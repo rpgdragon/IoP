@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="IoP: Smart T-shirt Mobile App" company="" webLink="http://" view-date="2019-09-30" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="2.8.10" locale="es_ES">
+    <description/>
+    <view zooming-state="default:4" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="167" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="65" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="64" order="2"/>
+        <option id="color.recent"><![CDATA[#660066 #cc3300 #ffff00 #cc0033]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="210" order="0"/>
+        <field id="1" name="Función" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Sprint0" color="#cc0033" meeting="false" start="2019-10-07" duration="7" complete="0" thirdDate="2019-10-07" thirdDate-constraint="1" expand="true">
+            <depend id="7" type="1" difference="0" hardness="Rubber"/>
+            <depend id="9" type="1" difference="0" hardness="Rubber"/>
+            <depend id="13" type="3" difference="0" hardness="Strong"/>
+            <depend id="41" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="7" name="Estado del Arte" color="#8cb6ce" meeting="false" start="2019-10-08" duration="4" complete="0" thirdDate="2019-10-07" thirdDate-constraint="1" expand="true">
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="9" name="Planificación" color="#8cb6ce" meeting="false" start="2019-10-07" duration="2" complete="0" thirdDate="2019-10-07" thirdDate-constraint="1" expand="true">
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="37" name="Documentar PEC2" color="#8cb6ce" meeting="false" start="2019-10-12" duration="2" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+            <depend id="13" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="13" name="Fin Sprint 0" color="#ffff00" meeting="true" start="2019-10-14" duration="0" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true"/>
+        <task id="41" name="Sprint 1" color="#cc3300" meeting="false" start="2019-10-14" duration="14" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+            <depend id="42" type="1" difference="0" hardness="Strong"/>
+            <depend id="46" type="1" difference="0" hardness="Strong"/>
+        </task>
+        <task id="42" name="Pantalla Constantes Vitales" color="#660066" meeting="false" start="2019-10-14" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+            <depend id="49" type="1" difference="0" hardness="Strong"/>
+        </task>
+        <task id="49" name="Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-10-14" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+            <depend id="81" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="81" name="Balsamiq" color="#8cb6ce" meeting="false" start="2019-10-16" duration="5" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true"/>
+        <task id="46" name="Pantalla Login" color="#660066" meeting="false" start="2019-10-14" duration="14" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+            <depend id="70" type="1" difference="0" hardness="Strong"/>
+        </task>
+        <task id="70" name="Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-10-14" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
