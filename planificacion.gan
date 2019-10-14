@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="IoP: Smart T-shirt Mobile App" company="" webLink="http://" view-date="2019-08-26" view-index="0" gantt-divider-location="408" resource-divider-location="300" version="2.8.10" locale="es_ES">
+<?xml version="1.0" encoding="UTF-8"?><project name="IoP: Smart T-shirt Mobile App" company="" webLink="http://" view-date="2019-11-04" view-index="0" gantt-divider-location="408" resource-divider-location="300" version="2.8.10" locale="es">
     <description/>
-    <view zooming-state="default:7" id="gantt-chart">
+    <view zooming-state="default:5" id="gantt-chart">
         <field id="tpd3" name="Nombre" width="195" order="0"/>
         <field id="tpd4" name="Fecha de inicio" width="97" order="1"/>
         <field id="tpd5" name="Fecha de fin" width="97" order="2"/>
@@ -58,19 +58,18 @@
         </task>
         <task id="42" name="P1-Pantalla Constantes Vitales" color="#660066" meeting="false" start="2019-10-14" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="49" type="1" difference="0" hardness="Strong"/>
-            <depend id="100" type="1" difference="0" hardness="Strong"/>
             <depend id="136" type="1" difference="0" hardness="Strong"/>
-            <depend id="150" type="1" difference="0" hardness="Strong"/>
             <depend id="154" type="1" difference="0" hardness="Strong"/>
         </task>
         <task id="49" name="P1-Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-10-14" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="81" type="2" difference="0" hardness="Strong"/>
+            <depend id="100" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="81" name="P1-Balsamiq" color="#8cb6ce" meeting="false" start="2019-10-16" duration="3" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true">
             <depend id="88" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="88" name="P1-Entrevista Validación Capturas" color="#8cb6ce" meeting="false" start="2019-10-19" duration="2" complete="0" thirdDate="2019-10-19" thirdDate-constraint="1" expand="true"/>
-        <task id="100" name="P1-Implementación" color="#8cb6ce" meeting="false" start="2019-10-14" duration="10" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="100" name="P1-Implementación" color="#8cb6ce" meeting="false" start="2019-10-16" duration="8" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="112" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="112" name="P1-Testing" color="#8cb6ce" meeting="false" start="2019-10-24" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
@@ -80,12 +79,13 @@
         </task>
         <task id="144" name="P2-Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-10-14" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="146" type="2" difference="0" hardness="Strong"/>
+            <depend id="150" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="146" name="P2-Balsamiq" color="#8cb6ce" meeting="false" start="2019-10-16" duration="3" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true">
             <depend id="148" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="148" name="P2-Entrevista Validación Capturas" color="#8cb6ce" meeting="false" start="2019-10-19" duration="2" complete="0" thirdDate="2019-10-19" thirdDate-constraint="1" expand="true"/>
-        <task id="150" name="P2-Implementación" color="#8cb6ce" meeting="false" start="2019-10-14" duration="10" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="150" name="P2-Implementación" color="#8cb6ce" meeting="false" start="2019-10-16" duration="8" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="152" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="152" name="P2-Testing" color="#8cb6ce" meeting="false" start="2019-10-24" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
@@ -97,34 +97,34 @@
         </task>
         <task id="171" name="P3-Pantalla Registrar Cuenta" color="#660066" meeting="false" start="2019-10-28" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="173" type="1" difference="0" hardness="Strong"/>
-            <depend id="179" type="1" difference="0" hardness="Strong"/>
             <depend id="183" type="1" difference="0" hardness="Strong"/>
         </task>
         <task id="173" name="P3-Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-10-28" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="175" type="2" difference="0" hardness="Strong"/>
+            <depend id="179" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="175" name="P3-Balsamiq" color="#8cb6ce" meeting="false" start="2019-10-30" duration="3" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true">
             <depend id="177" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="177" name="P3-Entrevista Validación Capturas" color="#8cb6ce" meeting="false" start="2019-11-02" duration="2" complete="0" thirdDate="2019-10-19" thirdDate-constraint="1" expand="true"/>
-        <task id="179" name="P3-Implementación" color="#8cb6ce" meeting="false" start="2019-10-28" duration="10" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="179" name="P3-Implementación" color="#8cb6ce" meeting="false" start="2019-10-30" duration="8" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="181" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="181" name="P3-Testing" color="#8cb6ce" meeting="false" start="2019-11-07" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
         <task id="183" name="P3-Documentación" color="#8cb6ce" meeting="false" start="2019-10-28" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
         <task id="224" name="P4-Pantalla Listar Camisetas" color="#660066" meeting="false" start="2019-10-28" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="227" type="1" difference="0" hardness="Strong"/>
-            <depend id="236" type="1" difference="0" hardness="Strong"/>
             <depend id="242" type="1" difference="0" hardness="Strong"/>
         </task>
         <task id="227" name="P4-Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-10-28" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="230" type="2" difference="0" hardness="Strong"/>
+            <depend id="236" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="230" name="P4-Balsamiq" color="#8cb6ce" meeting="false" start="2019-10-30" duration="3" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true">
             <depend id="233" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="233" name="P4-Entrevista Validación Capturas" color="#8cb6ce" meeting="false" start="2019-11-02" duration="2" complete="0" thirdDate="2019-10-19" thirdDate-constraint="1" expand="true"/>
-        <task id="236" name="P4-Implementación" color="#8cb6ce" meeting="false" start="2019-10-28" duration="10" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="236" name="P4-Implementación" color="#8cb6ce" meeting="false" start="2019-10-30" duration="8" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="239" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="239" name="P4-Testing" color="#8cb6ce" meeting="false" start="2019-11-07" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
@@ -136,37 +136,38 @@
             <depend id="265" type="1" difference="0" hardness="Strong"/>
             <depend id="286" type="1" difference="0" hardness="Strong"/>
             <depend id="359" type="2" difference="0" hardness="Strong"/>
+            <depend id="418" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="265" name="P5-Pantalla Registrar Camiseta" color="#660066" meeting="false" start="2019-11-11" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="268" type="1" difference="0" hardness="Strong"/>
-            <depend id="277" type="1" difference="0" hardness="Strong"/>
             <depend id="283" type="1" difference="0" hardness="Strong"/>
         </task>
         <task id="268" name="P5-Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-11-11" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="271" type="2" difference="0" hardness="Strong"/>
+            <depend id="277" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="271" name="P5-Balsamiq" color="#8cb6ce" meeting="false" start="2019-11-13" duration="3" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true">
             <depend id="274" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="274" name="P5-Entrevista Validación Capturas" color="#8cb6ce" meeting="false" start="2019-11-16" duration="2" complete="0" thirdDate="2019-10-19" thirdDate-constraint="1" expand="true"/>
-        <task id="277" name="P5-Implementación" color="#8cb6ce" meeting="false" start="2019-11-11" duration="10" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="277" name="P5-Implementación" color="#8cb6ce" meeting="false" start="2019-11-13" duration="8" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="280" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="280" name="P5-Testing" color="#8cb6ce" meeting="false" start="2019-11-21" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
         <task id="283" name="P5-Documentación" color="#8cb6ce" meeting="false" start="2019-11-11" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
         <task id="286" name="P6-Umbrales" color="#660066" meeting="false" start="2019-11-11" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="289" type="1" difference="0" hardness="Strong"/>
-            <depend id="298" type="1" difference="0" hardness="Strong"/>
             <depend id="304" type="1" difference="0" hardness="Strong"/>
         </task>
         <task id="289" name="P6-Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-11-11" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="292" type="2" difference="0" hardness="Strong"/>
+            <depend id="298" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="292" name="P6-Balsamiq" color="#8cb6ce" meeting="false" start="2019-11-13" duration="3" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true">
             <depend id="295" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="295" name="P6-Entrevista Validación Capturas" color="#8cb6ce" meeting="false" start="2019-11-16" duration="2" complete="0" thirdDate="2019-10-19" thirdDate-constraint="1" expand="true"/>
-        <task id="298" name="P6-Implementación" color="#8cb6ce" meeting="false" start="2019-11-11" duration="10" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="298" name="P6-Implementación" color="#8cb6ce" meeting="false" start="2019-11-13" duration="8" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="301" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="301" name="P6-Testing" color="#8cb6ce" meeting="false" start="2019-11-21" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
@@ -179,17 +180,17 @@
         </task>
         <task id="361" name="P7-Notificaciones" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="364" type="1" difference="0" hardness="Strong"/>
-            <depend id="373" type="1" difference="0" hardness="Strong"/>
             <depend id="379" type="1" difference="0" hardness="Strong"/>
         </task>
         <task id="364" name="P7-Entrevista EA requisitos" color="#8cb6ce" meeting="false" start="2019-11-25" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="367" type="2" difference="0" hardness="Strong"/>
+            <depend id="373" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="367" name="P7-Balsamiq" color="#8cb6ce" meeting="false" start="2019-11-27" duration="3" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true">
             <depend id="370" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="370" name="P7-Entrevista Validación Capturas" color="#8cb6ce" meeting="false" start="2019-11-30" duration="2" complete="0" thirdDate="2019-10-19" thirdDate-constraint="1" expand="true"/>
-        <task id="373" name="P7-Implementación" color="#8cb6ce" meeting="false" start="2019-11-25" duration="10" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="373" name="P7-Implementación" color="#8cb6ce" meeting="false" start="2019-11-27" duration="8" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="376" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="376" name="P7-Testing" color="#8cb6ce" meeting="false" start="2019-12-05" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
@@ -202,6 +203,7 @@
         <task id="424" name="Sprint 5" color="#cc3300" meeting="false" start="2019-12-09" duration="14" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
             <depend id="426" type="1" difference="0" hardness="Strong"/>
             <depend id="468" type="2" difference="0" hardness="Strong"/>
+            <depend id="497" type="2" difference="0" hardness="Strong"/>
             <depend id="612" type="1" difference="0" hardness="Strong"/>
         </task>
         <task id="426" name="Generación Datos Prueba" color="#660066" meeting="false" start="2019-12-09" duration="7" complete="0" thirdDate="2019-12-09" thirdDate-constraint="1" expand="true">
