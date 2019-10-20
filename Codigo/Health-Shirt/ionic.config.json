@@ -1,0 +1,7 @@
+{
+  "name": "Health-Shirt",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
