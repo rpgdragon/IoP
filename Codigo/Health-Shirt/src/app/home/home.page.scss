@@ -1,1 +1,6 @@
+@import "../app.component.scss";
 
+.fondo {
+    @include fondo_pantalla;
+}
+    
