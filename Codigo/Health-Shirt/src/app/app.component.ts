@@ -1,31 +1,64 @@
 import { Component } from '@angular/core';
-
-import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { timer } from 'rxjs';
+import { Platform, MenuController } from 'ionic-angular';
+import { InitPage } from '@pages/init/init';
+import { Router } from '@angular/router';
+import {App} from 'ionic-angular';
+
+
+declare var cordova:any;
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+    templateUrl: 'app.html'
 })
 
+export class MyApp {
+    rootPage: any = InitPage;
+	
+    private static nombreusuario = '';
+  
+    constructor(
+		public app: App,
+        public splashScreen: SplashScreen,
+        public platform: Platform,
+        private router: Router,  
+		private menu: MenuController
+    ) {
+		this.platform.ready().then(() => {			
+			this.redirigirInit();
+        });
+    }
+	
+    go(name){
+        this.router.navigate([name]);
+        switch(name){
+            case 'init':
+                this.rootPage = InitPage;
+                break;
+        }
+        this.menu.close();        
+	}
+		
+	private redirigirInit(){
+		console.log("Redirigiendo a Init");
+		this.splashScreen.hide();
+		this.rootPage = InitPage;
+	}
+	
+    salirApp(){
+        this.platform.exitApp();
+    }
+	
+	public get staticnombreusuario() {
+		return MyApp.nombreusuario;
+	}
+	
+	public static getNombreusuario() {
+		return MyApp.nombreusuario;
+	}
 
-export class AppComponent {
+	public static setNombreusuario(nombreusuario) {
+		MyApp.nombreusuario = nombreusuario;
+	}
 
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      timer(5000).subscribe(() => this.splashScreen.hide());
-    });
-  }
 }

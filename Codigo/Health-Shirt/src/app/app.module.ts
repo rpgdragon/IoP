@@ -1,23 +1,52 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { MyApp } from './app.component';
+import { ENV } from '@env';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Routes, RouterModule } from '@angular/router';
+import { InitPage } from '@pages/init/init';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Keyboard } from "@ionic-native/keyboard/ngx";
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+
+//import { HomePage } from '@pages/all'
+// NOTE: pages from other modules must be imported as well
+// and added to the 'entryComponents' array
+console.log('App mode:', ENV.mode)
+console.log('App property:', ENV.property)
+
+const routes: Routes = [
+    { path: '**', redirectTo: '', pathMatch: 'full' },
+    { path: 'init', component: InitPage },
+];
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    bootstrap: [IonicApp],
+    declarations: [
+        MyApp,
+        InitPage
+    ],
+    entryComponents: [
+        MyApp,
+        InitPage
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp, {
+            tabsPlacement: 'top'
+        }),
+        RouterModule.forRoot(routes)
+    ],
+    exports: [RouterModule],
+    providers: [
+        SplashScreen,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+		AppVersion,
+        Keyboard,
+        AndroidPermissions
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {}
+export class AppModule { }
