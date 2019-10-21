@@ -1,0 +1,34 @@
+<ion-menu [content]="content">
+	<ion-header>
+		<ion-toolbar>
+			<ion-title class="margenabajo">
+				<ion-avatar>
+					<img alt="MenuAvatar" src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg"
+						class="avatarmenu">
+				</ion-avatar> {{ staticnombreusuario }} 
+				<ion-icon (click)="salirApp()" class="derecha" name="exit"></ion-icon>
+			</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+	<ion-content>
+		<ion-list>
+			<ion-item (click)="go('traslados-diarios')">
+				<ion-icon name="shirt" class="icon_menu" item-left></ion-icon>
+				<ion-label>Camisetas</ion-label>
+			</ion-item>
+			<ion-item (click)="go('traslados-activos')">
+				<ion-icon name="alarm" class="icon_menu" item-left></ion-icon>
+				<ion-label>Actual</ion-label>
+			</ion-item>
+			<ion-item (click)="go('traslados-historicos')">
+				<ion-icon name="calendar" class="icon_menu" item-left></ion-icon>
+				<ion-label>Histórico</ion-label>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

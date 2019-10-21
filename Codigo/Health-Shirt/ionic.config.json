@@ -1,7 +1,8 @@
 {
-  "name": "Health-Shirt",
+  "name": "${app_name}",
   "integrations": {
     "cordova": {}
   },
-  "type": "angular"
+  "type": "ionic-angular",
+  "id": "${app_id}"
 }
