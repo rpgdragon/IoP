@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-buttons left>
+        <button ion-button menuToggle icon-only>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Camisetas</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    	<ion-refresher slot="fixed" (ionRefresh)="refrescar($event)">
+          <ion-refresher-content
+            pullingText="Desliza para actualizar">
+          </ion-refresher-content>
+        </ion-refresher>
+    <ion-list class="lista-camisetas" *ngFor="let camiseta of listaCamisetas">
+      <ion-item-sliding>
+        <ion-item (click)="abrirCamiseta(camiseta)"> 
+          <div class="flex-camisetas">
+            <div class="lista-camisetas-contenido">
+              <div class="cajaImagenCamiseta">
+                <img [src]="camiseta.src" width="100%" />
+              </div>
+              <div class="cajaDatosCamiseta">
+                <h3>{{camiseta.nombre}}</h3>
+                <h4>{{camiseta.parentesco}}</h4>
+                <div class="display-inline-landscape">
+                  <p>{{" Bateria: " + camiseta.bateria + "%"}}</p>
+                  <p>{{" Últimos datos: " + camiseta.horadatos}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-item> 
+        <ion-item-options side="end" >
+          <ion-item-option class="tamano_boton botonEdicion" (click)="editarCamiseta(camiseta)"><ion-icon class="en_medio" name="create"></ion-icon></ion-item-option>
+          <ion-item-option class="tamano_boton botonBorrar" (click)="borrarCamiseta(camiseta)"><ion-icon class="en_medio" name="trash"></ion-icon></ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding> 
+    </ion-list>
+    <div *ngIf="!camisetaEncontrada" padding>
+      <p>Todavía no hay ninguna camiseta</p>
+    </div>
+  </ion-content>
+  <ion-footer no-border>
+      <ion-icon class="botonAnadir" name="add-circle" (click)="crearCamiseta()"></ion-icon>
+  </ion-footer>
+  

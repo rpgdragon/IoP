@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="IoP: Smart T-shirt Mobile App" company="" webLink="http://" view-date="2019-11-04" view-index="0" gantt-divider-location="408" resource-divider-location="300" version="2.8.10" locale="es">
+<?xml version="1.0" encoding="UTF-8"?><project name="IoP: Smart T-shirt Mobile App" company="" webLink="http://" view-date="2019-11-11" view-index="0" gantt-divider-location="408" resource-divider-location="300" version="2.8.10" locale="es">
     <description/>
     <view zooming-state="default:5" id="gantt-chart">
         <field id="tpd3" name="Nombre" width="195" order="0"/>
@@ -174,11 +174,10 @@
         <task id="304" name="P6-Documentación" color="#8cb6ce" meeting="false" start="2019-11-11" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
         <task id="359" name="Sprint 4" color="#cc3300" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
             <depend id="361" type="1" difference="0" hardness="Strong"/>
-            <depend id="382" type="1" difference="0" hardness="Strong"/>
             <depend id="409" type="1" difference="0" hardness="Strong"/>
             <depend id="418" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="361" name="P7-Notificaciones" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="361" name="P7-Notificaciones FrontEnd" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
             <depend id="364" type="1" difference="0" hardness="Strong"/>
             <depend id="379" type="1" difference="0" hardness="Strong"/>
         </task>
@@ -195,8 +194,14 @@
         </task>
         <task id="376" name="P7-Testing" color="#8cb6ce" meeting="false" start="2019-12-05" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
         <task id="379" name="P7-Documentación" color="#8cb6ce" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
-        <task id="382" name="Adaptación PEC3" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
-        <task id="409" name="Colchón Desviación" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
+        <task id="409" name="Constantes Vitales + Generacion Datos" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+            <depend id="614" type="1" difference="0" hardness="Strong"/>
+        </task>
+        <task id="614" name="Implementación" color="#8cb6ce" meeting="false" start="2019-11-25" duration="7" complete="0" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true">
+            <depend id="617" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="617" name="Testing" color="#8cb6ce" meeting="false" start="2019-12-02" duration="7" complete="0" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true"/>
+        <task id="620" name="Documentación" color="#8cb6ce" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true"/>
         <task id="418" name="PEC4" color="#ffff00" meeting="true" start="2019-12-09" duration="0" complete="0" thirdDate="2019-08-26" thirdDate-constraint="0" expand="true">
             <depend id="424" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -206,16 +211,13 @@
             <depend id="497" type="2" difference="0" hardness="Strong"/>
             <depend id="612" type="1" difference="0" hardness="Strong"/>
         </task>
-        <task id="426" name="Generación Datos Prueba" color="#660066" meeting="false" start="2019-12-09" duration="7" complete="0" thirdDate="2019-12-09" thirdDate-constraint="1" expand="true">
-            <depend id="447" type="2" difference="0" hardness="Strong"/>
+        <task id="426" name="Notificaciones Backend" color="#660066" meeting="false" start="2019-12-09" duration="7" complete="0" thirdDate="2019-12-09" thirdDate-constraint="1" expand="true">
+            <depend id="450" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="447" name="Testing Integración Camiseta" color="#660066" meeting="false" start="2019-12-16" duration="7" complete="0" thirdDate="2019-12-16" thirdDate-constraint="1" expand="true">
-            <depend id="450" type="1" difference="0" hardness="Strong"/>
-        </task>
-        <task id="450" name="Firebase" color="#8cb6ce" meeting="false" start="2019-12-16" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+        <task id="450" name="Firebase" color="#8cb6ce" meeting="false" start="2019-12-16" duration="2" complete="0" thirdDate="2019-10-14" thirdDate-constraint="0" expand="true">
             <depend id="453" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="453" name="Testing" color="#8cb6ce" meeting="false" start="2019-12-18" duration="5" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true"/>
+        <task id="453" name="Testing Final" color="#8cb6ce" meeting="false" start="2019-12-18" duration="5" complete="0" thirdDate="2019-10-16" thirdDate-constraint="1" expand="true"/>
         <task id="612" name="Documentación Final" color="#660066" meeting="false" start="2019-12-09" duration="14" complete="0" thirdDate="2019-12-09" thirdDate-constraint="1" expand="true"/>
         <task id="468" name="Sprint 6" color="#cc3300" meeting="false" start="2019-12-23" duration="12" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
             <depend id="491" type="1" difference="0" hardness="Strong"/>

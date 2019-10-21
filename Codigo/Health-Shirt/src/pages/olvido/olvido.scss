@@ -1,0 +1,47 @@
+@import "../../app/app.scss";
+
+$button-width: 80%;
+$button-height: 50px;
+
+button{
+	width:$button-width;
+	margin-top: 1em;
+	height:$button-height - 5 !important;
+	text-transform: none !important;
+}
+
+#atras{
+	position:relative;
+	float:left;
+	margin-left:5%;
+}
+
+.flecha{
+	font-size: 3em;
+}
+
+form{
+	@include fixed_width(80%);
+	text-align: center;
+	margin:0 auto;
+}
+
+.textocabecera{
+	@include fixed_width(80%);
+	margin:0 auto;
+}
+
+form ion-label{
+	text-align: left;
+}
+
+form ion-input{
+	background: color($colors,white);
+}
+
+.buttonForm{
+	width:100% !important;
+	display:block;
+	margin-top: 1em;
+}
+

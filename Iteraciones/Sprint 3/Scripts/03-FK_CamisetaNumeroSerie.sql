@@ -1,0 +1,1 @@
+ALTER TABLE `camiseta` ADD CONSTRAINT `camiseta_numeroserie_fk` FOREIGN KEY (`numeroserie`) REFERENCES `producto`(`numeroserie`) ON DELETE RESTRICT ON UPDATE RESTRICT;

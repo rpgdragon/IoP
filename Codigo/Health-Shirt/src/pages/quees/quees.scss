@@ -1,0 +1,33 @@
+@import "../../app/app.scss";
+
+$button-width: 80%;
+$button-height: 50px;
+
+button{
+	width:$button-width;
+	margin-top: 1em;
+	height:$button-height - 5 !important;
+	text-transform: none !important;
+}
+
+.button-white-black{
+	background: #fff;
+	color: color($colors, black);
+}
+
+#atras{
+	position:relative;
+	float:left;
+	margin-left:5%;
+}
+
+#versionCode{
+	position:absolute;
+	bottom:2px;
+	right:5px;
+}
+
+.flecha{
+	font-size: 3em;
+}
+

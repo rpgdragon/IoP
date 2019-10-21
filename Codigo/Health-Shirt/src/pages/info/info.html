@@ -1,0 +1,46 @@
+<!--
+  Generated template for the InfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-toolbar color="primary">
+    <ion-buttons left>
+        <button ion-button icon-only (click)="irAtras()">
+          <ion-icon class="iconotoolbar" name="arrow-back" ></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>Información</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content forceOverscroll="true">
+<p class="justificado"><b>Nombre:</b> Especifica el nombre con el que vas a identificar la camiseta. Puede ser el nombre de la persona que lleva puesta, aunque
+en caso de que una persona posea diferentes camisetas (por ejemplo una de dia y otra para dormir) se recomienda poner el uso de la misma</p>
+<p class="justificado"><b>Parentesco:</b> Especifica el nombre de la persona que va asociada a esta camiseta o su grado de parentesco.</p>
+<p class="justificado"><b>Fecha de nacimiento:</b> Especifica la fecha de nacimiento de la persona.</p>
+<p class="justificado"><b>Sexo:</b> Especifica el sexo de la persona.</p>
+<p class="justificado"><b>Número Serial:</b> Para cerciorar de que usted es el propietario de la camiseta deberá introducir el número de serial de la camiseta. Antes de introducir este
+serial deberá seguir los pasos de instalación de la camiseta que se encuentra en el manual de la misma. Hasta que la camiseta no empiece a emitir datos, no se podrá registrar la camiseta desde la aplicación móvil</p>
+<p class="justificado"><b>Cód.Confirmación:</b> En la instalación de la camiseta se le solicita, aparte de configurar las credenciales wifi de la camiseta, un código de confirmación del mismo. Debe introducir en este campo el mismo código que introdujo
+en los datos de la camiseta.</p>
+<p class="justificado"><b>ECG:</b> Hace referencia a las constantes vitales referentes al corazón. En este caso se puede especificar un umbral del número de pulsaciones por minuto. Esta pulsación suele comprender entre las 60 y las 110 pulsaciones por minuto. La casilla de apagado de notificaciones permite
+indicar si se desea no recibir más notificaciones cuando se superen dichos umbrales. Si esta marcada la opción, no se enviarán más notificaciones aunque se superen los umbrales.</p>
+<p class="justificado una-linea"><ion-input class="primero" value="" type="number" placeholder="Mínimo" readonly ></ion-input><ion-input value="130" type="number" placeholder="Máximo" readonly></ion-input></p>
+<p class="justificado">Como se puede ver en el anterior ejemplo, se ha especificado un umbral máximo de 130, por lo que cuando se detecte que las pulsaciones por minuto superen los 130 se notificará al usuario.</p>
+<p class="justificado"><b>EDA:</b> Hace referencia a la conductividad y resistencia de la piel, pudiendose medir el sistema nervioso del paciente. Su valor suele oscilar entre 100 y 300. Valores inferiores representan una situación de mucha tranquilidad y valores superiores representan una situación de mucha intranquilidad. La casilla de apagado de notificaciones permite
+  indicar si se desea no recibir más notificaciones cuando se superen dichos umbrales. Si esta marcada la opción, no se enviarán más notificaciones aunque se superen los umbrales. </p>
+<p class="justificado una-linea"><ion-input class="primero" value="100" type="number" placeholder="Mínimo" readonly ></ion-input><ion-input value="" type="number" placeholder="Máximo" readonly></ion-input></p>
+<p class="justificado">Como se puede ver en el anterior ejemplo, se ha especificado un umbral mínimo para el EDA de 100. Cuando el valor descienda por debajo de los 100 se enviará una notificación al usuario.</p>
+<p class="justificado"><b>Temperatura:</b> Hace referencia a la temperatura corporal del paciente. Los valores suelen oscilar entre los 35 a 37 grados, siendo valores inferiores un posible caso de hipotermia y valores superiores una posible fiebre. La casilla de apagado de notificaciones permite
+  indicar si se desea no recibir más notificaciones cuando se superen dichos umbrales. Si esta marcada la opción, no se enviarán más notificaciones aunque se superen los umbrales.</p>
+<p class="justificado una-linea"><ion-input class="primero" value="35" type="text" placeholder="Mínimo" readonly ></ion-input><ion-input value="37.5" type="text" placeholder="Máximo" readonly></ion-input></p>
+<p class="justificado">Como se puede ver en el anterior ejemplo, se ha especificado tanto un umbral mínimo como un umbral máximo para la temperatura. Cuando la temperatura sea menor de 35º o mayor de 37.5º se notificará al usuario</p>
+<p class="justificado"><b>Caidas:</b> Indican si debe notificarse al usuario cuando la persona que lleva la camiseta ha sufrido una caida. </p>
+<p class="justificado"><b>Teléfono:</b> Especifica el número de teléfono de la persona que lleva la camiseta.</p>
+<p class="justificado"><b>Teléfono de Contacto:</b> Especifica el número de teléfono de un familiar.</p>
+<p class="justificado"><b>Dirección:</b> Especifica la dirección de la persona que tiene la camiseta</p>
+<p class="justificado"><b>Notas:</b> Permite especificar notas adicionales sobre esta camiseta.</p>
+</ion-content>

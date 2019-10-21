@@ -1,0 +1,121 @@
+@import "../../app/app.scss";
+
+$tamano_imagen: 100px;
+$color_boton_editar: #008f39;
+$color_boton_borrar: #ff0000;
+
+.lista-camisetas{
+    @include padding_lados(20px);
+    @include fixed_width(100%);
+    margin: 0px;
+    padding: 0px;
+}
+
+.flex-camisetas {
+    margin-top: 1em !important;
+    @include fixed_width(100%);
+    margin: 0px;
+    padding: 0px;
+}
+
+.lista-camisetas-contenido {
+    display:flex;
+    justify-content: flex-start;
+}
+
+.cajaImagenCamiseta{
+    @include fixed_width($tamano_imagen);
+    img{
+        vertical-align: middle;
+    }
+}
+
+.cajaDatosCamiseta{
+    flex-grow: 100;
+    text-align:left;
+    vertical-align: middle;
+    h3{
+        font-size:1.7em;
+    }
+    h4{
+        font-size:1.2em;
+    }
+}
+
+
+.botonAnadir{
+    font-size:4em;
+    position:relative;
+    right:0;
+}
+
+ion-content{
+    margin-bottom:50px;
+}
+
+ion-footer{
+    background: transparent !important;
+    text-align: end;
+    ion-icon{
+        margin-right:30px;
+        margin-bottom:15px;
+    }
+}
+
+@media screen and (orientation:portrait) {
+    .display-inline-landscape{
+        display:block;
+        justify-content: unset;
+        flex-wrap: wrap;
+        @include fixed_width(100%);
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .display-inline-landscape{
+        display:flex;
+        flex-wrap:nowrap;
+        justify-content: space-between;
+        @include fixed_width(100%);
+    }
+}
+
+ion-item-sliding{
+    border-bottom:2px solid black;
+    @include fixed_width(100%);
+    background-color: transparent !important;
+    padding:0px;
+    margin:0px;
+    text-align:left;
+}
+
+ion-item{
+    @include fixed_width(100%);
+    background-color: transparent !important;
+    margin: 0px;
+    padding: 0px;
+}
+
+.tamano_boton{
+    font-size:3em;
+    @include fixed_width(2em);
+    text-align:center;
+    color: color($colors, white);
+}
+
+.botonEdicion{
+    background-color: $color_boton_editar;    
+}
+
+.botonBorrar{
+    background-color: $color_boton_borrar;
+}
+
+.en_medio{
+    position:relative;
+    top:$tamano_imagen/2;
+}
+
+.scroll-content{
+    background-color: transparent !important;
+}

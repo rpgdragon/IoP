@@ -1,0 +1,1 @@
+ALTER TABLE `camiseta` ADD `fechanacimiento` DATE NULL AFTER `notificacionescaida`, ADD `sexo` VARCHAR(1) NULL AFTER `fechanacimiento`, ADD `telefono` INT NULL AFTER `sexo`, ADD `telefonocontacto` INT NULL AFTER `telefono`, ADD `notas` TEXT NULL AFTER `telefonocontacto`, ADD `direccion` TEXT NULL AFTER `notas`;

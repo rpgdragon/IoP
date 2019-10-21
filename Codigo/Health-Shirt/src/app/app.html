@@ -1,0 +1,26 @@
+<ion-menu [content]="content">
+	<ion-header>
+		<ion-toolbar color="primary">
+			<ion-title class="margenabajo">
+				{{ staticnombreusuario }} 
+				<ion-icon (click)="go('init')" class="derecha" name="exit"></ion-icon>
+			</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+	<ion-content class="menu">
+		<ion-list class="listado-menu">
+			<ion-item (click)="go('camiseta')" class="item-menu">
+				<ion-icon name="shirt" class="icon_menu" item-left></ion-icon>
+				<ion-label>Camisetas</ion-label>
+			</ion-item>
+			<ion-item (click)="go('configuracion')" class="item-menu segundomenu">
+				<ion-icon name="settings" class="icon_menu" item-left></ion-icon>
+				<ion-label>Configuración</ion-label>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+
+</ion-menu>
+
+<ion-nav #myNav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,35 @@
+@import "../../app/app.scss";
+
+.titulo-configuracion{
+    @include fixed_width(100%);
+    text-align: center;
+    border-bottom:2px solid black;
+    h1{
+        font-size: 1.8em;
+    }
+}
+
+.buttonForm{
+	margin-top: 1em;
+	height:45px !important;
+	text-transform: none !important;
+}
+
+.display-inline{
+    display:flex;
+    @include fixed_width(100%);
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    ion-checkbox{
+        top:15px;
+        margin-right:1em;
+    }
+    ion-input{
+        @include fixed_width(45%); 
+    }
+}
+
+.espaciado{
+    margin-bottom:1em;
+}

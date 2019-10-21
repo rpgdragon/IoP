@@ -1,0 +1,21 @@
+<ion-content forceOverscroll="true">
+<div class="item">
+	<div id="titulo">
+	<h1>Health Shirt</h1><img alt="logo"/></div>
+
+	<p class="justificado">Health Shirt es una aplicación móvil orientada a la monitorización de las constantes vitales de la gente de la 3ª edad. Esta aplicación requiere adquirir al menos una 
+	camiseta inteligente de la misma marca. La persona que requiera ser monitorizada deberá llevar puesta la camiseta de acuerdo a como se indica en el manual de usuario del
+	producto. Una vez este la camiseta preparada, deberá crear una cuenta y asociar la camiseta introduciendo los datos de la misma.Desde una misma cuenta se puede visualizar
+	una camiseta pero una misma camiseta no puede ser visualizada desde varias cuentas. ¿Este última línea validarla?</p>
+	
+	<button ion-button class="submit-btn right button-white-black" type="submit" (click)="navegarCompra()">
+	¿Quieres comprar una camiseta?
+	</button>
+</div>	
+
+</ion-content>
+<ion-footer no-border>
+	<div id="atras"><ion-icon class="flecha" name="arrow-back" (click)="navegarMain()"></ion-icon></div>
+	<div id="versionCode" class="versionCode">Versión {{version.__zone_symbol__value}}</div>
+</ion-footer>
+	

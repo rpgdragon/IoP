@@ -1,0 +1,76 @@
+{
+  "_from": "cordova-plugin-firebase-crashlytics@^0.1.0",
+  "_id": "cordova-plugin-firebase-crashlytics@0.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-gwZa7LPkVSvYK/Kzy3BW9iZ2RB1WdkhSd+84SpCm009oHknkEBaPxM+0jrcSEdfcgzo09+Xwu1oDcUq/8EZoZw==",
+  "_location": "/cordova-plugin-firebase-crashlytics",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cordova-plugin-firebase-crashlytics@^0.1.0",
+    "name": "cordova-plugin-firebase-crashlytics",
+    "escapedName": "cordova-plugin-firebase-crashlytics",
+    "rawSpec": "^0.1.0",
+    "saveSpec": null,
+    "fetchSpec": "^0.1.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-firebase-crashlytics/-/cordova-plugin-firebase-crashlytics-0.1.0.tgz",
+  "_shasum": "4721ab56473281b4765ee570689d2ad0634836ff",
+  "_spec": "cordova-plugin-firebase-crashlytics@^0.1.0",
+  "_where": "C:\\Users\\jmcastellano\\Desktop\\TFM\\IoP\\Codigo\\Webapp",
+  "author": {
+    "name": "Richard Windley",
+    "email": "richard.windley@gmail.com",
+    "url": "http://www.reallysmall.co.uk"
+  },
+  "bugs": {
+    "url": "https://github.com/ReallySmallSoftware/cordova-plugin-firebase-crashlytics/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-firebase-crashlytics",
+    "platforms": [
+      "android",
+      "ios",
+      "browser"
+    ]
+  },
+  "dependencies": {
+    "xcode": "^1.0.0"
+  },
+  "deprecated": false,
+  "description": "A Google Firebase Crashlytics plugin",
+  "devDependencies": {
+    "grunt": "^1.0.2",
+    "grunt-contrib-jshint": "^1.1.0",
+    "jshint-junit-reporter": "^0.2.3"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "0.0.7": {
+        "cordova": ">=7.0.0",
+        "cordova-android": ">=8.0.0",
+        "cordova-ios": ">=5.0.0"
+      }
+    }
+  },
+  "homepage": "https://github.com/ReallySmallSoftware/cordova-plugin-firebase-crashlytics",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-browser"
+  ],
+  "license": "Apache-2.0",
+  "name": "cordova-plugin-firebase-crashlytics",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReallySmallSoftware/cordova-plugin-firebase-crashlytics.git"
+  },
+  "version": "0.1.0"
+}

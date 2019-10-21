@@ -1,0 +1,10 @@
+.inputConIcono {
+	position: relative;
+}
+  
+.inputConIcono i {
+	position: absolute;
+	right: 5px;
+	bottom: 12px;
+	color: color($colors,black);
+}

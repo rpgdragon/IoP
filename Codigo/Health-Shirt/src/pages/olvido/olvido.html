@@ -1,0 +1,22 @@
+<ion-content forceOverscroll="true">
+<div class="item">
+	<div id="titulo">
+	<h1>Health Shirt</h1><img alt="logo"/></div>
+	<div class="textocabecera">
+		<p class="justificado">¿Has olvidado tu contraseña?</p>
+		<p class="justificado">Introduce tu email</p>
+	</div>
+	<form [formGroup]="formulario" (ngSubmit)="recuperarCuenta()">
+		<ion-label stacked>Email:</ion-label>
+		<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+	<button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formulario.valid">
+	Recuperar cuenta
+	</button>
+	</form>
+</div>	
+
+</ion-content>
+<ion-footer no-border>
+	<div id="atras"><ion-icon class="flecha" name="arrow-back" (click)="navegarAtras()"></ion-icon></div>
+</ion-footer>
+	

@@ -1,0 +1,1 @@
+CREATE TABLE `dbs200017`.`informacion` ( `ecg` TEXT , `eda` TEXT , `temperatura` FLOAT NOT NULL , `fecha` DATETIME NOT NULL , `numeroserie` VARCHAR(16) NOT NULL , `bateria` INT NOT NULL, PRIMARY KEY (`fecha`, `numeroserie`)) ENGINE = InnoDB PARTITION BY HASH (DAY(fecha)) PARTITIONS 365;

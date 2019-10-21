@@ -1,0 +1,32 @@
+<!--
+  Generated template for the EdaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+  <div class="cajaCalendario">
+      <ion-item>
+          <ion-label>De:</ion-label>
+          <ion-datetime id="fechade" disabled="{{constantes.deHabilitado}}" (ionChange)="obtenerConstantesFecha()"  displayFormat="YYYY-MM-DD HH:mm" min="2019"  cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaDe" [pickerOptions]="customOptionsDe"></ion-datetime>
+      </ion-item>
+     <ion-item>
+          <ion-label>Hasta:</ion-label>
+          <ion-datetime id="fechahasta" disabled="{{constantes.hastaHabilitado}}" (ionChange)="obtenerConstantesFecha()"  displayFormat="YYYY-MM-DD HH:mm" min="2019" cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaHasta" [pickerOptions]="customOptionsHasta"></ion-datetime>
+      </ion-item>
+      <ion-item>
+          <ion-label slot="start">¿Tiempo real?</ion-label>
+          <ion-checkbox item-right color="primary"  [(ngModel)]="constantes.actual" (click)="activarDesactivar();"></ion-checkbox>
+      </ion-item>
+  </div>
+  <canvas id="canvaseda"></canvas>
+</ion-content>
+
+<ion-footer class="footerConstantes" no-border>
+    <b>EDA</b>
+    <div style="display:flex; justify-content: space-between;">
+    <div>MIN: {{constantes.getEdamin()}}</div>
+    <div>MED: {{constantes.getEdamedias()}}</div>
+    <div>MAX: {{constantes.getEdamax()}}</div>
+    </div>
+</ion-footer>

@@ -1,0 +1,1 @@
+ALTER TABLE usuarioxtoken ADD confirmado smallint default 0

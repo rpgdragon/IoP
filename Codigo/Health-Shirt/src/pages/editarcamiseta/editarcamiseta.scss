@@ -1,0 +1,39 @@
+@import "../../app/app.scss";
+
+
+.display-inline{
+    display:flex;
+    @include fixed_width(100%);
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    ion-checkbox{
+        top:15px;
+        margin-right:1em;
+    }
+}
+
+.espaciado{
+    margin-bottom:1em;
+}
+
+.alreves{
+    flex-direction: row-reverse!important;
+}
+
+.noalreves{
+    flex-direction: row!important;
+}
+
+ion-datetime{
+    background-color: color($colors,white);
+    text-align:left;
+}
+
+ion-textarea{
+    background-color: color($colors,white);
+    @include fixed_height(128px);
+}
+
+.ion-select-sexo{
+    text-align: left;
+}

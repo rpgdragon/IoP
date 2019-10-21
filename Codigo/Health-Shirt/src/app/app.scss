@@ -1,0 +1,270 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+ion-menu .content, ion-menu .item {
+	color: color($colors, dark_gray);
+	background-color: color($colors, white);
+	padding:10px;
+}
+
+.margenabajo {
+	margin-bottom:20px;
+}
+
+
+.derecha {
+	float:right;
+	position:relative;
+}
+
+.item-inner {
+  	border: none !important;
+}
+
+.width-max-content{
+	width: max-content;
+}
+
+@mixin margen_lados($margen){
+	margin-left:$margen;
+	margin-right:$margen;
+}
+
+@mixin padding_lados($margen){
+	padding-left:$margen;
+	padding-right:$margen;
+}
+
+@mixin paddingtodos($top,$right,$bottom,$left){
+	padding:$top,$right,$bottom,$left;
+}
+
+@mixin fixed_width($withper){
+	width:$withper;
+	max-width:$withper;
+	min-width:$withper;
+}
+
+@mixin fixed_height($withper){
+	height:$withper;
+	max-height:$withper;
+	min-height:$withper;
+}
+
+@mixin fondo_pantalla{
+	background-image: url("../assets/images/fondo.png");
+	background-color:color($colors, white);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@mixin centrado_full{
+    text-align:center;
+	width:100%;
+}
+
+@mixin posicionar_abajo($margen){
+	position:absolute;
+	bottom: $margen;
+}
+
+h1{
+    font-size: 3em;
+}
+
+h2{
+	font-size: 1.5em;
+}
+
+.item{
+	@include centrado_full;
+    position:absolute;
+    top:10%;
+}
+
+#titulo{
+    @include centrado_full;
+	display:flex;
+}
+
+
+
+@media screen and (orientation:portrait) {
+	#titulo h1{
+		@include fixed_width(100%);
+	}
+
+	#titulo{
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	#titulo img{
+		@include fixed_width(30%);
+		content: url("../assets/icon/icon.png");
+	}
+}
+
+@media screen and (orientation:landscape) {
+	#titulo{
+		flex-direction: row;
+		justify-content: center;
+	}
+	
+	#titulo img{
+		@include fixed_width(15%);
+		content: url("../assets/icon/icon.png");
+	}
+	
+}
+
+.width-max-content{
+	width: max-content;
+}
+
+ion-content{
+	@include fondo_pantalla;
+}
+
+.menu{
+	background:#fff;
+}
+
+.justificado{
+	text-align:justify;
+	@include margen_lados(10px);
+}
+
+.listado-menu{
+	@include fixed_height(100%);
+	display:flex;
+	align-items:flex-start;
+}
+
+.item-menu{
+	@include fixed_height(75px);
+	top: 0px;
+}
+
+.segundomenu{
+	margin-top:75px;
+}
+
+.cajaCalendario{
+    background-color: color($colors,white);
+    @include fixed_width(100%);
+    @include fixed_height(150px);
+}
+
+.cajaCalendario ion-item{
+    display:flex;
+    flex-wrap:nowrap;
+    background-color: color($colors,white);
+}
+
+.cajaCalendario ion-item:first-child{
+    margin-top:-56px;
+}
+
+.cajaCalendario ion-item:nth-child(3){
+    margin-top:56px;
+}
+
+.cajaCalendario ion-label{
+    @include fixed_width(25%);
+    text-align:left;
+}
+
+.cajaCalendario ion-item:nth-child(3) ion-label{
+    @include fixed_width(50%);
+}
+
+.cajaCalendario ion-datetime{
+    flex-grow:100;
+    border:1px solid black;
+}
+
+.footerConstantes{
+    text-align: start !important;
+	font-size:1.5em;
+	padding-left:0.5em;
+}
+
+canvas{
+	background-color:#ffe6e6;
+}
+
+.iconotoolbar{
+    font-size:2em;
+    color:color($colors, white);
+}
+
+.imageselect {
+    .select-text {
+		    @include fixed_width(100%);
+            border-radius: 5px;
+            color: transparent;
+    }
+
+    .alert-radio-inner,
+    .alert-radio-icon,
+    .alert-radio-label {
+            display: none;
+    }
+
+    &.imageselected:before {
+            content: '\2713';
+            color: color($colors, primary, base);
+            z-index: 999999;
+            width: 100%;
+            height: 100%;
+            font-size: 33px;
+            left: 50%;
+            top: 50%;
+            position: relative;
+            transform: translate(-50%);
+    }
+
+    $imagesToSelect: "grandmother", "man", "grandfather", "old-man", "couple", "grandmother2", "old-woman", "old-man2", "grandmother3", "couple2";
+
+    @each $imageOption in $imagesToSelect {
+            &.image_#{$imageOption} {
+                    &, & .select-text {
+                            color: transparent;
+							background-image: url("../assets/images/#{$imageOption}.png");
+							background-size: contain;
+							background-repeat: no-repeat;
+							background-attachment: fixed;
+  							background-position: center; 
+                    }
+            }
+    }
+}
+
+ion-select{
+	@include fixed_width(100%);
+	@include fixed_height(128px);
+}
+
+.ion-select-sexo{
+	@include fixed_height(48px);
+	background-color:color($colors, white);
+}
+
+

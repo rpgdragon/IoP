@@ -1,0 +1,3 @@
+CREATE TABLE `dbs200017`.`configuracion` ( `usuario` VARCHAR(200) NOT NULL , `notificacionestodas` BOOLEAN NOT NULL DEFAULT FALSE , `notificacionesecg` BOOLEAN NOT NULL DEFAULT FALSE , `notificacioneseda` BOOLEAN NOT NULL DEFAULT FALSE , `notificacionestemperatura` BOOLEAN NOT NULL DEFAULT FALSE , `notificacionesbateria` BOOLEAN NOT NULL DEFAULT FALSE , `notificacionescaida` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`usuario`)) ENGINE = InnoDB;
+
+ALTER TABLE `configuracion` ADD FOREIGN KEY (`usuario`) REFERENCES `usuarios`(`usuario`) ON DELETE RESTRICT ON UPDATE RESTRICT;

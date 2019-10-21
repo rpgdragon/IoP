@@ -1,0 +1,71 @@
+<!--
+  Generated template for the CrearcamisetaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-toolbar color="primary">
+    <ion-buttons left>
+        <button ion-button icon-only (click)="irAtras()">
+          <ion-icon class="iconotoolbar" name="arrow-back" ></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>Registrar Camiseta</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="irInfo()">
+        <ion-icon class="iconotoolbar" name="information-circle" ></ion-icon>
+      </button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content forceOverscroll="true">
+  <form [formGroup]="formularioCrearCamiseta" (ngSubmit)="registrarCamiseta()">
+      <ion-label stacked>Icono *:</ion-label>
+      <ion-item class="imageselect image_{{imagen}}">
+        <ion-select (click)="prepararImagenesIcono()" formControlName="icono" cancelText="Cancelar" (ionChange)="ponerImagen(this.imagen)" [(ngModel)]="imagen">
+          <ion-option  *ngFor="let optionimagen of imagenes" [value]="optionimagen" (ionSelect)="selectIcono(optionimagen)">{{optionimagen}}</ion-option>
+        </ion-select>   
+      </ion-item>
+      <ion-label stacked>Nombre *:</ion-label>
+      <ion-input formControlName="nombre" type="text" placeholder="Nombre"></ion-input>
+      <ion-label stacked>Parentesco *:</ion-label>
+      <ion-input formControlName="parentesco" type="text" placeholder="Parentesco"></ion-input>
+      <ion-label stacked>Fecha de nacimiento :</ion-label>
+      <ion-datetime formControlName="fechanacimiento" style="text-align:left" displayFormat="YYYY-MM-DD" cancelText="Cancelar" doneText="Validar"></ion-datetime>
+      <ion-label stacked>Sexo :</ion-label>
+      <ion-select class="ion-select-sexo" formControlName="sexo" cancelText="Cancelar">
+        <ion-option  value="H">Hombre</ion-option>
+        <ion-option  value="M">Mujer</ion-option>
+      </ion-select>
+      <ion-label stacked>Num.Serie *:</ion-label>
+      <ion-input formControlName="numeroserie" type="number" placeholder="Numero de serie"></ion-input>
+      <ion-label stacked>Cód.Seg *:</ion-label>
+      <ion-input formControlName="codseg" placeholder="Código de seguridad"></ion-input>
+      <ion-label stacked>ECG:</ion-label>
+      <div class="display-inline espaciado noalreves"><ion-input formControlName="ecgminimo" type="number" placeholder="minimo"></ion-input><ion-input formControlName="ecgmaximo" type="number" placeholder="máximo"></ion-input></div>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones ECG?</ion-label><ion-checkbox slot="start" formControlName="notificacionesecg" color="primary" [(ngModel)]="notificacionesecg"></ion-checkbox></div> 
+      <ion-label stacked>EDA:</ion-label>
+      <div class="display-inline espaciado noalreves"><ion-input formControlName="edaminimo" type="number" placeholder="minimo"></ion-input><ion-input formControlName="edamaximo" type="number" placeholder="máximo"></ion-input></div>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones EDA?</ion-label><ion-checkbox slot="start" formControlName="notificacioneseda" color="primary" [(ngModel)]="notificacioneseda"></ion-checkbox></div> 
+      <ion-label stacked>Temperatura:</ion-label>
+      <div class="display-inline espaciado noalreves"><ion-input formControlName="temperaturaminimo" type="number" placeholder="minimo"></ion-input><ion-input formControlName="temperaturamaximo" type="number" placeholder="máximo"></ion-input></div>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones Temperatura?</ion-label><ion-checkbox slot="start" formControlName="notificacionestemperatura" color="primary" [(ngModel)]="notificacionestemperatura"></ion-checkbox></div>  
+      <ion-label stacked>Caidas:</ion-label>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Notificar caidas?</ion-label><ion-checkbox git aslot="start" formControlName="notificacionescaida" color="primary" [(ngModel)]="notificacionescaida" ></ion-checkbox></div>
+      <div class="justificado display-inline espaciado"><button ion-button id="botonescondidas" type="button" class="buttonForm" (click) ="mostrarAvanzados()" [hidden]="escondeme">Datos Contacto</button></div>
+      <div *ngIf="escondeme">
+        <ion-label stacked>Telefono:</ion-label>
+        <ion-input formControlName="telefono" type="number" placeholder="Telefono"></ion-input>
+        <ion-label stacked>Telefono Contacto:</ion-label>
+        <ion-input formControlName="telefonocontacto" type="number" placeholder="Telefono"></ion-input>
+        <ion-label stacked>Dirección:</ion-label>
+        <ion-textarea formControlName="direccion" placeholder="Direccion"></ion-textarea>
+        <ion-label stacked>Notas:</ion-label>
+        <ion-textarea formControlName="notas" placeholder="Notas"></ion-textarea>
+      </div> 
+      <div class="justificado display-inline espaciado"><button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formularioCrearCamiseta.valid">Registrar Camiseta</button></div>  
+    </form>
+</ion-content>
