@@ -3,6 +3,7 @@ import { NavController, Platform} from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { QueesPage } from '@pages/quees/quees';
+import { LoginPage } from '@pages/login/login';
 
 @Component({
   selector: 'page-init',
@@ -25,6 +26,10 @@ export class InitPage {
   
   navegarQueEs(){
 	  this.navCtrl.setRoot(QueesPage);
+  }
+
+  navegarLogin(){
+	  this.navCtrl.setRoot(LoginPage);
   }
 
 }
