@@ -6,9 +6,11 @@ import { ENV } from '@env';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Routes, RouterModule } from '@angular/router';
 import { InitPage } from '@pages/init/init';
+import { QueesPage } from '@pages/quees/quees';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
 //import { HomePage } from '@pages/all'
@@ -20,17 +22,20 @@ console.log('App property:', ENV.property)
 const routes: Routes = [
     { path: '**', redirectTo: '', pathMatch: 'full' },
     { path: 'init', component: InitPage },
+	{ path: 'quees', component: QueesPage },
 ];
 
 @NgModule({
     bootstrap: [IonicApp],
     declarations: [
         MyApp,
-        InitPage
+        InitPage,
+		QueesPage
     ],
     entryComponents: [
         MyApp,
-        InitPage
+        InitPage,
+		QueesPage
     ],
     imports: [
         BrowserModule,
@@ -45,7 +50,8 @@ const routes: Routes = [
         { provide: ErrorHandler, useClass: IonicErrorHandler },
 		AppVersion,
         Keyboard,
-        AndroidPermissions
+        AndroidPermissions,
+		InAppBrowser
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
