@@ -39,16 +39,13 @@ $colors: (
   light_gray: #f2f3f4,
   mid_gray:   #e6e7e9,
   dark_gray:  #222,
-  osde_blue:  #2d3b65,
-  osde_cyan:  #1b94b6,
-  osde_green: #93c844,
-  osde_red:   #d3484f,
-  white:	  #ffffff
+  white:	  #ffffff,
+  black:	  #000000
 );
 
 
-$text-color: color($colors, osde_blue);
-$toolbar-background: color($colors, osde_blue);
+$text-color: color($colors, black);
+$toolbar-background: color($colors, black);
 $toolbar-md-title-text-color: color($colors, light_gray);
 $menu-md-background: color($colors, white);
 $badge-font-size: 1rem;

@@ -54,26 +54,91 @@ ion-menu .content, ion-menu .item {
 	width: max-content;
 }
 
-@mixin fondo_pantalla{
-    --background: url("../../assets/images/fondo.png");
+@mixin margen_lados($margen){
+	margin-left:$margen;
+	margin-right:$margen;
 }
 
-@mixin centrado{
+@mixin fixed_width($withper){
+	width:$withper;
+	max-width:$withper;
+	min-width:$withper;
+}
+
+@mixin fondo_pantalla{
+	background-image: url("../assets/images/fondo.png");
+	background-color: #fff;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@mixin centrado_full{
     text-align:center;
+	width:100%;
+}
+
+@mixin posicionar_abajo($margen){
+	position:absolute;
+	bottom: $margen;
 }
 
 h1{
     font-size: 3em;
 }
 
-#titulo{
-    @include centrado;
+.item{
+	@include centrado_full;
     position:absolute;
-    top:20%;
-    width:100%;
+    top:10%;
+}
+
+#titulo{
+    @include centrado_full;
+	display:flex;
+}
+
+
+
+@media screen and (orientation:portrait) {
+	#titulo h1{
+		@include fixed_width(100%);
+	}
+
+	#titulo{
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	#titulo img{
+		@include fixed_width(30%);
+		content: url("../assets/icon/icon.png");
+	}
+}
+
+@media screen and (orientation:landscape) {
+	#titulo{
+		flex-direction: row;
+		justify-content: center;
+	}
+	
+	#titulo img{
+		@include fixed_width(15%);
+		content: url("../assets/icon/icon.png");
+	}
+	
 }
 
 .width-max-content{
 	width: max-content;
+}
+
+ion-content{
+	@include fondo_pantalla;
+}
+
+.justificado{
+	text-align:justify;
+	@include margen_lados(10px);
 }
 
