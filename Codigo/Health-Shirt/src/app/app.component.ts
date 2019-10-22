@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Platform, MenuController } from 'ionic-angular';
 import { InitPage } from '@pages/init/init';
+import { QueesPage } from '@pages/quees/quees';
 import { Router } from '@angular/router';
 import {App} from 'ionic-angular';
-
-
-declare var cordova:any;
 
 @Component({
     templateUrl: 'app.html'
@@ -35,6 +33,9 @@ export class MyApp {
             case 'init':
                 this.rootPage = InitPage;
                 break;
+			case 'quees':
+				this.rootPage = QueesPage;
+				break;
         }
         this.menu.close();        
 	}
