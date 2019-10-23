@@ -12,6 +12,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 
 //import { HomePage } from '@pages/all'
@@ -55,7 +56,8 @@ const routes: Routes = [
 		AppVersion,
         Keyboard,
         AndroidPermissions,
-		InAppBrowser
+        InAppBrowser,
+        Facebook
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
