@@ -4,6 +4,7 @@ import { MenuController } from 'ionic-angular/index';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { QueesPage } from '@pages/quees/quees';
 import { LoginPage } from '@pages/login/login';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'page-init',
@@ -16,7 +17,8 @@ export class InitPage {
   constructor(private menu: MenuController,
   public appVersion: AppVersion,
   public navCtrl: NavController, 
-  public platform: Platform) {
+  public platform: Platform,
+  public facebook: Facebook) {
 	   this.version = this.appVersion.getVersionNumber();
   }
   
@@ -30,6 +32,18 @@ export class InitPage {
 
   navegarLogin(){
 	  this.navCtrl.setRoot(LoginPage);
+  }
+
+  loginFacebook(){
+    this.facebook.login(['email'])
+    .then((res: FacebookLoginResponse) => this.fbLoginSuccess(res))
+    .catch(e => console.log('Error logging into Facebook', e));
+  }
+
+  fbLoginSuccess(res: FacebookLoginResponse) {
+   this.facebook.getAccessToken()
+   .then((token) => console.log("Token: " + token))
+   .catch(e => console.log('Error intentando obtener token', e));
   }
 
 }
