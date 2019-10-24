@@ -13,6 +13,8 @@ import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { RestProvider } from '../providers/rest/rest';
+import { HttpClientModule } from '@angular/common/http';
 
 
 //import { HomePage } from '@pages/all'
@@ -44,6 +46,7 @@ const routes: Routes = [
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         IonicModule.forRoot(MyApp, {
             tabsPlacement: 'top'
         }),
@@ -57,7 +60,9 @@ const routes: Routes = [
         Keyboard,
         AndroidPermissions,
         InAppBrowser,
-        Facebook
+        Facebook,
+    RestProvider,
+    HttpClientModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
