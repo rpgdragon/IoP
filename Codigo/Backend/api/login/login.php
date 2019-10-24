@@ -1,5 +1,6 @@
 <?php
- 
+//añadimos la cabecera del CORS
+ header("Access-Control-Allow-Origin: *");
 // obtenemos el pool de conexiones
 include_once '../config/database.php';
 // obtenemos donde esta la clase Usuario

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, Platform} from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
 import { InitPage } from '@pages/init/init';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { RestProvider} from '../../providers/rest/rest';
 
 @Component({
   selector: 'page-login',
@@ -16,7 +17,8 @@ export class LoginPage {
   constructor(private menu: MenuController,
   public navCtrl: NavController, 
   public platform: Platform,
-  public formBuilder: FormBuilder) {
+  public formBuilder: FormBuilder,
+  private rest: RestProvider) {
     this.formularioLogin = this.crearFormularioLogin();
   }
   
@@ -29,13 +31,16 @@ export class LoginPage {
   }
 
   login(){
-    console.log("Se ha invocado el login");
+    this.rest.login(this.formularioLogin.value.email,this.formularioLogin.value.password);
   }
 
   private crearFormularioLogin(){
     return this.formBuilder.group({
-      usuario: ['', Validators.required],
-      password: ['', Validators.required]
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      password: new FormControl ('', Validators.required)
     });
   }
 
