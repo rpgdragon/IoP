@@ -36,14 +36,21 @@ export class InitPage {
 
   loginFacebook(){
     this.facebook.login(['email'])
-    .then((res: FacebookLoginResponse) => this.fbLoginSuccess(res))
+    .then((res: FacebookLoginResponse) => this.obtenerDatos(res))
     .catch(e => console.log('Error logging into Facebook', e));
   }
 
-  fbLoginSuccess(res: FacebookLoginResponse) {
-   this.facebook.getAccessToken()
-   .then((token) => console.log("Token: " + token))
-   .catch(e => console.log('Error intentando obtener token', e));
+  obtenerDatos(res: FacebookLoginResponse) {
+   var token = res.authResponse.accessToken;
+   var userID = res.authResponse.userID;
+   this.facebook.api(userID + "/?fields=email",["user_birthday"])
+	.then((datos) => this.llamarLoginServidorFacebook(token,datos))
+	.catch(e => console.log('Error intentando obtener email ',e));
+  }
+ 
+  llamarLoginServidorFacebook(token:any, datos:any){
+	console.log(token);
+	console.log(datos.email);
   }
 
 }
