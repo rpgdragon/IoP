@@ -10,7 +10,22 @@ include_once '../modelo/codigos.php';
 //utilidades del sistema
 include_once '../utilidades/utils.php';
  
- 
+$inputJSON = file_get_contents('php://input');
+if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
+	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	exit();
+}
+$input= json_decode( $inputJSON );
+if(!isset($input) || $input==null || $input==''){
+	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	exit();
+} 
+
+if(!isset($input->usuario) || $input->usuario==null || $input->usuario=='' || !isset($input->password) || $input->password==null || $input->password==''){
+	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	exit();
+}
+
 $database = new Database();
 
 try{
@@ -23,16 +38,10 @@ catch(Exception $e){
  
 $usuario = new Usuario();
 $usuario->setConexion($db);
-
-$respuesta = null;
-if(!isset($_POST['usuario']) || $_POST['usuario']==null || $_POST['usuario']=='' || !isset($_POST['password']) || $_POST['password']==null || $_POST['password']==''){
-	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
-	exit();
-}	
  
-$usuario->setUsuario($_POST['usuario']);
+$usuario->setUsuario($input->usuario);
 //ciframos la contraseña
-$usuario->setPassword(base64_encode($_POST['password']));
+$usuario->setPassword(base64_encode($input->password));
 
 //vamos a ver si podemos hacer login
 try{
