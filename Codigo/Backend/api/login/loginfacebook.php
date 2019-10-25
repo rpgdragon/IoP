@@ -12,6 +12,22 @@ require_once '../utilidades/Facebook/autoload.php';
 //utilidades del sistema
 include_once '../utilidades/utils.php';
  
+$inputJSON = file_get_contents('php://input');
+if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
+	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	exit();
+}
+$input= json_decode( $inputJSON );
+if(!isset($input) || $input==null || $input==''){
+	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	exit();
+} 
+
+if(!isset($input->usuario) || $input->usuario==null || $input->usuario=='' || !isset($input->password) || $input->password==null || $input->password==''){
+	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	exit();
+}
+
 $database = new Database();
 try{
 	$db = $database->getConexion();
@@ -23,12 +39,6 @@ catch(Exception $e){
  
 $usuario = new Usuario();
 $usuario->setConexion($db);
-
-$respuesta = null;
-if(!isset($_POST['usuario']) || $_POST['usuario']==null || $_POST['usuario']=='' || !isset($_POST['token']) || $_POST['token']==null || $_POST['token']==''){
-	generar_respuesta(false,"La solicitud de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
-	exit();
-}	
  
 //antes de seguir validamos el token a ver si es valido
 $fb = new Facebook\Facebook([
