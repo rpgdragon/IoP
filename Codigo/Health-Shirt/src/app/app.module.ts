@@ -8,6 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InitPage } from '@pages/init/init';
 import { QueesPage } from '@pages/quees/quees';
 import { LoginPage } from '@pages/login/login';
+import { CamisetaPage } from '@pages/camiseta/camiseta';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
@@ -15,6 +16,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 //import { HomePage } from '@pages/all'
@@ -28,6 +30,7 @@ const routes: Routes = [
     { path: 'init', component: InitPage },
     { path: 'quees', component: QueesPage },
     { path: 'login', component: LoginPage },
+    { path: 'camiseta', component: CamisetaPage },
 ];
 
 @NgModule({
@@ -36,13 +39,15 @@ const routes: Routes = [
         MyApp,
         InitPage,
         QueesPage,
-        LoginPage
+        LoginPage,
+        CamisetaPage
     ],
     entryComponents: [
         MyApp,
         InitPage,
         QueesPage,
-        LoginPage
+        LoginPage,
+        CamisetaPage
     ],
     imports: [
         BrowserModule,
@@ -50,7 +55,8 @@ const routes: Routes = [
         IonicModule.forRoot(MyApp, {
             tabsPlacement: 'top'
         }),
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        IonicStorageModule.forRoot()
     ],
     exports: [RouterModule],
     providers: [

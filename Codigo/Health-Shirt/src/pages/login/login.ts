@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, Platform} from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
-import { InitPage } from '@pages/init/init';
+import { CamisetaPage } from '@pages/camiseta/camiseta';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { RestProvider} from '../../providers/rest/rest';
+import { MyApp } from '@app/app.component';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-login',
@@ -18,7 +20,8 @@ export class LoginPage {
   public navCtrl: NavController, 
   public platform: Platform,
   public formBuilder: FormBuilder,
-  private rest: RestProvider) {
+  private rest: RestProvider,
+  private storage: Storage) {
     this.formularioLogin = this.crearFormularioLogin();
   }
   
@@ -27,11 +30,22 @@ export class LoginPage {
   }
   
   navegarMain(){
-	  this.navCtrl.setRoot(InitPage);
+    //quitamos la pagina de la pila
+	  this.navCtrl.pop();
   }
 
   login(){
-    this.rest.login(this.formularioLogin.value.email,this.formularioLogin.value.password);
+    this.rest.login(this.formularioLogin.value.email,this.formularioLogin.value.password).then(data => {
+      MyApp.setNombreusuario(this.formularioLogin.value.email.toLowerCase());
+      this.storage.set('nombreusuario', this.formularioLogin.value.email.toLowerCase());
+      this.navCtrl.setRoot(CamisetaPage);
+    }, error => {
+      if (error.status === 403) {
+        alert('El usuario y/o contraseña no son correctos');
+      } else {
+        alert("No se ha podido iniciar sesión");
+      }
+    })
   }
 
   private crearFormularioLogin(){
