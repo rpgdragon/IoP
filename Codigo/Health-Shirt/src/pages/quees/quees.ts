@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, Platform} from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { InitPage } from '@pages/init/init';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
@@ -26,7 +25,7 @@ export class QueesPage {
   }
   
   navegarMain(){
-	  this.navCtrl.setRoot(InitPage);
+	  this.navCtrl.pop();
   }
   
   navegarCompra(){

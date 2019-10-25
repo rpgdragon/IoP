@@ -27,11 +27,11 @@ export class InitPage {
   }
   
   navegarQueEs(){
-	  this.navCtrl.setRoot(QueesPage);
+	  this.navCtrl.push(QueesPage);
   }
 
   navegarLogin(){
-	  this.navCtrl.setRoot(LoginPage);
+	  this.navCtrl.push(LoginPage);
   }
 
   loginFacebook(){

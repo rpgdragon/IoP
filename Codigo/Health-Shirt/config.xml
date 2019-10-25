@@ -112,6 +112,7 @@
         <variable name="FACEBOOK_HYBRID_APP_EVENTS" value="false" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="5.5.2" />
     </plugin>
+    <plugin name="cordova-sqlite-storage" spec="^3.4.0" />
     <engine name="android" spec="8.0.0" />
     <engine name="ios" spec="^4.5.5" />
 </widget>
