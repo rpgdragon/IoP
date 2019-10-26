@@ -14,17 +14,17 @@ include_once '../utilidades/utils.php';
  
 $inputJSON = file_get_contents('php://input');
 if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
-	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	generar_respuesta(false, "La solicitud de login facebook le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 $input= json_decode( $inputJSON );
 if(!isset($input) || $input==null || $input==''){
-	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	generar_respuesta(false, "La solicitud de login facebook le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 } 
 
-if(!isset($input->usuario) || $input->usuario==null || $input->usuario=='' || !isset($input->password) || $input->password==null || $input->password==''){
-	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+if(!isset($input->usuario) || $input->usuario==null || $input->usuario=='' || !isset($input->token) || $input->token==null || $input->token==''){
+	generar_respuesta(false, "La solicitud de login facebook le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 
@@ -47,7 +47,7 @@ $fb = new Facebook\Facebook([
   'default_graph_version' => 'v2.12',
  ]);
  
- $fb->setDefaultAccessToken($_POST['token']);
+ $fb->setDefaultAccessToken($input->token);
  
  try {
 		$request = $fb->get('/me');
@@ -61,8 +61,21 @@ $fb = new Facebook\Facebook([
 	// When validation fails or other local issues
 	generar_respuesta(false, $e->getMessage(),CODIGO_SESION_FACEBOOK_ERRONEA,ESTATUS_FORBIDDEN);
 	exit;
-	}
+}
+//si llega aqui, tenemos que ver si existe la cuenta o no
+try{
+	$usuario->setUsuario($input->usuario);
+	$queryst = $usuario->loginFacebook();
+}catch(Exception $e){
+	generar_respuesta(true, $e->getMessage(),CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
+	exit();
+}
 
-generar_respuesta(true, "LOGIN CORRECTO FACEBOOK",CODIGO_OK,ESTATUS_OK);
+if($queryst->rowCount() > 0){
+	generar_respuesta(true, "Logado correctamente Facebook",CODIGO_OK,ESTATUS_OK);
+}
+else{
+	generar_respuesta(true, "Necesita definir Contraseña",CODIGO_NUEVA_CUENTA,ESTATUS_OK);
+}
 
 ?>
