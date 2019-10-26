@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { Platform, MenuController } from 'ionic-angular';
+import { NavController, Platform, MenuController } from 'ionic-angular';
 import { InitPage } from '@pages/init/init';
 import { QueesPage } from '@pages/quees/quees';
-import { Router } from '@angular/router';
 import {App} from 'ionic-angular';
 import { CamisetaPage } from '@pages/camiseta/camiseta';
 import { LoginPage } from '@pages/login/login';
@@ -15,14 +14,13 @@ import { Storage } from '@ionic/storage';
 
 export class MyApp {
     rootPage: any = InitPage;
-	
+	@ViewChild('myNav') nav: NavController;
     private static nombreusuario = '';
   
     constructor(
 		public app: App,
         public splashScreen: SplashScreen,
-        public platform: Platform,
-        private router: Router,  
+        public platform: Platform, 
 		private menu: MenuController,
 		private storage: Storage
     ) {
@@ -41,20 +39,23 @@ export class MyApp {
     }
 	
     go(name){
-		console.log(name);
-        this.router.navigate([name]);
         switch(name){
             case 'init':
-                this.rootPage = InitPage;
+				this.rootPage = InitPage;
+				this.nav.setRoot(InitPage);
+				this.storage.set("nombreusuario",null);
                 break;
 			case 'quees':
 				this.rootPage = QueesPage;
+				this.nav.setRoot(QueesPage);
 				break;
 			case 'camiseta':
 				this.rootPage = CamisetaPage;
+				this.nav.setRoot(CamisetaPage);
 				break;
 			case 'login':
 				this.rootPage = LoginPage;
+				this.nav.setRoot(LoginPage);
 				break;
         }
         this.menu.close();        

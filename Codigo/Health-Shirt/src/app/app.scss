@@ -67,7 +67,7 @@ ion-menu .content, ion-menu .item {
 
 @mixin fondo_pantalla{
 	background-image: url("../assets/images/fondo.png");
-	background-color: #fff;
+	background-color:color($colors, white);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -135,6 +135,10 @@ h1{
 
 ion-content{
 	@include fondo_pantalla;
+}
+
+ion-content.menu{
+	background-color:color($colors, white);
 }
 
 .justificado{
