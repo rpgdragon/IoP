@@ -3,12 +3,12 @@
 		<ion-toolbar>
 			<ion-title class="margenabajo">
 				{{ staticnombreusuario }} 
-				<ion-icon (click)="logout()" class="derecha" name="exit"></ion-icon>
+				<ion-icon (click)="go('init')" class="derecha" name="exit"></ion-icon>
 			</ion-title>
 		</ion-toolbar>
 	</ion-header>
 
-	<ion-content>
+	<ion-content class="menu">
 		<ion-list>
 			<ion-item (click)="go('traslados-diarios')">
 				<ion-icon name="shirt" class="icon_menu" item-left></ion-icon>
@@ -28,4 +28,4 @@
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav #myNav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
