@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { RestProvider} from '../../providers/rest/rest';
 import { MyApp } from '@app/app.component';
 import { Storage } from '@ionic/storage';
+import { OlvidoPage } from '@pages/olvido/olvido';
 
 @Component({
   selector: 'page-login',
@@ -32,6 +33,10 @@ export class LoginPage {
   navegarMain(){
     //quitamos la pagina de la pila
 	  this.navCtrl.pop();
+  }
+
+  navegarOlvido(){
+    this.navCtrl.push(OlvidoPage);
   }
 
   login(){

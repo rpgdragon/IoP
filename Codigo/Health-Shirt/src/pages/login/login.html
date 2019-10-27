@@ -7,6 +7,7 @@
 				<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
 				<ion-label stacked>Password:</ion-label>
 				<ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+				<a (click)="navegarOlvido()"><ion-label stacked>¿Has olvidado la contraseña?</ion-label></a>
 				<button ion-button class="submit-btn right buttonLogin" type="submit" [disabled]="!formularioLogin.valid">
 					Login
 				</button>

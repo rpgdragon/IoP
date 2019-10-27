@@ -7,6 +7,7 @@ import {App} from 'ionic-angular';
 import { CamisetaPage } from '@pages/camiseta/camiseta';
 import { LoginPage } from '@pages/login/login';
 import { Storage } from '@ionic/storage';
+import { OlvidoPage } from '@pages/olvido/olvido';
 
 @Component({
     templateUrl: 'app.html'
@@ -56,6 +57,10 @@ export class MyApp {
 			case 'login':
 				this.rootPage = LoginPage;
 				this.nav.setRoot(LoginPage);
+				break;
+			case 'olvido':
+				this.rootPage = OlvidoPage;
+				this.nav.setRoot(OlvidoPage);
 				break;
         }
         this.menu.close();        

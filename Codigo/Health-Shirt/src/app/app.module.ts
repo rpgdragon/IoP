@@ -18,6 +18,7 @@ import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { TemplatePage } from '@pages/template/template';
+import { OlvidoPage } from '@pages/olvido/olvido';
 
 
 //import { HomePage } from '@pages/all'
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'quees', component: QueesPage },
     { path: 'login', component: LoginPage },
     { path: 'camiseta', component: CamisetaPage },
+    { path: 'olvido', component: OlvidoPage },
 ];
 
 @NgModule({
@@ -42,7 +44,8 @@ const routes: Routes = [
         QueesPage,
         LoginPage,
         CamisetaPage,
-        TemplatePage
+        TemplatePage,
+        OlvidoPage
     ],
     entryComponents: [
         MyApp,
@@ -50,7 +53,8 @@ const routes: Routes = [
         QueesPage,
         LoginPage,
         CamisetaPage,
-        TemplatePage
+        TemplatePage,
+        OlvidoPage
     ],
     imports: [
         BrowserModule,
