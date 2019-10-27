@@ -9,7 +9,7 @@
     "build-ionic-web": "ionic-app-scripts build",
     "lint-ionic": "ionic-app-scripts lint",
     "build-android": "(export MY_ENV=dev || set MY_ENV=dev) && ionic cordova build android",
-    "build-android-prod": "(export MY_ENV=prod || set MY_ENV=prod) && ionic cordova build android --prod ",
+    "build-android-prod": "(export MY_ENV=prod || set MY_ENV=prod) && ionic cordova build android --prod --release ",
     "build-android-dev": "(export MY_ENV=dev || set MY_ENV=dev) && ionic cordova build android",
     "run-android": "(export MY_ENV=dev || set MY_ENV=dev) && cordova run android --device",
     "run-android-dev": "(export MY_ENV=dev || set MY_ENV=dev) && cordova run android --device",
@@ -27,6 +27,7 @@
     "build-run-ios-dev": "(export MY_ENV=dev || set MY_ENV=dev) && ionic cordova build ios && cordova run ios --device",
     "build-run-ios-prod": "(export MY_ENV=prod || set MY_ENV=prod) &&  ionic cordova build ios --prod && cordova run ios --device --prod",
     "reset-android-plugins": "rm -rf platforms/android plugins/* && ionic cordova platform add android",
+    "create-android-version": "(export MY_ENV=prod || set MY_ENV=prod) && ionic cordova build android --prod --release && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../../keystore/healthshirt.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk healthshirt && zipalign -v 4 ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk HealthShirt.apk",
     "add-plugin": "ionic cordova plugin add --plugin",
     "remove-plugin": "ionic cordova plugin remove --plugin",
     "android-requirements": "ionic cordova requirements android"

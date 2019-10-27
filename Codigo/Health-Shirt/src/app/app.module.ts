@@ -17,6 +17,7 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { TemplatePage } from '@pages/template/template';
 
 
 //import { HomePage } from '@pages/all'
@@ -40,14 +41,16 @@ const routes: Routes = [
         InitPage,
         QueesPage,
         LoginPage,
-        CamisetaPage
+        CamisetaPage,
+        TemplatePage
     ],
     entryComponents: [
         MyApp,
         InitPage,
         QueesPage,
         LoginPage,
-        CamisetaPage
+        CamisetaPage,
+        TemplatePage
     ],
     imports: [
         BrowserModule,
