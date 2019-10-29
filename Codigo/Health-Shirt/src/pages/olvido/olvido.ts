@@ -34,7 +34,13 @@ export class OlvidoPage {
       alert("Mira tu correo y sigue las instrucciones");
       this.navCtrl.pop();
     },error=>{
-      alert("No se ha podido enviar el email para recuperar la contraseña")
+      if(error.status===404){
+        alert("El email introducido no pertenece a ninguna cuenta");
+      }
+      else{
+        alert("No se ha podido enviar el email para recuperar la contraseña")
+      }
+      
     });
   }
 

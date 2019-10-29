@@ -152,6 +152,22 @@ class Usuario{
         }
     }
 
+    function cambiarPassword($token){
+        $query = "UPDATE " . $this->tabla . " SET password=:password WHERE usuario=(SELECT idusuario FROM ".$this->tablatoken." WHERE token=:token)";
+        $queryst = $this->conexion->prepare($query);
+        $this->password=htmlspecialchars(strip_tags($this->password));
+        $queryst->bindParam(":password", $this->password);
+        $queryst->bindParam(":token", $token);
+        $queryst->execute();
+    }
+
+    function deleteTokenFromToken($token){
+        $query = "DELETE FROM " . $this->tablatoken . " WHERE token=:token";
+        $queryst = $this->conexion->prepare($query);
+        $queryst->bindParam(":token", $token);
+        $queryst->execute();        
+    }
+
     function insertarToken($token){
         $query = "INSERT INTO " . $this->tablatoken . " SET idusuario=:usuario, token=:token, horacreacion=now()";
         $queryst = $this->conexion->prepare($query);
