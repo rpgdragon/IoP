@@ -77,7 +77,7 @@ export class RestProvider {
 			let cuerpo = {
 				"usuario": email,
       }
-      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "recuperarcuenta.php",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "olvido.php",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);

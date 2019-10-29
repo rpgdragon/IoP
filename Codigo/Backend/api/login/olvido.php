@@ -49,13 +49,21 @@ try{
 		//si existe, se le debe de enviar un email para que recupere la contraseña
 		$enviado = false;
 		$intentos = 3;
+		$tokengenerado = generar_token(128);
 		$textocorreo = str_replace("%AQUIVATOKEN%",$tokengenerado,CUERPO_CORREO);
 		//usuarioxtoken
 		do{
 			$enviado = mail($input->usuario,ASUNTO_CORREO,$textocorreo,CABECERA_CORREO);
 			$intentos = $intentos - 1;
 		} while($enviado==false && $intentos > 0);
-		generar_respuesta(true,"Mensaje enviado",CODIGO_OK,ESTATUS_OK);
+		if(enviado){
+			$usuario->deleteToken();
+			$usuario->insertarToken($tokengenerado);
+			generar_respuesta(true,"Mensaje enviado",CODIGO_OK,ESTATUS_OK);
+		}
+		else{
+			generar_respuesta(true, "No se ha podido enviar el email",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
+		}
 	}
 	else{
 		//no existe, no es valido
