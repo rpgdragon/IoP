@@ -3,6 +3,7 @@ class Usuario{
  
     private $conexion;
     private $tabla = "usuarios";
+    private $tablatoken = "usuarioxtoken";
  
     private $usuario;
     private $password;
@@ -117,6 +118,51 @@ class Usuario{
     function comprobarSiExisteUsuario(){
         $queryst = $this->loginFacebook();
         if($queryst->rowCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function deleteToken(){
+        $query = "DELETE FROM " . $this->tablatoken . " WHERE idusuario=:usuario";
+        $queryst = $this->conexion->prepare($query);
+        $this->usuario=htmlspecialchars(strip_tags($this->usuario));
+        $queryst->bindParam(":usuario", $this->usuario);
+        $queryst->execute();
+    }
+
+    function checkTokenExists(){
+        // select all query
+        $query = "SELECT 1 FROM " . $this->tablatoken . " 
+                WHERE
+                   idusuario=:usuario and token=:token";
+
+        $queryst = $this->conexion->prepare($query);
+		$this->usuario=htmlspecialchars(strip_tags($this->usuario));
+        $queryst->bindParam(":usuario", $this->usuario);
+        $queryst->bindParam(":token", $token);
+        $queryst->execute();
+        if($queryst->rowCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function insertarToken($token){
+        $query = "INSERT INTO " . $this->tablatoken . " SET idusuario=:usuario, token=:token, horacreacion=now()";
+        $queryst = $this->conexion->prepare($query);
+    
+        $this->usuario=htmlspecialchars(strip_tags($this->usuario));
+    
+        $queryst->bindParam(":usuario", $this->usuario);
+        $queryst->bindParam(":token", $token);
+    
+        // execute query
+        if($queryst->execute()){
             return true;
         }
         else{

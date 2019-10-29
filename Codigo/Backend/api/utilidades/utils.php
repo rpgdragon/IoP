@@ -11,5 +11,17 @@ function generar_respuesta($estatus, $mensaje, $codigorespuesta, $codigoestatus)
 	
 }
 
+function generar_token($tamano){
+	$diccionario = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@.-_';
+	$tokengenerado = ''; 
+  
+    for ($i = 0; $i < $tamano; $i++) { 
+        $indice = rand(0, strlen($diccionario) - 1); 
+        $tokengenerado .= $diccionario[$indice]; 
+    } 
+  
+    return $tokengenerado;  
+}
+
 
 ?>

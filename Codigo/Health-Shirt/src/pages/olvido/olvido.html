@@ -6,10 +6,10 @@
 		<p class="justificado">¿Has olvidado tu contraseña?</p>
 		<p class="justificado">Introduce tu email</p>
 	</div>
-	<form [formGroup]="formularioLogin" (ngSubmit)="recuperarCuenta()">
+	<form [formGroup]="formulario" (ngSubmit)="recuperarCuenta()">
 		<ion-label stacked>Email:</ion-label>
 		<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
-	<button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formularioLogin.valid">
+	<button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formulario.valid">
 	Recuperar cuenta
 	</button>
 	</form>
