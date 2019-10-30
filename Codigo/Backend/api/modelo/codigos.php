@@ -24,4 +24,8 @@ define("ESTATUS_BAD_REQUEST",400);
 define("ESTATUS_CREATED",201);
 define("ESTATUS_CONFLICTO",409);
 
+
+define("AL_MENOS_UN_NUMERO",'/\d/');
+define("AL_MENOS_UN_ESPECIAL",'/[^a-zA-Z\d]/');
+
 ?>
