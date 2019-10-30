@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // obtenemos el pool de conexiones
 include_once '../config/database.php';
 
@@ -43,7 +45,21 @@ if($queryst->rowCount() <= 0){
     <div class="container" style="text-align:center">
         <img src="../assets/images/icon.png" width="30%" alt="Logo HealtShirt" />
         <h1>HealthShirt</h1>
-        <p>Para recuperar la cuenta debe resetear la contraseña, por favor introduce la nueva contraseña debajo</p>
+        <p>Para recuperar la cuenta debe resetear la contraseña, por favor introduce la nueva contraseña debajo. La contraseña debe cumplir las siguientes condiciones</p>
+        <ul style="text-align:left;">
+            <li>Debe contener al menos 6 caracteres</li>
+            <li>Debe contener al menos una letra mayuscula</li>
+            <li>Debe contener al menos una letra minuscula</li>
+            <li>Debe contener al menos un número</li>
+            <li>Debe contener al menos un caracter especial</li>
+        </ul>
+        <?php
+        if(isset($_SESSION['mensaje']) && $_SESSION['mensaje']!=null){
+            ?>
+            <div class="alert alert-danger" role="alert"><?php echo $_SESSION['mensaje']; ?></div>
+            <?php
+        }
+        ?>
         <form action="nuevacontrasena.php" method="post">
 			<input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password123" aria-describedby="password123"><br/>
 			<input type="password" class="form-control" placeholder="Confirma password" aria-label="Confirmar Password" name="rpassword123" aria-describedby="rpassword123"><br/>
@@ -51,5 +67,6 @@ if($queryst->rowCount() <= 0){
             <button class="btn btn-primary" type="submit">Cambiar clave</button>
         </form>
     </div>
+    <?php unset($_SESSION['mensaje']);?>
 </body>
 
