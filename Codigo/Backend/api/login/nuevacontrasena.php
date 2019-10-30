@@ -37,10 +37,12 @@ catch(Exception $e){
 	exit();
 }
 
-$query = "SELECT idusuario FROM usuarioxtoken WHERE token='".$_GET['token']."' ";
+$query = "SELECT idusuario FROM usuarioxtoken WHERE token='".$_POST['token']."' ";
 $queryst = $db->prepare($query);
-if(!$queryst->execute()){
-    http_response_code(400);
+$queryst->execute();
+if($queryst->rowCount() <= 0){
+	http_response_code(400);
+	echo "No hay token";
     exit();
 }
 
