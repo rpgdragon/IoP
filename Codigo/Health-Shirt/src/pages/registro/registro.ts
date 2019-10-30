@@ -1,0 +1,66 @@
+import { Component } from '@angular/core';
+import { NavController, Platform} from 'ionic-angular';
+import { MenuController } from 'ionic-angular/index';
+import { CamisetaPage } from '@pages/camiseta/camiseta';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { RestProvider} from '../../providers/rest/rest';
+import { MyApp } from '@app/app.component';
+import { Storage } from '@ionic/storage';
+import { OlvidoPage } from '@pages/olvido/olvido';
+
+@Component({
+  selector: 'page-registro',
+  templateUrl: 'registro.html'
+})
+export class RegistroPage {
+	
+  public version: any;
+  formularioLogin: FormGroup;
+
+  constructor(private menu: MenuController,
+  public navCtrl: NavController, 
+  public platform: Platform,
+  public formBuilder: FormBuilder,
+  private rest: RestProvider,
+  private storage: Storage) {
+    this.formularioLogin = this.crearFormularioLogin();
+  }
+  
+  ionViewDidLoad(): void {	 
+	  this.menu.swipeEnable(false);
+  }
+  
+  navegarMain(){
+    //quitamos la pagina de la pila
+	  this.navCtrl.pop();
+  }
+
+  navegarOlvido(){
+    this.navCtrl.push(OlvidoPage);
+  }
+
+  login(){
+    this.rest.login(this.formularioLogin.value.email,this.formularioLogin.value.password).then(data => {
+      MyApp.setNombreusuario(this.formularioLogin.value.email.toLowerCase());
+      this.storage.set('nombreusuario', this.formularioLogin.value.email.toLowerCase());
+      this.navCtrl.setRoot(CamisetaPage);
+    }, error => {
+      if (error.status === 403) {
+        alert('El usuario y/o contraseña no son correctos');
+      } else {
+        alert("No se ha podido iniciar sesión");
+      }
+    })
+  }
+
+  private crearFormularioLogin(){
+    return this.formBuilder.group({
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      password: new FormControl ('', Validators.required)
+    });
+  }
+
+}
