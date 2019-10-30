@@ -1,0 +1,21 @@
+<ion-content forceOverscroll="true">
+		<div class="item">
+			<div id="titulo">
+			<h1>Health Shirt</h1><img alt="logo"/></div>
+			<form [formGroup]="formularioLogin" (ngSubmit)="login()">
+				<ion-label stacked>Email:</ion-label>
+				<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+				<ion-label stacked>Password:</ion-label>
+				<ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+				<a (click)="navegarOlvido()"><ion-label stacked>¿Has olvidado la contraseña?</ion-label></a>
+				<button ion-button class="submit-btn right buttonLogin" type="submit" [disabled]="!formularioLogin.valid">
+					Login
+				</button>
+				<button ion-button class="submit-btn right button-white-black buttonLogin" type="button" (click)="navegarMain()">
+					Atrás
+				</button>
+			</form>
+		</div>	
+		
+		</ion-content>
+			
