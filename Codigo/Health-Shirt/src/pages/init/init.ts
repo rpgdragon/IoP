@@ -10,6 +10,7 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Storage } from '@ionic/storage';
 import { MyApp } from '@app/app.component';
 import { RegistroPage } from '@pages/registro/registro';
+import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
 
 @Component({
   selector: 'page-init',
@@ -63,7 +64,8 @@ export class InitPage {
     this.rest.loginFacebook(datos.email,token).then(data=>{
       if(data['codigorespuesta']==="603"){
         //hay que poner la pagina del password del Facebook
-        console.log("Ha devuelto 603");
+        MyApp.setNombreusuario(datos.email.toLowerCase());
+        this.navCtrl.push(RegistroFacebookPage);
       }
       else{
         //ok, login correcto cambiamos
