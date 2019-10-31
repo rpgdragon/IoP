@@ -76,7 +76,7 @@ catch(Exception $e){
 	exit();
 }
 
-$query = "SELECT idusuario FROM usuarioxtoken WHERE token='".$_POST['token']."' ";
+$query = "SELECT idusuario FROM usuarioxtoken WHERE token='".$_POST['token']."' and confirmado=1 ";
 $queryst = $db->prepare($query);
 $queryst->execute();
 if($queryst->rowCount() <= 0){
@@ -92,7 +92,7 @@ $usuario->setConexion($db);
 //ciframos la contraseña
 $usuario->setPassword(base64_encode($_POST['password123']));
 $usuario->cambiarPassword($_POST['token']);
-$usuario->deleteTokenFromToken($_POST['token']);
+$usuario->deleteTokenFromToken($_POST['token'],1);
 http_response_code(200);
 echo "Se ha cambiado exitosamente la contraseña";
 

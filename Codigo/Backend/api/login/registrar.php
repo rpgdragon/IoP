@@ -8,7 +8,10 @@ include_once '../modelo/usuario.php';
 include_once '../modelo/codigos.php';
 //utilidades del sistema
 include_once '../utilidades/utils.php';
- 
+
+//correos constantes
+include_once '../utilidades/correoconstantes.php';
+
 $inputJSON = file_get_contents('php://input');
 if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
 	generar_respuesta(false, "La solicitud de creación de usuario le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
@@ -53,7 +56,24 @@ if($usuario->comprobarSiExisteUsuario()){
 
 
 if($usuario->registrar_usuario()){
-	generar_respuesta(true, "Registrado correctamente",CODIGO_USUARIO_CREADO,ESTATUS_CREATED);
+	//seguimos, antes de devolver la respuesta hay que enviar un correo indicando que te has registrado
+	$enviado = false;
+	$intentos = 3;
+	$tokengenerado = generar_token(128);
+	$textocorreo = str_replace("%AQUIVATOKEN%",$tokengenerado,CUERPO_CORREO_REGISTRO);
+	//usuarioxtoken
+	do{
+		$enviado = mail($input->usuario,ASUNTO_CORREO_REGISTRO,$textocorreo,CABECERA_CORREO);
+		$intentos = $intentos - 1;
+	} while($enviado==false && $intentos > 0);
+	if(enviado){
+		$usuario->deleteToken();
+		$usuario->insertarToken($tokengenerado,0);
+		generar_respuesta(true,"Registrado correctamente",CODIGO_OK,ESTATUS_OK);
+	}
+	else{
+		generar_respuesta(true, "No se ha podido enviar el email",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
+	}
 }
 else{
 	generar_respuesta(false, "No se ha podido generar el usuario",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
