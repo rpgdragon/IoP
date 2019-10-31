@@ -87,6 +87,10 @@ h1{
     font-size: 3em;
 }
 
+h2{
+	font-size: 1.5em;
+}
+
 .item{
 	@include centrado_full;
     position:absolute;

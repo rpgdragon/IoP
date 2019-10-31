@@ -8,6 +8,7 @@ import { CamisetaPage } from '@pages/camiseta/camiseta';
 import { LoginPage } from '@pages/login/login';
 import { Storage } from '@ionic/storage';
 import { OlvidoPage } from '@pages/olvido/olvido';
+import { RegistroPage} from '@pages/registro/registro';
 
 @Component({
     templateUrl: 'app.html'
@@ -61,6 +62,10 @@ export class MyApp {
 			case 'olvido':
 				this.rootPage = OlvidoPage;
 				this.nav.setRoot(OlvidoPage);
+				break;
+			case 'registro':
+				this.rootPage = RegistroPage;
+				this.nav.setRoot(RegistroPage);
 				break;
         }
         this.menu.close();        

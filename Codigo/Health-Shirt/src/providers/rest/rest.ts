@@ -44,6 +44,29 @@ export class RestProvider {
     });
   }
 
+  public registrar(email:string,password:string,esFacebook:string){
+    return new Promise((resolve,reject) => {
+      let httpOptions = {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + AUTHORIZACION
+				})
+			}
+			let cuerpo = {
+				"usuario": email,
+        "password": password,
+        "esFacebook": esFacebook
+      } 
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "registrar.php",cuerpo,httpOptions)
+      .timeout(TIMEOUT_MAXIMO)
+				.subscribe(data => {
+					resolve(data);
+				}, error => {
+					reject(error);
+				});
+    });
+  }
+
   public loginFacebook(email:string,token:string){
     return new Promise((resolve,reject) => {
       let httpOptions = {
