@@ -9,6 +9,7 @@ import { RestProvider} from '../../providers/rest/rest';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Storage } from '@ionic/storage';
 import { MyApp } from '@app/app.component';
+import { RegistroPage } from '@pages/registro/registro';
 
 @Component({
   selector: 'page-init',
@@ -38,6 +39,10 @@ export class InitPage {
 
   navegarLogin(){
 	  this.navCtrl.push(LoginPage);
+  }
+
+  navegarRegistro(){
+    this.navCtrl.push(RegistroPage);
   }
 
   loginFacebook(){

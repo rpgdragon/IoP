@@ -44,14 +44,19 @@ if(!isset($input->esFacebook) || $input->esFacebook==null || $input->esFacebook=
 $usuario->setUsuario($input->usuario);
 //ciframos la contraseña
 $usuario->setPassword(base64_encode($input->password));
-$usuario->setEsFacebook($inpput->esFacebook);
+$usuario->setEsFacebook($input->esFacebook);
+
+if($usuario->comprobarSiExisteUsuario()){
+	generar_respuesta(false, "El usuario ya existe",CODIGO_USUARIO_EXISTE,ESTATUS_CONFLICTO);
+	exit();
+}
 
 
 if($usuario->registrar_usuario()){
 	generar_respuesta(true, "Registrado correctamente",CODIGO_USUARIO_CREADO,ESTATUS_CREATED);
 }
 else{
-	generar_respuesta(false, "El usuario ya existe",CODIGO_USUARIO_EXISTE,ESTATUS_CONFLICTO);
+	generar_respuesta(false, "No se ha podido generar el usuario",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
     
 }
 ?>
