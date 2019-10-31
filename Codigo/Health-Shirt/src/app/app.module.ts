@@ -20,6 +20,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TemplatePage } from '@pages/template/template';
 import { OlvidoPage } from '@pages/olvido/olvido';
 import { RegistroPage } from '@pages/registro/registro';
+import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
 
 
 //import { HomePage } from '@pages/all'
@@ -35,7 +36,8 @@ const routes: Routes = [
     { path: 'login', component: LoginPage },
     { path: 'camiseta', component: CamisetaPage },
     { path: 'olvido', component: OlvidoPage },
-    { path: 'registro', component:RegistroPage }
+    { path: 'registro', component:RegistroPage },
+    { path: 'registrofacebook', component:RegistroFacebookPage}
 ];
 
 @NgModule({
@@ -48,7 +50,8 @@ const routes: Routes = [
         CamisetaPage,
         TemplatePage,
         OlvidoPage,
-        RegistroPage
+        RegistroPage,
+        RegistroFacebookPage
     ],
     entryComponents: [
         MyApp,
@@ -58,7 +61,8 @@ const routes: Routes = [
         CamisetaPage,
         TemplatePage,
         OlvidoPage,
-        RegistroPage
+        RegistroPage,
+        RegistroFacebookPage
     ],
     imports: [
         BrowserModule,
