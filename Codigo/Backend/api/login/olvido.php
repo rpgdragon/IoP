@@ -58,7 +58,7 @@ try{
 		} while($enviado==false && $intentos > 0);
 		if(enviado){
 			$usuario->deleteToken();
-			$usuario->insertarToken($tokengenerado);
+			$usuario->insertarToken($tokengenerado,1);
 			generar_respuesta(true,"Mensaje enviado",CODIGO_OK,ESTATUS_OK);
 		}
 		else{

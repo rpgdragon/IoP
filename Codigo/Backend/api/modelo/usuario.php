@@ -161,21 +161,23 @@ class Usuario{
         $queryst->execute();
     }
 
-    function deleteTokenFromToken($token){
-        $query = "DELETE FROM " . $this->tablatoken . " WHERE token=:token";
+    function deleteTokenFromToken($token,$confirmado){
+        $query = "DELETE FROM " . $this->tablatoken . " WHERE token=:token and confirmado=:confirmado";
         $queryst = $this->conexion->prepare($query);
         $queryst->bindParam(":token", $token);
+        $queryst->bindParam(":confirmado",$confirmado);
         $queryst->execute();        
     }
 
-    function insertarToken($token){
-        $query = "INSERT INTO " . $this->tablatoken . " SET idusuario=:usuario, token=:token, horacreacion=now()";
+    function insertarToken($token,$confirmado){
+        $query = "INSERT INTO " . $this->tablatoken . " SET idusuario=:usuario, token=:token, confirmado=:confirmado, horacreacion=now()";
         $queryst = $this->conexion->prepare($query);
     
         $this->usuario=htmlspecialchars(strip_tags($this->usuario));
     
         $queryst->bindParam(":usuario", $this->usuario);
         $queryst->bindParam(":token", $token);
+        $queryst->bindParam(":confirmado",$confirmado);
     
         // execute query
         if($queryst->execute()){
@@ -184,5 +186,12 @@ class Usuario{
         else{
             return false;
         }
+    }
+
+    function update($values){
+        $query = "UPDATE ".$this->tabla." SET ".$values." WHERE usuario=:usuario";
+        $queryst = $this->conexion->prepare($query);
+        $queryst->bindParam(":usuario",$this->usuario);
+        $queryst->execute();
     }
 }
