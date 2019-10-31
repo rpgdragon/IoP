@@ -1,0 +1,1 @@
+ALTER TABLE usuarios ADD confirmado smallint default 0
