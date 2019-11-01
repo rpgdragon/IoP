@@ -16,6 +16,8 @@ export class LoginPage {
 	
   public version: any;
   formularioLogin: FormGroup;
+  passwordTipo: string = 'password';
+	passwordClass: string = 'fas fa-eye-slash fa-lg fa-fw';
 
   constructor(private menu: MenuController,
   public navCtrl: NavController, 
@@ -63,4 +65,11 @@ export class LoginPage {
     });
   }
 
+  mostrarPassword() {
+		this.passwordTipo = this.passwordTipo === 'text' ? 'password' : 'text';
+		this.passwordClass = this.passwordClass === 'fas fa-eye-slash fa-lg fa-fw' ? 'fas fa-eye fa-lg fa-fw' : 'fas fa-eye-slash fa-lg fa-fw';
+	}
+
 }
+
+

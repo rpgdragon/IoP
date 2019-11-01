@@ -8,9 +8,15 @@
 				<ion-label stacked>Email:</ion-label>
 				<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
 				<ion-label stacked>Password:</ion-label>
-				<ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+				<div class="inputConIcono">
+					<ion-input formControlName="password" [type]="passwordTipo" placeholder="Password"></ion-input>
+					<i [class]="passwordClass" aria-hidden="true" (click)="mostrarPassword()"></i>
+				</div>
 				<ion-label stacked>Confirmar Password:</ion-label>
-				<ion-input formControlName="confirmarpassword" type="password" placeholder="Confirmar Password"></ion-input>
+				<div class="inputConIcono">
+					<ion-input formControlName="confirmarpassword" [type]="passwordTipoConfirmacion" placeholder="Confirmar Password"></ion-input>
+					<i [class]="passwordClassConfirmacion" aria-hidden="true" (click)="mostrarPasswordConfirmacion()"></i>
+				</div>	
 				<button ion-button class="submit-btn right buttonLogin" type="submit" [disabled]="!formularioLogin.valid">
 					Registrar Cuenta
 				</button>

@@ -2,11 +2,16 @@
 		<div class="item">
 			<div class="justificado">Para terminar de asociar tu cuenta a tu Facebook debes crear una contraseña. El password debe contener al menos 6 caracteres, debe contener una minúscula, debe contener una mayúscula, un digito y un caracter especial</div>
 			<form [formGroup]="formularioLogin" (ngSubmit)="registro()">
-				<ion-label stacked>Password:</ion-label>
-				<ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
-				<ion-label stacked>Confirmar Password:</ion-label>
-				<ion-input formControlName="confirmarpassword" type="password" placeholder="Confirmar Password"></ion-input>
-				<button ion-button class="submit-btn right buttonLogin" type="submit" [disabled]="!formularioLogin.valid">
+					<ion-label stacked>Password:</ion-label>
+					<div class="inputConIcono">
+						<ion-input formControlName="password" [type]="passwordTipo" placeholder="Password"></ion-input>
+						<i [class]="passwordClass" aria-hidden="true" (click)="mostrarPassword()"></i>
+					</div>
+					<ion-label stacked>Confirmar Password:</ion-label>
+					<div class="inputConIcono">
+						<ion-input formControlName="confirmarpassword" [type]="passwordTipoConfirmacion" placeholder="Confirmar Password"></ion-input>
+						<i [class]="passwordClassConfirmacion" aria-hidden="true" (click)="mostrarPasswordConfirmacion()"></i>
+					</div><button ion-button class="submit-btn right buttonLogin" type="submit" [disabled]="!formularioLogin.valid">
 					Registrar Cuenta
 				</button>
 				<button ion-button class="submit-btn right button-white-black buttonLogin" type="button" (click)="navegarMain()">
