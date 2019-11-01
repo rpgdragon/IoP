@@ -16,7 +16,12 @@ export class RegistroPage {
   public version: any;
   formularioLogin: FormGroup;
   readonly PATTERN_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\W)[A-Za-z\\d\\W]{6,}$";
-  readonly PATTERN_EMAIL = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+  readonly PATTERN_EMAIL = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
+
+  passwordTipo: string = 'password';
+  passwordClass: string = 'fas fa-eye-slash fa-lg fa-fw';
+  passwordTipoConfirmacion: string = 'password';
+	passwordClassConfirmacion: string = 'fas fa-eye-slash fa-lg fa-fw';
 
   constructor(private menu: MenuController,
   public navCtrl: NavController, 
@@ -76,5 +81,15 @@ export class RegistroPage {
         return null;
       };
   }
+
+  mostrarPassword() {
+		this.passwordTipo = this.passwordTipo === 'text' ? 'password' : 'text';
+		this.passwordClass = this.passwordClass === 'fas fa-eye-slash fa-lg fa-fw' ? 'fas fa-eye fa-lg fa-fw' : 'fas fa-eye-slash fa-lg fa-fw';
+  }
+  
+  mostrarPasswordConfirmacion() {
+		this.passwordTipoConfirmacion = this.passwordTipoConfirmacion === 'text' ? 'password' : 'text';
+		this.passwordClassConfirmacion = this.passwordClassConfirmacion === 'fas fa-eye-slash fa-lg fa-fw' ? 'fas fa-eye fa-lg fa-fw' : 'fas fa-eye-slash fa-lg fa-fw';
+	}
 
 }

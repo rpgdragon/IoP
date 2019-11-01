@@ -39,7 +39,41 @@ if($queryst->rowCount() <= 0){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
     <title>Recuperación de camiseta HealthShirt</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/comun.css">
+    <script>
+        function mostrarPassword(){
+            var control = document.getElementById("iconopassword");
+            var input = document.getElementById("password123");
+            if (control.classList.contains('fa-eye-slash') ){
+                control.classList.remove('fa-eye-slash');
+                control.classList.add('fa-eye');
+                input.type="text";
+            }
+            else{
+                control.classList.remove('fa-eye');
+                control.classList.add('fa-eye-slash');
+                input.type="password";
+            }
+           
+        }
+
+        function mostrarPasswordConfirmacion(){
+            var control = document.getElementById("iconopasswordconfirmacion");
+            var input = document.getElementById("rpassword123");
+            if (control.classList.contains('fa-eye-slash') ){
+                control.classList.remove('fa-eye-slash');
+                control.classList.add('fa-eye');
+                input.type="text";
+            }
+            else{
+                control.classList.remove('fa-eye');
+                control.classList.add('fa-eye-slash');
+                input.type="password";
+            }
+        }
+    </script>
 </head>
 <body style="padding-top:10%;background: url('../assets/images/fondo.png');">
     <div class="container" style="text-align:center">
@@ -61,8 +95,14 @@ if($queryst->rowCount() <= 0){
         }
         ?>
         <form action="nuevacontrasena.php" method="post">
-			<input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password123" aria-describedby="password123"><br/>
-			<input type="password" class="form-control" placeholder="Confirma password" aria-label="Confirmar Password" name="rpassword123" aria-describedby="rpassword123"><br/>
+        <div class="inputConIcono">
+            <input id="password123" type="password" class="form-control" placeholder="Password" aria-label="Password" name="password123" aria-describedby="password123">
+            <i id="iconopassword" class="fas fa-eye-slash fa-lg fa-fw" onclick="mostrarPassword();" aria-hidden="true" ></i>
+        </div><br />
+        <div class="inputConIcono">
+            <input id="rpassword123" type="password" class="form-control" placeholder="Confirma password" aria-label="Confirmar Password" name="rpassword123" aria-describedby="rpassword123">
+            <i id="iconopasswordconfirmacion" class="fas fa-eye-slash fa-lg fa-fw" onclick="mostrarPasswordConfirmacion();" aria-hidden="true" onclick></i>
+        </div><br/>
             <input type="hidden" name="token" id="token" value="<?php echo $_GET['token']; ?>" />
             <button class="btn btn-primary" type="submit">Cambiar clave</button>
         </form>
