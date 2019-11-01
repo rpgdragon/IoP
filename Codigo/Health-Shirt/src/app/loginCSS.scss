@@ -40,5 +40,23 @@ form ion-label{
 
 form ion-input{
 	background: color($colors,white);
+	width:100% !important;
+}
+
+.passwordIcono{
+	font-size:3rem !important;
+	background: color($colors,white);
+	border:2px solid black;
+}
+
+.inputConIcono {
+	position: relative;
+}
+  
+.inputConIcono i {
+	position: absolute;
+	right: 5px;
+	bottom: 15px;
+	color: color($colors,black);
 }
 
