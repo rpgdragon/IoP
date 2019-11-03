@@ -21,6 +21,7 @@ import { TemplatePage } from '@pages/template/template';
 import { OlvidoPage } from '@pages/olvido/olvido';
 import { RegistroPage } from '@pages/registro/registro';
 import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
+import { RestCamisetaProvider } from '../providers/rest-camiseta/rest-camiseta';
 
 
 //import { HomePage } from '@pages/all'
@@ -83,7 +84,8 @@ const routes: Routes = [
         InAppBrowser,
         Facebook,
     RestProvider,
-    HttpClientModule
+    HttpClientModule,
+    RestCamisetaProvider
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

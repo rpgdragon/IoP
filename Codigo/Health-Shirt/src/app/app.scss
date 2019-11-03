@@ -26,12 +26,6 @@ ion-menu .content, ion-menu .item {
 	margin-bottom:20px;
 }
 
-.avatarmenu {
-	width:50px;
-	height:50px;
-	margin:10px;
-	border-radius: 50%;
-}
 
 .derecha {
 	float:right;
@@ -40,14 +34,6 @@ ion-menu .content, ion-menu .item {
 
 .item-inner {
   	border: none !important;
-}
-
-.item-block {
-  	height: 10vh;
-}
-
-.item-chips {
-  	margin: 0 !important;
 }
 
 .width-max-content{
@@ -59,10 +45,25 @@ ion-menu .content, ion-menu .item {
 	margin-right:$margen;
 }
 
+@mixin padding_lados($margen){
+	padding-left:$margen;
+	padding-right:$margen;
+}
+
+@mixin paddingtodos($top,$right,$bottom,$left){
+	padding:$top,$right,$bottom,$left;
+}
+
 @mixin fixed_width($withper){
 	width:$withper;
 	max-width:$withper;
 	min-width:$withper;
+}
+
+@mixin fixed_height($withper){
+	height:$withper;
+	max-height:$withper;
+	min-height:$withper;
 }
 
 @mixin fondo_pantalla{
@@ -141,12 +142,28 @@ ion-content{
 	@include fondo_pantalla;
 }
 
-ion-content.menu{
-	background-color:color($colors, white);
+.menu{
+	background:#fff;
 }
 
 .justificado{
 	text-align:justify;
 	@include margen_lados(10px);
 }
+
+.listado-menu{
+	@include fixed_height(100%);
+	display:flex;
+	align-items:flex-start;
+}
+
+.item-menu{
+	@include fixed_height(75px);
+	top: 0px;
+}
+
+.segundomenu{
+	margin-top:75px;
+}
+
 
