@@ -18,7 +18,6 @@ const TIMEOUT_MAXIMO = 10000;
 export class RestProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello RestProvider Provider');
   }
 
   public login(email:string,password:string){
