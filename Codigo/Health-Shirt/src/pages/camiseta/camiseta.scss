@@ -1,3 +1,73 @@
-page-camiseta {
+@import "../../app/app.scss";
 
+$tamano_imagen: 100px;
+
+.lista-camisetas{
+    @include padding_lados(20px);
+    margin: 0px;
 }
+
+.flex-camisetas {
+	position: relative;
+    border-bottom: 1px solid colors;
+    margin-top: 1em !important;
+}
+
+.borderInferior{
+    border-bottom: 2px solid black;
+}
+
+.lista-camisetas-contenido {
+    display:flex;
+    justify-content: flex-start;
+}
+
+.cajaImagenCamiseta{
+    @include fixed_width($tamano_imagen);
+    padding-top:1em;
+    img{
+        vertical-align: middle;
+    }
+}
+
+.cajaDatosCamiseta{
+    flex-grow: 100;
+}
+
+.botonAnadir{
+    font-size:4em;
+    position:relative;
+    right:0;
+}
+
+ion-content{
+    margin-bottom:50px;
+}
+
+ion-footer{
+    background: transparent !important;
+    text-align: end;
+    ion-icon{
+        margin-right:30px;
+        margin-bottom:15px;
+    }
+}
+
+@media screen and (orientation:portrait) {
+    .display-inline-landscape{
+        display:block;
+        justify-content: unset;
+        flex-wrap: wrap;
+        @include fixed_width(100%);
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .display-inline-landscape{
+        display:flex;
+        flex-wrap:nowrap;
+        justify-content: space-between;
+        @include fixed_width(100%);
+    }
+}
+
