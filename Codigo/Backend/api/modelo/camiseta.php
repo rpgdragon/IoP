@@ -55,8 +55,7 @@ class Camiseta{
     
     function listar_camisetas($usuario){
         // query to insert record
-        $query = "SELECT camiseta.id, camiseta.nombre, camiseta.parentesco, camiseta.bateria, 
-                  camiseta.horadatos FROM " . $this->tablaxusuario . " camisetaxusuario 
+        $query = "SELECT camiseta.* FROM " . $this->tablaxusuario . " camisetaxusuario 
                   INNER JOIN ". $this->tabla . " camiseta on camiseta.id = camisetaxusuario.idcamiseta 
                   WHERE camisetaxusuario.idusuario=:idusuario";
         $queryst = $this->conexion->prepare($query);
