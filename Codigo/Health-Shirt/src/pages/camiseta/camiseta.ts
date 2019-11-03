@@ -29,8 +29,14 @@ export class CamisetaPage {
 
   ionViewWillLoad() {
     this.menu.swipeEnable(true);
-    this.rest.listar(MyApp.getNombreusuario()).then(data => {
-      console.log(data);
+    this.rest.listar(MyApp.getNombreusuario()).then((data:any) => {
+      this.listaCamisetas = JSON.parse(data.mensaje);
+      if(this.listaCamisetas!=[]){
+        this.camisetaEncontrada = true;
+      }
+      else{
+        this.camisetaEncontrada = false;
+      }
     }, error=>{
       //si hay un error simplemente lo imprimimos por la consola
       console.log(error);
