@@ -18,7 +18,7 @@ import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
 export class MyApp {
     rootPage: any = InitPage;
 	@ViewChild('myNav') nav: NavController;
-    private static nombreusuario = '';
+	private static nombreusuario = '';
   
     constructor(
 		public app: App,

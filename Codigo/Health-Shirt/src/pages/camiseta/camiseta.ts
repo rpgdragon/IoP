@@ -4,6 +4,7 @@ import { MenuController } from 'ionic-angular/index';
 import { ConstantesPage } from '@pages/constantes/constantes';
 import { MyApp } from '@app/app.component';
 import { RestCamisetaProvider} from '../../providers/rest-camiseta/rest-camiseta';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 
 /**
@@ -22,13 +23,14 @@ export class CamisetaPage {
   camisetaEncontrada = false;
 
   constructor(private menu: MenuController,public navCtrl: NavController, public navParams: NavParams,
-            private rest: RestCamisetaProvider) {
+            private rest: RestCamisetaProvider,private screenOrientation: ScreenOrientation) {
  
   }
 
 
   ionViewWillLoad() {
     this.menu.swipeEnable(true);
+    this.screenOrientation.unlock();
     this.rest.listar(MyApp.getNombreusuario()).then((data:any) => {
       this.listaCamisetas = JSON.parse(data.mensaje);
       if(this.listaCamisetas!=[]){

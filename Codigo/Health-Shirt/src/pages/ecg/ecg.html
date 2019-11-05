@@ -6,14 +6,19 @@
 -->
 
 <ion-content>
-<div style="background:#fff !important;">
-    <ion-item>
-        <ion-label>De:</ion-label>
-        <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
-    </ion-item>
-    <ion-item>
-        <ion-label>Hasta:</ion-label>
-        <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
-    </ion-item>
-</div>
+    <div class="cajaCalendario">
+        <ion-item>
+            <ion-label>De:</ion-label>
+            <ion-datetime id="fechade" disabled="{{constantes.deHabilitado}}"  displayFormat="YYYY-MM-DD HH:mm" min="2019"  cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaDe"></ion-datetime>
+        </ion-item>
+       <ion-item>
+            <ion-label>Hasta:</ion-label>
+            <ion-datetime id="fechahasta" disabled="{{constantes.hastaHabilitado}}"  displayFormat="YYYY-MM-DD HH:mm" min="2019" cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaHasta"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label slot="start">¿Tiempo real?</ion-label>
+            <ion-checkbox slot="end" color="primary"  [(ngModel)]="constantes.actual" (clic)="activarDesactivar();"></ion-checkbox>
+        </ion-item>
+    </div>
+   
 </ion-content>

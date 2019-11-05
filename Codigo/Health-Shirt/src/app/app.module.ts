@@ -26,6 +26,7 @@ import { ConstantesPage } from '@pages/constantes/constantes';
 import { EcgPage } from '@pages/ecg/ecg';
 import { EdaPage } from '@pages/eda/eda';
 import { TemperaturaPage } from '@pages/temperatura/temperatura';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 
 //import { HomePage } from '@pages/all'
@@ -82,7 +83,10 @@ const routes: Routes = [
         BrowserModule,
         HttpClientModule,
         IonicModule.forRoot(MyApp, {
-            tabsPlacement: 'top'
+            tabsPlacement: 'top',
+            monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+            monthShortNames: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ],
+            dayNames:['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
         }),
         RouterModule.forRoot(routes),
         IonicStorageModule.forRoot()
@@ -96,6 +100,7 @@ const routes: Routes = [
         AndroidPermissions,
         InAppBrowser,
         Facebook,
+        ScreenOrientation,
     RestProvider,
     HttpClientModule,
     RestCamisetaProvider

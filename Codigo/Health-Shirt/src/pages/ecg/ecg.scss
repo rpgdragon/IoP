@@ -1,3 +1,35 @@
-page-ecg {
+@import "../../app/app.scss";
 
+.cajaCalendario{
+    background-color: color($colors,white);
+    @include fixed_width(100%);
+    @include fixed_height(150px);
+}
+
+.cajaCalendario ion-item{
+    display:flex;
+    flex-wrap:nowrap;
+    background-color: color($colors,white);
+}
+
+.cajaCalendario ion-item:first-child{
+    margin-top:-56px;
+}
+
+.cajaCalendario ion-item:nth-child(3){
+    margin-top:56px;
+}
+
+.cajaCalendario ion-label{
+    @include fixed_width(25%);
+    text-align:left;
+}
+
+.cajaCalendario ion-item:nth-child(3) ion-label{
+    @include fixed_width(50%);
+}
+
+.cajaCalendario ion-datetime{
+    flex-grow:100;
+    border:1px solid black;
 }
