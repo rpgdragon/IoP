@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import {EcgPage} from '@pages/ecg/ecg';
+import {EdaPage} from '@pages/eda/eda';
+import {TemperaturaPage} from '@pages/temperatura/temperatura';
 
 /**
  * Generated class for the ConstantesPage page.
@@ -8,18 +11,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-constantes',
   templateUrl: 'constantes.html',
 })
 export class ConstantesPage {
 
+  public camiseta: Object;
+  public ecg: any;
+  public eda: any;
+  public temperatura: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    //recoge el objeto pasado por parametro
+    this.camiseta = this.navParams.get('camiseta');
+    this.ecg = EcgPage;
+    this.eda = EdaPage;
+    this.temperatura = TemperaturaPage;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConstantesPage');
+  }
+
+  irAtras(){
+    //limpiamos un elemento la pila
+    this.navCtrl.pop();
   }
 
 }
