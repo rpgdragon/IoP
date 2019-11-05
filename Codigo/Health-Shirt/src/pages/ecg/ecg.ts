@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { ConstantesPage } from '@pages/constantes/constantes';
 
 /**
  * Generated class for the EcgPage page.
@@ -8,18 +9,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-ecg',
   templateUrl: 'ecg.html',
 })
 export class EcgPage {
 
+  private constantes:ConstantesPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.constantes = this.navParams.get('constantes');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EcgPage');
+    console.log(this.constantes);
+  }
+
+  activarDesactivar(){
+    this.constantes.deHabilitado = this.constantes.actual;
+    this.constantes.hastaHabilitado = this.constantes.actual;
   }
 
 }
