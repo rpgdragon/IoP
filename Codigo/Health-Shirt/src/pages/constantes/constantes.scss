@@ -1,3 +1,10 @@
-page-constantes {
+@import "../../app/app.scss";
 
+.iconoatras{
+    font-size:2em;
+    color:color($colors, white);
+}
+
+ion-header{
+    display:block !important;
 }

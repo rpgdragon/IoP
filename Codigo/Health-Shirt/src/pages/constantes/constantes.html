@@ -5,14 +5,22 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>constantes</ion-title>
-  </ion-navbar>
+	<ion-toolbar color="primary">
+    	<ion-buttons left>
+        	<button ion-button icon-only (click)="irAtras()">
+            <ion-icon class="iconoatras" name="arrow-back" ></ion-icon>
+          </button>
+    </ion-buttons>
+		<ion-title>{{camiseta.nombre}}</ion-title>
+  </ion-toolbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
-
+	<ion-tabs>
+		<ion-tab tabIcon="heart" tabTitle="ECG" [root]="ecg" [rootParams]="camiseta"></ion-tab>
+		<ion-tab tabIcon="water" tabTitle="EDA" [root]="eda" [rootParams]="camiseta"></ion-tab>
+		<ion-tab tabIcon="thermometer" tabTitle="Temperatura" [root]="temperatura" [rootParams]="camiseta"></ion-tab>
+  </ion-tabs>
 </ion-content>

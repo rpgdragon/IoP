@@ -22,6 +22,10 @@ import { OlvidoPage } from '@pages/olvido/olvido';
 import { RegistroPage } from '@pages/registro/registro';
 import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
 import { RestCamisetaProvider } from '../providers/rest-camiseta/rest-camiseta';
+import { ConstantesPage } from '@pages/constantes/constantes';
+import { EcgPage } from '@pages/ecg/ecg';
+import { EdaPage } from '@pages/eda/eda';
+import { TemperaturaPage } from '@pages/temperatura/temperatura';
 
 
 //import { HomePage } from '@pages/all'
@@ -38,7 +42,8 @@ const routes: Routes = [
     { path: 'camiseta', component: CamisetaPage },
     { path: 'olvido', component: OlvidoPage },
     { path: 'registro', component:RegistroPage },
-    { path: 'registrofacebook', component:RegistroFacebookPage}
+    { path: 'registrofacebook', component:RegistroFacebookPage},
+    { path: 'constantes', component:ConstantesPage}
 ];
 
 @NgModule({
@@ -52,7 +57,11 @@ const routes: Routes = [
         TemplatePage,
         OlvidoPage,
         RegistroPage,
-        RegistroFacebookPage
+        RegistroFacebookPage,
+        ConstantesPage,
+        EcgPage,
+        EdaPage,
+        TemperaturaPage
     ],
     entryComponents: [
         MyApp,
@@ -63,7 +72,11 @@ const routes: Routes = [
         TemplatePage,
         OlvidoPage,
         RegistroPage,
-        RegistroFacebookPage
+        RegistroFacebookPage,
+        ConstantesPage,
+        EcgPage,
+        EdaPage,
+        TemperaturaPage
     ],
     imports: [
         BrowserModule,
