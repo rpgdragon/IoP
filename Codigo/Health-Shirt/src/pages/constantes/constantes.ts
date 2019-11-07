@@ -33,6 +33,10 @@ export class ConstantesPage {
   public deHabilitado: boolean;
   public hastaHabilitado: boolean;
 
+  private pulsacionesmedias: any;
+  private edamedias: any;
+  private temperaturamedias: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private screenOrientation: ScreenOrientation) {
     //recoge el objeto pasado por parametro
     this.camiseta = this.navParams.get('camiseta');
@@ -40,18 +44,47 @@ export class ConstantesPage {
     this.eda = EdaPage;
     this.temperatura = TemperaturaPage;
     this.constantes = this;
-    this.deHabilitado = false;
-    this.hastaHabilitado = false;
-    this.actual = false;
+    this.deHabilitado = true;
+    this.hastaHabilitado = true;
+    this.actual = true;
   }
 
   ionViewDidLoad() {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 
+  /**
+   * Método para ir de nuevo a la ventana de seleccion de la camiseta
+   */
   irAtras(){
-    //limpiamos un elemento la pila
     this.navCtrl.pop();
+  }
+
+  /**
+   * Getters y Setters de los atributos privados
+   */
+  public getPulsacionesmedias(){
+    return this.pulsacionesmedias;
+  }
+
+  public setPulsacionesmedias(pulsacionesmedias:any){
+    this.pulsacionesmedias = pulsacionesmedias;
+  }
+
+  public getEdamedias(){
+    return this.edamedias;
+  }
+
+  public setEdamedias(edamedias:any){
+    this.edamedias = edamedias;
+  }
+
+  public getTemperaturamedias(){
+    return this.temperaturamedias;
+  }
+
+  public setTemperaturamedias(temperaturamedias:any){
+    this.temperaturamedias = temperaturamedias;
   }
 
 }
