@@ -17,8 +17,12 @@
         </ion-item>
         <ion-item>
             <ion-label slot="start">¿Tiempo real?</ion-label>
-            <ion-checkbox slot="end" color="primary"  [(ngModel)]="constantes.actual" (clic)="activarDesactivar();"></ion-checkbox>
+            <ion-checkbox item-right color="primary"  [(ngModel)]="constantes.actual" (click)="activarDesactivar();"></ion-checkbox>
         </ion-item>
     </div>
-   
+    <canvas id="canvasecg"></canvas>
 </ion-content>
+
+<ion-footer class="footerConstantes" no-border>
+NPM media: {{constantes.getPulsacionesmedias()}}
+</ion-footer>
