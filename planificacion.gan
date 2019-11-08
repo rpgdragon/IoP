@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="IoP: Smart T-shirt Mobile App" company="" webLink="http://" view-date="2019-11-04" view-index="0" gantt-divider-location="408" resource-divider-location="300" version="2.8.10" locale="es">
+<?xml version="1.0" encoding="UTF-8"?><project name="IoP: Smart T-shirt Mobile App" company="" webLink="http://" view-date="2019-11-11" view-index="0" gantt-divider-location="408" resource-divider-location="300" version="2.8.10" locale="es">
     <description/>
     <view zooming-state="default:5" id="gantt-chart">
         <field id="tpd3" name="Nombre" width="195" order="0"/>
@@ -196,7 +196,14 @@
         <task id="376" name="P7-Testing" color="#8cb6ce" meeting="false" start="2019-12-05" duration="4" complete="0" thirdDate="2019-10-24" thirdDate-constraint="1" expand="true"/>
         <task id="379" name="P7-Documentación" color="#8cb6ce" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
         <task id="382" name="Adaptación PEC3" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
-        <task id="409" name="Colchón Desviación" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true"/>
+        <task id="409" name="DESVIO - Backend Constantes Vitales" color="#660066" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-10-14" thirdDate-constraint="1" expand="true">
+            <depend id="614" type="1" difference="0" hardness="Strong"/>
+        </task>
+        <task id="614" name="DESVIO - Implementación" color="#8cb6ce" meeting="false" start="2019-11-25" duration="7" complete="0" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true">
+            <depend id="617" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="617" name="DESVIO - Testing" color="#8cb6ce" meeting="false" start="2019-12-02" duration="7" complete="0" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true"/>
+        <task id="620" name="DESVIO - Documentación" color="#8cb6ce" meeting="false" start="2019-11-25" duration="14" complete="0" thirdDate="2019-11-11" thirdDate-constraint="0" expand="true"/>
         <task id="418" name="PEC4" color="#ffff00" meeting="true" start="2019-12-09" duration="0" complete="0" thirdDate="2019-08-26" thirdDate-constraint="0" expand="true">
             <depend id="424" type="2" difference="0" hardness="Strong"/>
         </task>
