@@ -6,7 +6,7 @@ class Database{
     private $host = "db5000205048.hosting-data.io";
     private $db_name = "dbs200017";
     private $usuario = "dbu176063";
-    private $password = "HealthShirt2019.";
+    private $password = "AQUI IRÁ LA CONTRASEÑA";
     public $conexion = null;
  
     // get the database connection
