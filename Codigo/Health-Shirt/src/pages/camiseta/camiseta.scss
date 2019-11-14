@@ -1,20 +1,21 @@
 @import "../../app/app.scss";
 
 $tamano_imagen: 100px;
+$color_boton_editar: #008f39;
+$color_boton_borrar: #ff0000;
 
 .lista-camisetas{
     @include padding_lados(20px);
+    @include fixed_width(100%);
     margin: 0px;
+    padding: 0px;
 }
 
 .flex-camisetas {
-	position: relative;
-    border-bottom: 1px solid colors;
     margin-top: 1em !important;
-}
-
-.borderInferior{
-    border-bottom: 2px solid black;
+    @include fixed_width(100%);
+    margin: 0px;
+    padding: 0px;
 }
 
 .lista-camisetas-contenido {
@@ -24,7 +25,6 @@ $tamano_imagen: 100px;
 
 .cajaImagenCamiseta{
     @include fixed_width($tamano_imagen);
-    padding-top:1em;
     img{
         vertical-align: middle;
     }
@@ -32,7 +32,16 @@ $tamano_imagen: 100px;
 
 .cajaDatosCamiseta{
     flex-grow: 100;
+    text-align:left;
+    vertical-align: middle;
+    h3{
+        font-size:1.7em;
+    }
+    h4{
+        font-size:1.2em;
+    }
 }
+
 
 .botonAnadir{
     font-size:4em;
@@ -71,3 +80,38 @@ ion-footer{
     }
 }
 
+ion-item-sliding{
+    border-bottom:2px solid black;
+    @include fixed_width(100%);
+    background-color: transparent !important;
+    padding:0px;
+    margin:0px;
+    text-align:left;
+}
+
+ion-item{
+    @include fixed_width(100%);
+    background-color: transparent !important;
+    margin: 0px;
+    padding: 0px;
+}
+
+.tamano_boton{
+    font-size:3em;
+    @include fixed_width(2em);
+    text-align:center;
+    color: color($colors, white);
+}
+
+.botonEdicion{
+    background-color: $color_boton_editar;    
+}
+
+.botonBorrar{
+    background-color: $color_boton_borrar;
+}
+
+.en_medio{
+    position:relative;
+    top:$tamano_imagen/2;
+}
