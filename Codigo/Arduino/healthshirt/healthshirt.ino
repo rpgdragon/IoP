@@ -16,32 +16,31 @@
 
 
 
-
-/**
- * Explicación del ejercicio
- * Este ejercicio esta preparado para utilizar MINIRTOS en un Arduino Mega con 3 sensores y 2 actuadores
- * Los sensores son el LDR, EL DHT22 y el MPU 6050
- * Los actuadores son el Servo SG90 y el Ventilador 
+/*https://www.how2electronics.com/ecg-monitoring-with-ad8232-ecg-sensor-arduino/
+ * http://wiki.seeedstudio.com/Grove-GSR_Sensor/
  */
+
 
 /*
  * Primero vamos a poner todas las variables globales para liberar la pila
  */
 SemaphoreHandle_t ss;
 SemaphoreHandle_t sa;
-const int GSR=A1;
-int threshold=0;
+const int GSR=A0;
+const int ECG=A1;
+const int LOPLUS=10;
+const int LOMINUS=11;
 int gsrValue;
+float temp;
 
 
 
-/*
- * En la función setup inicializaremos todos los sensores, valores y las tareas
- */
 void setup(){
   Serial.begin(9600);
   ss = xSemaphoreCreateBinary();
   sa = xSemaphoreCreateBinary();
+  pinMode(LOPLUS, INPUT); // Setup for leads off detection LO +
+  pinMode(LOMINUS, INPUT); // Setup for leads off detection LO -
   xTaskCreate(LeerSerie, "LeerSerie", 150, NULL, 0, NULL);
   xTaskCreate(LeerSensores, "LeerSensores", 475, NULL, 2, NULL);
   //como usamos MINIRTOS debemos utilizar la siguiente función
@@ -49,16 +48,11 @@ void setup(){
 }
 
 
-/*
- * Tarea para leer el puerto serie, puede leer dos cadenas
- * [S] pide una lectura de Sensores
- * [A,X,Y] donde X e Y son numeros de 0 al 9 
- */
 static void LeerSerie(void* pvParameters){
   while(1){
     if(xSemaphoreGive(ss)==pdTRUE){
       xSemaphoreTake(ss, portMAX_DELAY);
-      vTaskDelay(150/portTICK_PERIOD_MS);
+      vTaskDelay(10/portTICK_PERIOD_MS);
     }         
   }       
 }
@@ -72,11 +66,28 @@ static void LeerSensores(void* pvParameters){
   while(1){
     if(xSemaphoreTake(ss, portMAX_DELAY ) == pdTRUE){
       gsrValue=analogRead(GSR);
-      Serial.print("sensorValue=");
-      Serial.println(gsrValue);
+      //debido a las limitaciones de arduino, esto no funciona, hay que hacerlo en la psarela
+      //resistencia_piel=((2*gsrValue + 1024) * 10000) / (512 - gsrValue);
+      //Serial.print("gsrValue=");
+      //Serial.println(gsrValue);
+      //Serial.print("sensorECG=");
+      /*if((digitalRead(LOPLUS) == 1)||(digitalRead(LOMINUS) == 1)){
+        Serial.println('!');
+      }
+      else{
+        // send the value of analog input 0:
+          Serial.println(analogRead(A1));
+      }*/
+      int inicial = analogRead(A2);
+      temp = inicial * 3.3/1024.0;
+      temp = temp - 0.33;
+      temp = temp / 0.01;
+      Serial.println(temp);
+      Serial.println(inicial);
       xSemaphoreGive(ss);
     }
-    vTaskDelay(150/portTICK_PERIOD_MS);
+    //
+    vTaskDelay(10/portTICK_PERIOD_MS);
   }
 }
 
