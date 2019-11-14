@@ -50,7 +50,15 @@ export class CamisetaPage {
      * @param camiseta Datos de la camiseta que hay que abrir
      */
     abrirCamiseta(camiseta) {
-        this.navCtrl.push(ConstantesPage, { camiseta });
+      this.navCtrl.push(ConstantesPage, { camiseta });
+    }
+
+    editarCamiseta(camiseta){
+      console.log("Se ha editado la Camiseta: " + camiseta);
+    }
+
+    borrarCamiseta(camiseta){
+      console.log("Se ha borrado la Camiseta: " + camiseta);
     }
 
 }
