@@ -26,6 +26,10 @@ import { ConstantesPage } from '@pages/constantes/constantes';
 import { EcgPage } from '@pages/ecg/ecg';
 import { EdaPage } from '@pages/eda/eda';
 import { TemperaturaPage } from '@pages/temperatura/temperatura';
+import { ConfiguracionPage } from '@pages/configuracion/configuracion';
+import { InfoPage } from '@pages/info/info';
+import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
+import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 
@@ -44,7 +48,11 @@ const routes: Routes = [
     { path: 'olvido', component: OlvidoPage },
     { path: 'registro', component:RegistroPage },
     { path: 'registrofacebook', component:RegistroFacebookPage},
-    { path: 'constantes', component:ConstantesPage}
+    { path: 'constantes', component:ConstantesPage},
+    { path: 'crearcamiseta', component:CrearcamisetaPage},
+    { path: 'editarcamiseta', component:EditarcamisetaPage},
+    { path: 'configuracion', component:ConfiguracionPage},
+    { path: 'info', component:InfoPage}
 ];
 
 @NgModule({
@@ -62,7 +70,11 @@ const routes: Routes = [
         ConstantesPage,
         EcgPage,
         EdaPage,
-        TemperaturaPage
+        TemperaturaPage,
+        InfoPage,
+        CrearcamisetaPage,
+        EditarcamisetaPage,
+        ConfiguracionPage
     ],
     entryComponents: [
         MyApp,
@@ -77,7 +89,11 @@ const routes: Routes = [
         ConstantesPage,
         EcgPage,
         EdaPage,
-        TemperaturaPage
+        TemperaturaPage,
+        InfoPage,
+        CrearcamisetaPage,
+        EditarcamisetaPage,
+        ConfiguracionPage
     ],
     imports: [
         BrowserModule,
