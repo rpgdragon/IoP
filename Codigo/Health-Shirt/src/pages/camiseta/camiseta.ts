@@ -5,6 +5,8 @@ import { ConstantesPage } from '@pages/constantes/constantes';
 import { MyApp } from '@app/app.component';
 import { RestCamisetaProvider} from '../../providers/rest-camiseta/rest-camiseta';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
+import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 
 
 /**
@@ -30,6 +32,12 @@ export class CamisetaPage {
 
   ionViewWillLoad() {
     this.menu.swipeEnable(true);
+  }
+
+  /**
+   * Cada vez que entre dentro de esta vista deberia refrescar los datos del listado de las camisetas
+   */
+  ionViewWillEnter(){
     this.screenOrientation.unlock();
     this.rest.listar(MyApp.getNombreusuario()).then((data:any) => {
       this.listaCamisetas = JSON.parse(data.mensaje);
@@ -54,11 +62,15 @@ export class CamisetaPage {
     }
 
     editarCamiseta(camiseta){
-      console.log("Se ha editado la Camiseta: " + camiseta);
+      this.navCtrl.push(EditarcamisetaPage, { camiseta });
     }
 
     borrarCamiseta(camiseta){
       console.log("Se ha borrado la Camiseta: " + camiseta);
+    }
+
+    crearCamiseta(){
+      this.navCtrl.push(CrearcamisetaPage);
     }
 
 }

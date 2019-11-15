@@ -10,6 +10,10 @@ import { Storage } from '@ionic/storage';
 import { OlvidoPage } from '@pages/olvido/olvido';
 import { RegistroPage } from '@pages/registro/registro';
 import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
+import { ConfiguracionPage } from '@pages/configuracion/configuracion';
+import { InfoPage } from '@pages/info/info';
+import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
+import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 
 @Component({
     templateUrl: 'app.html'
@@ -71,6 +75,22 @@ export class MyApp {
 			case 'registrofacebook':
 				this.rootPage = RegistroFacebookPage;
 				this.nav.setRoot(RegistroFacebookPage);
+				break;
+			case 'configuracion':
+				this.rootPage = CamisetaPage;
+				this.nav.push(ConfiguracionPage);
+				break;
+			case 'info':
+				this.rootPage = InfoPage;
+				this.nav.setRoot(InfoPage);
+				break;
+			case 'crearcamiseta':
+				this.rootPage = CrearcamisetaPage;
+				this.nav.setRoot(CrearcamisetaPage);
+				break;
+			case 'editarcamiseta':
+				this.rootPage = EditarcamisetaPage;
+				this.nav.setRoot(EditarcamisetaPage);
 				break;
         }
         this.menu.close();        
