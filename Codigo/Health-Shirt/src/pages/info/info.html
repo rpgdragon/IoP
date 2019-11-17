@@ -26,9 +26,15 @@ serial deberá seguir los pasos de instalación de la camiseta que se encuentra 
 en los datos de la camiseta.</p>
 <p class="justificado"><b>ECG:</b> Hace referencia a las constantes vitales referentes al corazón. En este caso se puede especificar un umbral del número de pulsaciones por minuto. Esta pulsación suele comprender entre las 60 y las 110 pulsaciones por minuto. La casilla de apagado de notificaciones permite
 indicar si se desea no recibir más notificaciones cuando se superen dichos umbrales. Si esta marcada la opción, no se enviarán más notificaciones aunque se superen los umbrales.</p>
+<p class="justificado una-linea"><ion-input class="primero" value="" type="number" placeholder="Mínimo" readonly ></ion-input><ion-input value="130" type="number" placeholder="Máximo" readonly></ion-input></p>
+<p class="justificado">Como se puede ver en el anterior ejemplo, se ha especificado un umbral máximo de 130, por lo que cuando se detecte que las pulsaciones por minuto superen los 130 se notificará al usuario.</p>
 <p class="justificado"><b>EDA:</b> Hace referencia a la conductividad y resistencia de la piel, pudiendose medir el sistema nervioso del paciente. Su valor suele oscilar entre 100 y 300. Valores inferiores representan una situación de mucha tranquilidad y valores superiores representan una situación de mucha intranquilidad. La casilla de apagado de notificaciones permite
   indicar si se desea no recibir más notificaciones cuando se superen dichos umbrales. Si esta marcada la opción, no se enviarán más notificaciones aunque se superen los umbrales. </p>
+<p class="justificado una-linea"><ion-input class="primero" value="100" type="number" placeholder="Mínimo" readonly ></ion-input><ion-input value="" type="number" placeholder="Máximo" readonly></ion-input></p>
+<p class="justificado">Como se puede ver en el anterior ejemplo, se ha especificado un umbral mínimo para el EDA de 100. Cuando el valor descienda por debajo de los 100 se enviará una notificación al usuario.</p>
 <p class="justificado"><b>Temperatura:</b> Hace referencia a la temperatura corporal del paciente. Los valores suelen oscilar entre los 35 a 37 grados, siendo valores inferiores un posible caso de hipotermia y valores superiores una posible fiebre. La casilla de apagado de notificaciones permite
   indicar si se desea no recibir más notificaciones cuando se superen dichos umbrales. Si esta marcada la opción, no se enviarán más notificaciones aunque se superen los umbrales.</p>
+<p class="justificado una-linea"><ion-input class="primero" value="35" type="text" placeholder="Mínimo" readonly ></ion-input><ion-input value="37.5" type="text" placeholder="Máximo" readonly></ion-input></p>
+<p class="justificado">Como se puede ver en el anterior ejemplo, se ha especificado tanto un umbral mínimo como un umbral máximo para la temperatura. Cuando la temperatura sea menor de 35º o mayor de 37.5º se notificará al usuario</p>
 <p class="justificado"><b>Caidas:</b> Indican si debe notificarse al usuario cuando la persona que lleva la camiseta ha sufrido una caida. </p>
 </ion-content>

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { InfoPage } from '@pages/info/info';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { RestCamisetaProvider} from '../../providers/rest-camiseta/rest-camiseta';
+import { MyApp } from '@app/app.component';
 
 /**
  * Generated class for the CrearcamisetaPage page.
@@ -15,7 +18,12 @@ import { InfoPage } from '@pages/info/info';
 })
 export class CrearcamisetaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  formularioCrearCamiseta: FormGroup;
+  imagenes: Array<string> = ['grandmother', 'man', 'grandfather', 'old-man', 'couple', 'grandmother2', 'old-woman', 'old-man2', 'grandmother3', 'couple2'];
+  imagen: string = 'grandmother';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private rest: RestCamisetaProvider) {
+    this.formularioCrearCamiseta = this.crearFormularioRegistrarCamiseta();
   }
 
   ionViewDidLoad() {
@@ -34,6 +42,93 @@ export class CrearcamisetaPage {
    */
   irInfo(){
     this.navCtrl.push(InfoPage);
+  }
+
+  private crearFormularioRegistrarCamiseta(){
+    return this.formBuilder.group({
+      nombre: new FormControl('', Validators.required),
+      parentesco: new FormControl ('', Validators.required),
+      numeroserie: new FormControl ('', Validators.required),
+      codseg: new FormControl ('', Validators.required),
+      icono: new FormControl ('', Validators.required),
+      ecgminimo: new FormControl ('', []),
+      ecgmaximo: new FormControl ('', []),
+      edaminimo: new FormControl ('', []),
+      edamaximo: new FormControl ('', []),
+      temperaturaminimo: new FormControl ('', []),
+      temperaturamaximo: new FormControl ('', []),
+      notificacionesecg: new FormControl ('', []),
+      notificacioneseda: new FormControl ('', []),
+      notificacionestemperatura: new FormControl ('', []),
+      notificacionescaida: new FormControl ('', [])
+    });
+  }
+
+  prepararImagenesIcono() {
+		setTimeout(() => {
+      let buttonElements = document.querySelectorAll('div.alert-radio-group button');
+      console.log(buttonElements);
+			if (!buttonElements.length) {
+				this.prepararImagenesIcono();
+			} else {
+				for (let index = 0; index < buttonElements.length; index++) {
+          let buttonElement = buttonElements[index];
+          console.log(buttonElement);
+					let optionLabelElement = buttonElement.querySelector('.alert-radio-label');
+          let image = optionLabelElement.innerHTML.trim();
+          console.log(image);
+					buttonElement.classList.add('imageselect', 'image_' + image);
+					if (image == this.imagen) {
+						buttonElement.classList.add('imageselected');
+					}
+				}
+			}
+		}, 100);
+  }
+  
+  ponerImagen(imagen) {
+    let buttonElements = document.querySelectorAll('div.alert-radio-group button.imageselect');
+    console.log(buttonElements);
+		for (let index = 0; index < buttonElements.length; index++) {
+			let buttonElement = buttonElements[index];
+			buttonElement.classList.remove('imageselected');
+			if (buttonElement.classList.contains('image_' + imagen)) {
+				buttonElement.classList.add('imageselected');
+			}
+		}
+  }
+  
+  selectIcono(imagen){
+    this.imagen = imagen;
+  }
+
+  registrarCamiseta(){
+    this.rest.registrarCamiseta(MyApp.getNombreusuario(), this.formularioCrearCamiseta.value.nombre,
+    this.formularioCrearCamiseta.value.parentesco,this.formularioCrearCamiseta.value.numeroserie,
+    this.formularioCrearCamiseta.value.codseg,this.formularioCrearCamiseta.value.icono,
+    this.formularioCrearCamiseta.value.ecgminimo,this.formularioCrearCamiseta.value.ecgmaximo,
+    this.formularioCrearCamiseta.value.edaminimo,this.formularioCrearCamiseta.value.edamaximo,
+    this.formularioCrearCamiseta.value.temperaturaminimo,this.formularioCrearCamiseta.value.temperaturamaximo,
+    this.formularioCrearCamiseta.value.notificacionesecg,this.formularioCrearCamiseta.value.notificacioneseda,
+    this.formularioCrearCamiseta.value.notificacionestemperatura,this.formularioCrearCamiseta.value.notificacionescaida).then(data => {
+        alert("Camiseta creada exitosamente");
+        this.navCtrl.pop();
+    }, error => {
+      console.log(error);
+      if (error.status === 404) {
+        alert("La camiseta no existe o no coincide el código de seguridad");
+      }
+      else{
+        if(error.status === 403){
+          alert("Esta camisa ya ha sido registrada");
+        }
+        else{
+          alert("No se ha podido registrar la camiseta");
+        }
+        
+      }
+     
+    })
   }
 
 }
