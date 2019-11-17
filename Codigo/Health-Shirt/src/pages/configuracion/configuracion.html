@@ -16,6 +16,16 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content forceOverscroll="true">
+  <form [formGroup]="formularioConfiguracion" (ngSubmit)="guardarConfiguracion()">
+    <div class="titulo-configuracion"><h1>Notificaciones</h1></div>
+    <div class="justificado display-inline espaciado"><ion-label>¿Apagar todas las notificaciones?</ion-label><ion-checkbox slot="start" formControlName="notificacionestodas" color="primary" [(ngModel)]="notificacionestodas" (click)="apagarCasillas()"></ion-checkbox></div>
+    <div class="justificado display-inline espaciado"><ion-label>¿Apagar notificaciones ECG?</ion-label><ion-checkbox slot="start" formControlName="notificacionesecg" color="primary" [(ngModel)]="notificacionesecg" disabled={{disablecheckbox}}></ion-checkbox></div>
+    <div class="justificado display-inline espaciado"><ion-label>¿Apagar notificaciones EDA?</ion-label><ion-checkbox formControlName="notificacioneseda" color="primary" [(ngModel)]="notificacioneseda" disabled={{disablecheckbox}}></ion-checkbox></div>
+    <div class="justificado display-inline espaciado"><ion-label>¿Apagar notificaciones Temperatura?</ion-label><ion-checkbox formControlName="notificacionestemperatura" color="primary" [(ngModel)]="notificacionestemperatura" disabled={{disablecheckbox}}></ion-checkbox></div>
+    <div class="justificado display-inline espaciado"><ion-label>¿Apagar notificaciones caidas?</ion-label><ion-checkbox formControlName="notificacionescaida" color="primary" [(ngModel)]="notificacionescaida" disabled={{disablecheckbox}}></ion-checkbox></div>
+    <div class="titulo-configuracion"><h1>Bateria</h1></div>
+    <div class="justificado display-inline"><ion-label>¿Apagar notificaciones bateria?</ion-label><ion-checkbox formControlName="notificacionesbateria" color="primary" [(ngModel)]="notificacionesbateria"></ion-checkbox></div>
+    <div class="justificado display-inline"><button ion-button class="submit-btn right buttonForm" type="submit">Guardar Cambios</button></div>
+  </form>
 </ion-content>

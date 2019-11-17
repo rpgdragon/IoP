@@ -1,1 +1,15 @@
 @import "../../app/app.scss";
+
+.una-linea{
+    display:flex;
+    flex-wrap: nowrap;
+    ion-input{
+        @include fixed_width(45%);
+        background: color($colors,white);
+        justify-content: space-between;
+        border:2px solid black;
+    }
+    .primero{
+        margin-right: 1em;
+    }
+}
