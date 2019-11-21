@@ -5,7 +5,6 @@
     @include fixed_width(100%);
     justify-content: space-around;
     flex-wrap: nowrap;
-    flex-direction: row-reverse;
     ion-checkbox{
         top:15px;
         margin-right:1em;
@@ -14,4 +13,12 @@
 
 .espaciado{
     margin-bottom:1em;
+}
+
+.alreves{
+    flex-direction: row-reverse!important;
+}
+
+.noalreves{
+    flex-direction: row!important;
 }

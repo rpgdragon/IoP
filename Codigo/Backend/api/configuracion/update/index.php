@@ -149,6 +149,6 @@ try{
 	}
 }
 catch(Exception $e){
-	generar_respuesta(false, $e-getMessage(),CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
+	generar_respuesta(false, $e->getMessage(),CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 	exit();
 }
