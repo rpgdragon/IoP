@@ -21,9 +21,17 @@ export class CrearcamisetaPage {
   formularioCrearCamiseta: FormGroup;
   imagenes: Array<string> = ['grandmother', 'man', 'grandfather', 'old-man', 'couple', 'grandmother2', 'old-woman', 'old-man2', 'grandmother3', 'couple2'];
   imagen: string = 'grandmother';
+  notificacionesecg: boolean;
+  notificacioneseda: boolean;
+  notificacionestemperatura: boolean;
+  notificacionescaida: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private rest: RestCamisetaProvider) {
     this.formularioCrearCamiseta = this.crearFormularioRegistrarCamiseta();
+    this.notificacionestemperatura = false;
+    this.notificacioneseda = false;
+    this.notificacionesecg = false;
+    this.notificacionescaida = false;
   }
 
   ionViewDidLoad() {
@@ -119,7 +127,7 @@ export class CrearcamisetaPage {
         alert("La camiseta no existe o no coincide el código de seguridad");
       }
       else{
-        if(error.status === 403){
+        if(error.status === 409){
           alert("Esta camisa ya ha sido registrada");
         }
         else{

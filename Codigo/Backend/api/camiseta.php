@@ -232,6 +232,10 @@ class Camiseta{
 		$queryst->bindParam(":notificacioneseda", $this->notificacioneseda);
 		$queryst->bindParam(":notificacionestemperatura", $this->notificacionestemperatura);
 		$queryst->bindParam(":notificacionescaida", $this->notificacionescaida);
+		print($this->ecgminimo);
+		print($this->getEcgminimo());
+		print("Hola");
+		return false;
 		try{
 			if($queryst->execute()){
 				//si devuelve true, tenemos que obtener el id generado para asignarlo en la tabla usuarioxcamiseta
