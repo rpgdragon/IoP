@@ -116,17 +116,19 @@ export class RestCamisetaProvider {
         "numeroserie": numeroserie,
         "codseg": codseg,
         "icono": icono,
-        "ecgminimo": ecgminimo,
-        "ecgmaximo": ecgmaximo,
-        "edaminimo": edaminimo,
-        "edamaximo": edamaximo,
-        "temperaturaminimo": temperaturaminimo,
-        "temperaturamaximo": temperaturamaximo,
+        "ecgminimo": "" + ecgminimo,
+        "ecgmaximo": "" + ecgmaximo,
+        "edaminimo": "" + edaminimo,
+        "edamaximo": "" + edamaximo,
+        "temperaturaminimo": "" + temperaturaminimo,
+        "temperaturamaximo": "" + temperaturamaximo,
         "notificacionesecg": "" + notificacionesecg,
         "notificacioneseda": "" + notificacioneseda,
         "notificacionestemperatura": "" + notificacionestemperatura,
         "notificacionescaida": "" + notificacionescaida
       } 
+
+      console.log(cuerpo);
 
       this.http.post(MAIN_URL + VERSION + CAMISETA_URL + "crear/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)

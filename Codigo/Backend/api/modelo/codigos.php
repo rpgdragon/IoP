@@ -1,6 +1,7 @@
 <?php
 
 define("CODIGO_USUARIO_CREADO", "201");
+define("CODIGO_CAMISETA_CREADO", "201");
 define("CODIGO_USUARIO_EXISTE", "501");
 define("CODIGO_FALTAN_PARAMETROS", "400");
 define("CODIGO_ERROR_LOGIN","403");
@@ -10,6 +11,7 @@ define("CODIGO_ERROR","500");
 define("CODIGO_OK","200");
 define("CODIGO_NUEVA_CUENTA","603");
 define("CODIGO_NO_CUENTA","404");
+define("CODIGO_CONFLICTO","409");
 
 
 
@@ -27,5 +29,7 @@ define("ESTATUS_CONFLICTO",409);
 
 define("AL_MENOS_UN_NUMERO",'/\d/');
 define("AL_MENOS_UN_ESPECIAL",'/[^a-zA-Z\d]/');
+
+define("URL_PATH_ASSETS","healthshirt/api/v1/assets");
 
 ?>

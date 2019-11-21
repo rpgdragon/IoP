@@ -1,0 +1,1 @@
+CREATE TABLE `dbs200017`.`producto` ( `numeroserie` VARCHAR(16) NOT NULL , `codseg` TEXT NOT NULL , PRIMARY KEY (`numeroserie`(16))) ENGINE = InnoDB;
