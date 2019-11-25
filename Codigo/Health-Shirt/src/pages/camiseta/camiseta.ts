@@ -39,6 +39,11 @@ export class CamisetaPage {
    */
   ionViewWillEnter(){
     this.screenOrientation.unlock();
+    this.recargarLista();
+    
+  }
+
+  recargarLista(){
     this.rest.listar(MyApp.getNombreusuario()).then((data:any) => {
       this.listaCamisetas = JSON.parse(data.mensaje);
       if(this.listaCamisetas!=[]){
@@ -66,7 +71,15 @@ export class CamisetaPage {
     }
 
     borrarCamiseta(camiseta){
-      console.log("Se ha borrado la Camiseta: " + camiseta);
+      //invocamos al proceso de borrar la camiseta
+      this.rest.borrar(MyApp.getNombreusuario(), camiseta.id).then((data:any) => {
+        //si ha ido todo bien recargamos la lista
+        this.recargarLista();
+      }, error=>{
+        //si hay un error simplemente lo imprimimos por la consola
+        alert("No se ha podido borrar la camiseta. Vuelva a intentarlo más tarde.");
+        console.log(error);
+      })
     }
 
     crearCamiseta(){

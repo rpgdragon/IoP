@@ -22,7 +22,7 @@ export class RestCamisetaProvider {
   constructor(public http: HttpClient) {
   }
 
-  public borrar(id:number){
+  public borrar(usuario:string, id:number){
     return new Promise((resolve,reject) => {
       let httpOptions = {
 				headers: new HttpHeaders({
@@ -32,10 +32,11 @@ export class RestCamisetaProvider {
       }
 
       let cuerpo = {
-        "id": id
+        "usuario": usuario,
+        "id": "" + id
       } 
 
-      this.http.post(MAIN_URL + VERSION + CAMISETA_URL + "borrar" ,cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + CAMISETA_URL + "borrar/" ,cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
