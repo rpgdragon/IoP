@@ -190,7 +190,7 @@ class Camiseta{
 
     function listar_camisetas($usuario){
         // query to insert record
-        $query = "SELECT camiseta.id, camiseta.nombre, camiseta.parentesco, camiseta.bateria, camiseta.horadatos, camiseta.src FROM " . $this->tablaxusuario . " camisetaxusuario 
+        $query = "SELECT camiseta.* FROM " . $this->tablaxusuario . " camisetaxusuario 
                   INNER JOIN ". $this->tabla . " camiseta on camiseta.id = camisetaxusuario.idcamiseta 
                   WHERE camisetaxusuario.idusuario=:idusuario";
 		$queryst = $this->conexion->prepare($query);
@@ -393,6 +393,28 @@ class Camiseta{
 		$queryst->bindParam(":id", $this->id);
 		$queryst->bindParam(":idusuario", $usuario);
 		try{
+			$queryst->execute();
+			if($queryst->rowCount() > 0){
+				//existe una camiseta
+				return true;
+			}
+			else{
+				//no existe
+				return false;
+			}
+		}catch(PDOException $e) { 
+			return false; 
+		}
+	}
+
+	function existe_camiseta(){
+        // query to insert record
+        $query = "SELECT camiseta.* FROM " . $this->tabla . "  
+                  WHERE camiseta.id=:id";
+		$queryst = $this->conexion->prepare($query);
+		$this->id=htmlspecialchars(strip_tags($this->id));
+        $queryst->bindParam(":id", $this->id);
+        try{
 			$queryst->execute();
 			if($queryst->rowCount() > 0){
 				//existe una camiseta

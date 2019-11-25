@@ -111,6 +111,9 @@ export class CrearcamisetaPage {
   }
 
   registrarCamiseta(){
+    if(!this.validarCamposMinimoMaximo()){
+      return;
+    }
     this.rest.registrarCamiseta(MyApp.getNombreusuario(), this.formularioCrearCamiseta.value.nombre,
     this.formularioCrearCamiseta.value.parentesco,this.formularioCrearCamiseta.value.numeroserie,
     this.formularioCrearCamiseta.value.codseg,this.formularioCrearCamiseta.value.icono,
@@ -137,6 +140,90 @@ export class CrearcamisetaPage {
       }
      
     })
+  }
+
+  validarCamposMinimoMaximo(){
+    var ecgminimorelleno = false;
+    var ecgmaximorelleno = false;
+    var edaminimorelleno = false;
+    var edamaximorelleno = false;
+    var temperaturaminimorelleno = false;
+    var temperaturamaximorelleno = false;
+    if(this.formularioCrearCamiseta.value.ecgminimo!='' && this.formularioCrearCamiseta.value.ecgminimo!=null && this.formularioCrearCamiseta.value.ecgminimo!=undefined){
+      if(isNaN(this.formularioCrearCamiseta.value.ecgminimo)){
+        alert("El campo ECG minimo debe rellenarse con un número");
+        return false;
+      }
+      ecgminimorelleno = true;
+    }
+
+    if(this.formularioCrearCamiseta.value.ecgmaximo!='' && this.formularioCrearCamiseta.value.ecgmaximo!=null && this.formularioCrearCamiseta.value.ecgmaximo!=undefined){
+      if(isNaN(this.formularioCrearCamiseta.value.ecgmaximo)){
+        alert("El campo ECG máximo debe rellenarse con un número");
+        return false;
+      }
+      ecgmaximorelleno = true;
+    }
+
+    if(this.formularioCrearCamiseta.value.edaminimo!='' && this.formularioCrearCamiseta.value.edaminimo!=null && this.formularioCrearCamiseta.value.edaminimo!=undefined){
+      if(isNaN(this.formularioCrearCamiseta.value.edaminimo)){
+        alert("El campo EDA minimo debe rellenarse con un número");
+        return false;
+      }
+      edaminimorelleno = true;
+    }
+
+    if(this.formularioCrearCamiseta.value.edamaximo!='' && this.formularioCrearCamiseta.value.edamaximo!=null && this.formularioCrearCamiseta.value.edamaximo!=undefined){
+      if(isNaN(this.formularioCrearCamiseta.value.ecgmaximo)){
+        alert("El campo EDA máximo debe rellenarse con un número");
+        return false;
+      }
+      edamaximorelleno = true;
+    }
+
+    if(this.formularioCrearCamiseta.value.temperaturaminimo!='' && this.formularioCrearCamiseta.value.temperaturaminimo!=null && this.formularioCrearCamiseta.value.temperaturaminimo!=undefined){
+      if(isNaN(this.formularioCrearCamiseta.value.temperaturaminimo)){
+        alert("El campo Temperatura minimo debe rellenarse con un número");
+        return false;
+      }
+      temperaturaminimorelleno = true;
+    }
+
+    if(this.formularioCrearCamiseta.value.temperaturamaximo!='' && this.formularioCrearCamiseta.value.temperaturamaximo!=null && this.formularioCrearCamiseta.value.temperaturamaximo!=undefined){
+      if(isNaN(this.formularioCrearCamiseta.value.temperaturamaximo)){
+        alert("El campo Temperatura máximo debe rellenarse con un número");
+        return false;
+      }
+      temperaturamaximorelleno = true;
+    }
+
+    if(ecgminimorelleno && ecgmaximorelleno){
+      var v1 = Number(this.formularioCrearCamiseta.value.ecgminimo);
+      var v2 = Number(this.formularioCrearCamiseta.value.ecgmaximo);
+      if(v1 > v2){
+        alert("El umbral minimo de ECG no puede ser superior al umbral máximo");
+        return false;
+      }
+    }
+
+    if(edaminimorelleno && edamaximorelleno){
+      var v3 = Number(this.formularioCrearCamiseta.value.edaminimo);
+      var v4 = Number(this.formularioCrearCamiseta.value.edamaximo);
+      if(v3 > v4){
+        alert("El umbral minimo de EDA no puede ser superior al umbral máximo");
+        return false;
+      }
+    }
+
+    if(temperaturaminimorelleno && temperaturamaximorelleno){
+      var v5 = Number(this.formularioCrearCamiseta.value.temperaturaminimo);
+      var v6 = Number(this.formularioCrearCamiseta.value.temperaturamaximo);
+      if(v5 > v6){
+        alert("El umbral minimo de Temperatura no puede ser superior al umbral máximo");
+        return false;
+      }
+    }
+    return true;
   }
 
 }

@@ -21,6 +21,29 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content forceOverscroll="true">
+  <form [formGroup]="formularioEditarCamiseta" (ngSubmit)="editarCamiseta()">
+      <ion-label stacked>Icono *:</ion-label>
+      <ion-item class="imageselect image_{{imagen}}">
+        <ion-select (click)="prepararImagenesIcono()" formControlName="icono" cancelText="Cancelar" (ionChange)="ponerImagen(this.imagen)" [(ngModel)]="imagen">
+          <ion-option  *ngFor="let optionimagen of imagenes" [value]="optionimagen" (ionSelect)="selectIcono(optionimagen)">{{optionimagen}}</ion-option>
+        </ion-select>   
+      </ion-item>
+      <ion-label stacked>Nombre *:</ion-label>
+      <ion-input formControlName="nombre" type="text" placeholder="Nombre" [(ngModel)]="camiseta.nombre"></ion-input>
+      <ion-label stacked>Parentesco *:</ion-label>
+      <ion-input formControlName="parentesco" type="text" placeholder="Parentesco" [(ngModel)]="camiseta.parentesco"></ion-input>
+      <ion-label stacked>ECG:</ion-label>
+      <div class="display-inline espaciado noalreves"><ion-input formControlName="ecgminimo" type="number" placeholder="minimo" [(ngModel)]="camiseta.ecgminimo"></ion-input><ion-input formControlName="ecgmaximo" type="number" placeholder="máximo" [(ngModel)]="camiseta.ecgmaximo"></ion-input></div>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones ECG?</ion-label><ion-checkbox slot="start" formControlName="notificacionesecg" color="primary" [(ngModel)]="notificacionesecg"></ion-checkbox></div> 
+      <ion-label stacked>EDA:</ion-label>
+      <div class="display-inline espaciado noalreves"><ion-input formControlName="edaminimo" type="number" placeholder="minimo" [(ngModel)]="camiseta.edaminimo"></ion-input><ion-input formControlName="edamaximo" type="number" placeholder="máximo" [(ngModel)]="camiseta.edamaximo"></ion-input></div>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones EDA?</ion-label><ion-checkbox slot="start" formControlName="notificacioneseda" color="primary" [(ngModel)]="notificacioneseda"></ion-checkbox></div> 
+      <ion-label stacked>Temperatura:</ion-label>
+      <div class="display-inline espaciado noalreves"><ion-input formControlName="temperaturaminimo" type="number" placeholder="minimo" [(ngModel)]="camiseta.temperaturaminimo"></ion-input><ion-input formControlName="temperaturamaximo" type="number" placeholder="máximo" [(ngModel)]="camiseta.temperaturamaximo"></ion-input></div>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones Temperatura?</ion-label><ion-checkbox slot="start" formControlName="notificacionestemperatura" color="primary" [(ngModel)]="notificacionestemperatura"></ion-checkbox></div>  
+      <ion-label stacked>Caidas:</ion-label>
+      <div class="justificado display-inline espaciado alreves"><ion-label>¿Notificar caidas?</ion-label><ion-checkbox git aslot="start" formControlName="notificacionescaida" color="primary" [(ngModel)]="notificacionescaida" ></ion-checkbox></div>
+      <div class="justificado display-inline espaciado"><button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formularioEditarCamiseta.valid">Guardar Cambios</button></div>  
+    </form>
 </ion-content>
