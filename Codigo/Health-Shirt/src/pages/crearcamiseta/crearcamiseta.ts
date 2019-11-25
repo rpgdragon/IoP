@@ -56,7 +56,7 @@ export class CrearcamisetaPage {
     return this.formBuilder.group({
       nombre: new FormControl('', Validators.required),
       parentesco: new FormControl ('', Validators.required),
-      numeroserie: new FormControl ('', Validators.required),
+      numeroserie: new FormControl ('', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
       codseg: new FormControl ('', Validators.required),
       icono: new FormControl ('', Validators.required),
       ecgminimo: new FormControl ('', []),

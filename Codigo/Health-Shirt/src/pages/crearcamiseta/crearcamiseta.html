@@ -23,19 +23,19 @@
 
 <ion-content forceOverscroll="true">
   <form [formGroup]="formularioCrearCamiseta" (ngSubmit)="registrarCamiseta()">
-      <ion-label stacked>Icono:</ion-label>
+      <ion-label stacked>Icono *:</ion-label>
       <ion-item class="imageselect image_{{imagen}}">
         <ion-select (click)="prepararImagenesIcono()" formControlName="icono" cancelText="Cancelar" (ionChange)="ponerImagen(this.imagen)" [(ngModel)]="imagen">
           <ion-option  *ngFor="let optionimagen of imagenes" [value]="optionimagen" (ionSelect)="selectIcono(optionimagen)">{{optionimagen}}</ion-option>
         </ion-select>   
       </ion-item>
-      <ion-label stacked>Nombre:</ion-label>
+      <ion-label stacked>Nombre *:</ion-label>
       <ion-input formControlName="nombre" type="text" placeholder="Nombre"></ion-input>
-      <ion-label stacked>Parentesco:</ion-label>
+      <ion-label stacked>Parentesco *:</ion-label>
       <ion-input formControlName="parentesco" type="text" placeholder="Parentesco"></ion-input>
-      <ion-label stacked>Num.Serie:</ion-label>
+      <ion-label stacked>Num.Serie *:</ion-label>
       <ion-input formControlName="numeroserie" type="number" placeholder="Numero de serie"></ion-input>
-      <ion-label stacked>Cód.Seg:</ion-label>
+      <ion-label stacked>Cód.Seg *:</ion-label>
       <ion-input formControlName="codseg" placeholder="Código de seguridad"></ion-input>
       <ion-label stacked>ECG:</ion-label>
       <div class="display-inline espaciado noalreves"><ion-input formControlName="ecgminimo" type="number" placeholder="minimo"></ion-input><ion-input formControlName="ecgmaximo" type="number" placeholder="máximo"></ion-input></div>
@@ -48,6 +48,6 @@
       <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones Temperatura?</ion-label><ion-checkbox slot="start" formControlName="notificacionestemperatura" color="primary" [(ngModel)]="notificacionestemperatura"></ion-checkbox></div>  
       <ion-label stacked>Caidas:</ion-label>
       <div class="justificado display-inline espaciado alreves"><ion-label>¿Notificar caidas?</ion-label><ion-checkbox git aslot="start" formControlName="notificacionescaida" color="primary" [(ngModel)]="notificacionescaida" ></ion-checkbox></div>
-      <div class="justificado display-inline espaciado"><button ion-button class="submit-btn right buttonForm" type="submit">Registrar Camiseta</button></div>  
+      <div class="justificado display-inline espaciado"><button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formularioCrearCamiseta.valid">Registrar Camiseta</button></div>  
     </form>
 </ion-content>
