@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 
 const AUTHORIZACION = "healthshirt20192020";
-const MAIN_URL = "http://www.jmcastellano.eu/healthshirt/api/";
+const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
 const CONFIGURACION_URL = "configuracion/";
 const VERSION = "v1/";
 
