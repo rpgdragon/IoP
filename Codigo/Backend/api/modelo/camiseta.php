@@ -384,4 +384,26 @@ class Camiseta{
 		}
 
 	}
+
+	function es_camiseta_usuario($usuario){
+		$query = "SELECT * FROM ". $this->tablaxusuario. " WHERE idcamiseta=:id and idusuario=:idusuario";
+		$queryst = $this->conexion->prepare($query);
+		$usuario=htmlspecialchars(strip_tags($usuario));
+		$this->id=htmlspecialchars(strip_tags($this->id));
+		$queryst->bindParam(":id", $this->id);
+		$queryst->bindParam(":idusuario", $usuario);
+		try{
+			$queryst->execute();
+			if($queryst->rowCount() > 0){
+				//existe una camiseta
+				return true;
+			}
+			else{
+				//no existe
+				return false;
+			}
+		}catch(PDOException $e) { 
+			return false; 
+		}
+	}
 }
