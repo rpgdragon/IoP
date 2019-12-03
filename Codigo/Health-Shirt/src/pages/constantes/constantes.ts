@@ -37,6 +37,8 @@ export class ConstantesPage {
   private edamedias: any;
   private temperaturamedias: any;
 
+  private timerId: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private screenOrientation: ScreenOrientation) {
     //recoge el objeto pasado por parametro
     this.camiseta = this.navParams.get('camiseta');
@@ -47,10 +49,30 @@ export class ConstantesPage {
     this.deHabilitado = true;
     this.hastaHabilitado = true;
     this.actual = true;
+    this.timerId = null;
   }
 
   ionViewDidLoad() {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    
+  }
+
+  ionViewWillEnter(){
+    this.obtenerDatosRecientes();
+  }
+
+  obtenerDatosRecientes(){
+    //ok la primera cosa que tenemos que hacer es comprobar si esta activo el campo de actual
+    if(this.actual==true){
+      //ok podemos seguir
+    }
+
+    this.timerId = setTimeout("this.obtenerDatosRecientes()",60000);
+  }
+
+  ionViewWillLeave(){
+    console.log("Abandonando la pagina de constantes y desactivando llamada a constantes");
+    clearTimeout(this.timerId);
   }
 
   /**

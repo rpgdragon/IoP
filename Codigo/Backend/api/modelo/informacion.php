@@ -4,14 +4,11 @@ class Informacion{
     private $conexion;
     private $tabla = "informacion";
     private $tablacamiseta = "camiseta";
-    private $producto = "producto";
+    private $tablaproducto = "producto";
  
 	private $ecg;
     private $eda;
-	private $X;
-	private $Y;
 	private $temperatura;
-	private $Z;
 	private $fecha;
     private $numeroserie;
     private $bateria;
@@ -51,30 +48,6 @@ class Informacion{
 		return $this->temperatura;
     }
     
-    function setX($X){
-		$this->X = $X;
-	}
-	
-	function getX(){
-		return $this->X;
-	}
-	
-	function setY($Y){
-		$this->Y = $Y;
-	}
-
-	function getY(){
-		return $this->Y;
-    }
-
-    function setZ($Z){
-		$this->Z = $Z;
-	}
-
-	function getZ(){
-		return $this->Z;
-    }
-	
 	function getBateria(){
 		return $this->bateria;
 	}
@@ -104,15 +77,11 @@ class Informacion{
 	 */
 	function registrar_informacion(){
         if($this->comprobar_existe_producto()){
-		    $query = "INSERT INTO ".$this->tabla . " SET ecg=:ecg, eda=:eda, temperatura=:temperatura, X=:X,Y=:Y,
-            Z=:Z,bateria=:bateria,numeroserie=:numeroserie,fecha=NOW()";
+		    $query = "INSERT INTO ".$this->tabla . " SET ecg=:ecg, eda=:eda, temperatura=:temperatura, bateria=:bateria,numeroserie=:numeroserie,fecha=NOW()";
             $queryst = $this->conexion->prepare($query);
             $queryst->bindParam(":ecg", $this->ecg);
             $queryst->bindParam(":eda", $this->eda);
             $queryst->bindParam(":temperatura", $this->temperatura);
-            $queryst->bindParam(":X", $this->X);
-            $queryst->bindParam(":Y", $this->Y);
-            $queryst->bindParam(":Z", $this->Z);
             $queryst->bindParam(":bateria", $this->bateria);
             $queryst->bindParam(":numeroserie", $this->numeroserie);
             try{
@@ -121,9 +90,11 @@ class Informacion{
                 
                 }
                 else{
+                    print("No se ha podido insertar el registro");
                     return false;
                 }
             }catch(PDOException $e) { 
+                print("Se ha producido una excepción ".$e->getMessage());
                 return false; 
             }
         }
@@ -137,15 +108,11 @@ class Informacion{
 	 */
 	function registrar_informacion_confecha(){
         if($this->comprobar_existe_producto()){
-		    $query = "INSERT INTO ".$this->tabla . " SET ecg=:ecg, eda=:eda, temperatura=:temperatura, X=:X,Y=:Y,
-            Z=:Z,bateria=:bateria,numeroserie=:numeroserie,fecha=:fecha";
+		    $query = "INSERT INTO ".$this->tabla . " SET ecg=:ecg, eda=:eda, temperatura=:temperatura, bateria=:bateria,numeroserie=:numeroserie,fecha=:fecha";
             $queryst = $this->conexion->prepare($query);
             $queryst->bindParam(":ecg", $this->ecg);
             $queryst->bindParam(":eda", $this->eda);
             $queryst->bindParam(":temperatura", $this->temperatura);
-            $queryst->bindParam(":X", $this->X);
-            $queryst->bindParam(":Y", $this->Y);
-            $queryst->bindParam(":Z", $this->Z);
             $queryst->bindParam(":bateria", $this->bateria);
             $queryst->bindParam(":numeroserie", $this->numeroserie);
             $queryst->bindParam(":fecha", $this->fecha);
@@ -189,7 +156,7 @@ class Informacion{
     function comprobar_existe_producto(){
         $query = "SELECT producto.* FROM " .$this->tablaproducto . "  
                   WHERE producto.numeroserie=:numeroserie";
-		$queryst = $this->conexion->prepare($query);
+        $queryst = $this->conexion->prepare($query);
         $queryst->bindParam(":numeroserie", $this->numeroserie);
         try{
 			$queryst->execute();
@@ -207,7 +174,7 @@ class Informacion{
     }
 
     function obtener_datos_last_minute(){
-        $query= "SELECT informacion.* FROM ".$this->tabla." WHERE fecha >= NOW() - INTERVAL 1 MINUTE  AND numeroserie=:numeroserie ORDER BY fecha asc";
+        $query= "SELECT informacion.* FROM ".$this->tabla." WHERE fecha >= NOW() - INTERVAL 2 MINUTE  AND numeroserie=:numeroserie ORDER BY fecha desc LIMIT 0,1";
         $queryst = $this->conexion->prepare($query);
         $queryst->bindParam(":numeroserie", $this->numeroserie);
         $queryst->execute();

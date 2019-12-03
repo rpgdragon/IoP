@@ -428,4 +428,17 @@ class Camiseta{
 			return false; 
 		}
 	}
+
+	function actualizar_bateria_camiseta(){
+		$query = "UPDATE ".$this->tabla . " SET bateria=:bateria, horadatos=NOW() WHERE numeroserie=:numeroserie ";
+		$queryst = $this->conexion->prepare($query);
+		$queryst->bindParam(":bateria", $this->bateria);
+		$queryst->bindParam(":numeroserie", $this->numeroserie);
+		if($queryst->execute()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 }
