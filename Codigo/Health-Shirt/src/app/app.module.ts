@@ -32,6 +32,7 @@ import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
 import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { RestConfiguracionProvider } from '../providers/rest-configuracion/rest-configuracion';
+import { RestConstantesProvider } from '../providers/rest-constantes/rest-constantes';
 
 
 //import { HomePage } from '@pages/all'
@@ -121,7 +122,8 @@ const routes: Routes = [
     RestProvider,
     HttpClientModule,
     RestCamisetaProvider,
-    RestConfiguracionProvider
+    RestConfiguracionProvider,
+    RestConstantesProvider
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

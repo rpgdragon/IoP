@@ -183,4 +183,14 @@ class Informacion{
         return $json;
     }
 
+    function obtener_ultimas_temperaturas(){
+        $query= "SELECT informacion.temperatura FROM ".$this->tabla." WHERE fecha >= NOW() - INTERVAL 10 MINUTE  AND numeroserie=:numeroserie ORDER BY fecha asc LIMIT 0,10";
+        $queryst = $this->conexion->prepare($query);
+        $queryst->bindParam(":numeroserie", $this->numeroserie);
+        $queryst->execute();
+        $results = $queryst->fetchAll(PDO::FETCH_ASSOC);
+        $json = json_encode($results);
+        return $json;
+    }
+
 }

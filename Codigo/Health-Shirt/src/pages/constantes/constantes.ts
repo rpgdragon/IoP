@@ -4,6 +4,7 @@ import {EcgPage} from '@pages/ecg/ecg';
 import {EdaPage} from '@pages/eda/eda';
 import {TemperaturaPage} from '@pages/temperatura/temperatura';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { RestConstantesProvider} from '../../providers/rest-constantes/rest-constantes';
 
 /**
  * Generated class for the ConstantesPage page.
@@ -37,9 +38,18 @@ export class ConstantesPage {
   private edamedias: any;
   private temperaturamedias: any;
 
+  private datosecg: any;
+  private datoseda: any;
+  private datostemperatura: any;
   private timerId: any;
+  private valorecgcambiado: boolean;
+  private valoredacambiado: boolean;
+  private valortemperaturacambiado: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private screenOrientation: ScreenOrientation) {
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private screenOrientation: ScreenOrientation,
+    private rest: RestConstantesProvider) {
     //recoge el objeto pasado por parametro
     this.camiseta = this.navParams.get('camiseta');
     this.ecg = EcgPage;
@@ -50,6 +60,9 @@ export class ConstantesPage {
     this.hastaHabilitado = true;
     this.actual = true;
     this.timerId = null;
+    this.valorecgcambiado = false;
+    this.valoredacambiado = false;
+    this.valortemperaturacambiado = false;
   }
 
   ionViewDidLoad() {
@@ -64,10 +77,65 @@ export class ConstantesPage {
   obtenerDatosRecientes(){
     //ok la primera cosa que tenemos que hacer es comprobar si esta activo el campo de actual
     if(this.actual==true){
-      //ok podemos seguir
-    }
+      //ok podemos seguir ya que se piden los datos del último minuto
+      this.rest.obtenerConstantesUltimoMinuto(this.camiseta["numeroserie"]).then( (data:any) => {
+        var constantesarray = JSON.parse(data.mensaje);
+        var elemento = constantesarray[0];
+        var ecgc = elemento["ecg"];
+        var edac = elemento["eda"];
+        var temperaturac = elemento["temperatura"];
+        //ahora tenemos que convertir los datos a elementos comprensibles por el mismo
+        this.datosecg = ecgc.split(",");
+        this.datoseda = edac.split(",");
+        this.datostemperatura = temperaturac.split(","); 
 
-    this.timerId = setTimeout("this.obtenerDatosRecientes()",60000);
+        //vamos a calcular las medias
+        //la media de la temperatura es tan simple como sumar sus valores y dividirlos por el número del tamaño
+        var mediat = 0;
+        for(var i=0; i< this.datostemperatura.length; i++){
+          this.datostemperatura[i] = parseFloat(this.datostemperatura[i]);
+          mediat+=this.datostemperatura[i];
+        }
+        this.temperaturamedias = Math.round( (mediat/this.datostemperatura.length) * 100) / 100
+
+        //lo mismo con el eda
+        mediat = 0;
+        for(i=0; i< this.datoseda.length; i++){
+          this.datoseda[i] = parseInt(this.datoseda[i]);
+          mediat+=this.datoseda[i];
+        }
+        this.edamedias = Math.round( (mediat/this.datoseda.length) * 100) / 100
+
+        //por último el ecg. No obstante este es un poco más complicado de medir, por que aqui tenemos que medir
+        //los pulsos segun los valores y no los valores en si
+
+        mediat = 0;
+        this.pulsacionesmedias = 0;
+        for(i=0; i< this.datosecg.length; i++){
+          this.datosecg[i] = parseInt(this.datosecg[i]);
+          if(this.datosecg[i]>=180 && this.datosecg[i]<=220){
+            mediat++;
+            if(mediat>=7){
+              this.pulsacionesmedias++;
+              mediat-=7;
+            }
+          }
+          else{
+            mediat=0;
+          }
+        }
+        //ademas aqui tendrá que haber una accion para que se reinicien las animaciones y las graficas
+        //se utilizará un flag
+        this.valorecgcambiado = true;
+        this.valoredacambiado = true;
+        this.valortemperaturacambiado = true;
+      }, error=>{
+        //si hay un error simplemente lo imprimimos por la consola
+        console.log("Esto es un error" + error);
+      })
+    }
+    var that = this;
+    this.timerId = setTimeout(function(){ that.obtenerDatosRecientes(); },60000);
   }
 
   ionViewWillLeave(){
@@ -107,6 +175,54 @@ export class ConstantesPage {
 
   public setTemperaturamedias(temperaturamedias:any){
     this.temperaturamedias = temperaturamedias;
+  }
+
+  public getDatosecg(){
+    return this.datosecg;
+  }
+
+  public setDatosecg(datosecg:any){
+    this.datosecg = datosecg;
+  }
+
+  public getDatoseda(){
+    return this.datoseda;
+  }
+
+  public setDatoseda(datoseda:any){
+    this.datosecg = datoseda;
+  }
+
+  public getDatostemperatura(){
+    return this.datostemperatura;
+  }
+
+  public setDatostemperatura(datostemperatura:any){
+    this.datostemperatura = datostemperatura;
+  }
+
+  public getValorecgcambiado(){
+    return this.valorecgcambiado;
+  }
+
+  public setValorecgcambiado(valorecgcambiado:any){
+    this.valorecgcambiado = valorecgcambiado;
+  }
+
+  public getValoredacambiado(){
+    return this.valoredacambiado;
+  }
+
+  public setValoredacambiado(valoredacambiado:any){
+    this.valoredacambiado = valoredacambiado;
+  }
+
+  public getValortemperaturacambiado(){
+    return this.valortemperaturacambiado;
+  }
+
+  public setValortemperaturacambiado(valortemperaturacambiado:any){
+    this.valortemperaturacambiado = valortemperaturacambiado;
   }
 
 }
