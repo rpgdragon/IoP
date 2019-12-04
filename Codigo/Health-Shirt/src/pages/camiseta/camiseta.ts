@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Refresher } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
 import { ConstantesPage } from '@pages/constantes/constantes';
 import { MyApp } from '@app/app.component';
@@ -23,6 +23,7 @@ import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 export class CamisetaPage {
   public listaCamisetas: any[];
   camisetaEncontrada = false;
+  private refresher: Refresher;
 
   constructor(private menu: MenuController,public navCtrl: NavController, public navParams: NavParams,
             private rest: RestCamisetaProvider,private screenOrientation: ScreenOrientation) {
@@ -86,4 +87,29 @@ export class CamisetaPage {
       this.navCtrl.push(CrearcamisetaPage);
     }
 
+    /**
+	 * Función que recibe el evento de refrescar la pantalla
+	 * @param event 
+	 */
+	refrescar(event: Refresher) {
+		this.refresher = event;
+		this.rest.listar(MyApp.getNombreusuario()).then((data:any) => {
+      this.listaCamisetas = JSON.parse(data.mensaje);
+      if(this.listaCamisetas!=[]){
+        this.camisetaEncontrada = true;
+      }
+      else{
+        this.camisetaEncontrada = false;
+      }
+      if (this.refresher !== undefined && this.refresher != null) {
+        this.refresher.complete();
+      }
+    }, error=>{
+      //si hay un error simplemente lo imprimimos por la consola
+      console.log(error);
+      if (this.refresher !== undefined && this.refresher != null) {
+        this.refresher.complete();
+      }
+    })
+  }
 }

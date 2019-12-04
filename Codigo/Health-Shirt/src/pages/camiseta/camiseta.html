@@ -10,6 +10,11 @@
   </ion-header>
   
   <ion-content>
+    	<ion-refresher slot="fixed" (ionRefresh)="refrescar($event)">
+          <ion-refresher-content
+            pullingText="Desliza para actualizar">
+          </ion-refresher-content>
+        </ion-refresher>
     <ion-list class="lista-camisetas" *ngFor="let camiseta of listaCamisetas">
       <ion-item-sliding>
         <ion-item (click)="abrirCamiseta(camiseta)"> 
