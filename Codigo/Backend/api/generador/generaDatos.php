@@ -9,33 +9,142 @@ include_once '../modelo/camiseta.php';
 include_once '../utilidades/utils.php';
 
 
+function obtener_valor_plano(){
+    $valor = rand(195,205);
+    return $valor;
+}
+
+function pico300(){
+    $valor = rand(290,310);
+    return $valor;
+}
+
+function pico400(){
+    $valor = rand(390,410);
+    return $valor;
+}
+
+function pico250(){
+    $valor = rand(240,260);
+    return $valor;
+}
+
+function picoMaximo(){
+    $valor = rand(630,650);
+    return $valor;    
+}
+
+function picoMinimo(){
+    $valor = rand(0,20);
+    return $valor;    
+}
+
 /**
  * Función que genera las pulsaciones basadas en un ECG sano
  * Estas se ha obtenido a partir de mediciones con un ECG 8266 a 3.3V
  */
 function generar_pulsaciones(){
     $pulsaciones = [];
-    for($i = 0; $i < 60; $i = $i+1){
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,300);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,650);
-        array_push($pulsaciones,0);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,400);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,250);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
-        array_push($pulsaciones,200);
+    //vamos a hacer 3 posibles modelos
+    //una a 60 pulsaciones (7 posibilidad)
+    //otra a 90 pulsaciones (2 posibilidades)
+    //y otra a 120 pulsaciones (1 posibilidades)
+    $obtenido = rand(1,10);
+    if($obtenido==1){
+        //120 pulsaciones
+        for($i = 0; $i < 60; $i = $i+1){
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico300());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,picoMaximo());
+            array_push($pulsaciones,picoMinimo());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico400());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico250());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico300());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,picoMaximo());
+            array_push($pulsaciones,picoMinimo());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico400());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico250());
+        }
+    }
+    if($obtenido==2 || $obtenido==3){
+        //90 pulsaciones
+        for($i = 0; $i < 30; $i = $i+1){
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico300());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,picoMaximo());
+            array_push($pulsaciones,picoMinimo());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico400());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico250());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico300());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,picoMaximo());
+            array_push($pulsaciones,picoMinimo());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico400());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico250());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico300());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,picoMaximo());
+            array_push($pulsaciones,picoMinimo());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico400());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico250());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+        }
+        
+    }
+    if($obtenido>2){
+        //Este son 60 pulsaciones
+        for($i = 0; $i < 60; $i = $i+1){
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico300());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,picoMaximo());
+            array_push($pulsaciones,picoMinimo());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico400());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,pico250());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+            array_push($pulsaciones,obtener_valor_plano());
+        }
     }
     return $pulsaciones;
 }
@@ -51,12 +160,12 @@ function generar_eda(){
         //entre 300 y 310, sino el valor común suele ser entre 200 y 210
         $numero = rand(0,100);
         if($numero==0){
-            array_push($eda,rand(90,100));
+            array_push($eda,rand(70,110));
         }
         else if($numero==1){
-            array_push($eda,rand(300,310));
+            array_push($eda,rand(290,350));
         } else{
-            array_push($eda,rand(200,210));
+            array_push($eda,rand(190,210));
         }
         
     }

@@ -9,11 +9,11 @@
     <div class="cajaCalendario">
         <ion-item>
             <ion-label>De:</ion-label>
-            <ion-datetime id="fechade" disabled="{{constantes.deHabilitado}}"  displayFormat="YYYY-MM-DD HH:mm" min="2019"  cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaDe"></ion-datetime>
+            <ion-datetime id="fechade" disabled="{{constantes.deHabilitado}}" (ionChange)="obtenerConstantesFecha()"  displayFormat="YYYY-MM-DD HH:mm" min="2019"  cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaDe" [pickerOptions]="customOptionsDe"></ion-datetime>
         </ion-item>
        <ion-item>
             <ion-label>Hasta:</ion-label>
-            <ion-datetime id="fechahasta" disabled="{{constantes.hastaHabilitado}}"  displayFormat="YYYY-MM-DD HH:mm" min="2019" cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaHasta"></ion-datetime>
+            <ion-datetime id="fechahasta" disabled="{{constantes.hastaHabilitado}}" (ionChange)="obtenerConstantesFecha()"  displayFormat="YYYY-MM-DD HH:mm" min="2019" cancelText="Cancelar" doneText="Validar" [(ngModel)]="constantes.fechaHasta" [pickerOptions]="customOptionsHasta"></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label slot="start">¿Tiempo real?</ion-label>

@@ -193,4 +193,16 @@ class Informacion{
         return $json;
     }
 
+    function obtener_fecha_historico($fechade,$fechahasta){
+        $query= "SELECT informacion.* FROM ".$this->tabla." WHERE fecha between :fechade and :fechahasta  AND numeroserie=:numeroserie ORDER BY fecha asc";
+        $queryst = $this->conexion->prepare($query);
+        $queryst->bindParam(":fechade", $fechade);
+        $queryst->bindParam(":fechahasta", $fechahasta);
+        $queryst->bindParam(":numeroserie", $this->numeroserie);
+        $queryst->execute();
+        $results = $queryst->fetchAll(PDO::FETCH_ASSOC);
+        $json = json_encode($results);
+        return $json;
+    }
+
 }

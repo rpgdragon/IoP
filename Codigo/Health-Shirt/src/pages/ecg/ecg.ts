@@ -27,6 +27,16 @@ export class EcgPage {
   fpsIntervalo: number;
   fps:number = 20;
   then: any;
+  public customOptionsDe: any = {
+    buttons: [{
+      text: 'Clear',
+      handler: () => this.constantes.fechaDe=null
+    }]};
+  public customOptionsHasta: any = {
+      buttons: [{
+        text: 'Clear',
+        handler: () => this.constantes.fechaHasta=null
+      }]};
 
 
 
@@ -36,21 +46,27 @@ export class EcgPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EcgPage');
+    this.constantes.setEcgP(this);
     this.data = [];
     this.canvas = document.getElementById("canvasecg");
     this.ctx = this.canvas.getContext("2d");
 
     this.canvas.width = this.platform.width();
     this.canvas.height = this.platform.width();
-
+    this.ctx.translate(0, this.canvas.height);
+    this.ctx.scale(10,-0.5);
     this.frame=0;
     
     this.x = 0;
-    this.panAtX = 250;
+    this.panAtX = 25;
     this.continuarAnimacion = true;
     this.fpsIntervalo = 1000 / this.fps;
     this.then = Date.now();
     this.animate();
+  }
+
+  ionViewWillUnload(){
+    this.apagarContinuarAnimacion();
   }
 
   animate() {
@@ -66,9 +82,9 @@ export class EcgPage {
       requestAnimationFrame(this.animate.bind(this));
     }
 
-    this.ctx.fillStyle="#FF0000";
+    this.ctx.strokeStyle="#FF0000";
+    this.ctx.lineWidth = 1;
     if (this.x > this.data.length - 1) {
-        console.log("Me da que no hay datos");
         return;
     }
 
@@ -76,21 +92,35 @@ export class EcgPage {
     var now = Date.now();
     var transcurrido = now - this.then;
     if (transcurrido > this.fpsIntervalo) {
-      console.log("Toca pinta");
+      this.ctx.save();
+      this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.restore();
+      this.ctx.beginPath();
       if (this.x++ < this.panAtX) {
-          this.ctx.fillRect(this.x, this.data[this.x], 1, 1);
+          for (var xx = 0; xx <= this.x; xx++) {
+            if(xx==0){
+              this.ctx.moveTo(xx,this.data[xx]);
+            }
+            else{
+              this.ctx.lineTo(xx,this.data[xx]);
+            }
+          }
+          this.ctx.stroke();
 
       } else {
-          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-          for (var xx = 0; xx < this.panAtX; xx++) {
-              var y = this.data[this.x - this.panAtX + xx];
-              this.ctx.fillRect(xx, y, 1, 1)
+          for (var xx2 = 0; xx2 < this.panAtX; xx2++) {
+              var y = this.data[this.x - this.panAtX + xx2];
+              if(xx==0){
+                this.ctx.moveTo(xx2,y);
+              }
+              else{
+                this.ctx.lineTo(xx2,y);
+              }
           }
+          this.ctx.stroke();
       }
       this.then = now - (transcurrido % this.fpsIntervalo);
-    }
-    else{
-      console.log("Ahora no toca pintar");
     }
    
 }
@@ -99,6 +129,30 @@ export class EcgPage {
   activarDesactivar(){
     this.constantes.deHabilitado = this.constantes.actual;
     this.constantes.hastaHabilitado = this.constantes.actual;
+    if(this.constantes.actual==true){
+      this.continuarAnimacion = true;
+      this.constantes.obtenerDatosRecientes();
+      this.animate();
+    }
+    else{
+      this.apagarContinuarAnimacion();
+      this.constantes.apagarTimeout();
+    }
+  }
+
+  apagarContinuarAnimacion(){
+    this.continuarAnimacion = false;
+  }
+
+  public encenderContinuarAnimacion(){
+    this.continuarAnimacion = true;
+    this.animate();
+  }
+
+  obtenerConstantesFecha(){
+    if(this.constantes.fechaDe!=null && this.constantes.fechaDe!=undefined && this.constantes.fechaDe!=null && this.constantes.fechaHasta!=undefined){
+      this.constantes.obtenerDatosHistoricos();
+    }
   }
 
 }

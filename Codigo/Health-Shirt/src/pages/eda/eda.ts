@@ -20,14 +20,23 @@ export class EdaPage {
   private canvas: any;
   private ctx: any;
   data: Array<any>;
-  xAxis: Array<any>;
-  private datos = 100;
-  private columnSize = 30;
-  private margin = 10;
-  private Val_max = 700;
-  private Val_min = 100;
-  private rowSize = 25;
-  private stepSize = 100;
+  frame: number;
+  x: number;
+  panAtX: number;
+  continuarAnimacion: boolean;
+  fpsIntervalo: number;
+  fps:number = 4;
+  then: any;
+  public customOptionsDe: any = {
+    buttons: [{
+      text: 'Clear',
+      handler: () => this.constantes.fechaDe=null
+    }]};
+  public customOptionsHasta: any = {
+      buttons: [{
+        text: 'Clear',
+        handler: () => this.constantes.fechaHasta=null
+      }]};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.constantes = this.navParams.get('constantes');
@@ -35,74 +44,111 @@ export class EdaPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EdaPage');
-    console.log(this.constantes);
-    this.data=[];
-    this.xAxis=[];
-    //cogemos la fecha actual y le restamos 100 minutos
-    var actual = new Date();
-    var milisecondsactual = actual.valueOf();
-    var inicial = new Date(milisecondsactual - 100 * 60000);
-
-    //TESTING rellenamos con datos aleatorios, con los últimos 100 detectados
-    for (var i = 0; i < 100; i++) {
-      this.data.push(Math.floor(Math.random() * 600) + 100 );
-      this.xAxis.push(inicial.toLocaleString());
-      inicial = new Date(milisecondsactual - (100 - i + 1)*60000);
-    }
-    console.log(this.xAxis);
+    this.constantes.setEdaP(this);
+    this.data = [];
     this.canvas = document.getElementById("canvaseda");
     this.ctx = this.canvas.getContext("2d");
 
     this.canvas.width = this.platform.width();
     this.canvas.height = this.platform.width();
-    this.dibujarGrafica();
-  }
-
-  activarDesactivar(){
-    this.constantes.deHabilitado = this.constantes.actual;
-    this.constantes.hastaHabilitado = this.constantes.actual;
-  }
-
-  dibujarGrafica() {
-    this.ctx.fillStyle = "#0099ff";
-    this.ctx.font = "20 pt Verdana";
-    var yScale = (this.canvas.height - this.columnSize - this.margin) / (this.Val_max - this.Val_min);
-    var xScale = (this.canvas.width - this.rowSize) / this.datos;
+    this.ctx.translate(0, this.canvas.height-100);
+    this.ctx.scale(10,-0.5);
+    this.frame=0;
     
-    this.ctx.strokeStyle="#488aff"; // color of grid lines
-	  this.ctx.beginPath();
-		// print Parameters on X axis, and grid lines on the graph
-	  for (var i=1;i<=this.datos;i=i+35) {
-      var x = i * xScale;
-		  this.ctx.fillText(this.xAxis[i], x,this.columnSize - this.margin);
-	  }
-		// print row header and draw horizontal grid lines
-	  var count =  0;
-	  for (var scale=this.Val_max;scale>=this.Val_min;scale = scale - this.stepSize) {
-		  var y = this.columnSize + (yScale * count * this.stepSize); 
-		  this.ctx.fillText(scale, this.margin,y + this.margin);
-		  this.ctx.moveTo(this.rowSize,y)
-		  this.ctx.lineTo(this.canvas.width,y)
-		  count++;
-	  }
-	  this.ctx.stroke();
-	
-	  this.ctx.translate(this.rowSize,this.canvas.height + this.Val_min * yScale);
-	  this.ctx.scale(1,-1 * yScale);
-	
-		// Color of each dataplot items
-		
-	  this.ctx.strokeStyle="#FF0066";
-	  this.ctx.beginPath();
-    this.ctx.moveTo(0, this.data[0]);
-    for (i=1;i<this.datos;i++) {
-      this.ctx.lineTo(i * xScale, this.data[i]);
-    }
-    this.ctx.stroke();
+    this.x = 0;
+    this.panAtX = 25;
+    this.continuarAnimacion = true;
+    this.fpsIntervalo = 1000 / this.fps;
+    this.then = Date.now();
+    this.animate();
+  }
 
-    //calculamos la media
-    const average = lista => lista.reduce((prev, curr) => prev + curr) / lista.length;
-    this.constantes.setEdamedias(Math.floor(average(this.data)));
+  ionViewWillUnload(){
+    this.apagarContinuarAnimacion();
+  }
+
+  animate() {
+    //lo primero es comprobar si hay nuevos datos
+    if(this.constantes.getValoredacambiado()==true){
+      this.data = this.constantes.getDatoseda();
+      this.constantes.setValoredacambiado(false);
+      this.x = 0;
+      this.then = Date.now();
+    }
+
+    if (this.continuarAnimacion) {
+      requestAnimationFrame(this.animate.bind(this));
+    }
+
+    this.ctx.strokeStyle="#FF0000";
+    this.ctx.lineWidth = 1;
+    if (this.x > this.data.length - 1) {
+        return;
+    }
+
+    var now = Date.now();
+    var transcurrido = now - this.then;
+    if (transcurrido > this.fpsIntervalo) {
+      this.ctx.save();
+      this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.restore();
+      this.ctx.beginPath();
+      if (this.x++ < this.panAtX) {
+          for (var xx = 0; xx <= this.x; xx++) {
+            if(xx==0){
+              this.ctx.moveTo(xx,this.data[xx]);
+            }
+            else{
+              this.ctx.lineTo(xx,this.data[xx]);
+            }
+          }
+          this.ctx.stroke();
+
+      } else {
+          for (var xx2 = 0; xx2 < this.panAtX; xx2++) {
+              var y = this.data[this.x - this.panAtX + xx2];
+              if(xx==0){
+                this.ctx.moveTo(xx2,y);
+              }
+              else{
+                this.ctx.lineTo(xx2,y);
+              }
+          }
+          this.ctx.stroke();
+      }
+      this.then = now - (transcurrido % this.fpsIntervalo);
+    }
+   
+}
+
+activarDesactivar(){
+  this.constantes.deHabilitado = this.constantes.actual;
+  this.constantes.hastaHabilitado = this.constantes.actual;
+  if(this.constantes.actual==true){
+    this.continuarAnimacion = true;
+    this.constantes.obtenerDatosRecientes();
+    this.animate();
+  }
+  else{
+    this.apagarContinuarAnimacion();
+    this.constantes.apagarTimeout();
+  }
+}
+
+  apagarContinuarAnimacion(){
+    this.continuarAnimacion = false;
+  }
+
+  obtenerConstantesFecha(){
+    if(this.constantes.fechaDe!=null && this.constantes.fechaDe!=undefined && this.constantes.fechaDe!=null && this.constantes.fechaHasta!=undefined){
+      this.constantes.obtenerDatosHistoricos();
+    }
+  }
+
+  public encenderContinuarAnimacion(){
+    this.continuarAnimacion = true;
+    this.animate();
   }
 
 }
