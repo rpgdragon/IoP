@@ -40,4 +40,28 @@ export class RestConstantesProvider {
     });
   }
 
+  public obtenerConstantesHistorico(numeroserie:string, fechaDe: Date, fechaHasta: Date){
+    return new Promise((resolve,reject) => {
+      let httpOptions = {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + AUTHORIZACION
+				})
+      }
+
+      let cuerpo = {
+        "numeroserie": numeroserie,
+        "fechade": fechaDe,
+        "fechahasta": fechaHasta
+      } 
+      this.http.post(MAIN_URL + VERSION + INFORMACION_URL + "/historico/",cuerpo,httpOptions)
+      .timeout(TIMEOUT_MAXIMO)
+				.subscribe(data => {
+					resolve(data);
+				}, error => {
+					reject(error);
+				});
+    });
+  }
+
 }

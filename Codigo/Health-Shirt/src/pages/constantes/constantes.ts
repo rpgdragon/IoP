@@ -24,10 +24,12 @@ export class ConstantesPage {
   public eda: any;
   public temperatura: any;
 
-  public fechaDe: any;
-  public fechaHasta: any;
-  public horaDe: any;
-  public horaHasta: any;
+  private ecgP : EcgPage;
+  private edaP : EdaPage;
+  private temperaturaP : TemperaturaPage;
+
+  public fechaDe: Date;
+  public fechaHasta: Date;
   public constantes: any;
   public actual:any;
 
@@ -113,12 +115,8 @@ export class ConstantesPage {
         this.pulsacionesmedias = 0;
         for(i=0; i< this.datosecg.length; i++){
           this.datosecg[i] = parseInt(this.datosecg[i]);
-          if(this.datosecg[i]>=180 && this.datosecg[i]<=220){
-            mediat++;
-            if(mediat>=7){
-              this.pulsacionesmedias++;
-              mediat-=7;
-            }
+          if(this.datosecg[i]>=550){
+            this.pulsacionesmedias++;
           }
           else{
             mediat=0;
@@ -223,6 +221,114 @@ export class ConstantesPage {
 
   public setValortemperaturacambiado(valortemperaturacambiado:any){
     this.valortemperaturacambiado = valortemperaturacambiado;
+  }
+
+  public getEcgP(){
+    return this.ecgP;
+  }
+
+  public setEcgP(ecgP:EcgPage){
+    this.ecgP = ecgP;
+  }
+
+  public getEdaP(){
+    return this.edaP;
+  }
+
+  public setEdaP(edaP:EdaPage){
+    this.edaP = edaP;
+  }
+
+  public getTemperaturaP(){
+    return this.temperaturaP;
+  }
+
+  public setTemperaturaP(temperaturaP:TemperaturaPage){
+    this.temperaturaP = temperaturaP;
+  }
+
+  public obtenerDatosHistoricos(){
+    if(this.fechaHasta!=null && this.fechaHasta!=undefined && this.fechaDe!=null && this.fechaDe!=undefined){
+      //ok si los dos estan llenos, llamamos al servicio restful
+      if(this.fechaDe > this.fechaHasta){
+        alert("La fecha desde debe ser inferior o igual a la fecha hasta");
+        return;
+      }
+      this.rest.obtenerConstantesHistorico(this.camiseta["numeroserie"],this.fechaDe,this.fechaHasta).then( (data:any) => {
+        var constantesarray = JSON.parse(data.mensaje);
+        var elemento = constantesarray[0];
+        var ecgc = elemento["ecg"];
+        var edac = elemento["eda"];
+        var temperaturac = elemento["temperatura"];
+        //ahora tenemos que convertir los datos a elementos comprensibles por el mismo
+        this.datosecg = ecgc.split(",");
+        this.datoseda = edac.split(",");
+        this.datostemperatura = temperaturac.split(","); 
+
+        //vamos a calcular las medias
+        //la media de la temperatura es tan simple como sumar sus valores y dividirlos por el número del tamaño
+        var mediat = 0;
+        for(var i=0; i< this.datostemperatura.length; i++){
+          this.datostemperatura[i] = parseFloat(this.datostemperatura[i]);
+          mediat+=this.datostemperatura[i];
+        }
+        this.temperaturamedias = Math.round( (mediat/this.datostemperatura.length) * 100) / 100
+
+        //lo mismo con el eda
+        mediat = 0;
+        for(i=0; i< this.datoseda.length; i++){
+          this.datoseda[i] = parseInt(this.datoseda[i]);
+          mediat+=this.datoseda[i];
+        }
+        this.edamedias = Math.round( (mediat/this.datoseda.length) * 100) / 100
+
+        //por último el ecg. No obstante este es un poco más complicado de medir, por que aqui tenemos que medir
+        //los pulsos segun los valores y no los valores en si
+
+        mediat = 0;
+        this.pulsacionesmedias = 0;
+        for(i=0; i< this.datosecg.length; i++){
+          this.datosecg[i] = parseInt(this.datosecg[i]);
+          if(this.datosecg[i]>=550){
+            this.pulsacionesmedias++;
+          }
+          else{
+            mediat=0;
+          }
+        }
+
+        //y ahora a partir de la diferencia de minutos se divide
+        
+        var diffMs = (Date.parse(this.fechaHasta.toLocaleString()) - Date.parse(this.fechaDe.toLocaleString()));
+        let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+        this.pulsacionesmedias = this.pulsacionesmedias / diffMins;
+
+        //ademas aqui tendrá que haber una accion para que se reinicien las animaciones y las graficas
+        //se utilizará un flag
+        this.valorecgcambiado = true;
+        this.valoredacambiado = true;
+        this.valortemperaturacambiado = true;
+        //tambien pediremos activar el caso
+        if(this.ecgP!=null && this.ecgP!=undefined){
+          this.ecgP.encenderContinuarAnimacion();
+        }
+        if(this.edaP!=null && this.edaP!=undefined){
+          this.edaP.encenderContinuarAnimacion();
+        }
+        if(this.temperaturaP!=null && this.temperaturaP!=undefined){
+          this.temperaturaP.encenderContinuarAnimacion();
+        }       
+      }, error=>{
+        //si hay un error simplemente lo imprimimos por la consola
+        console.log("Esto es un error" + error);
+      })
+    }
+  }
+
+  public apagarTimeout(){
+    if(this.timerId!=null && this.timerId!=undefined){
+      clearTimeout(this.timerId);
+    }
   }
 
 }
