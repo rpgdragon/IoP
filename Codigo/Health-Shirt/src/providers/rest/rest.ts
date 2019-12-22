@@ -66,6 +66,28 @@ export class RestProvider {
     });
   }
 
+  public registrarToken(email:string,token:string){
+    return new Promise((resolve,reject) => {
+      let httpOptions = {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + AUTHORIZACION
+				})
+		}
+		let cuerpo = {
+		"usuario": email,
+        "token": token
+      	} 
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "registrartoken.php",cuerpo,httpOptions)
+      .timeout(TIMEOUT_MAXIMO)
+				.subscribe(data => {
+					resolve(data);
+				}, error => {
+					reject(error);
+				});
+    });
+  }
+
   public loginFacebook(email:string,token:string){
     return new Promise((resolve,reject) => {
       let httpOptions = {
