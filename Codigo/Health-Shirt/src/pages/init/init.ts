@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 import { MyApp } from '@app/app.component';
 import { RegistroPage } from '@pages/registro/registro';
 import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'page-init',
@@ -26,7 +27,8 @@ export class InitPage {
   public platform: Platform,
   public facebook: Facebook,
   private rest: RestProvider,
-  private storage: Storage) {
+  private storage: Storage,
+  private fcm: FCM) {
 	   this.version = this.appVersion.getVersionNumber();
   }
   
@@ -71,6 +73,15 @@ export class InitPage {
         //ok, login correcto cambiamos
         MyApp.setNombreusuario(datos.email.toLowerCase());
         this.storage.set('nombreusuario', datos.email.toLowerCase());
+        this.fcm.getToken().then(token => {
+          //vamos a guardar el token tanto en el storage como en el backend
+          this.storage.set("tokennotificacion",token);
+          this.rest.registrarToken(MyApp.getNombreusuario(),token)
+          });
+        this.fcm.onTokenRefresh().subscribe(token => {
+          this.storage.set("tokennotificacion",token);
+          this.rest.registrarToken(MyApp.getNombreusuario(),token)
+          });
         this.navCtrl.setRoot(CamisetaPage);       
       }
     },error=>{

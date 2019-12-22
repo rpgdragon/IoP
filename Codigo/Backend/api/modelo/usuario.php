@@ -194,4 +194,13 @@ class Usuario{
         $queryst->bindParam(":usuario",$this->usuario);
         $queryst->execute();
     }
+
+    function insertar_actualizar_token($token){
+        $query = "INSERT INTO usuarioxtokennotificacion (idusuario, token) VALUES(:usuario,:token1) ON DUPLICATE KEY UPDATE token=:token2";
+        $queryst = $this->conexion->prepare($query);
+        $queryst->bindParam(":usuario",$this->usuario);
+        $queryst->bindParam(":token1",$token);
+        $queryst->bindParam(":token2",$token);
+        $queryst->execute();
+    }
 }

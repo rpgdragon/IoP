@@ -218,6 +218,24 @@ class Camiseta{
 		$this->parentesco=htmlspecialchars(strip_tags($this->parentesco));
 		$this->src=htmlspecialchars(strip_tags($this->src));
 		$this->numeroserie=htmlspecialchars(strip_tags($this->numeroserie));
+		if($this->ecgminimo==0){
+			$this->ecgminimo=null;
+		}
+		if($this->ecgmaximo==0){
+			$this->ecgmaximo=null;
+		}
+		if($this->edaminimo==0){
+			$this->edaminimo=null;
+		}
+		if($this->edamaximo==0){
+			$this->edamaximo=null;
+		}
+		if($this->temperaturaminimo==0){
+			$this->temperaturaminimo=null;
+		}
+		if($this->temperaturamaximo==0){
+			$this->temperaturamaximo=null;
+		}
 		$queryst->bindParam(":nombre", $this->nombre);
 		$queryst->bindParam(":parentesco", $this->parentesco);
 		$queryst->bindParam(":src", $this->src);
@@ -279,6 +297,24 @@ class Camiseta{
 		$this->notificacionestemperatura=htmlspecialchars(strip_tags($this->notificacionestemperatura));
 		$this->notificacionescaida=htmlspecialchars(strip_tags($this->notificacionescaida));
 		$this->id=htmlspecialchars(strip_tags($this->id));
+		if($this->ecgminimo==0){
+			$this->ecgminimo=null;
+		}
+		if($this->ecgmaximo==0){
+			$this->ecgmaximo=null;
+		}
+		if($this->edaminimo==0){
+			$this->edaminimo=null;
+		}
+		if($this->edamaximo==0){
+			$this->edamaximo=null;
+		}
+		if($this->temperaturaminimo==0){
+			$this->temperaturaminimo=null;
+		}
+		if($this->temperaturamaximo==0){
+			$this->temperaturamaximo=null;
+		}
 		$queryst->bindParam(":nombre", $this->nombre);
 		$queryst->bindParam(":parentesco", $this->parentesco);
 		$queryst->bindParam(":src", $this->src);
@@ -440,5 +476,26 @@ class Camiseta{
 		else{
 			return false;
 		}
+	}
+
+	function obtener_umbrales_por_usuario($numeroserie){
+		$query = "SELECT camiseta.nombre nombre,camiseta.ecgminimo cecgminimo, camiseta.ecgmaximo cecgmaximo, 
+		camiseta.edaminimo cedaminimo, camiseta.edamaximo cedamaximo, camiseta.temperaturaminimo ctemperaturaminimo, 
+		camiseta.temperaturamaximo ctemperaturamaximo, camiseta.notificacionesecg cnotificacionesecg, 
+		camiseta.notificacioneseda cnotificacioneseda, camiseta.notificacionestemperatura cnotificacionestemperatura, 
+		camiseta.notificacionescaida cnotificacionescaida, configuracion.notificacionestodas, configuracion.notificacionesecg, configuracion.notificacioneseda, 
+		configuracion.notificacionestemperatura, configuracion.notificacionesbateria, configuracion.notificacionescaida,
+		usuarioxtokennotificacion.token token, camiseta.id id, camiseta.numeroserie numeroserie 
+		FROM camiseta 
+		inner join camisetaxusuario on camisetaxusuario.idcamiseta = camiseta.id 
+		inner join usuarios on usuarios.usuario = camisetaxusuario.idusuario
+		inner join usuarioxtokennotificacion on usuarioxtokennotificacion.idusuario = usuarios.usuario
+		left join configuracion on configuracion.usuario = usuarios.usuario 
+		WHERE camiseta.numeroserie=:numeroserie ";
+		$queryst = $this->conexion->prepare($query);
+		$queryst->bindParam(":numeroserie", $numeroserie);
+		$queryst->execute();
+		$results = $queryst->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
 	}
 }

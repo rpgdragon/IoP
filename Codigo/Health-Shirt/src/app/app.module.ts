@@ -33,6 +33,7 @@ import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { RestConfiguracionProvider } from '../providers/rest-configuracion/rest-configuracion';
 import { RestConstantesProvider } from '../providers/rest-constantes/rest-constantes';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 
 //import { HomePage } from '@pages/all'
@@ -119,6 +120,7 @@ const routes: Routes = [
         InAppBrowser,
         Facebook,
         ScreenOrientation,
+        FCM,
     RestProvider,
     HttpClientModule,
     RestCamisetaProvider,

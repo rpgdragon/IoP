@@ -7,6 +7,7 @@ import { RestProvider} from '../../providers/rest/rest';
 import { MyApp } from '@app/app.component';
 import { Storage } from '@ionic/storage';
 import { OlvidoPage } from '@pages/olvido/olvido';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'page-login',
@@ -24,6 +25,7 @@ export class LoginPage {
   public platform: Platform,
   public formBuilder: FormBuilder,
   private rest: RestProvider,
+  private fcm: FCM,
   private storage: Storage) {
     this.formularioLogin = this.crearFormularioLogin();
   }
@@ -45,6 +47,15 @@ export class LoginPage {
     this.rest.login(this.formularioLogin.value.email,this.formularioLogin.value.password).then(data => {
       MyApp.setNombreusuario(this.formularioLogin.value.email.toLowerCase());
       this.storage.set('nombreusuario', this.formularioLogin.value.email.toLowerCase());
+      this.fcm.getToken().then(token => {
+        //vamos a guardar el token tanto en el storage como en el backend
+        this.storage.set("tokennotificacion",token);
+        this.rest.registrarToken(MyApp.getNombreusuario(),token)
+        });
+      this.fcm.onTokenRefresh().subscribe(token => {
+        this.storage.set("tokennotificacion",token);
+        this.rest.registrarToken(MyApp.getNombreusuario(),token)
+        });
       this.navCtrl.setRoot(CamisetaPage);
     }, error => {
       if (error.status === 403) {

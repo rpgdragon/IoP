@@ -14,6 +14,9 @@ import { ConfiguracionPage } from '@pages/configuracion/configuracion';
 import { InfoPage } from '@pages/info/info';
 import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
 import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { RestProvider } from '../providers/rest/rest';
+import { ConstantesPage } from '@pages/constantes/constantes';
 
 @Component({
     templateUrl: 'app.html'
@@ -29,21 +32,62 @@ export class MyApp {
         public splashScreen: SplashScreen,
         public platform: Platform, 
 		private menu: MenuController,
-		private storage: Storage
+		private storage: Storage,
+		private fcm: FCM,
+		private rest: RestProvider
     ) {
 		this.platform.ready().then(() => {
+			//creamos una acccion asociada 
+			this.fcm.onNotification().subscribe(data => {
+				setTimeout(() => this.redirigirNotificacion(data), 500);
+				//comprobamos si esta logado o no
+			  });
+
 			this.storage.get('nombreusuario').then((val) => {
 				if(val==null || val=='undefined' || val==''){
 					this.redirigirInit();
 				}
 				else{
 					MyApp.nombreusuario = val;
+					this.fcm.getToken().then(token => {
+						//vamos a guardar el token tanto en el storage como en el backend
+						this.storage.set("tokennotificacion",token);
+						this.rest.registrarToken(MyApp.nombreusuario,token)
+					  });
+					this.fcm.onTokenRefresh().subscribe(token => {
+						this.storage.set("tokennotificacion",token);
+						this.rest.registrarToken(MyApp.nombreusuario,token)
+					  });
+					  
 					this.redirigirCamiseta();
 				}
 			});
 			
         });
-    }
+	}
+	
+	redirigirNotificacion(data){
+		this.storage.get('nombreusuario').then((val) => {
+			if(data['tipo']=="bateria"){
+				//la bateria se redirige siempre a la vista de camisetas
+				this.redirigirCamiseta();
+			}
+
+			if(data['tipo']=="caida"){
+				this.redirigirConstantes(data['idcamiseta'],data['nombre'],data['numeroserie'],null,data.wasTapped);
+			}
+
+			if(data['tipo']=="temperatura"){
+				this.redirigirConstantes(data['idcamiseta'],data['nombre'],data['numeroserie'],"temperatura",data.wasTapped);
+			}
+			if(data['tipo']=="ecg"){
+				this.redirigirConstantes(data['idcamiseta'],data['nombre'],data['numeroserie'],"ecg",data.wasTapped);
+			}
+			if(data['tipo']=="eda"){
+				this.redirigirConstantes(data['idcamiseta'],data['nombre'],data['numeroserie'],"eda",data.wasTapped);
+			}
+		});
+	}
 	
     go(name){
         switch(name){
@@ -106,6 +150,21 @@ export class MyApp {
 		console.log("Redirigiendo a Camiseta");
 		this.splashScreen.hide();
 		this.rootPage = CamisetaPage;
+	}
+
+	private redirigirConstantes(idcamiseta, nombre, numeroserie, pagina,modo){
+		console.log("Redirigiendo a Constantes");
+		//creamos un objeto camiseta
+		var camiseta = {};
+		camiseta["id"] = idcamiseta;
+		camiseta["numeroserie"] = numeroserie;
+		camiseta['nombre'] = nombre;
+		if(modo){
+			this.nav.setRoot(ConstantesPage, { camiseta: camiseta, pagina: pagina  });
+		}
+		else{
+			this.nav.push(ConstantesPage, { camiseta: camiseta, pagina: pagina  })
+		}
 	}
 	
     logout(){

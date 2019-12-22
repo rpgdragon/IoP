@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractC
 import { RestProvider} from '../../providers/rest/rest';
 import { Storage } from '@ionic/storage';
 import { MyApp } from '@app/app.component';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'page-registrofacebook',
@@ -28,7 +29,8 @@ export class RegistroFacebookPage {
   public platform: Platform,
   public formBuilder: FormBuilder,
   private rest: RestProvider,
-  private storage: Storage) {
+  private storage: Storage,
+  private fcm: FCM) {
     this.formularioLogin = this.crearFormularioLogin();
   }
   
@@ -44,6 +46,15 @@ export class RegistroFacebookPage {
   registro(){
     this.rest.registrar(MyApp.getNombreusuario(),this.formularioLogin.value.password,"1").then(data => {
       this.storage.set('nombreusuario', MyApp.getNombreusuario().toLowerCase());
+      this.fcm.getToken().then(token => {
+        //vamos a guardar el token tanto en el storage como en el backend
+        this.storage.set("tokennotificacion",token);
+        this.rest.registrarToken(MyApp.getNombreusuario(),token)
+        });
+      this.fcm.onTokenRefresh().subscribe(token => {
+        this.storage.set("tokennotificacion",token);
+        this.rest.registrarToken(MyApp.getNombreusuario(),token)
+        });
       this.navCtrl.setRoot(CamisetaPage);
     }, error => {
       if (error.status === 409) {
