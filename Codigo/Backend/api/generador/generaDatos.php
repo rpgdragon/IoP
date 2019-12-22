@@ -9,6 +9,8 @@ include_once '../modelo/camiseta.php';
 include_once '../utilidades/utils.php';
 
 
+$npm = 60;
+
 function obtener_valor_plano(){
     $valor = rand(195,205);
     return $valor;
@@ -45,6 +47,7 @@ function picoMinimo(){
  */
 function generar_pulsaciones(){
     $pulsaciones = [];
+    global $npm;
     //vamos a hacer 3 posibles modelos
     //una a 60 pulsaciones (7 posibilidad)
     //otra a 90 pulsaciones (2 posibilidades)
@@ -52,6 +55,7 @@ function generar_pulsaciones(){
     $obtenido = rand(1,10);
     if($obtenido==1){
         //120 pulsaciones
+        $npm = 120;
         for($i = 0; $i < 60; $i = $i+1){
             array_push($pulsaciones,obtener_valor_plano());
             array_push($pulsaciones,pico300());
@@ -77,6 +81,7 @@ function generar_pulsaciones(){
     }
     if($obtenido==2 || $obtenido==3){
         //90 pulsaciones
+        $npm = 90;
         for($i = 0; $i < 30; $i = $i+1){
             array_push($pulsaciones,obtener_valor_plano());
             array_push($pulsaciones,pico300());
@@ -123,6 +128,7 @@ function generar_pulsaciones(){
     }
     if($obtenido>2){
         //Este son 60 pulsaciones
+        $npm = 60;
         for($i = 0; $i < 60; $i = $i+1){
             array_push($pulsaciones,obtener_valor_plano());
             array_push($pulsaciones,obtener_valor_plano());
@@ -147,6 +153,108 @@ function generar_pulsaciones(){
         }
     }
     return $pulsaciones;
+}
+
+
+function enviar_notificacion($token, $nombrecamiseta, $idcamiseta, $numeroserie, $tipo, $umbral, $dato){
+    $data = null;
+    $parametros = null;
+    if($tipo=='bateria'){
+        $data = array(
+            'title' => 'Aviso de bateria baja - '.$nombrecamiseta,
+            'body' => 'La camiseta '.$nombrecamiseta.' le queda '.$dato.'% de bateria',
+            'click_action' => 'FCM_PLUGIN_ACTIVITY'
+        );
+        $parametros = array(
+            'tipo' => 'bateria',
+            'idcamiseta' => $idcamiseta,
+            'numeroserie' => $numeroserie,
+            'nombre' => $nombrecamiseta
+        );
+    }
+
+    if($tipo=='caida'){
+        $data = array(
+            'title' => 'Aviso de caida - '.$nombrecamiseta,
+            'body' => 'El usuario con la camiseta '.$nombrecamiseta.' se ha caido',
+            'click_action' => 'FCM_PLUGIN_ACTIVITY'
+        );
+
+        $parametros = array(
+            'tipo' => 'caida',
+            'idcamiseta' => $idcamiseta,
+            'numeroserie' => $numeroserie,
+            'nombre' => $nombrecamiseta
+        );
+    }
+    
+    if($tipo=='temperatura'){
+        $data = array(
+            'title' => 'Aviso de temperatura '.$umbral. ' superado - '.$nombrecamiseta,
+            'body' => 'Se ha alcanzado '.$dato.'º',
+            'click_action' => 'FCM_PLUGIN_ACTIVITY'
+        );
+
+        $parametros = array(
+            'tipo' => 'temperatura',
+            'idcamiseta' => $idcamiseta,
+            'numeroserie' => $numeroserie,
+            'nombre' => $nombrecamiseta
+        );
+    }
+    
+    if($tipo=='eda'){
+        $data = array(
+            'title' => 'Aviso de eda '.$umbral. ' superado - '.$nombrecamiseta,
+            'body' => 'Se ha alcanzado '.$dato.' ',
+            'click_action' => 'FCM_PLUGIN_ACTIVITY'
+        );
+
+        $parametros = array(
+            'tipo' => 'eda',
+            'idcamiseta' => $idcamiseta,
+            'numeroserie' => $numeroserie,
+            'nombre' => $nombrecamiseta
+        );
+    }
+
+    if($tipo=='ecg'){
+        $data = array(
+            'title' => 'Aviso de npm '.$umbral. ' superado - '.$nombrecamiseta,
+            'body' => 'Se ha alcanzado '.$dato.' npm',
+            'click_action' => 'FCM_PLUGIN_ACTIVITY'
+        );
+
+        $parametros = array(
+            'tipo' => 'ecg',
+            'idcamiseta' => $idcamiseta,
+            'numeroserie' => $numeroserie,
+            'nombre' => $nombrecamiseta
+        );
+    }   
+
+    sendPushNotifications($token,$data,$parametros);
+}
+
+function sendPushNotifications($to='',$data=array(),$parametros=array()){
+    $apiKey='AIzaSyA5uZeW8stU3gROP2RThymWqJW0xqUkQRk';
+    $fields = array ('to' => $to, 'notification' => $data, 'data' => $parametros);
+    $headers = array('Authorization: key='.$apiKey, 'Content-Type: application/json');
+
+    $url = 'https://fcm.googleapis.com/fcm/send';
+
+    $ch = curl_init();
+
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_POST,true);
+    curl_setopt($ch,CURLOPT_HTTPHEADER,$headers);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+
+    curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+    curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($fields));
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($result,true);
 }
 
 /**
@@ -259,4 +367,92 @@ $informacion->setTemperatura($temperatura);
 
 $valor_devuelto = $informacion->registrar_informacion();
 
+//ahora por ultimo comprobamos si supera alguno de los umbrales establecidos
 
+$datos_umbrales = $camiseta->obtener_umbrales_por_usuario("1111111111111111");
+foreach($datos_umbrales as $valorumbral){
+    //lo primero que tenemos que hacer es comprobar si las notificaciones se encuentran apagadas o no
+    
+    if($valorumbral['notificacionestodas']==1){
+        //el usuario ha indicado que no quiere notificaciones, por tanto las apagamos todas
+        continue;
+    }
+
+    //ahora englobaremos notificaciones por cada una de las constantes
+    //ECG
+    if($valorumbral['notificacionesecg']==0 && $valorumbral['cnotificacionesecg']==0){
+        //tenemos que comprobar
+        //tenemos que comprobar si se ha rebasado el minimo o maximo de los npms
+        if($valorumbral['cecgminimo']!=null && $valorumbral['cecgminimo']!='' && $valorumbral['cecgminimo'] > $npm){
+            enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'ecg','minimo',$npm);
+        }
+
+        //y ahora el maximo
+        if($valorumbral['cecgmaximo']!=null && $valorumbral['cecgmaximo']!=''  && $valorumbral['cecgmaximo'] < $npm){
+            enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'ecg','maximo',$npm);
+        }
+    }
+    //EDA
+    if($valorumbral['notificacioneseda']==0 && $valorumbral['cnotificacioneseda']==0){
+        //tenemos que comprobar
+        //aqui ha habido varios valores, se tienen que analizar todos los datos
+        $encontradominimo = false;
+        $encontradomaximo = false;
+        $valorminimo = -1;
+        $valormaximo = -1;
+
+        foreach($eda_generadas as $eda_valor){
+            if($valorumbral['cedaminimo']!=null && $valorumbral['cedaminimo']!='' && $valorumbral['cedaminimo'] > $eda_valor){
+                $encontradominimo = true;
+                $valorminimo = $eda_valor;
+            }
+    
+            //y ahora el maximo
+            if($valorumbral['cedamaximo']!=null && $valorumbral['cedamaximo']!='' && $valorumbral['cedamaximo'] < $eda_valor){
+                $encontradomaximo = true;
+                $valormaximo = $eda_valor;
+            }
+        }
+
+        if($encontradominimo){
+            enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'eda','minimo',$valorminimo);
+        }
+
+        if($encontradomaximo){
+            enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'eda','maximo',$valormaximo);
+        }
+    }
+
+    //Temperatura
+    if($valorumbral['notificacionestemperatura']==0 && $valorumbral['cnotificacionestemperatura']==0){
+        //tenemos que comprobar si se ha rebasado el minimo o maximo de temperatura
+        if($valorumbral['ctemperaturaminimo']!=null && $valorumbral['ctemperaturaminimo']!='' && $valorumbral['ctemperaturaminimo'] > $informacion->getTemperatura()){
+            enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'temperatura','minimo',$informacion->getTemperatura());
+        }
+
+        //y ahora el maximo
+        if($valorumbral['ctemperaturamaximo']!=null && $valorumbral['ctemperaturamaximo']!='' && $valorumbral['ctemperaturamaximo'] < $informacion->getTemperatura()){
+            enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'temperatura','maximo',$informacion->getTemperatura());
+        }
+    }
+
+    //Y ahora procedemos a ver si enviamos una notificacion de caida
+    if($valorumbral['notificacionescaida']==0){
+       //tenemos que ver si generamos una notificacion de caida, solo ocurrira una de cada
+       //diez veces
+       $valor = rand(0,10);
+       if($valor==0){
+           //tenemos que enviar notificacion
+           enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'caida',null,null);
+       }
+    }    
+
+    //Y por ultimo procedemos a ver si hay que enviar una notificacion e bateria
+    if($valorumbral['notificacionesbateria']==0){
+        if($informacion->getBateria()==null || $informacion->getBateria() < 20){
+            //tenemos que enviar una notificacion informando de que el dispositivo tiene bateria baja
+            enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'bateria',null,$informacion->getBateria());
+        }
+    }
+
+}

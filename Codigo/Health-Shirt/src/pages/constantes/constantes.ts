@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Tabs } from 'ionic-angular';
+import { ViewChild } from '@angular/core';
 import {EcgPage} from '@pages/ecg/ecg';
 import {EdaPage} from '@pages/eda/eda';
 import {TemperaturaPage} from '@pages/temperatura/temperatura';
@@ -18,8 +19,9 @@ import { RestConstantesProvider} from '../../providers/rest-constantes/rest-cons
   templateUrl: 'constantes.html',
 })
 export class ConstantesPage {
-
+  @ViewChild("paymentTabs") tabs: Tabs;
   public camiseta: Object;
+  public paginasolicitada: string;
   public ecg: any;
   public eda: any;
   public temperatura: any;
@@ -54,6 +56,7 @@ export class ConstantesPage {
     private rest: RestConstantesProvider) {
     //recoge el objeto pasado por parametro
     this.camiseta = this.navParams.get('camiseta');
+    this.paginasolicitada = this.navParams.get('pagina');
     this.ecg = EcgPage;
     this.eda = EdaPage;
     this.temperatura = TemperaturaPage;
@@ -74,6 +77,14 @@ export class ConstantesPage {
 
   ionViewWillEnter(){
     this.obtenerDatosRecientes();
+    //cargamos la pagina que es
+    if(this.paginasolicitada=='temperatura'){
+      this.tabs.select(2);
+    }
+
+    if(this.paginasolicitada=='eda'){
+      this.tabs.select(1);
+    }
   }
 
   obtenerDatosRecientes(){
