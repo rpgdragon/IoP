@@ -159,6 +159,10 @@ export class MyApp {
 		camiseta["id"] = idcamiseta;
 		camiseta["numeroserie"] = numeroserie;
 		camiseta['nombre'] = nombre;
+		if(this.nav.getActive().name=='ConstantesPage'){
+			//si esta en la pagina de constantes no hay que hacer nada
+			return;
+		}
 		if(modo){
 			this.nav.setRoot(ConstantesPage, { camiseta: camiseta, pagina: pagina  });
 		}
