@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 const AUTHORIZACION = "healthshirt20192020";
 const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
 const LOGIN_URL = "login/";
-const VERSION = "v1/";
+const VERSION = "v2/";
 
 const TIMEOUT_MAXIMO = 10000;
 /*
@@ -33,7 +33,7 @@ export class RestProvider {
         "password": password,
         "esFacebook": "0"
       } 
-      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "login.php",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "login/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -56,7 +56,7 @@ export class RestProvider {
         "password": password,
         "esFacebook": esFacebook
       } 
-      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "registrar.php",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "registrar/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -78,7 +78,7 @@ export class RestProvider {
 		"usuario": email,
         "token": token
       	} 
-      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "registrartoken.php",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "registrartoken/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -100,7 +100,7 @@ export class RestProvider {
 				"usuario": email,
         "token": token
       }
-      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "loginfacebook.php",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "loginfacebook/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -121,7 +121,7 @@ export class RestProvider {
 			let cuerpo = {
 				"usuario": email,
       }
-      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "olvido.php",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "olvido/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
