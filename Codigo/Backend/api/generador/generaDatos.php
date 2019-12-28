@@ -163,7 +163,7 @@ function generar_pulsaciones(){
  */
 function generar_eda(){
     $eda = [];
-    for($i = 0; $i < 240; $i = $i+1){
+    for($i = 0; $i < 1200; $i = $i+1){
         //existe un 1% de posibilidades que se desplome a un valor entre 90 y 100 y un 1% de posibilidades que se dispare a un valor
         //entre 300 y 310, sino el valor común suele ser entre 200 y 210
         $numero = rand(0,100);

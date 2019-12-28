@@ -254,7 +254,8 @@ class Camiseta{
 			if($queryst->execute()){
 				//si devuelve true, tenemos que obtener el id generado para asignarlo en la tabla usuarioxcamiseta
 				$usuario=htmlspecialchars(strip_tags($usuario));
-				$queryst2->bindParam(":idcamiseta", $this->conexion->lastInsertId());
+				$valorcamiseta = $this->conexion->lastInsertId();
+				$queryst2->bindParam(":idcamiseta", $valorcamiseta);
 				$queryst2->bindParam(":idusuario", $usuario);
 				if($queryst2->execute()){
 					$this->conexion->commit(); 

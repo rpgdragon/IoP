@@ -3,9 +3,12 @@
 session_start();
 
 // obtenemos el pool de conexiones
-include_once '../config/database.php';
+include_once '../../config/database.php';
+include_once '../../utilidades/logging.php';
 
 if(!isset($_GET['token']) || $_GET['token']==null || $_GET['token']==''){
+    $log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene el parametro token en la URL';
+	meter_error_log($log);
     http_response_code(400);
     exit();
 }
@@ -18,14 +21,20 @@ try{
 	$db = $database->getConexion();
 }
 catch(Exception $e){
+    $log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- '.$e->getMessage();
+	meter_error_log($log);
     http_response_code(500);
 	exit();
 }
 
+$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Recuperación de la cuenta '.$_GET['token'];
+meter_debug_log($log);
 $query = "SELECT idusuario FROM usuarioxtoken WHERE token='".$_GET['token']."' ";
 $queryst = $db->prepare($query);
 $queryst->execute();
 if($queryst->rowCount() <= 0){
+    $log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- No existe el token';
+	meter_error_log($log);
 	http_response_code(400);
     exit();
 }
@@ -41,7 +50,7 @@ if($queryst->rowCount() <= 0){
     <title>Recuperación de camiseta HealthShirt</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/comun.css">
+    <link rel="stylesheet" href="../../assets/css/comun.css">
     <script>
         function mostrarPassword(){
             var control = document.getElementById("iconopassword");
@@ -75,9 +84,9 @@ if($queryst->rowCount() <= 0){
         }
     </script>
 </head>
-<body style="padding-top:10%;background: url('../assets/images/fondo.png');">
+<body style="padding-top:10%;background: url('../../assets/images/fondo.png');">
     <div class="container" style="text-align:center">
-        <img src="../assets/images/icon.png" width="30%" alt="Logo HealtShirt" />
+        <img src="../../assets/images/icon.png" width="30%" alt="Logo HealtShirt" />
         <h1>HealthShirt</h1>
         <p>Para recuperar la cuenta debe resetear la contraseña, por favor introduce la nueva contraseña debajo. La contraseña debe cumplir las siguientes condiciones</p>
         <ul style="text-align:left;">
@@ -94,7 +103,7 @@ if($queryst->rowCount() <= 0){
             <?php
         }
         ?>
-        <form action="nuevacontrasena.php" method="post">
+        <form action="../nuevacontrasena/index.php" method="post">
         <div class="inputConIcono">
             <input id="password123" type="password" class="form-control" placeholder="Password" aria-label="Password" name="password123" aria-describedby="password123">
             <i id="iconopassword" class="fas fa-eye-slash fa-lg fa-fw" onclick="mostrarPassword();" aria-hidden="true" ></i>

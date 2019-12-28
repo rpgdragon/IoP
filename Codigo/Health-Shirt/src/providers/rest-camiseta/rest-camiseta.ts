@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 const AUTHORIZACION = "healthshirt20192020";
 const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
 const CAMISETA_URL = "camiseta/";
-const VERSION = "v1/";
+const VERSION = "v2/";
 
 const TIMEOUT_MAXIMO = 10000;
 

@@ -57,7 +57,7 @@ export class InitPage {
   obtenerDatos(res: FacebookLoginResponse) {
    var token = res.authResponse.accessToken;
    var userID = res.authResponse.userID;
-   this.facebook.api(userID + "/?fields=email",["user_birthday"])
+   this.facebook.api(userID + "/?fields=email",["email"])
 	.then((datos) => this.llamarLoginServidorFacebook(token,datos))
 	.catch(e => console.log('Error intentando obtener email ',e));
   }

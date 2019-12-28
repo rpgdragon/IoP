@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="5" android-versionName="0.0.5" id="eu.jmcastellano.healthshirt" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="6" android-versionName="0.0.6" id="eu.jmcastellano.healthshirt" version="0.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Health-Shirt</name>
     <description>Monitorización de constantes vitales a través de camiseta inteligente</description>
     <author email="jmcastellano@jmcastellano.eu" href="https://www.jmcastellano.eu">Jose Manuel Castellano Dominguez</author>

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 const AUTHORIZACION = "healthshirt20192020";
 const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
 const INFORMACION_URL = "informacion/";
-const VERSION = "v1/";
+const VERSION = "v2/";
 
 const TIMEOUT_MAXIMO = 10000;
 
@@ -30,7 +30,7 @@ export class RestConstantesProvider {
 					'Authorization': 'Bearer ' + AUTHORIZACION
 				})
       }
-      this.http.get(MAIN_URL + VERSION + INFORMACION_URL + "?numeroserie=" + numeroserie,httpOptions)
+      this.http.get(MAIN_URL + VERSION + INFORMACION_URL + "actual/?numeroserie=" + numeroserie,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -54,7 +54,7 @@ export class RestConstantesProvider {
         "fechade": fechaDe,
         "fechahasta": fechaHasta
       } 
-      this.http.post(MAIN_URL + VERSION + INFORMACION_URL + "/historico/",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + INFORMACION_URL + "historico/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);

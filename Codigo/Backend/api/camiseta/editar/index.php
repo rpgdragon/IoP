@@ -5,6 +5,7 @@
 include_once '../../config/database.php';
 //utilidades del sistema
 include_once '../../utilidades/utils.php';
+include_once '../../utilidades/logging.php';
 // codigos de respuesta
 include_once '../../modelo/codigos.php';
 include_once '../../modelo/camiseta.php';
@@ -16,21 +17,29 @@ $camiseta = new Camiseta();
 $inputJSON = file_get_contents('php://input');
 
 if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
 	generar_respuesta(false, "La solicitud de actualizacion de camiseta le faltan datos. No hay Input",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 $input= json_decode( $inputJSON );
 if(!isset($input) || $input==null || $input==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
 	generar_respuesta(false, "La solicitud de actualizacion de camiseta le faltan datos. El input no es un JSON",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 } 
 
 if(!isset($input->usuario) || $input->usuario==null || $input->usuario==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
     generar_respuesta(false, "La solicitud de actualizacion le falta el usuario",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 
 if(!isset($input->id) || $input->id==null  || $input->id==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
     generar_respuesta(false, "La solicitud de actualizacion le falta el identificador de la camiseta",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
@@ -39,6 +48,8 @@ else{
 }
 
 if(!isset($input->nombre) || $input->nombre==null  || $input->nombre==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
     generar_respuesta(false, "La solicitud de actualizacion le falta el nombre",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
@@ -47,6 +58,8 @@ else{
 }
 
 if(!isset($input->parentesco) || $input->parentesco==null  || $input->parentesco==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
     generar_respuesta(false, "La solicitud de actualizacion le falta el parentesco",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
@@ -55,6 +68,8 @@ else{
 }
 
 if(!isset($input->icono) || $input->icono==null  || $input->icono==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
     generar_respuesta(false, "La solicitud de actualizacion le falta el icono",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
@@ -166,21 +181,28 @@ try{
 	$db = $database->getConexion();
 }
 catch(Exception $e){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- '.$e->getMessage();
+	meter_error_log($log);
 	generar_respuesta(false, $e->getMessage(),CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 	exit();
 }
 
-
+$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Editar camisetas datos '.$input->id;
+meter_debug_log($log);
 $camiseta->setConexion($db);
 $i = 0;
 try{
 	if($camiseta->es_camiseta_usuario($input->usuario)){
 		if($camiseta->actualizar_camiseta()){
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Camiseta Actualizada ';
+			meter_debug_log($log);
 			generar_respuesta(true, "Actualizado",CODIGO_OK_CREADO,ESTATUS_OK);
 			exit();
 		}
 		else{
 			//ha habido algun problema en el borrado
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Error al actualizar la camiseta';
+			meter_error_log($log);
 			generar_respuesta(false, "Error interno servidor",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 			exit();
 		}
@@ -188,10 +210,14 @@ try{
 	else{
 		//el usuario no esta asociado a la camiseta
 		if($camiseta->existe_camiseta()){
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Esta camiseta no pertenece al usuario';
+			meter_error_log($log);
 			generar_respuesta(false, "Esta camiseta no pertenece al usuario",CODIGO_ERROR_LOGIN,ESTATUS_FORBIDDEN);
 			exit();
 		}
 		else{
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La camiseta no existe';
+			meter_error_log($log);
 			generar_respuesta(false, "Esta camiseta no existe",CODIGO_NO_CUENTA,ESTATUS_NO_ENCONTRADO);
 			exit();
 		}
@@ -199,6 +225,8 @@ try{
 	}
 }
 catch(Exception $e){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- '.$e->getMessage();
+	meter_error_log($log);
 	generar_respuesta(false, $e->getMessage(),CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 	exit();
 }
