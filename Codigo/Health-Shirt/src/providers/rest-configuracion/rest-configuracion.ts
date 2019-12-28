@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 const AUTHORIZACION = "healthshirt20192020";
 const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
 const CONFIGURACION_URL = "configuracion/";
-const VERSION = "v1/";
+const VERSION = "v2/";
 
 const TIMEOUT_MAXIMO = 10000;
 
@@ -63,7 +63,7 @@ export class RestConfiguracionProvider {
       } 
 
       console.log(cuerpo);
-      this.http.post(MAIN_URL + VERSION + CONFIGURACION_URL + "update/",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + CONFIGURACION_URL + "editar/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);

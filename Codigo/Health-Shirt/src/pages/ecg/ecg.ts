@@ -111,7 +111,7 @@ export class EcgPage {
       } else {
           for (var xx2 = 0; xx2 < this.panAtX; xx2++) {
               var y = this.data[this.x - this.panAtX + xx2];
-              if(xx==0){
+              if(xx2==0){
                 this.ctx.moveTo(xx2,y);
               }
               else{

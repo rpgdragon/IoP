@@ -25,7 +25,7 @@ export class EdaPage {
   panAtX: number;
   continuarAnimacion: boolean;
   fpsIntervalo: number;
-  fps:number = 4;
+  fps:number = 20;
   then: any;
   public customOptionsDe: any = {
     buttons: [{

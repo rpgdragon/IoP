@@ -5,6 +5,7 @@
 include_once '../../config/database.php';
 //utilidades del sistema
 include_once '../../utilidades/utils.php';
+include_once '../../utilidades/logging.php';
 // codigos de respuesta
 include_once '../../modelo/codigos.php';
 include_once '../../modelo/configuracion.php';
@@ -14,22 +15,30 @@ $configuracion = new Configuracion();
 $inputJSON = file_get_contents('php://input');
 
 if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
 	generar_respuesta(false, "La solicitud de actualizacion de configuracion le faltan datos. No hay Input",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 $input= json_decode( $inputJSON );
 if(!isset($input) || $input==null || $input==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
 	generar_respuesta(false, "La solicitud de actualizacion de configuracion le faltan datos. El input no es un JSON",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 } 
 
 if(!isset($input->usuario) || $input->usuario==null || $input->usuario==''){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
     generar_respuesta(false, "La solicitud de actualizacion le falta el usuario",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 
 if(!isset($input->notificacionestodas) || $input->notificacionestodas==null  || $input->notificacionestodas==''){
-    generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones todas",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
+	generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones todas",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 else{
@@ -43,7 +52,9 @@ else{
 }
 
 if(!isset($input->notificacionesecg) || $input->notificacionesecg==null  || $input->notificacionesecg==''){
-    generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones ecg",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
+	generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones ecg",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 else{
@@ -57,7 +68,9 @@ else{
 }
 
 if(!isset($input->notificacioneseda) || $input->notificacioneseda==null || $input->notificacioneseda==''){
-    generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones eda",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
+	generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones eda",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 else{
@@ -71,7 +84,9 @@ else{
 }
 
 if(!isset($input->notificacionestemperatura) || $input->notificacionestemperatura==null || $input->notificacionestemperatura==''){
-    generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones temperatura",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
+	generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones temperatura",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 else{
@@ -85,7 +100,9 @@ else{
 }
 
 if(!isset($input->notificacionesbateria) || $input->notificacionesbateria==null || $input->notificacionesbateria==''){
-    generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones bateria",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
+	generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones bateria",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 else{
@@ -99,7 +116,9 @@ else{
 }
 
 if(!isset($input->notificacionescaida) || $input->notificacionescaida==null || $input->notificacionescaida==''){
-    generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones caida",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
+	meter_error_log($log);
+	generar_respuesta(false, "La solicitud de actualizacion le falta el dato de notificaciones caida",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 else{
@@ -118,20 +137,27 @@ try{
 	$db = $database->getConexion();
 }
 catch(Exception $e){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- '.$e->getMessage();
+	meter_error_log($log);
 	generar_respuesta(false, $e->getMessage(),CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 	exit();
 }
 
-
+$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Editar Configuracion '.$input->usuario;
+meter_debug_log($log);
 $configuracion->setConexion($db);
 $i = 0;
 try{
 	if($configuracion->ver_si_existe($input->usuario)){
 		//si existe, entonces tenemos que llamar a actualizar
 		if($configuracion->actualizar_configuracion($input->usuario)){
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Configuracion Actualizada ';
+			meter_debug_log($log);
 			generar_respuesta(true, "Actualizado",CODIGO_OK,ESTATUS_OK);
 		}
 		else{
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Error al actualizar la camiseta';
+			meter_error_log($log);
 			generar_respuesta(false, "No se ha podido actualizar el registro de configuracion",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 			exit();		
 		}
@@ -140,15 +166,21 @@ try{
 		//tenemos qe llamar a crear
 		//si existe, entonces tenemos que llamar a actualizar
 		if($configuracion->crear_configuracion($input->usuario)){
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Configuracion Actualizada ';
+			meter_debug_log($log);
 			generar_respuesta(true, "Creado",CODIGO_OK,ESTATUS_OK);	
 		}
 		else{
+			$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- No se ha podido actualizar la configuración';
+			meter_error_log($log);
 			generar_respuesta(false, "No se ha podido crear el registro de configuracion",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 			exit();		
 		}
 	}
 }
 catch(Exception $e){
+	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- '.$e->getMessage();
+	meter_error_log($log);
 	generar_respuesta(false, $e->getMessage(),CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 	exit();
 }
