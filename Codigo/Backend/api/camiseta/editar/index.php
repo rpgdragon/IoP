@@ -80,6 +80,48 @@ else{
 	$camiseta->setSrc($url);
 }
 
+if(!isset($input->sexo) || $input->sexo==null  || $input->sexo==''){
+    $camiseta->setSexo(null);
+}
+else{
+	$camiseta->setSexo($input->sexo);
+}
+
+if(!isset($input->fechanacimiento) || $input->fechanacimiento==null  || $input->fechanacimiento==''){
+    $camiseta->setFechanacimiento(null);
+}
+else{
+	$camiseta->setFechanacimiento($input->fechanacimiento);
+}
+
+if(!isset($input->telefono) || $input->telefono==null  || $input->telefono==''){
+    $camiseta->setTelefono(null);
+}
+else{
+	$camiseta->setTelefono($input->telefono);
+}
+
+if(!isset($input->telefonocontacto) || $input->telefonocontacto==null  || $input->telefonocontacto==''){
+    $camiseta->setTelefonocontacto(null);
+}
+else{
+	$camiseta->setTelefonocontacto($input->telefonocontacto);
+}
+
+if(!isset($input->notas) || $input->notas==null  || $input->notas==''){
+    $camiseta->setNotas(null);
+}
+else{
+	$camiseta->setNotas($input->notas);
+}
+
+if(!isset($input->direccion) || $input->direccion==null  || $input->direccion==''){
+    $camiseta->setDireccion(null);
+}
+else{
+	$camiseta->setDireccion($input->direccion);
+}
+
 if(!isset($input->ecgminimo) || $input->ecgminimo==null  || $input->ecgminimo=='' || $input->ecgminimo=="-1"){
     $camiseta->setEcgminimo(null);
 }

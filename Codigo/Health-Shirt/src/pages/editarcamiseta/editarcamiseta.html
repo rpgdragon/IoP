@@ -33,6 +33,13 @@
       <ion-input formControlName="nombre" type="text" placeholder="Nombre" [(ngModel)]="camiseta.nombre"></ion-input>
       <ion-label stacked>Parentesco *:</ion-label>
       <ion-input formControlName="parentesco" type="text" placeholder="Parentesco" [(ngModel)]="camiseta.parentesco"></ion-input>
+      <ion-label stacked>Fecha de nacimiento :</ion-label>
+      <ion-datetime formControlName="fechanacimiento" style="text-align:left" [(ngModel)]="camiseta.fechanacimiento" displayFormat="YYYY-MM-DD" cancelText="Cancelar" doneText="Validar"></ion-datetime>
+      <ion-label stacked>Sexo :</ion-label>
+      <ion-select class="ion-select-sexo" formControlName="sexo" [(ngModel)]="camiseta.sexo" cancelText="Cancelar">
+        <ion-option  value="H">Hombre</ion-option>
+        <ion-option  value="M">Mujer</ion-option>
+      </ion-select>
       <ion-label stacked>ECG:</ion-label>
       <div class="display-inline espaciado noalreves"><ion-input formControlName="ecgminimo" type="number" placeholder="minimo" [(ngModel)]="camiseta.ecgminimo"></ion-input><ion-input formControlName="ecgmaximo" type="number" placeholder="máximo" [(ngModel)]="camiseta.ecgmaximo"></ion-input></div>
       <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones ECG?</ion-label><ion-checkbox slot="start" formControlName="notificacionesecg" color="primary" [(ngModel)]="notificacionesecg"></ion-checkbox></div> 
@@ -44,6 +51,17 @@
       <div class="justificado display-inline espaciado alreves"><ion-label>¿Apagar Notificaciones Temperatura?</ion-label><ion-checkbox slot="start" formControlName="notificacionestemperatura" color="primary" [(ngModel)]="notificacionestemperatura"></ion-checkbox></div>  
       <ion-label stacked>Caidas:</ion-label>
       <div class="justificado display-inline espaciado alreves"><ion-label>¿Notificar caidas?</ion-label><ion-checkbox git aslot="start" formControlName="notificacionescaida" color="primary" [(ngModel)]="notificacionescaida" ></ion-checkbox></div>
+      <div class="justificado display-inline espaciado"><button ion-button id="botonescondidas" type="button" class="buttonForm" (click) ="mostrarAvanzados()" [hidden]="escondeme">Datos Contacto</button></div>
+      <div *ngIf="escondeme">
+        <ion-label stacked>Telefono:</ion-label>
+        <ion-input formControlName="telefono" [(ngModel)]="camiseta.telefono" type="number" placeholder="Telefono"></ion-input>
+        <ion-label stacked>Telefono Contacto:</ion-label>
+        <ion-input formControlName="telefonocontacto" [(ngModel)]="camiseta.telefonocontacto" type="number" placeholder="Telefono"></ion-input>
+        <ion-label stacked>Dirección:</ion-label>
+        <ion-textarea formControlName="direccion" [(ngModel)]="camiseta.direccion" placeholder="Direccion"></ion-textarea>
+        <ion-label stacked>Notas:</ion-label>
+        <ion-textarea formControlName="notas" [(ngModel)]="camiseta.notas" placeholder="Notas"></ion-textarea>
+      </div> 
       <div class="justificado display-inline espaciado"><button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formularioEditarCamiseta.valid">Guardar Cambios</button></div>  
     </form>
 </ion-content>

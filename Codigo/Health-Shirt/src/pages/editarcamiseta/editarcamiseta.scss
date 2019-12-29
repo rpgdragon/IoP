@@ -23,3 +23,17 @@
 .noalreves{
     flex-direction: row!important;
 }
+
+ion-datetime{
+    background-color: color($colors,white);
+    text-align:left;
+}
+
+ion-textarea{
+    background-color: color($colors,white);
+    @include fixed_height(128px);
+}
+
+.ion-select-sexo{
+    text-align: left;
+}
