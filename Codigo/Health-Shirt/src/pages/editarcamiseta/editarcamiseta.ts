@@ -26,6 +26,7 @@ export class EditarcamisetaPage {
   notificacionestemperatura: boolean;
   notificacionescaida: boolean;
   camiseta: Object;
+  escondeme: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private rest: RestCamisetaProvider) {
     this.camiseta = this.navParams.get('camiseta');
@@ -59,6 +60,7 @@ export class EditarcamisetaPage {
     var lastpartsrc = this.camiseta["src"].split("/").pop();
     this.imagen = lastpartsrc.split(".")[0];
     console.log(this.imagen);
+    this.escondeme = false;
   }
 
   ionViewDidLoad() {
@@ -137,7 +139,13 @@ export class EditarcamisetaPage {
       notificacionesecg: new FormControl ('', []),
       notificacioneseda: new FormControl ('', []),
       notificacionestemperatura: new FormControl ('', []),
-      notificacionescaida: new FormControl ('', [])
+      notificacionescaida: new FormControl ('', []),
+      fechanacimiento: new FormControl('',[]),
+      sexo: new FormControl('',[]),
+      telefono: new FormControl('',[]),
+      telefonocontacto: new FormControl('',[]),
+      notas: new FormControl('',[]),
+      direccion: new FormControl('',[])
     });
   }
 
@@ -151,7 +159,10 @@ export class EditarcamisetaPage {
     this.formularioEditarCamiseta.value.edaminimo,this.formularioEditarCamiseta.value.edamaximo,
     this.formularioEditarCamiseta.value.temperaturaminimo,this.formularioEditarCamiseta.value.temperaturamaximo,
     this.formularioEditarCamiseta.value.notificacionesecg,this.formularioEditarCamiseta.value.notificacioneseda,
-    this.formularioEditarCamiseta.value.notificacionestemperatura,this.formularioEditarCamiseta.value.notificacionescaida).then(data => {
+    this.formularioEditarCamiseta.value.notificacionestemperatura,this.formularioEditarCamiseta.value.notificacionescaida,
+    this.formularioEditarCamiseta.value.fechanacimiento,this.formularioEditarCamiseta.value.sexo,this.formularioEditarCamiseta.value.telefono,
+    this.formularioEditarCamiseta.value.telefonocontacto,this.formularioEditarCamiseta.value.notas,
+    this.formularioEditarCamiseta.value.direccion).then(data => {
         alert("Camiseta editada exitosamente");
         this.navCtrl.pop();
     }, error => {
@@ -254,6 +265,10 @@ export class EditarcamisetaPage {
       }
     }
     return true;
+  }
+
+  mostrarAvanzados(){
+    this.escondeme = true;
   }
 
 }

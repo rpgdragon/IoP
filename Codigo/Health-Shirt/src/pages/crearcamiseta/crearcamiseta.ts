@@ -25,6 +25,7 @@ export class CrearcamisetaPage {
   notificacioneseda: boolean;
   notificacionestemperatura: boolean;
   notificacionescaida: boolean;
+  escondeme: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder,private rest: RestCamisetaProvider) {
     this.formularioCrearCamiseta = this.crearFormularioRegistrarCamiseta();
@@ -32,6 +33,7 @@ export class CrearcamisetaPage {
     this.notificacioneseda = false;
     this.notificacionesecg = false;
     this.notificacionescaida = false;
+    this.escondeme = false;
   }
 
   ionViewDidLoad() {
@@ -68,7 +70,13 @@ export class CrearcamisetaPage {
       notificacionesecg: new FormControl ('', []),
       notificacioneseda: new FormControl ('', []),
       notificacionestemperatura: new FormControl ('', []),
-      notificacionescaida: new FormControl ('', [])
+      notificacionescaida: new FormControl ('', []),
+      fechanacimiento: new FormControl('',[]),
+      sexo: new FormControl('',[]),
+      telefono: new FormControl('',[]),
+      telefonocontacto: new FormControl('',[]),
+      notas: new FormControl('',[]),
+      direccion: new FormControl('',[])
     });
   }
 
@@ -121,7 +129,10 @@ export class CrearcamisetaPage {
     this.formularioCrearCamiseta.value.edaminimo,this.formularioCrearCamiseta.value.edamaximo,
     this.formularioCrearCamiseta.value.temperaturaminimo,this.formularioCrearCamiseta.value.temperaturamaximo,
     this.formularioCrearCamiseta.value.notificacionesecg,this.formularioCrearCamiseta.value.notificacioneseda,
-    this.formularioCrearCamiseta.value.notificacionestemperatura,this.formularioCrearCamiseta.value.notificacionescaida).then(data => {
+    this.formularioCrearCamiseta.value.notificacionestemperatura,this.formularioCrearCamiseta.value.notificacionescaida,
+    this.formularioCrearCamiseta.value.fechanacimiento,this.formularioCrearCamiseta.value.sexo,this.formularioCrearCamiseta.value.telefono,
+    this.formularioCrearCamiseta.value.telefonocontacto,this.formularioCrearCamiseta.value.notas,
+    this.formularioCrearCamiseta.value.direccion).then(data => {
         alert("Camiseta creada exitosamente");
         this.navCtrl.pop();
     }, error => {
@@ -224,6 +235,10 @@ export class CrearcamisetaPage {
       }
     }
     return true;
+  }
+
+  mostrarAvanzados(){
+    this.escondeme = true;
   }
 
 }

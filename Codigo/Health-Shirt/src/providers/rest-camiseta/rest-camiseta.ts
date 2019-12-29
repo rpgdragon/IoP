@@ -67,7 +67,8 @@ export class RestCamisetaProvider {
   public registrarCamiseta(usuario:string, nombre:string, parentesco:string, numeroserie:string,
     codseg:string, icono:string, ecgminimo: number, ecgmaximo: number, edaminimo:number, edamaximo: number,
     temperaturaminimo: number, temperaturamaximo: number, notificacionesecg: boolean, notificacioneseda: boolean,
-    notificacionestemperatura: boolean, notificacionescaida:boolean){
+    notificacionestemperatura: boolean, notificacionescaida:boolean,fechanacimiento: Date, sexo: string, telefono: number,
+    telefonocontacto: string, notas: string, direccion:string){
      //rellenamos los valores no obligatorios que han venido sin nada con un valor -1
      //para indicar en el json que ese valor no esta relleno
      //la idea es forzar que esten todos los campos para poder depurar mejor
@@ -126,7 +127,13 @@ export class RestCamisetaProvider {
         "notificacionesecg": "" + notificacionesecg,
         "notificacioneseda": "" + notificacioneseda,
         "notificacionestemperatura": "" + notificacionestemperatura,
-        "notificacionescaida": "" + notificacionescaida
+        "notificacionescaida": "" + notificacionescaida,
+        "fechanacimiento": fechanacimiento,
+        "sexo": sexo,
+        "telefono": "" + telefono,
+        "telefonocontacto": "" + telefonocontacto,
+        "notas": "" + notas,
+        "direccion": "" + direccion
       } 
 
       console.log(cuerpo);
@@ -144,7 +151,8 @@ export class RestCamisetaProvider {
 
   public editarCamiseta(usuario:string, id:number, nombre:string, parentesco:string, icono:string, ecgminimo: number, ecgmaximo: number, edaminimo:number, edamaximo: number,
     temperaturaminimo: number, temperaturamaximo: number, notificacionesecg: boolean, notificacioneseda: boolean,
-    notificacionestemperatura: boolean, notificacionescaida:boolean){
+    notificacionestemperatura: boolean, notificacionescaida:boolean,fechanacimiento: Date, sexo: string, telefono: number,
+    telefonocontacto: string, notas: string, direccion:string){
      //rellenamos los valores no obligatorios que han venido sin nada con un valor -1
      //para indicar en el json que ese valor no esta relleno
      //la idea es forzar que esten todos los campos para poder depurar mejor
@@ -202,7 +210,13 @@ export class RestCamisetaProvider {
         "notificacionesecg": "" + notificacionesecg,
         "notificacioneseda": "" + notificacioneseda,
         "notificacionestemperatura": "" + notificacionestemperatura,
-        "notificacionescaida": "" + notificacionescaida
+        "notificacionescaida": "" + notificacionescaida,
+        "fechanacimiento": fechanacimiento,
+        "sexo": sexo,
+        "telefono": "" + telefono,
+        "telefonocontacto": "" + telefonocontacto,
+        "notas": "" + notas,
+        "direccion": "" + direccion
       } 
 
       console.log(cuerpo);

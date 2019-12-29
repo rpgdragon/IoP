@@ -120,6 +120,9 @@
         <variable name="GRADLE_TOOLS_VERSION" value="3.5.0" />
         <variable name="GOOGLE_SERVICES_VERSION" value="4.2.0" />
     </plugin>
+    <plugin name="cordova-plugin-firebase-crashlytics" spec="^0.1.0">
+        <variable name="ANDROID_FIREBASE_CORE_VERSION" value="16.0.8" />
+    </plugin>
     <engine name="android" spec="8.0.0" />
     <engine name="ios" spec="^4.5.5" />
 </widget>

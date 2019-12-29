@@ -262,3 +262,9 @@ ion-select{
 	@include fixed_height(128px);
 }
 
+.ion-select-sexo{
+	@include fixed_height(48px);
+	background-color:color($colors, white);
+}
+
+
