@@ -24,5 +24,11 @@
 </ion-content>
 
 <ion-footer class="footerConstantes" no-border>
-NPM media: {{constantes.getPulsacionesmedias()}}
+<b>NPM</b>
+<div style="display:flex; justify-content: space-between;">
+<div>MIN: {{constantes.getPulsacionesmin()}}</div>
+<div>MED: {{constantes.getPulsacionesmedias()}}</div>
+<div>MAX: {{constantes.getPulsacionesmax()}}</div>
+</div>
+
 </ion-footer>
