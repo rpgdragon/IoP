@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 
 
@@ -19,7 +20,10 @@ const TIMEOUT_MAXIMO = 10000;
 @Injectable()
 export class RestCamisetaProvider {
 
-  constructor(public http: HttpClient) {
+  private crashlytics;
+
+  constructor(public http: HttpClient, private firebaseCrashlytics: FirebaseCrashlytics) {
+    this.crashlytics = this.firebaseCrashlytics.initialise();
   }
 
   public borrar(usuario:string, id:number){
@@ -41,6 +45,7 @@ export class RestCamisetaProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+          this.crashlytics.logException("No se ha podido borrar la camiseta de " + usuario + " con id " + id + " " + error.error + " " + error.status);
 					reject(error);
 				});
     });
@@ -59,7 +64,8 @@ export class RestCamisetaProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
-					reject(error);
+          this.crashlytics.logException("No se han podido recuperar las camisetas de " + email + " " + error.error + " " + error.status);
+          reject(error);
 				});
     });
   }
@@ -143,7 +149,8 @@ export class RestCamisetaProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
-					reject(error);
+          this.crashlytics.logException("No se han podido crear la camiseta para " + usuario + " " + error.error['mensaje'] + " " + error.status);
+          reject(error);
 				});
     });
   }
@@ -226,6 +233,7 @@ export class RestCamisetaProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+          this.crashlytics.logException("No se han podido editar la camiseta de " + usuario + " con id " + id + " " + error.error + " " + error.status);
 					reject(error);
 				});
     });
