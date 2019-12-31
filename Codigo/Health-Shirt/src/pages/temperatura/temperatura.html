@@ -23,5 +23,10 @@
 </ion-content>
 
 <ion-footer class="footerConstantes" no-border>
-Temperatura media: {{constantes.getTemperaturamedias()}}
+    <b>Temperatura</b>
+    <div style="display:flex; justify-content: space-between;">
+    <div>MIN: {{constantes.getTemperaturamin()}}</div>
+    <div>MED: {{constantes.getTemperaturamedias()}}</div>
+    <div>MAX: {{constantes.getTemperaturamax()}}</div>
+    </div>
 </ion-footer>

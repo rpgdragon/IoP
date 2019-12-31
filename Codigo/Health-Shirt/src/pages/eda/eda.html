@@ -23,5 +23,10 @@
 </ion-content>
 
 <ion-footer class="footerConstantes" no-border>
-EDA media: {{constantes.getEdamedias()}}
+    <b>EDA</b>
+    <div style="display:flex; justify-content: space-between;">
+    <div>MIN: {{constantes.getEdamin()}}</div>
+    <div>MED: {{constantes.getEdamedias()}}</div>
+    <div>MAX: {{constantes.getEdamax()}}</div>
+    </div>
 </ion-footer>
