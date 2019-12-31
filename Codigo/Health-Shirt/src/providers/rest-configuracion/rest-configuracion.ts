@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 /*
   Generated class for the RestConfiguracionProvider provider.
@@ -18,8 +19,10 @@ const TIMEOUT_MAXIMO = 10000;
 @Injectable()
 export class RestConfiguracionProvider {
 
-  constructor(public http: HttpClient) {
+  private crashlytics;
 
+  constructor(public http: HttpClient, private firebaseCrashlytics: FirebaseCrashlytics) {
+    this.crashlytics = this.firebaseCrashlytics.initialise();
   }
 
   public guardarConfiguracion(usuario:string, notificacionestodas:boolean,
@@ -68,6 +71,7 @@ export class RestConfiguracionProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+          this.crashlytics.logException("No se ha guardar la configuracion del usuario " + usuario + " " + error.error + " " + error.status);
 					reject(error);
 				});
     });
@@ -86,6 +90,7 @@ export class RestConfiguracionProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+          this.crashlytics.logException("No se ha podido recuperar la configuración del usuario " + usuario + " " + error.error + " " + error.status);
 					reject(error);
 				});
     });

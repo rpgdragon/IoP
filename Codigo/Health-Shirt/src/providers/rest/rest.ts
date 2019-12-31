@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 
 const AUTHORIZACION = "healthshirt20192020";
@@ -17,7 +18,10 @@ const TIMEOUT_MAXIMO = 10000;
 @Injectable()
 export class RestProvider {
 
-  constructor(public http: HttpClient) {
+  private crashlytics;
+
+  constructor(public http: HttpClient, private firebaseCrashlytics: FirebaseCrashlytics) {
+	this.crashlytics = this.firebaseCrashlytics.initialise();
   }
 
   public login(email:string,password:string){
@@ -38,6 +42,7 @@ export class RestProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+					this.crashlytics.logException("No se ha podido logar el usuario " + email + error.error + " " + error.status);
 					reject(error);
 				});
     });
@@ -61,6 +66,7 @@ export class RestProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+					this.crashlytics.logException("No se ha podido registrar el usuario con email  " + email + error.error + " " + error.status);
 					reject(error);
 				});
     });
@@ -83,6 +89,7 @@ export class RestProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+					this.crashlytics.logException("No se ha podido registrar el token de notificaciones para el usuario " + email + error.error + " " + error.status);
 					reject(error);
 				});
     });
@@ -105,6 +112,7 @@ export class RestProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+					this.crashlytics.logException("No se ha podido logar el usuario en Facebook " + email + error.error + " " + error.status);
 					reject(error);
 				});      
     });
@@ -126,6 +134,7 @@ export class RestProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+					this.crashlytics.logException("No se ha podido recuperar la cuenta del usuario " + email + error.error + " " + error.status);
 					reject(error);
 				});
     });

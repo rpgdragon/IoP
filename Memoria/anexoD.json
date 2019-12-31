@@ -1,0 +1,742 @@
+{
+	"info": {
+		"_postman_id": "d6854e07-9426-4de2-9fed-dba524658eb4",
+		"name": "Health Shirt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login no facebook sin parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/login/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login no existe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"noexiste\",\"password\":\"noexiste\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/login/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"login",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login existe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"password\":\"51q7d00DRAGARIES.\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/login/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"login",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "jmcastellano",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "jmcastellano",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrar sin parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/registrar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"registrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrar con parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"marihhola@hotmail.com\",\"password\":\"noexiste\",\"esFacebook\":\"0\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/registrar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"registrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrar token  Notificaciones existe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"prueba11\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/registrartoken/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"registrartoken",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Configuración",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"usuario\": \"healthshirt@jmcastellano.eu\", \"notificacionestodas\": \"false\", \"notificacionesecg\": \"false\", \"notificacioneseda\": \"false\", \"notificacionestemperatura\": \"false\", \"notificacionesbateria\": \"false\", \"notificacionescaida\": \"false\" }"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/configuracion/editar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"configuracion",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Configuración Sin Parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"usuario\": \"healthshirt@jmcastellano.eu\" }"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/configuracion/editar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"configuracion",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Camiseta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/crear/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"crear",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Camiseta No usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"healthshirt@jmcastellano.eu\",\"id\":\"28\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/editar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Camiseta Si Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\",\"id\":\"28\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"130\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/editar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Camiseta No Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"healthshirt@jmcastellano.eu\", \"id\": \"27\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/borrar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"borrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Camiseta  Si Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\", \"id\": \"28\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/borrar/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"borrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login Facebook tokenincorrecto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"jmcastellano\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/loginfacebook/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"loginfacebook",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "jmcastellano",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "jmcastellano",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "olvidocontrasena",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/olvido/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"olvido",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Camisetas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/lista/?usuario=jmcastellano@jmcastellano.eu",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"lista",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "jmcastellano@jmcastellano.eu"
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Datos Constantes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/informacion/actual/?numeroserie=1111111111111111",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"informacion",
+						"actual",
+						""
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "numeroserie",
+							"value": "1111111111111111"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Datos Constantes Historico",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"numeroserie\": \"1111111111111111\", \"fechade\": \"2019-12-21T17:40:00Z\", \"fechahasta\": \"2019-12-21T17:53:00Z\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v1/informacion/historico/?",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v1",
+						"informacion",
+						"historico",
+						""
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "numeroserie",
+							"value": "1111111111111111",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generador",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.jmcastellano.eu/healthshirt/api/v2/generador/generaDatos.php",
+					"protocol": "https",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"generador",
+						"generaDatos.php"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

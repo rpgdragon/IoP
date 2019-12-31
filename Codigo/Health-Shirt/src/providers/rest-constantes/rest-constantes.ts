@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 
 
@@ -19,7 +20,10 @@ const TIMEOUT_MAXIMO = 10000;
 @Injectable()
 export class RestConstantesProvider {
 
-  constructor(public http: HttpClient) {
+  private crashlytics;
+
+  constructor(public http: HttpClient, private firebaseCrashlytics: FirebaseCrashlytics) {
+    this.crashlytics = this.firebaseCrashlytics.initialise();
   }
 
   public obtenerConstantesUltimoMinuto(numeroserie:string){
@@ -35,6 +39,7 @@ export class RestConstantesProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+          this.crashlytics.logException("No se han podido obtener las constantes vitales actuales de la camiseta " + numeroserie + " " + error.error + " " + error.status);
 					reject(error);
 				});
     });
@@ -59,6 +64,8 @@ export class RestConstantesProvider {
 				.subscribe(data => {
 					resolve(data);
 				}, error => {
+          this.crashlytics.logException("No se han podido obtener las constantes vitales historicas de la camiseta " + numeroserie + " del " + fechaDe + " hasta " + fechaHasta + " "
+            + error.error + " " + error.status);
 					reject(error);
 				});
     });

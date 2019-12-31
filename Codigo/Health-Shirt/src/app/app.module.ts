@@ -34,6 +34,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { RestConfiguracionProvider } from '../providers/rest-configuracion/rest-configuracion';
 import { RestConstantesProvider } from '../providers/rest-constantes/rest-constantes';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 
 //import { HomePage } from '@pages/all'
@@ -125,7 +126,8 @@ const routes: Routes = [
     HttpClientModule,
     RestCamisetaProvider,
     RestConfiguracionProvider,
-    RestConstantesProvider
+    RestConstantesProvider,
+    FirebaseCrashlytics
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
