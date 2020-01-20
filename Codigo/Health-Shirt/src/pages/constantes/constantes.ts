@@ -468,7 +468,7 @@ export class ConstantesPage {
         var diffMs = (Date.parse(this.fechaHasta.toLocaleString()) - Date.parse(this.fechaDe.toLocaleString()));
         let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
         console.log(diffMins);
-        this.pulsacionesmedias = this.pulsacionesmedias / diffMins;
+        this.pulsacionesmedias = Math.round(this.pulsacionesmedias / diffMins);
 
         //ademas aqui tendrá que haber una accion para que se reinicien las animaciones y las graficas
         //se utilizará un flag
