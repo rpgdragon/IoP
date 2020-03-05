@@ -49,6 +49,13 @@ export class InitPage {
   }
 
   loginFacebook(){
+    this.facebook.logout().then(()=> this.hacerLogin(true)).catch(()=> this.hacerLogin(false));
+  }
+
+  hacerLogin(logout){
+    if(logout==true){
+      console.log("Eliminado logins previos");
+    }
     this.facebook.login(['email'])
     .then((res: FacebookLoginResponse) => this.obtenerDatos(res))
     .catch(e => console.log('Error logging into Facebook', e));
@@ -58,20 +65,26 @@ export class InitPage {
    var token = res.authResponse.accessToken;
    var userID = res.authResponse.userID;
    this.facebook.api(userID + "/?fields=email",["email"])
-	.then((datos) => this.llamarLoginServidorFacebook(token,datos))
+	.then((datos) => this.llamarLoginServidorFacebook(token,datos,userID))
 	.catch(e => console.log('Error intentando obtener email ',e));
   }
  
-  llamarLoginServidorFacebook(token:any, datos:any){
+  llamarLoginServidorFacebook(token:any, datos:any, userID:any){
     this.rest.loginFacebook(datos.email,token).then(data=>{
       if(data['codigorespuesta']==="603"){
         //hay que poner la pagina del password del Facebook
         MyApp.setNombreusuario(datos.email.toLowerCase());
+        this.storage.set("tokenfacebook",token);
+        this.storage.set("usuariofacebook",userID);
+        this.storage.set("esFacebook","1");
         this.navCtrl.push(RegistroFacebookPage);
       }
       else{
         //ok, login correcto cambiamos
         MyApp.setNombreusuario(datos.email.toLowerCase());
+        this.storage.set("tokenfacebook",token);
+        this.storage.set("esFacebook","1");
+        this.storage.set("usuariofacebook",userID);
         this.storage.set('nombreusuario', datos.email.toLowerCase());
         this.fcm.getToken().then(token => {
           //vamos a guardar el token tanto en el storage como en el backend
