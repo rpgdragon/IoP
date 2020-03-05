@@ -7,6 +7,9 @@ import { RestCamisetaProvider} from '../../providers/rest-camiseta/rest-camiseta
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
 import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
+import { InitPage } from '@pages/init/init';
+import { Storage } from '@ionic/storage';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 
 /**
@@ -26,7 +29,8 @@ export class CamisetaPage {
   private refresher: Refresher;
 
   constructor(private menu: MenuController,public navCtrl: NavController, public navParams: NavParams,
-            private rest: RestCamisetaProvider,private screenOrientation: ScreenOrientation) {
+            private rest: RestCamisetaProvider,private screenOrientation: ScreenOrientation, private storage: Storage,
+            private facebook: Facebook) {
  
   }
 
@@ -41,6 +45,36 @@ export class CamisetaPage {
   ionViewWillEnter(){
     this.screenOrientation.unlock();
     this.recargarLista();
+    //recuperamos si hay un token de Facebook
+    Promise.all([this.storage.get("tokenfacebook"), this.storage.get("usuariofacebook")]).then(values => {
+      if(values==null  || values[0]==null || values[1]==null || values[0]=='undefined' || values[1]=='undefined'
+      || values[0]=='' || values[1]==''){
+        return;
+      }
+      else{
+        //comprobamos si el token sigue siendo valido
+        this.facebook.getLoginStatus().then((res: FacebookLoginResponse) => {
+          var tiempo = +res.authResponse.expiresIn;
+          console.log(values[0]);
+          console.log(values[1]);
+          console.log(res);
+          if(res.status!='connected' || res.authResponse.accessToken!=values[0] || tiempo <= 0 || res.authResponse.userID!=values[1]){
+            alert("Sesion en Facebook terminada. Debe volver a conectarse a la aplicación");
+            this.storage.set("nombreusuario",null);
+            this.storage.set("tokenfacebook",null);
+            this.storage.set("esFacebook","0");
+            this.navCtrl.setRoot(InitPage);
+          }
+        })
+        .catch(e => {console.log('Error al revisar conexion Facebook', e);
+        alert("Sesion en Facebook terminada. Debe volver a conectarse a la aplicación");
+        				this.storage.set("nombreusuario",null);
+				this.storage.set("tokenfacebook",null);
+				this.storage.set("esFacebook","0");
+        this.navCtrl.setRoot(InitPage);
+      });
+      }
+    }); 
     
   }
 

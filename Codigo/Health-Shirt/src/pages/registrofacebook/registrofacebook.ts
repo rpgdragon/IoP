@@ -40,7 +40,10 @@ export class RegistroFacebookPage {
   
   navegarMain(){
     //quitamos la pagina de la pila
-	  this.navCtrl.pop();
+    this.storage.set("tokenfacebook",null);
+    this.storage.set("usuariofacebook",null);
+    this.storage.set("esFacebook","0");
+    this.navCtrl.pop();
   }
 
   registro(){
