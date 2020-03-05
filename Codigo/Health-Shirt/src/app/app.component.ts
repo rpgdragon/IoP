@@ -17,6 +17,7 @@ import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { RestProvider } from '../providers/rest/rest';
 import { ConstantesPage } from '@pages/constantes/constantes';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @Component({
     templateUrl: 'app.html'
@@ -34,7 +35,8 @@ export class MyApp {
 		private menu: MenuController,
 		private storage: Storage,
 		private fcm: FCM,
-		private rest: RestProvider
+		private rest: RestProvider,
+		public facebook: Facebook
     ) {
 		this.platform.ready().then(() => {
 			//creamos una acccion asociada 
@@ -58,7 +60,6 @@ export class MyApp {
 						this.storage.set("tokennotificacion",token);
 						this.rest.registrarToken(MyApp.nombreusuario,token)
 					  });
-					  
 					this.redirigirCamiseta();
 				}
 			});
@@ -95,6 +96,10 @@ export class MyApp {
 				this.rootPage = InitPage;
 				this.nav.setRoot(InitPage);
 				this.storage.set("nombreusuario",null);
+				this.storage.set("tokenfacebook",null);
+				this.storage.set("usuariofacebook",null);
+				this.storage.set("esFacebook","0");
+				this.facebook.logout().then(()=> console.log("Eliminado login Facebook"));
                 break;
 			case 'quees':
 				this.rootPage = QueesPage;
@@ -173,6 +178,10 @@ export class MyApp {
 	
     logout(){
 		this.storage.set("nombreusuario",null);
+		this.storage.set("tokenfacebook",null);
+		this.storage.set("esFacebook","0");
+		this.storage.set("usuariofacebook",null);
+		this.facebook.logout().then(()=> console.log("Eliminado login Facebook"));
 		this.platform.exitApp();
 		
     }
