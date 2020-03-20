@@ -5,10 +5,10 @@
 			<h2>Login</h2>
 			<form [formGroup]="formularioLogin" (ngSubmit)="login()">
 				<ion-label stacked>Email:</ion-label>
-				<ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+				<ion-input formControlName="email" type="text" placeholder="Email" clearOnEdit="false"></ion-input>
 				<ion-label stacked>Password:</ion-label>
 				<div class="inputConIcono">
-					<ion-input formControlName="password" [type]="passwordTipo" placeholder="Password"></ion-input>
+					<ion-input formControlName="password" [type]="passwordTipo" placeholder="Password" clearOnEdit="false"></ion-input>
 					<i [class]="passwordClass" aria-hidden="true" (click)="mostrarPassword()"></i>
 				</div>
 				<a (click)="navegarOlvido()"><ion-label stacked>¿Has olvidado la contraseña?</ion-label></a>
