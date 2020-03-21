@@ -31,7 +31,7 @@ export class QueesPage {
   navegarCompra(){
 	  console.log(this.iab);
 	  //Pendiente de modificar, ¿Deberia recuperarse de base de datos por si cambiara?
-	  this.iab.create('http://www.jmcastellano.eu/','_system');
+	  this.iab.create('http://www.iopshirt.es/productos/camiseta-inteligente-iop-shirt/','_system');
   }
 
 }
