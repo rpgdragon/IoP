@@ -4,12 +4,12 @@
 			<form [formGroup]="formularioLogin" (ngSubmit)="registro()">
 					<ion-label stacked>Password:</ion-label>
 					<div class="inputConIcono">
-						<ion-input formControlName="password" [type]="passwordTipo" placeholder="Password"></ion-input>
+						<ion-input formControlName="password" [type]="passwordTipo" placeholder="Password" clearOnEdit="false"></ion-input>
 						<i [class]="passwordClass" aria-hidden="true" (click)="mostrarPassword()"></i>
 					</div>
 					<ion-label stacked>Confirmar Password:</ion-label>
 					<div class="inputConIcono">
-						<ion-input formControlName="confirmarpassword" [type]="passwordTipoConfirmacion" placeholder="Confirmar Password"></ion-input>
+						<ion-input formControlName="confirmarpassword" [type]="passwordTipoConfirmacion" placeholder="Confirmar Password" clearOnEdit="false"></ion-input>
 						<i [class]="passwordClassConfirmacion" aria-hidden="true" (click)="mostrarPasswordConfirmacion()"></i>
 					</div><button ion-button class="submit-btn right buttonLogin" type="submit" [disabled]="!formularioLogin.valid">
 					Registrar Cuenta
