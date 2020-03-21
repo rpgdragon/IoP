@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "761412272703",
-    "firebase_url": "https://healthshirt-34b15.firebaseio.com",
-    "project_id": "healthshirt-34b15",
-    "storage_bucket": "healthshirt-34b15.appspot.com"
+    "project_number": "601932631063",
+    "firebase_url": "https://iop-shirt.firebaseio.com",
+    "project_id": "iop-shirt",
+    "storage_bucket": "iop-shirt.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:761412272703:android:743b2817c7d7628f1c6e8a",
+        "mobilesdk_app_id": "1:601932631063:android:3c824dfe093e0a90c4a052",
         "android_client_info": {
-          "package_name": "eu.jmcastellano.healthshirt"
+          "package_name": "eu.jmcastellano.iop.shirt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "761412272703-48hq1d4rbam28tnkhcjprmafee5c3fn1.apps.googleusercontent.com",
+          "client_id": "601932631063-0hm6ofe13oln7cobt7sir4luivl2bmcr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "eu.jmcastellano.healthshirt",
+            "package_name": "eu.jmcastellano.iop.shirt",
             "certificate_hash": "3eae69a13c05c26fecef643f638400a5e49ff14c"
           }
         },
         {
-          "client_id": "761412272703-1kukfl9ruf1o2p417a7q413blngs2llb.apps.googleusercontent.com",
+          "client_id": "601932631063-j0get73hqb4p4mrrnj07i5coch1tdqk9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDGjEFCtQyoJNVgiYM5xzQU1XusIWCCRTs"
+          "current_key": "AIzaSyAj3CfzHge59H08hfnizWGOocjBGTC-Yu8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "761412272703-1kukfl9ruf1o2p417a7q413blngs2llb.apps.googleusercontent.com",
+              "client_id": "601932631063-j0get73hqb4p4mrrnj07i5coch1tdqk9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
