@@ -6,6 +6,11 @@ Antes de realizar cualquier compilación, es necesario que el entorno tenga inst
 - En caso de que ocurra un error relacionado con memoria en la ejecución de gradle, agregar la variable _JAVA_OPTIONS al sistema con el valor -Xmx512M -Xms512M
 - Hacer un npm install en la raiz del proyecto de Health-Shirt
 
+- Si da un error de Duplicate Classes hay que añadir en el gradle.properties las siguientes propiedades.
+
+android.enableJetifier=true
+android.useAndroidX=true
+
 Todos los procesos indicados aquí son para ser probados en un dispositivo con sistema operativo Android. Las instrucciones para instalarlos en IOS estarán proximamente.
 
 ## Android
