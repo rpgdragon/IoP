@@ -11,7 +11,13 @@
 	Iniciar sesión con tu cuenta
 	</button>
 	<br/>
-	<a class="button button--social-login button--facebook" (click)="loginFacebook()"><ion-icon name="logo-facebook"></ion-icon>Iniciar sesión con Facebook</a>
+	<div class="botonesredessociales">
+		<a (click)="loginFacebook()"><img id="facebook" alt="facebook" width="64px" height="64px"/></a>
+		<a (click)="loginFacebook()"><img id="twitter" alt="twitter" width="64px" height="64px"/></a>
+		<a (click)="loginGoogle()"><img id="google" alt="google" width="64px" height="64px"/></a>
+		<a (click)="loginFacebook()"><img id="instagram" alt="instagram" width="64px" height="64px"/></a>
+	</div>
+	
 	<br/>
 </div>	
 

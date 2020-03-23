@@ -12,6 +12,7 @@ import { MyApp } from '@app/app.component';
 import { RegistroPage } from '@pages/registro/registro';
 import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
   selector: 'page-init',
@@ -28,7 +29,8 @@ export class InitPage {
   public facebook: Facebook,
   private rest: RestProvider,
   private storage: Storage,
-  private fcm: FCM) {
+  private fcm: FCM,
+  private google: GooglePlus) {
 	   this.version = this.appVersion.getVersionNumber();
   }
   
@@ -50,6 +52,19 @@ export class InitPage {
 
   loginFacebook(){
     this.facebook.logout().then(()=> this.hacerLogin(true)).catch(()=> this.hacerLogin(false));
+  }
+
+  loginGoogle(){
+    this.google.login({})
+  .then(res => {
+    if(res.email!=undefined && res.email!=null && res.email!=''){
+      //ok tenemos un login en google
+      this.llamarLoginServidorGoogle(res.accessToken,res,res.userId);
+    }
+  })
+  .catch(err => {
+    //no realizamos ninguna operacion
+  });
   }
 
   hacerLogin(logout){
@@ -77,7 +92,7 @@ export class InitPage {
         this.storage.set("tokenfacebook",token);
         this.storage.set("usuariofacebook",userID);
         this.storage.set("esFacebook","1");
-        this.navCtrl.push(RegistroFacebookPage);
+        this.navCtrl.push(RegistroFacebookPage,{red:"facebook"});
       }
       else{
         //ok, login correcto cambiamos
@@ -104,6 +119,46 @@ export class InitPage {
       else{
         console.log(error);
         alert("Se ha producido un error en la autentificación con Facebook");
+      }
+    });
+  }
+
+
+  llamarLoginServidorGoogle(token:any, datos:any, userID:any){
+    this.rest.loginGoogle(datos.email,token).then(data=>{
+      if(data['codigorespuesta']==="603"){
+        //hay que poner la pagina del password del Facebook
+        MyApp.setNombreusuario(datos.email.toLowerCase());
+        this.storage.set("tokenfacebook",token);
+        this.storage.set("usuariogoogle",userID);
+        this.storage.set("esGoogle","1");
+        this.navCtrl.push(RegistroFacebookPage,{red:"google"});
+      }
+      else{
+        //ok, login correcto cambiamos
+        MyApp.setNombreusuario(datos.email.toLowerCase());
+        this.storage.set("tokenfacebook",token);
+        this.storage.set("esGoogle","1");
+        this.storage.set("usuariogoogle",userID);
+        this.storage.set('nombreusuario', datos.email.toLowerCase());
+        this.fcm.getToken().then(token => {
+          //vamos a guardar el token tanto en el storage como en el backend
+          this.storage.set("tokennotificacion",token);
+          this.rest.registrarToken(MyApp.getNombreusuario(),token)
+          });
+        this.fcm.onTokenRefresh().subscribe(token => {
+          this.storage.set("tokennotificacion",token);
+          this.rest.registrarToken(MyApp.getNombreusuario(),token)
+          });
+        this.navCtrl.setRoot(CamisetaPage);       
+      }
+    },error=>{
+      if(error.status===403){
+        alert('Token de Google no válido');
+      }
+      else{
+        console.log(error);
+        alert("Se ha producido un error en la autentificación con Google");
       }
     });
   }
