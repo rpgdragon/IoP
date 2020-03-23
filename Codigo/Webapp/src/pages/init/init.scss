@@ -7,7 +7,7 @@ $button-width: 80%;
 $button-height: 50px;
 $button-text-color: white;
 $color-facebook: #4b70ab;
-
+$color-google:#DD4A38;
 
 %button,
 .button {
@@ -68,6 +68,22 @@ border: 1px solid darken($color-facebook, 10%);
 	}
 }
 
+
+.button--google {
+	background-color: $color-google;
+	border: 1px solid darken($color-google, 10%);
+		.icon {
+			border-right: 1px solid darken($color-google, 10%);
+	
+			&:after {
+				border-right: 1px solid lighten($color-google, 10%);
+			}
+		}
+		&:hover {
+			background-color: darken($color-google, 5%);
+		}
+	}
+
 button{
 	width:$button-width;
 	margin-top: 1em;
@@ -95,21 +111,5 @@ button{
 	justify-content: space-around;
 	flex-wrap: nowrap;
 	padding-top:20px;
-}
-
-#facebook{
-	content: url("../assets/images/facebook.png");
-}
-
-#twitter{
-	content: url("../assets/images/twitter.png");
-}
-
-#google{
-	content: url("../assets/images/google.png");
-}
-
-#instagram{
-	content: url("../assets/images/instagram.png");
 }
 
