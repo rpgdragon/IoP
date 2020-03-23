@@ -90,3 +90,26 @@ button{
 	float:left;
 }
 
+.botonesredessociales{
+	display:flex;
+	justify-content: space-around;
+	flex-wrap: nowrap;
+	padding-top:20px;
+}
+
+#facebook{
+	content: url("../assets/images/facebook.png");
+}
+
+#twitter{
+	content: url("../assets/images/twitter.png");
+}
+
+#google{
+	content: url("../assets/images/google.png");
+}
+
+#instagram{
+	content: url("../assets/images/instagram.png");
+}
+
