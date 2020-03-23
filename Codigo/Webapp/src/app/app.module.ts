@@ -35,6 +35,7 @@ import { RestConfiguracionProvider } from '../providers/rest-configuracion/rest-
 import { RestConstantesProvider } from '../providers/rest-constantes/rest-constantes';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 //import { HomePage } from '@pages/all'
@@ -127,7 +128,8 @@ const routes: Routes = [
     RestCamisetaProvider,
     RestConfiguracionProvider,
     RestConstantesProvider,
-    FirebaseCrashlytics
+    FirebaseCrashlytics,
+    GooglePlus
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

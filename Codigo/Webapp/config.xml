@@ -123,6 +123,9 @@
     <plugin name="cordova-plugin-firebase-crashlytics" spec="^0.1.0">
         <variable name="ANDROID_FIREBASE_CORE_VERSION" value="16.0.8" />
     </plugin>
+    <plugin name="cordova-plugin-googleplus" spec="^8.4.0">
+        <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
+    </plugin>
     <engine name="android" spec="^8.0.0" />
     <engine name="ios" spec="^4.5.5" />
 </widget>

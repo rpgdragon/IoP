@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform} from 'ionic-angular';
+import { NavController, Platform, NavParams} from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
 import { CamisetaPage } from '@pages/camiseta/camiseta';
 import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
@@ -18,6 +18,7 @@ export class RegistroFacebookPage {
   formularioLogin: FormGroup;
   readonly PATTERN_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\W)[A-Za-z\\d\\W]{6,}$";
   readonly PATTERN_EMAIL = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
+  public redsocial: string;
 
   passwordTipo: string = 'password';
   passwordClass: string = 'fas fa-eye-slash fa-lg fa-fw';
@@ -30,8 +31,10 @@ export class RegistroFacebookPage {
   public formBuilder: FormBuilder,
   private rest: RestProvider,
   private storage: Storage,
-  private fcm: FCM) {
+  private fcm: FCM,
+  public navParams: NavParams) {
     this.formularioLogin = this.crearFormularioLogin();
+    this.redsocial = this.navParams.get('red');
   }
   
   ionViewDidLoad(): void {	 
@@ -47,7 +50,14 @@ export class RegistroFacebookPage {
   }
 
   registro(){
-    this.rest.registrar(MyApp.getNombreusuario(),this.formularioLogin.value.password,"1").then(data => {
+    var redelegida = "1";
+    if(this.redsocial=="facebook"){
+      redelegida="1";  
+    }
+    if(this.redsocial=="google"){
+      redelegida="2";
+    }
+    this.rest.registrar(MyApp.getNombreusuario(),this.formularioLogin.value.password,redelegida).then(data => {
       this.storage.set('nombreusuario', MyApp.getNombreusuario().toLowerCase());
       this.fcm.getToken().then(token => {
         //vamos a guardar el token tanto en el storage como en el backend

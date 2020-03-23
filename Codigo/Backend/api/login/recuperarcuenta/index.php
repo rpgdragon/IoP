@@ -47,7 +47,7 @@ if($queryst->rowCount() <= 0){
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-    <title>Recuperación de camiseta HealthShirt</title>
+    <title>Recuperación de camiseta IoP-Shirt</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/comun.css">
@@ -87,7 +87,7 @@ if($queryst->rowCount() <= 0){
 <body style="padding-top:10%;background: url('../../assets/images/fondo.png');">
     <div class="container" style="text-align:center">
         <img src="../../assets/images/icon.png" width="30%" alt="Logo HealtShirt" />
-        <h1>HealthShirt</h1>
+        <h1>IoP-Shirt</h1>
         <p>Para recuperar la cuenta debe resetear la contraseña, por favor introduce la nueva contraseña debajo. La contraseña debe cumplir las siguientes condiciones</p>
         <ul style="text-align:left;">
             <li>Debe contener al menos 6 caracteres</li>

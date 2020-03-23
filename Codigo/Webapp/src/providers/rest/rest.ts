@@ -4,9 +4,9 @@ import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 
 const AUTHORIZACION = "healthshirt20192020";
-const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
+const MAIN_URL = "http://www.iopshirt.es/api/";
 const LOGIN_URL = "login/";
-const VERSION = "v2/";
+const VERSION = "v3/";
 
 const TIMEOUT_MAXIMO = 10000;
 /*
@@ -113,6 +113,31 @@ export class RestProvider {
 					resolve(data);
 				}, error => {
 					this.crashlytics.logException("No se ha podido logar el usuario en Facebook " + email + error.error + " " + error.status);
+					reject(error);
+				});      
+    });
+  }
+
+
+  public loginGoogle(email:string,token:string){
+    return new Promise((resolve,reject) => {
+      let httpOptions = {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + AUTHORIZACION
+				})
+			}
+			let cuerpo = {
+				"usuario": email,
+        		"token": token
+	}
+	console.log(cuerpo);
+      this.http.post(MAIN_URL + VERSION + LOGIN_URL + "logingoogle/",cuerpo,httpOptions)
+      .timeout(TIMEOUT_MAXIMO)
+				.subscribe(data => {
+					resolve(data);
+				}, error => {
+					this.crashlytics.logException("No se ha podido logar el usuario en Google " + email + error.error + " " + error.status);
 					reject(error);
 				});      
     });
