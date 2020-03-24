@@ -55,16 +55,24 @@ export class InitPage {
   }
 
   loginGoogle(){
-    this.google.login({})
-  .then(res => {
-    if(res.email!=undefined && res.email!=null && res.email!=''){
-      //ok tenemos un login en google
-      this.llamarLoginServidorGoogle(res.accessToken,res,res.userId);
+    this.google.logout().then(()=> this.hacerLoginGoogle(true)).catch(()=>this.hacerLoginGoogle(false));
+    
+  }
+
+  hacerLoginGoogle(logout){
+    if(logout==true){
+      console.log("Eliminado logins previos");
     }
-  })
-  .catch(err => {
-    //no realizamos ninguna operacion
-  });
+    this.google.login({})
+    .then(res => {
+      if(res.email!=undefined && res.email!=null && res.email!=''){
+        //ok tenemos un login en google
+        this.llamarLoginServidorGoogle(res.accessToken,res,res.userId);
+      }
+    })
+    .catch(err => {
+      //no realizamos ninguna operacion
+    });
   }
 
   hacerLogin(logout){
