@@ -18,6 +18,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { RestProvider } from '../providers/rest/rest';
 import { ConstantesPage } from '@pages/constantes/constantes';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
     templateUrl: 'app.html'
@@ -36,7 +37,8 @@ export class MyApp {
 		private storage: Storage,
 		private fcm: FCM,
 		private rest: RestProvider,
-		public facebook: Facebook
+		public facebook: Facebook,
+		public google: GooglePlus
     ) {
 		this.platform.ready().then(() => {
 			//creamos una acccion asociada 
@@ -98,8 +100,11 @@ export class MyApp {
 				this.storage.set("nombreusuario",null);
 				this.storage.set("tokenfacebook",null);
 				this.storage.set("usuariofacebook",null);
-				this.storage.set("esFacebook","0");
+				this.storage.set("esFacebook",null);
+				this.storage.set("usuariogoogle",null);
+				this.storage.set("esGoogle",null);
 				this.facebook.logout().then(()=> console.log("Eliminado login Facebook"));
+				this.google.logout().then(()=> console.log("Eliminado login Google"));
                 break;
 			case 'quees':
 				this.rootPage = QueesPage;
@@ -180,8 +185,11 @@ export class MyApp {
 		this.storage.set("nombreusuario",null);
 		this.storage.set("tokenfacebook",null);
 		this.storage.set("esFacebook","0");
+		this.storage.set("usuariogoogle",null);
+        this.storage.set("esGoogle",null);
 		this.storage.set("usuariofacebook",null);
 		this.facebook.logout().then(()=> console.log("Eliminado login Facebook"));
+		this.google.logout().then(()=> console.log("Eliminado login Google"));
 		this.platform.exitApp();
 		
     }
