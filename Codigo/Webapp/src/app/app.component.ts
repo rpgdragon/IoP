@@ -12,7 +12,7 @@ import { RegistroPage } from '@pages/registro/registro';
 import { RegistroFacebookPage } from '@pages/registrofacebook/registrofacebook';
 import { ConfiguracionPage } from '@pages/configuracion/configuracion';
 import { InfoPage } from '@pages/info/info';
-import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
+import { NuevacamisetaPage } from '@pages/nuevacamiseta/nuevacamiseta';
 import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { RestProvider } from '../providers/rest/rest';
@@ -138,9 +138,9 @@ export class MyApp {
 				this.rootPage = InfoPage;
 				this.nav.setRoot(InfoPage);
 				break;
-			case 'crearcamiseta':
-				this.rootPage = CrearcamisetaPage;
-				this.nav.setRoot(CrearcamisetaPage);
+			case 'nuevacamiseta':
+				this.rootPage = NuevacamisetaPage;
+				this.nav.setRoot(NuevacamisetaPage);
 				break;
 			case 'editarcamiseta':
 				this.rootPage = EditarcamisetaPage;

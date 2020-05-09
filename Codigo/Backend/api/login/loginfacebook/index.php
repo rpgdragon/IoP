@@ -20,6 +20,7 @@ if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
 	generar_respuesta(false, "La solicitud de login facebook le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
+
 $input= json_decode( $inputJSON );
 if(!isset($input) || $input==null || $input==''){
 	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La solicitud de login facebook le faltan datos';
@@ -53,13 +54,13 @@ $usuario->setConexion($db);
  
 //antes de seguir validamos el token a ver si es valido
 $fb = new Facebook\Facebook([
-  'app_id' => '2851936288159153',
-  'app_secret' => '613609457b3451b555ed1e089eab12c5',
+  'app_id' => '888567681583639',
+  'app_secret' => 'ce42f88bf03132939b75d8056324f3e4',
   'default_graph_version' => 'v2.12',
  ]);
  
  $fb->setDefaultAccessToken($input->token);
- 
+  
  try {
 		$request = $fb->get('/me');
 } catch(Facebook\Exceptions\FacebookResponseException $e) {
@@ -77,6 +78,7 @@ $fb = new Facebook\Facebook([
 	generar_respuesta(false, $e->getMessage(),CODIGO_SESION_FACEBOOK_ERRONEA,ESTATUS_FORBIDDEN);
 	exit;
 }
+
 //si llega aqui, tenemos que ver si existe la cuenta o no
 try{
 	$usuario->setUsuario($input->usuario);

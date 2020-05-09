@@ -5,7 +5,7 @@ import { ConstantesPage } from '@pages/constantes/constantes';
 import { MyApp } from '@app/app.component';
 import { RestCamisetaProvider} from '../../providers/rest-camiseta/rest-camiseta';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
+import { NuevacamisetaPage } from '@pages/nuevacamiseta/nuevacamiseta';
 import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { InitPage } from '@pages/init/init';
 import { Storage } from '@ionic/storage';
@@ -118,7 +118,7 @@ export class CamisetaPage {
     }
 
     crearCamiseta(){
-      this.navCtrl.push(CrearcamisetaPage);
+      this.navCtrl.push(NuevacamisetaPage);
     }
 
     /**

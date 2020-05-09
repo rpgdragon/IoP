@@ -97,16 +97,18 @@ export class RestProvider {
 
   public loginFacebook(email:string,token:string){
     return new Promise((resolve,reject) => {
-      let httpOptions = {
+      	let httpOptions = {
 				headers: new HttpHeaders({
 					'Content-Type': 'application/json',
 					'Authorization': 'Bearer ' + AUTHORIZACION
 				})
-			}
-			let cuerpo = {
+		}
+		let cuerpo = {
 				"usuario": email,
-        "token": token
-      }
+        		"token": token
+		  }
+		  console.log(cuerpo);
+		  console.log(MAIN_URL + VERSION + LOGIN_URL + "loginfacebook/");
       this.http.post(MAIN_URL + VERSION + LOGIN_URL + "loginfacebook/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {

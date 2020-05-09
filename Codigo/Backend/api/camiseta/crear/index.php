@@ -47,16 +47,6 @@ else{
 	$camiseta->setNombre($input->nombre);
 }
 
-if(!isset($input->parentesco) || $input->parentesco==null  || $input->parentesco==''){
-	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para crear la camiseta';
-	meter_error_log($log);
-    generar_respuesta(false, "La solicitud de actualizacion le falta el parentesco",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
-	exit();
-}
-else{
-	$camiseta->setParentesco($input->parentesco);
-}
-
 if(!isset($input->numeroserie) || $input->numeroserie==null  || $input->numeroserie==''){
 	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para crear la camiseta';
 	meter_error_log($log);
@@ -125,107 +115,33 @@ else{
 	$camiseta->setNotas($input->notas);
 }
 
-if(!isset($input->direccion) || $input->direccion==null  || $input->direccion==''){
-    $camiseta->setDireccion(null);
+if(!isset($input->calle) || $input->calle==null  || $input->calle==''){
+    $camiseta->setCalle(null);
 }
 else{
-	$camiseta->setDireccion($input->direccion);
+	$camiseta->setCalle($input->calle);
 }
 
-if(!isset($input->ecgminimo) || $input->ecgminimo==null  || $input->ecgminimo=='' || $input->ecgminimo=="-1"){
-    $camiseta->setEcgminimo(null);
+if(!isset($input->numero) || $input->numero==null  || $input->numero==''){
+    $camiseta->setNumero(null);
 }
 else{
-	$camiseta->setEcgminimo($input->ecgminimo);
+	$camiseta->setNumero($input->numero);
 }
 
-if(!isset($input->ecgmaximo) || $input->ecgmaximo==null  || $input->ecgmaximo=='' || $input->ecgmaximo=="-1"){
-    $camiseta->setEcgmaximo(null);
+if(!isset($input->localidad) || $input->localidad==null  || $input->localidad==''){
+    $camiseta->setLocalidad(null);
 }
 else{
-	$camiseta->setEcgmaximo($input->ecgmaximo);
+	$camiseta->setLocalidad($input->localidad);
 }
 
-if(!isset($input->edaminimo) || $input->edaminimo==null  || $input->edaminimo=='' || $input->edaminimo=="-1"){
-    $camiseta->setEdaminimo(null);
+if(!isset($input->provincia) || $input->provincia==null  || $input->provincia==''){
+    $camiseta->setProvincia(null);
 }
 else{
-	$camiseta->setEdaminimo($input->edaminimo);
+	$camiseta->setProvincia($input->provincia);
 }
-
-if(!isset($input->edamaximo) || $input->edamaximo==null  || $input->edamaximo=='' || $input->edamaximo=="-1"){
-    $camiseta->setEdamaximo(null);
-}
-else{
-	$camiseta->setEdamaximo($input->edamaximo);
-}
-
-if(!isset($input->temperaturaminimo) || $input->temperaturaminimo==null  || $input->temperaturaminimo=='' || $input->temperaturaminimo=="-1"){
-    $camiseta->setTemperaturaminimo(null);
-}
-else{
-	$camiseta->setTemperaturaminimo($input->temperaturaminimo);
-}
-
-if(!isset($input->temperaturamaximo) || $input->temperaturamaximo==null  || $input->temperaturamaximo=='' || $input->temperaturamaximo=="-1"){
-    $camiseta->setTemperaturamaximo(null);
-}
-else{
-	$camiseta->setTemperaturamaximo($input->temperaturamaximo);
-}
-
-if(!isset($input->notificacionesecg) || $input->notificacionesecg==null  || $input->notificacionesecg==''){
-	$camiseta->setNotificacionesecg(null);
-	
-}
-else{
-	if($input->notificacionesecg=="true"){
-		$camiseta->setNotificacionesecg(true);
-	}
-	else{
-		$camiseta->setNotificacionesecg(false);
-	}
-}
-
-if(!isset($input->notificacioneseda) || $input->notificacioneseda==null || $input->notificacioneseda==''){
-	$camiseta->setNotificacioneseda(null);
-}
-else{
-	if($input->notificacioneseda=="true"){
-		$camiseta->setNotificacioneseda(true);
-	}
-	else{
-		$camiseta->setNotificacioneseda(false);
-	}
-    
-}
-
-if(!isset($input->notificacionestemperatura) || $input->notificacionestemperatura==null || $input->notificacionestemperatura==''){
-	$camiseta->setNotificacionestemperatura(true);
-}
-else{
-	if($input->notificacionestemperatura=="true"){
-		$camiseta->setNotificacionestemperatura(true);
-	}
-	else{
-		$camiseta->setNotificacionestemperatura(false);
-	}
-    
-}
-
-
-if(!isset($input->notificacionescaida) || $input->notificacionescaida==null || $input->notificacionescaida==''){
-	$camiseta->setNotificacionescaida(true);
-}
-else{
-	if($input->notificacionescaida=="true"){
-		$camiseta->setNotificacionescaida(true);
-	}
-	else{
-		$camiseta->setNotificacionescaida(false);
-	}
-}
-
 
 $database = new Database();
 
