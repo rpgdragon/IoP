@@ -25,10 +25,12 @@ import { RestCamisetaProvider } from '../providers/rest-camiseta/rest-camiseta';
 import { ConstantesPage } from '@pages/constantes/constantes';
 import { EcgPage } from '@pages/ecg/ecg';
 import { EdaPage } from '@pages/eda/eda';
+import { NuevacamisetaPage } from '@pages/nuevacamiseta/nuevacamiseta';
+import { NuevacamisetaxcamisetaPage } from '@pages/nuevacamisetaxcamiseta/nuevacamisetaxcamiseta';
+import { NuevacamisetaxpacientePage } from '@pages/nuevacamisetaxpaciente/nuevacamisetaxpaciente';
 import { TemperaturaPage } from '@pages/temperatura/temperatura';
 import { ConfiguracionPage } from '@pages/configuracion/configuracion';
 import { InfoPage } from '@pages/info/info';
-import { CrearcamisetaPage } from '@pages/crearcamiseta/crearcamiseta';
 import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { RestConfiguracionProvider } from '../providers/rest-configuracion/rest-configuracion';
@@ -54,7 +56,7 @@ const routes: Routes = [
     { path: 'registro', component:RegistroPage },
     { path: 'registrofacebook', component:RegistroFacebookPage},
     { path: 'constantes', component:ConstantesPage},
-    { path: 'crearcamiseta', component:CrearcamisetaPage},
+    { path: 'nuevacamiseta', component:NuevacamisetaPage},
     { path: 'editarcamiseta', component:EditarcamisetaPage},
     { path: 'configuracion', component:ConfiguracionPage},
     { path: 'info', component:InfoPage}
@@ -77,9 +79,11 @@ const routes: Routes = [
         EdaPage,
         TemperaturaPage,
         InfoPage,
-        CrearcamisetaPage,
         EditarcamisetaPage,
-        ConfiguracionPage
+        ConfiguracionPage,
+        NuevacamisetaPage,
+        NuevacamisetaxcamisetaPage,
+        NuevacamisetaxpacientePage
     ],
     entryComponents: [
         MyApp,
@@ -96,9 +100,11 @@ const routes: Routes = [
         EdaPage,
         TemperaturaPage,
         InfoPage,
-        CrearcamisetaPage,
         EditarcamisetaPage,
-        ConfiguracionPage
+        ConfiguracionPage,
+        NuevacamisetaPage,
+        NuevacamisetaxpacientePage,
+        NuevacamisetaxcamisetaPage
     ],
     imports: [
         BrowserModule,

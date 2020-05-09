@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons left>
+          <button ion-button icon-only (click)="irAtras()">
+            <ion-icon class="iconotoolbar" name="arrow-back" ></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>Registrar Camiseta</ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only (click)="irInfo()">
+          <ion-icon class="iconotoolbar" name="information-circle" ></ion-icon>
+        </button>
+    </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-tabs #nuevaCamisetaTabs>
+      <ion-tab tabIcon="heart" tabTitle="Camiseta" [root]="camiseta" [rootParams]="formulario"></ion-tab>
+      <ion-tab tabIcon="water" tabTitle="Paciente" [root]="paciente" [rootParams]="formulario"></ion-tab>
+    </ion-tabs>
+  </ion-content>
