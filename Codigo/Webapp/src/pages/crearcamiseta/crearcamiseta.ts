@@ -118,40 +118,7 @@ export class CrearcamisetaPage {
     this.imagen = imagen;
   }
 
-  registrarCamiseta(){
-    if(!this.validarCamposMinimoMaximo()){
-      return;
-    }
-    this.rest.registrarCamiseta(MyApp.getNombreusuario(), this.formularioCrearCamiseta.value.nombre,
-    this.formularioCrearCamiseta.value.parentesco,this.formularioCrearCamiseta.value.numeroserie,
-    this.formularioCrearCamiseta.value.codseg,this.formularioCrearCamiseta.value.icono,
-    this.formularioCrearCamiseta.value.ecgminimo,this.formularioCrearCamiseta.value.ecgmaximo,
-    this.formularioCrearCamiseta.value.edaminimo,this.formularioCrearCamiseta.value.edamaximo,
-    this.formularioCrearCamiseta.value.temperaturaminimo,this.formularioCrearCamiseta.value.temperaturamaximo,
-    this.formularioCrearCamiseta.value.notificacionesecg,this.formularioCrearCamiseta.value.notificacioneseda,
-    this.formularioCrearCamiseta.value.notificacionestemperatura,this.formularioCrearCamiseta.value.notificacionescaida,
-    this.formularioCrearCamiseta.value.fechanacimiento,this.formularioCrearCamiseta.value.sexo,this.formularioCrearCamiseta.value.telefono,
-    this.formularioCrearCamiseta.value.telefonocontacto,this.formularioCrearCamiseta.value.notas,
-    this.formularioCrearCamiseta.value.direccion).then(data => {
-        alert("Camiseta creada exitosamente");
-        this.navCtrl.pop();
-    }, error => {
-      console.log(error);
-      if (error.status === 404) {
-        alert("La camiseta no existe o no coincide el código de seguridad");
-      }
-      else{
-        if(error.status === 409){
-          alert("Esta camisa ya ha sido registrada");
-        }
-        else{
-          alert("No se ha podido registrar la camiseta");
-        }
-        
-      }
-     
-    })
-  }
+  
 
   validarCamposMinimoMaximo(){
     var ecgminimorelleno = false;

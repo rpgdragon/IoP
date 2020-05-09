@@ -8,7 +8,6 @@ class Camiseta{
  
 	private $id;
     private $nombre;
-	private $parentesco;
 	private $numeroserie;
 	private $codseg;
 	private $src;
@@ -29,7 +28,10 @@ class Camiseta{
 	private $telefonocontacto;
 	private $sexo;
 	private $notas;
-	private $direccion;
+	private $calle;
+	private $numero;
+	private $localidad;
+	private $provincia;
  
     public function __construct(){
     }
@@ -50,12 +52,20 @@ class Camiseta{
 		return $this->nombre;
 	}
 
-	function setParentesco($parentesco){
-		$this->parentesco = $parentesco;
+	function setCalle($calle){
+		$this->calle = $calle;
 	}
 	
-	function getParentesco(){
-		return $this->parentesco;
+	function getCalle(){
+		return $this->calle;
+	}
+
+	function setNumero($numero){
+		$this->numero = $numero;
+	}
+	
+	function getNumero(){
+		return $this->numero;
 	}
 	
 	function setBateria($bateria){
@@ -235,18 +245,27 @@ class Camiseta{
 		return $this->notas;
 	}
 
-	function setDireccion($direccion){
-		$this->direccion = $direccion;
+	function setLocalidad($localidad){
+		$this->localidad = $localidad;
 	}
 
-	function getDireccion(){
-		return $this->direccion;
+	function getLocalidad(){
+		return $this->localidad;
+	}
+
+	function setProvincia($provincia){
+		$this->provincia = $provincia;
+	}
+
+	function getProvincia(){
+		return $this->provincia;
 	}
 
     function listar_camisetas($usuario){
         // query to insert record
-        $query = "SELECT camiseta.* FROM " . $this->tablaxusuario . " camisetaxusuario 
-                  INNER JOIN ". $this->tabla . " camiseta on camiseta.id = camisetaxusuario.idcamiseta 
+        $query = "SELECT camiseta.*, producto.esECG, producto.esEDA, producto.esTemperatura, producto.esCaida  FROM " . $this->tablaxusuario . " camisetaxusuario 
+				  INNER JOIN ". $this->tabla . " camiseta on camiseta.id = camisetaxusuario.idcamiseta
+				  INNER JOIN ". $this->tableproducto. " producto on camiseta.numeroserie= producto.numeroserie 
                   WHERE camisetaxusuario.idusuario=:idusuario";
 		$queryst = $this->conexion->prepare($query);
 		$usuario=htmlspecialchars(strip_tags($usuario));
@@ -262,41 +281,23 @@ class Camiseta{
 	 * Metodo que registra la camiseta
 	 */
 	function registrar_camiseta($usuario){
-		$query = "INSERT INTO ".$this->tabla . " SET nombre=:nombre, parentesco=:parentesco, numeroserie=:numeroserie, src=:src,ecgminimo=:ecgminimo,
-		ecgmaximo=:ecgmaximo,edaminimo=:edaminimo,edamaximo=:edamaximo,temperaturaminimo=:temperaturaminimo, temperaturamaximo=:temperaturamaximo,
-		notificacionesecg=:notificacionesecg,notificacioneseda=:notificacioneseda,notificacionestemperatura=:notificacionestemperatura,notificacionescaida=:notificacionescaida,
-		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, direccion=:direccion ";
+		$query = "INSERT INTO ".$this->tabla . " SET nombre=:nombre,numeroserie=:numeroserie, src=:src,
+		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, calle=:calle, numero=:numero, localidad=:localidad, provincia=:provincia ";
 		$query2="INSERT INTO ". $this->tablaxusuario. " SET idcamiseta=:idcamiseta, idusuario=:idusuario";
 		$queryst = $this->conexion->prepare($query);
 		$queryst2 = $this->conexion->prepare($query2);
 		$this->conexion->beginTransaction(); 
 		$this->nombre=htmlspecialchars(strip_tags($this->nombre));
-		$this->parentesco=htmlspecialchars(strip_tags($this->parentesco));
 		$this->src=htmlspecialchars(strip_tags($this->src));
 		$this->numeroserie=htmlspecialchars(strip_tags($this->numeroserie));
 		$this->sexo=htmlspecialchars(strip_tags($this->sexo));
 		$this->notas=htmlspecialchars(strip_tags($this->notas));
-		$this->direccion=htmlspecialchars(strip_tags($this->direccion));
+		$this->calle=htmlspecialchars(strip_tags($this->calle));
+		$this->numero=htmlspecialchars(strip_tags($this->numero));
+		$this->localidad=htmlspecialchars(strip_tags($this->localidad));
+		$this->provincia=htmlspecialchars(strip_tags($this->provincia));
 		$this->telefono=htmlspecialchars(strip_tags($this->telefono));
 		$this->telefonocontacto=htmlspecialchars(strip_tags($this->telefonocontacto));
-		if($this->ecgminimo==0){
-			$this->ecgminimo=null;
-		}
-		if($this->ecgmaximo==0){
-			$this->ecgmaximo=null;
-		}
-		if($this->edaminimo==0){
-			$this->edaminimo=null;
-		}
-		if($this->edamaximo==0){
-			$this->edamaximo=null;
-		}
-		if($this->temperaturaminimo==0){
-			$this->temperaturaminimo=null;
-		}
-		if($this->temperaturamaximo==0){
-			$this->temperaturamaximo=null;
-		}
 		if($this->telefono==0){
 			$this->telefono=null;
 		}
@@ -310,22 +311,15 @@ class Camiseta{
 		$queryst->bindParam(":parentesco", $this->parentesco);
 		$queryst->bindParam(":src", $this->src);
 		$queryst->bindParam(":numeroserie", $this->numeroserie);
-		$queryst->bindParam(":ecgminimo", $this->ecgminimo);
-		$queryst->bindParam(":ecgmaximo", $this->ecgmaximo);
-		$queryst->bindParam(":edaminimo", $this->edaminimo);
-		$queryst->bindParam(":edamaximo", $this->edamaximo);
-		$queryst->bindParam(":temperaturaminimo", $this->temperaturaminimo);
-		$queryst->bindParam(":temperaturamaximo", $this->temperaturamaximo);
-		$queryst->bindParam(":notificacionesecg", $this->notificacionesecg);
-		$queryst->bindParam(":notificacioneseda", $this->notificacioneseda);
-		$queryst->bindParam(":notificacionestemperatura", $this->notificacionestemperatura);
-		$queryst->bindParam(":notificacionescaida", $this->notificacionescaida);
 		$queryst->bindParam(":fechanacimiento", $this->fechanacimiento);
 		$queryst->bindParam(":telefono", $this->telefono);
 		$queryst->bindParam(":telefonocontacto", $this->telefonocontacto);
 		$queryst->bindParam(":sexo", $this->sexo);
 		$queryst->bindParam(":notas", $this->notas);
-		$queryst->bindParam(":direccion", $this->direccion);
+		$queryst->bindParam(":calle", $this->calle);
+		$queryst->bindParam(":numero", $this->numero);
+		$queryst->bindParam(":localidad", $this->localidad);
+		$queryst->bindParam(":provincia", $this->provincia);
 
 		try{
 			if($queryst->execute()){
@@ -358,13 +352,12 @@ class Camiseta{
 	 * Metodo que actualiza la camiseta
 	 */
 	function actualizar_camiseta(){
-		$query = "UPDATE ".$this->tabla . " SET nombre=:nombre, parentesco=:parentesco,src=:src,ecgminimo=:ecgminimo,
+		$query = "UPDATE ".$this->tabla . " SET nombre=:nombre, src=:src,ecgminimo=:ecgminimo,
 		ecgmaximo=:ecgmaximo,edaminimo=:edaminimo,edamaximo=:edamaximo,temperaturaminimo=:temperaturaminimo, temperaturamaximo=:temperaturamaximo,
 		notificacionesecg=:notificacionesecg,notificacioneseda=:notificacioneseda,notificacionestemperatura=:notificacionestemperatura,notificacionescaida=:notificacionescaida,
-		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, direccion=:direccion WHERE id=:id ";
+		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, calle=:calle, numero=:numero, localidad=:localidad, provincia=:provincia, WHERE id=:id ";
 		$queryst = $this->conexion->prepare($query);
 		$this->nombre=htmlspecialchars(strip_tags($this->nombre));
-		$this->parentesco=htmlspecialchars(strip_tags($this->parentesco));
 		$this->src=htmlspecialchars(strip_tags($this->src));
 		$this->ecgminimo=htmlspecialchars(strip_tags($this->ecgminimo));
 		$this->ecgmaximo=htmlspecialchars(strip_tags($this->ecgmaximo));
@@ -378,7 +371,10 @@ class Camiseta{
 		$this->notificacionescaida=htmlspecialchars(strip_tags($this->notificacionescaida));
 		$this->sexo=htmlspecialchars(strip_tags($this->sexo));
 		$this->notas=htmlspecialchars(strip_tags($this->notas));
-		$this->direccion=htmlspecialchars(strip_tags($this->direccion));
+		$this->calle=htmlspecialchars(strip_tags($this->calle));
+		$this->numero=htmlspecialchars(strip_tags($this->numero));
+		$this->localidad=htmlspecialchars(strip_tags($this->localidad));
+		$this->provincia=htmlspecialchars(strip_tags($this->provincia));
 		$this->telefono=htmlspecialchars(strip_tags($this->telefono));
 		$this->telefonocontacto=htmlspecialchars(strip_tags($this->telefonocontacto));
 		$this->id=htmlspecialchars(strip_tags($this->id));
@@ -410,7 +406,6 @@ class Camiseta{
 			$this->sexo=null;
 		}
 		$queryst->bindParam(":nombre", $this->nombre);
-		$queryst->bindParam(":parentesco", $this->parentesco);
 		$queryst->bindParam(":src", $this->src);
 		$queryst->bindParam(":ecgminimo", $this->ecgminimo);
 		$queryst->bindParam(":ecgmaximo", $this->ecgmaximo);
@@ -427,7 +422,10 @@ class Camiseta{
 		$queryst->bindParam(":telefonocontacto", $this->telefonocontacto);
 		$queryst->bindParam(":sexo", $this->sexo);
 		$queryst->bindParam(":notas", $this->notas);
-		$queryst->bindParam(":direccion", $this->direccion);
+		$queryst->bindParam(":calle", $this->calle);
+		$queryst->bindParam(":numero", $this->numero);
+		$queryst->bindParam(":localidad", $this->localidad);
+		$queryst->bindParam(":provincia", $this->provincia);
 		$queryst->bindParam(":id", $this->id);
         if($queryst->execute()){
 			return true;
