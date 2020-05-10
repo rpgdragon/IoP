@@ -20,6 +20,7 @@ export class NuevacamisetaxcamisetaPage {
   private nuevacamiseta:NuevacamisetaPage;
   
   imagen: string = 'grandmother';
+  imagenes: Array<string> = ['grandmother', 'man', 'grandfather', 'old-man', 'couple', 'grandmother2', 'old-woman', 'old-man2', 'grandmother3', 'couple2'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private rest: RestCamisetaProvider) {
     this.nuevacamiseta = this.navParams.get('formulario');
@@ -56,12 +57,12 @@ export class NuevacamisetaxcamisetaPage {
     })
   }
 
-  prepararImagenesIcono() {
+  prepararImagenesIcono(numero) {
+    if(numero > 50){ return; }
 		setTimeout(() => {
       let buttonElements = document.querySelectorAll('div.alert-radio-group button');
-      console.log(buttonElements);
 			if (!buttonElements.length) {
-				this.prepararImagenesIcono();
+				this.prepararImagenesIcono(numero+1);
 			} else {
 				for (let index = 0; index < buttonElements.length; index++) {
           let buttonElement = buttonElements[index];
