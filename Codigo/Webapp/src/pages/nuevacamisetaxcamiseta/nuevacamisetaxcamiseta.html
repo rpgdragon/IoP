@@ -7,8 +7,8 @@
 <ion-content forceOverscroll="true">
     <form [formGroup]="nuevacamiseta.getFormularioRegistrarCamiseta()" (ngSubmit)="registrarCamiseta()">
         <ion-label stacked>Icono *:</ion-label>
-        <ion-item class="imageselect image_{{imagen}}">
-          <ion-select (click)="prepararImagenesIcono()" formControlName="icono" cancelText="Cancelar" (ionChange)="ponerImagen(this.imagen)" [(ngModel)]="imagen">
+        <ion-item class="imageselect image_{{imagen}}" >
+          <ion-select (click)="prepararImagenesIcono(1)" formControlName="icono" cancelText="Cancelar" (ionChange)="ponerImagen(this.imagen)" [(ngModel)]="imagen">
             <ion-option  *ngFor="let optionimagen of imagenes" [value]="optionimagen" (ionSelect)="selectIcono(optionimagen)">{{optionimagen}}</ion-option>
           </ion-select>   
         </ion-item>

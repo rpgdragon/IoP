@@ -250,8 +250,8 @@ canvas{
 							background-image: url("../assets/images/#{$imageOption}.png");
 							background-size: contain;
 							background-repeat: no-repeat;
-							background-attachment: fixed;
-  							background-position: center; 
+							background-attachment: scroll;
+							background-position: center;
                     }
             }
     }
@@ -259,10 +259,11 @@ canvas{
 
 ion-select{
 	@include fixed_width(100%);
-	@include fixed_height(128px);
+	@include fixed_height(64px);
 }
 
 .ion-select-sexo{
+	@include fixed_width(100%);
 	@include fixed_height(48px);
 	background-color:color($colors, white);
 }
