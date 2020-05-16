@@ -32,6 +32,8 @@ class Camiseta{
 	private $numero;
 	private $localidad;
 	private $provincia;
+	private $latitud;
+	private $longitud;
  
     public function __construct(){
     }
@@ -261,11 +263,27 @@ class Camiseta{
 		return $this->provincia;
 	}
 
+	function getLatitud(){
+		return $this->latitud;
+	}
+
+	function setLatitud($latitud){
+		$this->latitud = $latitud;
+	}
+
+	function getLongitud(){
+		return $this->longitud;
+	}
+
+	function setLongitud($longitud){
+		$this->longitud = $longitud;
+	}
+
     function listar_camisetas($usuario){
         // query to insert record
         $query = "SELECT camiseta.*, producto.esECG, producto.esEDA, producto.esTemperatura, producto.esCaida  FROM " . $this->tablaxusuario . " camisetaxusuario 
 				  INNER JOIN ". $this->tabla . " camiseta on camiseta.id = camisetaxusuario.idcamiseta
-				  INNER JOIN ". $this->tableproducto. " producto on camiseta.numeroserie= producto.numeroserie 
+				  INNER JOIN ". $this->tablaproducto. " producto on camiseta.numeroserie= producto.numeroserie 
                   WHERE camisetaxusuario.idusuario=:idusuario";
 		$queryst = $this->conexion->prepare($query);
 		$usuario=htmlspecialchars(strip_tags($usuario));
@@ -282,7 +300,7 @@ class Camiseta{
 	 */
 	function registrar_camiseta($usuario){
 		$query = "INSERT INTO ".$this->tabla . " SET nombre=:nombre,numeroserie=:numeroserie, src=:src,
-		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, calle=:calle, numero=:numero, localidad=:localidad, provincia=:provincia ";
+		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, calle=:calle, numero=:numero, localidad=:localidad, provincia=:provincia, latitud=:latitud, longitud=:longitud ";
 		$query2="INSERT INTO ". $this->tablaxusuario. " SET idcamiseta=:idcamiseta, idusuario=:idusuario";
 		$queryst = $this->conexion->prepare($query);
 		$queryst2 = $this->conexion->prepare($query2);
@@ -298,6 +316,8 @@ class Camiseta{
 		$this->provincia=htmlspecialchars(strip_tags($this->provincia));
 		$this->telefono=htmlspecialchars(strip_tags($this->telefono));
 		$this->telefonocontacto=htmlspecialchars(strip_tags($this->telefonocontacto));
+		$this->latitud=htmlspecialchars(strip_tags($this->latitud));
+		$this->longitud=htmlspecialchars(strip_tags($this->longitud));
 		if($this->telefono==0){
 			$this->telefono=null;
 		}
@@ -307,8 +327,13 @@ class Camiseta{
 		if($this->sexo==''){
 			$this->sexo=null;
 		}
+		if($this->latitud==0){
+			$this->latitud=null;
+		}
+		if($this->longitud==0){
+			$this->longitud=null;
+		}
 		$queryst->bindParam(":nombre", $this->nombre);
-		$queryst->bindParam(":parentesco", $this->parentesco);
 		$queryst->bindParam(":src", $this->src);
 		$queryst->bindParam(":numeroserie", $this->numeroserie);
 		$queryst->bindParam(":fechanacimiento", $this->fechanacimiento);
@@ -320,7 +345,8 @@ class Camiseta{
 		$queryst->bindParam(":numero", $this->numero);
 		$queryst->bindParam(":localidad", $this->localidad);
 		$queryst->bindParam(":provincia", $this->provincia);
-
+		$queryst->bindParam(":latitud", $this->latitud);
+		$queryst->bindParam(":longitud", $this->longitud);
 		try{
 			if($queryst->execute()){
 				//si devuelve true, tenemos que obtener el id generado para asignarlo en la tabla usuarioxcamiseta
