@@ -143,6 +143,20 @@ else{
 	$camiseta->setProvincia($input->provincia);
 }
 
+if(!isset($input->latitud) || $input->latitud==null  || $input->latitud==''){
+    $camiseta->setLatitud(null);
+}
+else{
+	$camiseta->setLatitud($input->latitud);
+}
+
+if(!isset($input->longitud) || $input->longitud==null  || $input->longitud==''){
+    $camiseta->setLongitud(null);
+}
+else{
+	$camiseta->setLongitud($input->longitud);
+}
+
 $database = new Database();
 
 try{

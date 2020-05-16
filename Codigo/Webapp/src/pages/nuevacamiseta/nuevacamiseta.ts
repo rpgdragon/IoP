@@ -25,6 +25,8 @@ export class NuevacamisetaPage {
   private pacienteP : NuevacamisetaxpacientePage;
   public camiseta: any;
   public paciente: any;
+  private lat: number;
+  private lng: number;
   constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder) {
     this.formularioCrearCamiseta = this.crearFormularioRegistrarCamiseta();
     this.formulario = this;
@@ -84,6 +86,26 @@ export class NuevacamisetaPage {
   public setPacienteP(pacienteP:NuevacamisetaxpacientePage){
     this.pacienteP = pacienteP;
   }
+
+  public volverAtras(){
+    this.navCtrl.pop();
+  }
+
+  public getLatitud(){
+    return this.lat;
+  }
+
+  public setLatitud(latitud){
+    this.lat = latitud;
+  }
+
+  public getLongitud(){
+    return this.lng;
+  }
+
+  public setLongitud(longitud){
+    this.lng = longitud;
+  } 
 
   
 
