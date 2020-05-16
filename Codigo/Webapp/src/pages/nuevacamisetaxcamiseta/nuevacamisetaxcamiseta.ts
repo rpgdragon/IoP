@@ -36,9 +36,10 @@ export class NuevacamisetaxcamisetaPage {
     this.nuevacamiseta.getFormularioRegistrarCamiseta().value.codseg,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.icono,
     this.nuevacamiseta.getFormularioRegistrarCamiseta().value.fechanacimiento,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.sexo,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.telefono,
     this.nuevacamiseta.getFormularioRegistrarCamiseta().value.telefonocontacto,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.notas,
-    this.nuevacamiseta.getFormularioRegistrarCamiseta().value.calle,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.numero,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.localidad,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.provincia).then(data => {
+    this.nuevacamiseta.getFormularioRegistrarCamiseta().value.calle,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.numero,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.localidad,this.nuevacamiseta.getFormularioRegistrarCamiseta().value.provincia,
+    this.nuevacamiseta.getLatitud(), this.nuevacamiseta.getLongitud()).then(data => {
         alert("Camiseta creada exitosamente");
-        this.navCtrl.pop();
+        this.nuevacamiseta.volverAtras();
     }, error => {
       console.log(error);
       if (error.status === 404) {

@@ -67,7 +67,7 @@ ion-menu .content, ion-menu .item {
 }
 
 @mixin fondo_pantalla{
-	background-image: url("../assets/images/fondo.png");
+	background-image: url("../assets/images/fondo.png") !important;
 	background-color:color($colors, white);
 	background-position: center;
 	background-repeat: no-repeat;
@@ -266,6 +266,16 @@ ion-select{
 	@include fixed_width(100%);
 	@include fixed_height(48px);
 	background-color:color($colors, white);
+}
+
+#canvas_map{
+    width:100% !important;
+	height:200px !important;
+	background:#eee;
+}
+
+.formulario_fondo{
+	background:#eee !important;
 }
 
 

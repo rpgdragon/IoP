@@ -5,9 +5,9 @@ import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 
 const AUTHORIZACION = "healthshirt20192020";
-const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
+const MAIN_URL = "http://www.iopshirt.es/api/";
 const CAMISETA_URL = "camiseta/";
-const VERSION = "v2/";
+const VERSION = "v3/";
 
 const TIMEOUT_MAXIMO = 10000;
 
@@ -72,7 +72,8 @@ export class RestCamisetaProvider {
   
   public registrarCamiseta(usuario:string, nombre:string, numeroserie:string,
     codseg:string, icono:string,fechanacimiento: Date, sexo: string, telefono: number,
-    telefonocontacto: string, notas: string, calle:string,numero:string,localidad:string,provincia:string){
+    telefonocontacto: string, notas: string, calle:string,numero:string,localidad:string,provincia:string,
+    latitud: number, longitud:number){
      //rellenamos los valores no obligatorios que han venido sin nada con un valor -1
      //para indicar en el json que ese valor no esta relleno
      //la idea es forzar que esten todos los campos para poder depurar mejor
@@ -98,7 +99,9 @@ export class RestCamisetaProvider {
         "calle": "" + calle,
         "numero": "" + numero,
         "localidad": "" + localidad,
-        "provincia": "" + provincia
+        "provincia": "" + provincia,
+        "latitud": "" + latitud,
+        "longitud": "" + longitud
       } 
 
       console.log(cuerpo);
