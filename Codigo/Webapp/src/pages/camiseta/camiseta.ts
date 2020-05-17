@@ -10,6 +10,7 @@ import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { InitPage } from '@pages/init/init';
 import { Storage } from '@ionic/storage';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 
 /**
@@ -30,7 +31,7 @@ export class CamisetaPage {
 
   constructor(private menu: MenuController,public navCtrl: NavController, public navParams: NavParams,
             private rest: RestCamisetaProvider,private screenOrientation: ScreenOrientation, private storage: Storage,
-            private facebook: Facebook) {
+            private facebook: Facebook,private callNumber: CallNumber) {
  
   }
 
@@ -81,6 +82,7 @@ export class CamisetaPage {
   recargarLista(){
     this.rest.listar(MyApp.getNombreusuario()).then((data:any) => {
       this.listaCamisetas = JSON.parse(data.mensaje);
+      console.log(this.listaCamisetas);
       if(this.listaCamisetas!=[]){
         this.camisetaEncontrada = true;
       }
@@ -103,6 +105,10 @@ export class CamisetaPage {
 
     editarCamiseta(camiseta){
       this.navCtrl.push(EditarcamisetaPage, { camiseta });
+    }
+
+    llamarContacto(camiseta){
+      this.callNumber.callNumber(camiseta.telefono, true).then(res => console.log('Se va a llamar al telefono' + camiseta.telefono, res)).catch(err => console.log('No se ha podido llamar al telefono ' + camiseta.telefono, err));
     }
 
     borrarCamiseta(camiseta){

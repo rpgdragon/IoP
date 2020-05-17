@@ -129,6 +129,7 @@
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
     </plugin>
     <plugin name="cordova-plugin-googlemaps" spec="https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <engine name="android" spec="^8.0.0" />
     <engine name="ios" spec="^4.5.5" />
 </widget>
