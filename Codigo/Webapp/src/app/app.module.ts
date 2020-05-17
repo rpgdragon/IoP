@@ -39,6 +39,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { GeolocalizacionProvider } from '../providers/geolocalizacion/geolocalizacion';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 
 //import { HomePage } from '@pages/all'
@@ -137,7 +138,8 @@ const routes: Routes = [
     RestConstantesProvider,
     FirebaseCrashlytics,
     GooglePlus,
-    GeolocalizacionProvider
+    GeolocalizacionProvider,
+    CallNumber
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
