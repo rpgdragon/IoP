@@ -118,10 +118,11 @@ export class RestCamisetaProvider {
   }
 
 
-  public editarCamiseta(usuario:string, id:number, nombre:string, parentesco:string, icono:string, ecgminimo: number, ecgmaximo: number, edaminimo:number, edamaximo: number,
+  public editarCamiseta(usuario:string, id:number, nombre:string, icono:string, ecgminimo: number, ecgmaximo: number, edaminimo:number, edamaximo: number,
     temperaturaminimo: number, temperaturamaximo: number, notificacionesecg: boolean, notificacioneseda: boolean,
     notificacionestemperatura: boolean, notificacionescaida:boolean,fechanacimiento: Date, sexo: string, telefono: number,
-    telefonocontacto: string, notas: string, direccion:string){
+    telefonocontacto: string, notas: string, calle:string,numero:string,localidad:string,provincia:string,
+    latitud: number, longitud:number ){
      //rellenamos los valores no obligatorios que han venido sin nada con un valor -1
      //para indicar en el json que ese valor no esta relleno
      //la idea es forzar que esten todos los campos para poder depurar mejor
@@ -156,6 +157,12 @@ export class RestCamisetaProvider {
       notificacionescaida = false;
     }
 
+    if(longitud==undefined || longitud==null){
+      longitud=-1;
+    }
+    if(latitud==undefined || latitud==null){
+      latitud=-1;
+    }    
     return new Promise((resolve,reject) => {
       let httpOptions = {
 				headers: new HttpHeaders({
@@ -168,7 +175,6 @@ export class RestCamisetaProvider {
         "usuario": usuario,
         "id": "" + id,
         "nombre": nombre,
-        "parentesco": parentesco,
         "icono": icono,
         "ecgminimo": "" + ecgminimo,
         "ecgmaximo": "" + ecgmaximo,
@@ -185,7 +191,12 @@ export class RestCamisetaProvider {
         "telefono": "" + telefono,
         "telefonocontacto": "" + telefonocontacto,
         "notas": "" + notas,
-        "direccion": "" + direccion
+        "calle": "" + calle,
+        "numero": "" + numero,
+        "localidad": "" + localidad,
+        "provincia": "" + provincia,
+        "latitud": "" + latitud,
+        "longitud": "" + longitud
       } 
 
       console.log(cuerpo);

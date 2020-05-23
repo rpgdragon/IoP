@@ -20,19 +20,21 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
+  <ion-tabs #editarCamisetaTabs>
+    <ion-tab tabIcon="shirt" tabTitle="Camiseta" [root]="camisetapagina" [rootParams]="formulario"></ion-tab>
+    <ion-tab tabIcon="person" tabTitle="Paciente" [root]="pacientepagina" [rootParams]="formulario"></ion-tab>
+    <ion-tab tabIcon="heart" tabTitle="ECG" [root]="ecgpagina" [rootParams]="formulario" *ngIf="!isECG"></ion-tab>
+    <ion-tab tabIcon="water" tabTitle="EDA" [root]="edapagina" [rootParams]="formulario" *ngIf="!isEDA"></ion-tab>
+    <ion-tab tabIcon="thermometer" tabTitle="Temperatura" [root]="temperaturapagina" [rootParams]="formulario" *ngIf="!isTemperatura"></ion-tab>
+    <ion-tab tabIcon="trending-down" tabTitle="Caida" [root]="caidapagina" [rootParams]="formulario" *ngIf="!isCaida"></ion-tab>
+  </ion-tabs>
+</ion-content>
 
-<ion-content forceOverscroll="true">
+
+<!--<ion-content forceOverscroll="true">
   <form [formGroup]="formularioEditarCamiseta" (ngSubmit)="editarCamiseta()">
-      <ion-label stacked>Icono *:</ion-label>
-      <ion-item class="imageselect image_{{imagen}}">
-        <ion-select (click)="prepararImagenesIcono()" formControlName="icono" cancelText="Cancelar" (ionChange)="ponerImagen(this.imagen)" [(ngModel)]="imagen">
-          <ion-option  *ngFor="let optionimagen of imagenes" [value]="optionimagen" (ionSelect)="selectIcono(optionimagen)">{{optionimagen}}</ion-option>
-        </ion-select>   
-      </ion-item>
-      <ion-label stacked>Nombre *:</ion-label>
-      <ion-input formControlName="nombre" type="text" placeholder="Nombre" [(ngModel)]="camiseta.nombre" clearOnEdit="false"></ion-input>
-      <ion-label stacked>Parentesco *:</ion-label>
-      <ion-input formControlName="parentesco" type="text" placeholder="Parentesco" [(ngModel)]="camiseta.parentesco" clearOnEdit="false"></ion-input>
+     
       <ion-label stacked>Fecha de nacimiento :</ion-label>
       <ion-datetime formControlName="fechanacimiento" style="text-align:left" [(ngModel)]="camiseta.fechanacimiento" displayFormat="YYYY-MM-DD" cancelText="Cancelar" doneText="Validar" clearOnEdit="false"></ion-datetime>
       <ion-label stacked>Sexo :</ion-label>
@@ -64,4 +66,4 @@
       </div> 
       <div class="justificado display-inline espaciado"><button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!formularioEditarCamiseta.valid">Guardar Cambios</button></div>  
     </form>
-</ion-content>
+</ion-content>-->
