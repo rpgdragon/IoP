@@ -55,6 +55,9 @@ export class ConstantesPage {
   private valorecgcambiado: boolean;
   private valoredacambiado: boolean;
   private valortemperaturacambiado: boolean;
+  public isECG:boolean;
+  public isEDA:boolean;
+  public isTemperatura:boolean;
 
 
 
@@ -74,6 +77,24 @@ export class ConstantesPage {
     this.valorecgcambiado = false;
     this.valoredacambiado = false;
     this.valortemperaturacambiado = false;
+    if(this.camiseta["esECG"]=="1"){
+      this.isECG = false;
+    }
+    else{
+      this.isECG = true;
+    }
+    if(this.camiseta["esEDA"]=="1"){
+      this.isEDA = false;
+    }
+    else{
+      this.isEDA = true;
+    }
+    if(this.camiseta["esTemperatura"]=="1"){
+      this.isTemperatura= false;
+    }
+    else{
+      this.isTemperatura = true;
+    }
   }
 
   ionViewDidLoad() {

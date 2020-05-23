@@ -28,6 +28,12 @@ import { EdaPage } from '@pages/eda/eda';
 import { NuevacamisetaPage } from '@pages/nuevacamiseta/nuevacamiseta';
 import { NuevacamisetaxcamisetaPage } from '@pages/nuevacamisetaxcamiseta/nuevacamisetaxcamiseta';
 import { NuevacamisetaxpacientePage } from '@pages/nuevacamisetaxpaciente/nuevacamisetaxpaciente';
+import { EditarcamisetaxcamisetaPage } from '@pages/editarcamisetaxcamiseta/editarcamisetaxcamiseta';
+import { EditarcamisetaxpacientePage } from '@pages/editarcamisetaxpaciente/editarcamisetaxpaciente';
+import { EditarcamisetaxedaPage } from '@pages/editarcamisetaxeda/editarcamisetaxeda';
+import { EditarcamisetaxecgPage } from '@pages/editarcamisetaxecg/editarcamisetaxecg';
+import { EditarcamisetaxtemperaturaPage } from '@pages/editarcamisetaxtemperatura/editarcamisetaxtemperatura';
+import { EditarcamisetaxcaidaPage } from '@pages/editarcamisetaxcaida/editarcamisetaxcaida';
 import { TemperaturaPage } from '@pages/temperatura/temperatura';
 import { ConfiguracionPage } from '@pages/configuracion/configuracion';
 import { InfoPage } from '@pages/info/info';
@@ -82,6 +88,12 @@ const routes: Routes = [
         TemperaturaPage,
         InfoPage,
         EditarcamisetaPage,
+        EditarcamisetaxcamisetaPage,
+        EditarcamisetaxpacientePage,
+        EditarcamisetaxecgPage,
+        EditarcamisetaxedaPage,
+        EditarcamisetaxtemperaturaPage,
+        EditarcamisetaxcaidaPage,
         ConfiguracionPage,
         NuevacamisetaPage,
         NuevacamisetaxcamisetaPage,
@@ -103,6 +115,12 @@ const routes: Routes = [
         TemperaturaPage,
         InfoPage,
         EditarcamisetaPage,
+        EditarcamisetaxcamisetaPage,
+        EditarcamisetaxpacientePage,
+        EditarcamisetaxecgPage,
+        EditarcamisetaxedaPage,
+        EditarcamisetaxtemperaturaPage,
+        EditarcamisetaxcaidaPage,
         ConfiguracionPage,
         NuevacamisetaPage,
         NuevacamisetaxpacientePage,
