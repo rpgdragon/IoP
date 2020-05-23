@@ -1,0 +1,28 @@
+<ion-content forceOverscroll="true" class="formulario_fondo">
+  <form style="min-height:200px" [formGroup]="editarcamiseta.getFormularioEditarCamiseta()" (ngSubmit)="editarCamiseta()">
+    <div id="canvas_map" style="height:200px"></div>
+    <button ion-button class="submit-btn right buttonForm" type="button" (click) ="calcularPosicion()">Calcular posición</button>
+    <ion-label stacked>Telefono:</ion-label>
+    <ion-input formControlName="telefono" type="number" placeholder="Telefono" clearOnEdit="false" [(ngModel)]="camiseta.telefono"></ion-input>
+    <ion-label stacked>Telefono Contacto:</ion-label>
+    <ion-input formControlName="telefonocontacto" type="number" placeholder="Telefono" clearOnEdit="false" [(ngModel)]="camiseta.telefonocontacto"></ion-input>
+    <ion-label stacked>Sexo :</ion-label>
+    <ion-select placeholder="Seleccione el sexo" class="ion-select-sexo" formControlName="sexo" cancelText="Cancelar" [(ngModel)]="camiseta.sexo" >
+      <ion-option  value="H">Hombre</ion-option>
+      <ion-option  value="M">Mujer</ion-option>
+    </ion-select>
+  <ion-label stacked>Fecha de nacimiento :</ion-label>
+  <ion-datetime placeholder="Seleccione fecha de nacimiento" formControlName="fechanacimiento" style="text-align:left" displayFormat="YYYY-MM-DD" cancelText="Cancelar" doneText="Validar" clearOnEdit="false" [(ngModel)]="camiseta.fechanacimiento"></ion-datetime>
+  <ion-label stacked>Calle:</ion-label>
+  <ion-input formControlName="calle" placeholder="Calle" clearOnEdit="false" [(ngModel)]="camiseta.calle"></ion-input>
+  <ion-label stacked>Número:</ion-label>
+  <ion-input formControlName="numero" placeholder="numero" clearOnEdit="false" [(ngModel)]="camiseta.numero"></ion-input>
+  <ion-label stacked>Localidad:</ion-label>
+  <ion-input formControlName="localidad" placeholder="localidad" clearOnEdit="false" [(ngModel)]="camiseta.localidad"></ion-input>
+  <ion-label stacked>Provincia:</ion-label>
+  <ion-input formControlName="provincia" placeholder="Provincia" clearOnEdit="false" [(ngModel)]="camiseta.provincia"></ion-input>
+  <ion-label stacked>Notas:</ion-label>
+  <ion-input formControlName="notas" placeholder="Notas" clearOnEdit="false"  [(ngModel)]="camiseta.notas"></ion-input>
+  <div class="justificado display-inline espaciado"><button ion-button class="submit-btn right buttonForm" type="submit" [disabled]="!editarcamiseta.getFormularioEditarCamiseta().valid">Guardar Cambios</button></div>
+</form>
+</ion-content>
