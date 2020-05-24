@@ -57,16 +57,6 @@ else{
 	$camiseta->setNombre($input->nombre);
 }
 
-if(!isset($input->parentesco) || $input->parentesco==null  || $input->parentesco==''){
-	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
-	meter_error_log($log);
-    generar_respuesta(false, "La solicitud de actualizacion le falta el parentesco",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
-	exit();
-}
-else{
-	$camiseta->setParentesco($input->parentesco);
-}
-
 if(!isset($input->icono) || $input->icono==null  || $input->icono==''){
 	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada no tiene los parametros para editar la camiseta';
 	meter_error_log($log);
@@ -115,11 +105,46 @@ else{
 	$camiseta->setNotas($input->notas);
 }
 
-if(!isset($input->direccion) || $input->direccion==null  || $input->direccion==''){
-    $camiseta->setDireccion(null);
+if(!isset($input->calle) || $input->calle==null  || $input->calle==''){
+    $camiseta->setCalle(null);
 }
 else{
-	$camiseta->setDireccion($input->direccion);
+	$camiseta->setCalle($input->calle);
+}
+
+if(!isset($input->numero) || $input->numero==null  || $input->numero==''){
+    $camiseta->setNumero(null);
+}
+else{
+	$camiseta->setNumero($input->numero);
+}
+
+if(!isset($input->provincia) || $input->provincia==null  || $input->provincia==''){
+    $camiseta->setProvincia(null);
+}
+else{
+	$camiseta->setProvincia($input->provincia);
+}
+
+if(!isset($input->localidad) || $input->localidad==null  || $input->localidad==''){
+    $camiseta->setLocalidad(null);
+}
+else{
+	$camiseta->setLocalidad($input->localidad);
+}
+
+if(!isset($input->latitud) || $input->latitud==null  || $input->latitud==''){
+    $camiseta->setLatitud(null);
+}
+else{
+	$camiseta->setLatitud($input->latitud);
+}
+
+if(!isset($input->longitud) || $input->longitud==null  || $input->longitud==''){
+    $camiseta->setLongitud(null);
+}
+else{
+	$camiseta->setLongitud($input->longitud);
 }
 
 if(!isset($input->ecgminimo) || $input->ecgminimo==null  || $input->ecgminimo=='' || $input->ecgminimo=="-1"){

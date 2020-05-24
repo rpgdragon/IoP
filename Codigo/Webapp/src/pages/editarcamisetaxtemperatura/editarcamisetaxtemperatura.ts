@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { EditarcamisetaPage} from '@pages/editarcamiseta/editarcamiseta';
 
 /**
  * Generated class for the EditarcamisetaxtemperaturaPage page.
@@ -8,18 +9,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-editarcamisetaxtemperatura',
   templateUrl: 'editarcamisetaxtemperatura.html',
 })
 export class EditarcamisetaxtemperaturaPage {
+  private editarcamiseta:EditarcamisetaPage;
+  public camiseta:Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.editarcamiseta = this.navParams.get('formulario');
+    this.camiseta = this.editarcamiseta.getCamiseta();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditarcamisetaxtemperaturaPage');
+  }
+
+  editarCamiseta(){
+    this.editarcamiseta.editarCamiseta();
   }
 
 }
