@@ -33,6 +33,7 @@ $color_boton_borrar: #ff0000;
 .cajaDatosCamiseta{
     flex-grow: 100;
     text-align:left;
+    margin-left:0.5em;
     vertical-align: middle;
     h3{
         font-size:1.7em;
@@ -118,4 +119,8 @@ ion-item{
 
 .scroll-content{
     background-color: transparent !important;
+}
+
+.telefono{
+    color:#0000EE;
 }

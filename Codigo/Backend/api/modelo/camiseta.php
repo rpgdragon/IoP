@@ -381,7 +381,7 @@ class Camiseta{
 		$query = "UPDATE ".$this->tabla . " SET nombre=:nombre, src=:src,ecgminimo=:ecgminimo,
 		ecgmaximo=:ecgmaximo,edaminimo=:edaminimo,edamaximo=:edamaximo,temperaturaminimo=:temperaturaminimo, temperaturamaximo=:temperaturamaximo,
 		notificacionesecg=:notificacionesecg,notificacioneseda=:notificacioneseda,notificacionestemperatura=:notificacionestemperatura,notificacionescaida=:notificacionescaida,
-		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, calle=:calle, numero=:numero, localidad=:localidad, provincia=:provincia, WHERE id=:id ";
+		fechanacimiento=:fechanacimiento, sexo=:sexo, telefono=:telefono, telefonocontacto=:telefonocontacto, notas=:notas, calle=:calle, numero=:numero, localidad=:localidad, provincia=:provincia, latitud=:latitud, longitud=:longitud WHERE id=:id ";
 		$queryst = $this->conexion->prepare($query);
 		$this->nombre=htmlspecialchars(strip_tags($this->nombre));
 		$this->src=htmlspecialchars(strip_tags($this->src));
@@ -403,6 +403,8 @@ class Camiseta{
 		$this->provincia=htmlspecialchars(strip_tags($this->provincia));
 		$this->telefono=htmlspecialchars(strip_tags($this->telefono));
 		$this->telefonocontacto=htmlspecialchars(strip_tags($this->telefonocontacto));
+		$this->latitud=htmlspecialchars(strip_tags($this->latitud));
+		$this->longitud=htmlspecialchars(strip_tags($this->longitud));
 		$this->id=htmlspecialchars(strip_tags($this->id));
 		if($this->ecgminimo==0){
 			$this->ecgminimo=null;
@@ -431,6 +433,12 @@ class Camiseta{
 		if($this->sexo==''){
 			$this->sexo=null;
 		}
+		if($this->latitud==0){
+			$this->latitud=null;
+		}
+		if($this->longitud==0){
+			$this->longitud=null;
+		}
 		$queryst->bindParam(":nombre", $this->nombre);
 		$queryst->bindParam(":src", $this->src);
 		$queryst->bindParam(":ecgminimo", $this->ecgminimo);
@@ -453,6 +461,8 @@ class Camiseta{
 		$queryst->bindParam(":localidad", $this->localidad);
 		$queryst->bindParam(":provincia", $this->provincia);
 		$queryst->bindParam(":id", $this->id);
+		$queryst->bindParam(":latitud", $this->latitud);
+		$queryst->bindParam(":longitud", $this->longitud);
         if($queryst->execute()){
 			return true;
 		}
