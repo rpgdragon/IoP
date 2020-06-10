@@ -3,6 +3,9 @@
 #include <ADXL335.h>
 #include <SPI.h>
 #include <SD.h>
+#include <virtuabotixRTC.h>
+#include <OneWire.h>                
+#include <DallasTemperature.h>
 
 const int PIN_X = A0;
 const int PIN_Y = A1;
@@ -10,7 +13,9 @@ const int PIN_Z = A2;
 const int PIN_RX_WIFI = 8;
 const int PIN_TX_WIFI = 9;
 const int PIN_BUZZER = 3;
+const int PIN_BATERIA = A3
 const int PIN_CS_SD = 4;
+const int PIN_TEMPERATURA = 2;
 const float aref = 3.3;
 const float alfa = 0.6;
 const int HOST_PORT = 80;
@@ -20,19 +25,23 @@ const int MAXIMO_ERRORES = 10;
 String numeroserie;
 String codigoseguridad;
 
-int error = 0; 
+int error = 0;
+int tiempo = 0;
 
  
 SoftwareSerial softSerial(PIN_RX_WIFI, PIN_TX_WIFI); // RX, TX
 ESP8266 wifi(softSerial);
+virtuabotixRTC myRTC(5, 6, 7);
  
 void setup(void)
 {
+   //myRTC.setDS1302Time(00, 45, 15, 2, 9, 6, 2020); // SS, MM, HH, DW, DD, MM, YYYY
    int indice = 0;
    String ssid="";
    String clave="";
    Serial.begin(9600);
    pinMode(PIN_BUZZER, OUTPUT);
+   pinMode(PIN_BATERIA, INPUT);
    while (!Serial) {
     ;
    }
@@ -137,10 +146,25 @@ void setup(void)
    }
    return 0;
 }
+
+float tramitarTemperatura(){
+  OneWire ourWire(PIN_TEMPERATURA);                //Se establece el pin 2  como bus OneWire
+  DallasTemperature sensors(&ourWire); //Se declara una variable u objeto para nuestro sensor
+  sensors.begin();
+  delay(10);
+  sensors.requestTemperatures();   
+  return sensors.getTempCByIndex(0)
+}
+
+int tramitarCaida(){
+  
+}
  
 void loop(void)
 {
   int indice = 0;
+  int temperatura;
+  int bateria;
   if(error > 0){
     while(indice < error){
       tone(PIN_BUZZER, 500); // Send 1KHz sound signal...
@@ -154,7 +178,41 @@ void loop(void)
     }
   }
   else{
-    
+    tiempo = tiempo + 1
+
+    if(tiempo>=6000){
+      //hora de hacer el envio, primero actualizamos el timer
+      myRTC.updateTime();
+      bateria = analogRead(PIN_BATERIA);
+      temperatura = tramitarTemperatura();
+
+      if(!envioWifi){
+        //abrimos el fichero Wifi para guardar los datos
+        File f = SD.open("log.txt", FILE_WRITE);
+        String cadena = String(myRTC.dayofmonth) + "/" + String(myRTC.month) + "/" + String(myRTC.year) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
+        f.print(cadena);
+        cadena = " TEMP:" + String(temperatura);
+        f.print(cadena);
+        cadena = " BAT: " + String(bateria);
+        f.println(cadena);
+        f.flush();
+        f.close();
+      }
+
+  // Se imprime el resultado en el Monitor Serial
+  /*Serial.print("Fecha y hora actual: ");
+  Serial.print(myRTC.dayofmonth); // Se puede cambiar entre día y mes si se utiliza el sistema Americano
+  Serial.print("/");
+  Serial.print(myRTC.month);
+  Serial.print("/");
+  Serial.print(myRTC.year);
+  Serial.print(" ");
+  Serial.print(myRTC.hours);
+  Serial.print(":");
+  Serial.print(myRTC.minutes);
+  Serial.print(":");
+  Serial.println(myRTC.seconds);*/
+    }
   }
   /*
    uint8_t buffer[800] = { 0 };
