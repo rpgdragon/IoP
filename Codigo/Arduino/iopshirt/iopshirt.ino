@@ -13,7 +13,7 @@ const int PIN_Z = A2;
 const int PIN_RX_WIFI = 8;
 const int PIN_TX_WIFI = 9;
 const int PIN_BUZZER = 3;
-const int PIN_BATERIA = A3
+const int PIN_BATERIA = A3;
 const int PIN_CS_SD = 4;
 const int PIN_TEMPERATURA = 2;
 const float aref = 3.3;
@@ -22,16 +22,29 @@ const int HOST_PORT = 80;
 const char* HOST_NAME = "www.iopshirt.es";
 const int MAXIMO = 5;
 const int MAXIMO_ERRORES = 10;
+const int PIN1_RTC = 5;
+const int PIN2_RTC = 6;
+const int PIN3_RTC = 7;
+const float UMBRAL = 1.0;
 String numeroserie;
 String codigoseguridad;
 
+
 int error = 0;
 int tiempo = 0;
+int datos = 0;
+
+float laccel[4];
+
+
+float xAnt = -99.99;
+float zAnt = -99.99;
+float yAnt = -99.99;
 
  
 SoftwareSerial softSerial(PIN_RX_WIFI, PIN_TX_WIFI); // RX, TX
 ESP8266 wifi(softSerial);
-virtuabotixRTC myRTC(5, 6, 7);
+virtuabotixRTC myRTC(PIN1_RTC, PIN2_RTC, PIN3_RTC);
  
 void setup(void)
 {
@@ -153,15 +166,64 @@ float tramitarTemperatura(){
   sensors.begin();
   delay(10);
   sensors.requestTemperatures();   
-  return sensors.getTempCByIndex(0)
+  return sensors.getTempCByIndex(0);
 }
 
-int tramitarCaida(){
-  
+boolean tramitarCaida(){
+  ADXL335 accel(PIN_X, PIN_Y, PIN_Z, aref);
+  float x;
+  float y;
+  float z;
+  //this is required to update the values
+  delay(10);
+  accel.update(); 
+  x = accel.getX();
+  y = accel.getY();
+  //if the project is laying flat and top up the z axis reads ~1G
+  z = accel.getZ();
+
+  if(xAnt==-99.99){
+    xAnt = x;
+    yAnt = y;
+    zAnt = z;
+  }
+  else{
+    xAnt  = (alfa*x) + (1-alfa)*xAnt;
+    yAnt  = (alfa*y) + (1-alfa)*yAnt;
+    zAnt  = (alfa*z) + (1-alfa)*zAnt;
+  }
+
+  if(tiempo>=0 && tiempo%250==0){ 
+    float acelfinal = sqrt(xAnt*xAnt + yAnt*yAnt + zAnt*zAnt);
+    //tenemos que actualizar la array de pesos
+    int i = 3;
+    float maxf = acelfinal;
+    float minf = acelfinal;
+    while(i>0){
+      laccel[i] = laccel[i-1];
+      if(laccel[i] > maxf){
+        maxf = laccel[i];
+      }
+      if(laccel[i] < minf){
+        minf = laccel[i];
+      }
+      i = i - 1;     
+    }
+    laccel[0] = acelfinal;
+    if(datos >=4){
+      //comprobamos si ha habido caida
+      if(maxf - minf > UMBRAL){
+        return true;
+      }
+    }
+    else{
+      datos = datos + 1;
+    }
+  }
+  return false;
 }
  
-void loop(void)
-{
+void loop(void){
   int indice = 0;
   int temperatura;
   int bateria;
@@ -178,14 +240,17 @@ void loop(void)
     }
   }
   else{
-    tiempo = tiempo + 1
-
-    if(tiempo>=6000){
+    tiempo = tiempo + 1;
+    if(tramitarCaida()){
+      tramitarEnvio("CAIDA",1,0.0);
+    }
+    if(tiempo>=3000){
       //hora de hacer el envio, primero actualizamos el timer
       myRTC.updateTime();
       bateria = analogRead(PIN_BATERIA);
       temperatura = tramitarTemperatura();
-
+      boolean envioWifi = tramitarEnvio("BAT",bateria,0.0);
+      envioWifi = envioWifi && tramitarEnvio("TEMP",0,temperatura);
       if(!envioWifi){
         //abrimos el fichero Wifi para guardar los datos
         File f = SD.open("log.txt", FILE_WRITE);
@@ -198,55 +263,40 @@ void loop(void)
         f.flush();
         f.close();
       }
-
-  // Se imprime el resultado en el Monitor Serial
-  /*Serial.print("Fecha y hora actual: ");
-  Serial.print(myRTC.dayofmonth); // Se puede cambiar entre día y mes si se utiliza el sistema Americano
-  Serial.print("/");
-  Serial.print(myRTC.month);
-  Serial.print("/");
-  Serial.print(myRTC.year);
-  Serial.print(" ");
-  Serial.print(myRTC.hours);
-  Serial.print(":");
-  Serial.print(myRTC.minutes);
-  Serial.print(":");
-  Serial.println(myRTC.seconds);*/
     }
   }
-  /*
+
+}
+
+boolean tramitarEnvio(String tipo, int dato, float dato2){
+   if (!wifi.createTCP(HOST_NAME, HOST_PORT)) {
+      //no se ba podido generar la conexion TCP
+      return -1; 
+   }
    uint8_t buffer[800] = { 0 };
- 
-   if (wifi.createTCP(HOST_NAME, HOST_PORT)) {
-      Serial.print("create tcp ok\r\n");
+   char *request = NULL;
+   String cadena = "";
+   if(tipo=="BAT"){
+    cadena = "POST /api/v3/" + numeroserie + "/" + codigoseguridad + "/bateria/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
    }
-   else {
-      Serial.print("create tcp err\r\n");
+   if(tipo=="TEMP"){
+    cadena = "POST /api/v3/" + numeroserie + "/" + codigoseguridad + "/temperatura/" + String(dato2) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
    }
- 
-   char *request = "GET /2434bc64 HTTP/1.1\r\nHost: www.pasted.co\r\nConnection: close\r\n\r\n";
+   if(tipo=="CAIDA"){
+    cadena = "POST /api/v3/" + numeroserie + "/" + codigoseguridad + "/caida/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
+   }
+   cadena.toCharArray(request, cadena.length());
    wifi.send((const uint8_t*)request, strlen(request));
- 
+  
+   delay(1000);
+   
    uint32_t len = wifi.recv(buffer, sizeof(buffer), 10000);
-   if (len > 0) 
-   {
-      Serial.print("Received:\r\n");
-      for (uint32_t i = 0; i < len; i++) 
-      {
-         char c = (char)buffer[i];
-         if (c == '~')
-         {
-            for (uint32_t j = i + 1; j < len; j++)
-            {
-               c = (char)buffer[j];
-               if (c == '~') break;
-               Serial.print(c);
-            }
-            break;
-         }
-      }
-      Serial.print("\r\n");
+   delay(1000);
+   delete [] request;
+   if (len > 0) {
+     return true;
    }
- 
-   while (1) delay(1000);*/
+   else{
+    return false;
+   }
 }
