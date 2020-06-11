@@ -20,11 +20,12 @@ const float aref = 3.3;
 const float alfa = 0.6;
 const int HOST_PORT = 80;
 const char* HOST_NAME = "www.iopshirt.es";
+const char* INIT URL = "GET /api/v3/info/";
 const int MAXIMO = 5;
 const int MAXIMO_ERRORES = 10;
 const int PIN1_RTC = 5;
-const int PIN2_RTC = 6;
-const int PIN3_RTC = 7;
+const int PIN2_RTC = 7;
+const int PIN3_RTC = 6;
 const float UMBRAL = 1.0;
 String numeroserie;
 String codigoseguridad;
@@ -48,7 +49,7 @@ virtuabotixRTC myRTC(PIN1_RTC, PIN2_RTC, PIN3_RTC);
  
 void setup(void)
 {
-   //myRTC.setDS1302Time(00, 45, 15, 2, 9, 6, 2020); // SS, MM, HH, DW, DD, MM, YYYY
+   //myRTC.setDS1302Time(00, 38, 11, 4, 11, 6, 2020); // SS, MM, HH, DW, DD, MM, YYYY
    int indice = 0;
    String ssid="";
    String clave="";
@@ -60,7 +61,7 @@ void setup(void)
    }
    indice = inicializarSD(&ssid, &clave);
    if(indice==0){
-    indice = inicializarWifi(&ssid, &clave);
+    //indice = inicializarWifi(&ssid, &clave);
     error = indice;
    }
    else{
@@ -157,6 +158,9 @@ void setup(void)
     Serial.println("Ha fallado el MUX");
       return 6;
    }
+
+   //si llega bien aqui, implica que esta conectado, podemos registrarlo
+   tramitarEnvio("REG",null,null);
    return 0;
 }
 
@@ -165,7 +169,7 @@ float tramitarTemperatura(){
   DallasTemperature sensors(&ourWire); //Se declara una variable u objeto para nuestro sensor
   sensors.begin();
   delay(10);
-  sensors.requestTemperatures();   
+  sensors.requestTemperatures();  
   return sensors.getTempCByIndex(0);
 }
 
@@ -225,7 +229,7 @@ boolean tramitarCaida(){
  
 void loop(void){
   int indice = 0;
-  int temperatura;
+  float temperatura;
   int bateria;
   if(error > 0){
     while(indice < error){
@@ -242,19 +246,21 @@ void loop(void){
   else{
     tiempo = tiempo + 1;
     if(tramitarCaida()){
-      tramitarEnvio("CAIDA",1,0.0);
+      //tramitarEnvio("CAIDA",1,0.0);
     }
-    if(tiempo>=3000){
+    if(tiempo>=1000){
       //hora de hacer el envio, primero actualizamos el timer
       myRTC.updateTime();
       bateria = analogRead(PIN_BATERIA);
       temperatura = tramitarTemperatura();
-      boolean envioWifi = tramitarEnvio("BAT",bateria,0.0);
-      envioWifi = envioWifi && tramitarEnvio("TEMP",0,temperatura);
+      boolean envioWifi = false;
+      //boolean envioWifi = tramitarEnvio("BAT",bateria,0.0);
+     // envioWifi = envioWifi && tramitarEnvio("TEMP",0,temperatura);
       if(!envioWifi){
         //abrimos el fichero Wifi para guardar los datos
         File f = SD.open("log.txt", FILE_WRITE);
         String cadena = String(myRTC.dayofmonth) + "/" + String(myRTC.month) + "/" + String(myRTC.year) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
+        Serial.println(cadena);
         f.print(cadena);
         cadena = " TEMP:" + String(temperatura);
         f.print(cadena);
@@ -263,6 +269,7 @@ void loop(void){
         f.flush();
         f.close();
       }
+      tiempo = 0;
     }
   }
 
@@ -276,14 +283,17 @@ boolean tramitarEnvio(String tipo, int dato, float dato2){
    uint8_t buffer[800] = { 0 };
    char *request = NULL;
    String cadena = "";
+   if(tipo=="REG"){
+    cadena = INIT_URL + "registro/" + numeroserie + "/" + codigoseguridad + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
+   }
    if(tipo=="BAT"){
-    cadena = "POST /api/v3/" + numeroserie + "/" + codigoseguridad + "/bateria/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
+    cadena = INIT_URL + "bateria/" + numeroserie + "/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
    }
    if(tipo=="TEMP"){
-    cadena = "POST /api/v3/" + numeroserie + "/" + codigoseguridad + "/temperatura/" + String(dato2) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
+    cadena = INIT_URL + "temperatura/" + numeroserie + "/" + String(dato2) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
    }
    if(tipo=="CAIDA"){
-    cadena = "POST /api/v3/" + numeroserie + "/" + codigoseguridad + "/caida/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
+    cadena = INIT_URL + "caida/" + numeroserie + "/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
    }
    cadena.toCharArray(request, cadena.length());
    wifi.send((const uint8_t*)request, strlen(request));
