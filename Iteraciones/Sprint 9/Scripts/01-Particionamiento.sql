@@ -1,0 +1,1 @@
+Alter table informacion partition by key(fecha) partitions 365;
