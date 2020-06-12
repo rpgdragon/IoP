@@ -131,7 +131,118 @@ class Informacion{
         else{
             return false;
         }
-	}
+    }
+    
+    function actualizar_campo($tipo, $valor){
+        if($this->comprobar_existe_producto()){
+            $query = "UPDATE ".$this->tabla . " SET ";
+            if($tipo=="bateria"){
+                $query = $query."bateria=:valor ";
+            }
+            if($tipo=="ecg"){
+                $query = $query."ecg=:valor ";
+            }
+            if($tipo=="eda"){
+                $query = $query."eda=:valor ";
+            }
+            if($tipo=="temperatura"){
+                $query = $query."temperatura=:valor ";
+            }
+            $query = $query." WHERE numeroserie=:numeroserie AND fecha=:fecha";
+            $queryst = $this->conexion->prepare($query);
+            $queryst->bindParam(":valor", $valor);
+            $queryst->bindParam(":numeroserie", $this->numeroserie);
+            $queryst->bindParam(":fecha", $this->fecha);
+            try{
+                if($queryst->execute()){
+                    return true;
+                
+                }
+                else{
+                    return false;
+                }
+            }catch(PDOException $e) { 
+                return false; 
+            }
+        }
+        else{
+            return false;
+        }   
+    }
+
+    function insertar_por_campo($tipo,$valor){
+        if($this->comprobar_existe_producto()){
+            $query = "INSERT INTO ".$this->tabla . " SET ";
+            if($tipo=="bateria"){
+                $query = $query."bateria=:valor, ";
+            }
+            if($tipo=="ecg"){
+                $query = $query."ecg=:valor, ";
+            }
+            if($tipo=="eda"){
+                $query = $query."eda=:valor, ";
+            }
+            if($tipo=="temperatura"){
+                $query = $query."temperatura=:valor, ";
+            }
+           $query=$query." numeroserie=:numeroserie,fecha=NOW()";
+            $queryst = $this->conexion->prepare($query);
+            $queryst->bindParam(":valor", $this->valor);
+            $queryst->bindParam(":numeroserie", $this->numeroserie);
+            $queryst->bindParam(":fecha", $this->fecha);
+            try{
+                if($queryst->execute()){
+                    return true;
+                
+                }
+                else{
+                    return false;
+                }
+            }catch(PDOException $e) { 
+                return false; 
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    function insertar_por_campo_fecha($tipo,$valor){
+        if($this->comprobar_existe_producto()){
+            $query = "INSERT INTO ".$this->tabla . " SET ";
+            if($tipo=="bateria"){
+                $query = $query."bateria=:valor, ";
+            }
+            if($tipo=="ecg"){
+                $query = $query."ecg=:valor, ";
+            }
+            if($tipo=="eda"){
+                $query = $query."eda=:valor, ";
+            }
+            if($tipo=="temperatura"){
+                $query = $query."temperatura=:valor, ";
+            }
+           $query=$query." numeroserie=:numeroserie,fecha=:fecha";
+            $queryst = $this->conexion->prepare($query);
+            $queryst->bindParam(":valor", $valor);
+            $queryst->bindParam(":numeroserie", $this->numeroserie);
+            $queryst->bindParam(":fecha", $this->fecha);
+            try{
+                if($queryst->execute()){
+                    return true;
+                
+                }
+                else{
+                    return false;
+                }
+            }catch(PDOException $e) {
+                return false; 
+            }
+        }
+        else{
+            return false;
+        }
+    }
 
 	function actualizar_bateria_camiseta(){
         if($this->comprobar_existe_producto()){
@@ -148,6 +259,7 @@ class Informacion{
                     return false;
                 }
             }catch(PDOException $e) { 
+                echo $e;
                 return false; 
             }
         }
@@ -161,26 +273,41 @@ class Informacion{
         try{
 			$queryst->execute();
 			if($queryst->rowCount() > 0){
-				//existe un producto
+                //existe un producto
 				return true;
 			}
 			else{
-				//no existe
+                //no existe
 				return false;
 			}
-		}catch(PDOException $e) { 
+		}catch(PDOException $e) {
 			return false; 
 		}
     }
 
     function obtener_datos_last_minute(){
+        $results = $this->obtener_datos_last_minute_not_json();
+        $json = json_encode($results);
+        return $json;
+    }
+
+    function obtener_datos_last_minute_not_json(){
         $query= "SELECT informacion.* FROM ".$this->tabla." WHERE fecha >= NOW() - INTERVAL 2 MINUTE  AND numeroserie=:numeroserie ORDER BY fecha desc LIMIT 0,1";
         $queryst = $this->conexion->prepare($query);
         $queryst->bindParam(":numeroserie", $this->numeroserie);
         $queryst->execute();
         $results = $queryst->fetchAll(PDO::FETCH_ASSOC);
-        $json = json_encode($results);
-        return $json;
+        return $results;
+    }
+
+    function obtener_datos_exact_not_json(){
+        $query= "SELECT informacion.* FROM ".$this->tabla." WHERE fecha = :fecha  AND numeroserie=:numeroserie ORDER BY fecha desc LIMIT 0,1";
+        $queryst = $this->conexion->prepare($query);
+        $queryst->bindParam(":fecha", $this->fecha);
+        $queryst->bindParam(":numeroserie", $this->numeroserie);
+        $queryst->execute();
+        $results = $queryst->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
     }
 
     function obtener_ultimas_temperaturas(){

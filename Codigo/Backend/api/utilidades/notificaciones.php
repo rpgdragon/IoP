@@ -82,7 +82,7 @@ function enviar_notificacion($token, $nombrecamiseta, $idcamiseta, $numeroserie,
 
 
 function sendPushNotifications($to='',$data=array(),$parametros=array()){
-    $apiKey='AIzaSyA5uZeW8stU3gROP2RThymWqJW0xqUkQRk';
+    $apiKey='AAAAjCX7DBc:APA91bGRly0PQ9u3jPU2Nfqkbu5jiLWKyhIGEw83X-tdapIV9xe2OYEk4jDyKx2mt5OnozbramPSjumbCIEh8jEt_83D0MSpPdIdPJ0pHtsC4I6_M3oJqGx_yEHN8Engy6VLJI0Tr84g';
     $fields = array ('to' => $to, 'notification' => $data, 'data' => $parametros);
     $headers = array('Authorization: key='.$apiKey, 'Content-Type: application/json');
 

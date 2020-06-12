@@ -604,11 +604,16 @@ class Camiseta{
 		$queryst = $this->conexion->prepare($query);
 		$queryst->bindParam(":bateria", $this->bateria);
 		$queryst->bindParam(":numeroserie", $this->numeroserie);
-		if($queryst->execute()){
-			return true;
+		try{
+			if($queryst->execute()){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
-		else{
-			return false;
+		catch(PDOException $e) { 
+			return false; 
 		}
 	}
 
