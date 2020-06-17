@@ -1,5 +1,3 @@
-#include "ESP8266.h"
-#include <SoftwareSerial.h>
 #include <ADXL335.h>
 #include <SPI.h>
 #include <SD.h>
@@ -7,70 +5,79 @@
 #include <OneWire.h>                
 #include <DallasTemperature.h>
 
-const int PIN_X = A0;
-const int PIN_Y = A1;
-const int PIN_Z = A2;
-const int PIN_RX_WIFI = 8;
-const int PIN_TX_WIFI = 9;
-const int PIN_BUZZER = 3;
-const int PIN_BATERIA = A3;
-const int PIN_CS_SD = 4;
-const int PIN_TEMPERATURA = 2;
-const float aref = 3.3;
-const float alfa = 0.6;
-const int HOST_PORT = 80;
-const char* HOST_NAME = "www.iopshirt.es";
-const char* INIT URL = "GET /api/v3/info/";
-const int MAXIMO = 5;
-const int MAXIMO_ERRORES = 10;
-const int PIN1_RTC = 5;
-const int PIN2_RTC = 7;
-const int PIN3_RTC = 6;
-const float UMBRAL = 1.0;
+#define PIN_X  A0
+#define PIN_Y  A1
+#define PIN_Z  A2
+#define PIN_BUZZER  3
+#define PIN_BATERIA  A3
+#define PIN_EDA A4
+#define PIN_ECG A5
+#define PIN_LOMI 8
+#define PIN_LOMA 9
+#define PIN_CS_SD  4
+#define PIN_TEMPERATURA 2
+#define aref  3.3
+#define alfa  0.6
+#define MAXIMO  5
+#define MAXIMO_ERRORES  10
+#define PIN1_RTC  5
+#define PIN2_RTC  7
+#define PIN3_RTC  6
+#define UMBRAL 1.0
 String numeroserie;
 String codigoseguridad;
+String fecha;
 
 
-int error = 0;
-int tiempo = 0;
-int datos = 0;
+uint8_t error = 0;
+long tiempo = 0;
+long mensaje = 0;
+uint8_t datos = 0;
+
+bool sensores[4];
+bool activacion[4];
+bool enviarIO;
+bool minuto;
 
 float laccel[4];
-
-
 float xAnt = -99.99;
 float zAnt = -99.99;
 float yAnt = -99.99;
 
- 
-SoftwareSerial softSerial(PIN_RX_WIFI, PIN_TX_WIFI); // RX, TX
-ESP8266 wifi(softSerial);
+int ECGArr[20];
+int EDAArr[20];
+int ECGAnt = -99;
+int EDAAnt = -99;
+
 virtuabotixRTC myRTC(PIN1_RTC, PIN2_RTC, PIN3_RTC);
  
 void setup(void)
 {
-   //myRTC.setDS1302Time(00, 38, 11, 4, 11, 6, 2020); // SS, MM, HH, DW, DD, MM, YYYY
-   int indice = 0;
-   String ssid="";
-   String clave="";
+   //myRTC.setDS1302Time(00, 36, 23, 3, 17, 6, 2020); // SS, MM, HH, DW, DD, MM, YYYY
    Serial.begin(9600);
    pinMode(PIN_BUZZER, OUTPUT);
    pinMode(PIN_BATERIA, INPUT);
+   pinMode(PIN_LOMI, INPUT);
+   pinMode(PIN_LOMA, INPUT); 
    while (!Serial) {
     ;
    }
-   indice = inicializarSD(&ssid, &clave);
-   if(indice==0){
-    //indice = inicializarWifi(&ssid, &clave);
-    error = indice;
+   error = inicializarSD();
+   myRTC.updateTime();
+   fecha = String(myRTC.year) + "-" + String(myRTC.month) + "-" + String(myRTC.dayofmonth) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
+   if(error==0){
+    prepararEnvioBT("REG","");
    }
-   else{
-    error=indice;
-   }
+   activacion[0] = false;
+   activacion[1] = false;
+   activacion[2] = false;
+   activacion[3] = false;
+   enviarIO = false;
+   minuto = false;
 }
 
- int inicializarSD(String * ssid, String * clave){
-    int indice = 0;
+ uint8_t inicializarSD(){
+    uint8_t indice = 0;
     File f;
     char inputChar;
     while (!SD.begin(PIN_CS_SD) && indice < MAXIMO) {
@@ -91,48 +98,47 @@ void setup(void)
         f = SD.open("log.txt", FILE_WRITE);
         f.close();
       }
+      if (!SD.exists("pos.txt")){
+        f = SD.open("pos.txt", FILE_WRITE);
+        f.println("0");
+        f.close();
+      }
       f = SD.open("ns.txt", FILE_READ);
-      do{
-        inputChar = f.read();
-        if(inputChar!=-1 && inputChar!='eof' && inputChar!='\r' && inputChar!='\n'){
-          numeroserie = numeroserie + inputChar;
-        }
-      }while(inputChar!=-1);
+      inputChar = f.read();
+      while(inputChar!=-1 && inputChar!='eof' && inputChar!='\r' && inputChar!='\n'){
+        numeroserie = numeroserie + inputChar;
+         inputChar = f.read();
+      }
       f.close();
       if(numeroserie== NULL or numeroserie==""){
         return 3;
       }
       f = SD.open("cs.txt", FILE_READ);
-      do{
-        inputChar = f.read();
-        if(inputChar!=-1 && inputChar!='eof' && inputChar!='\r' && inputChar!='\n'){
-          codigoseguridad = codigoseguridad + inputChar;
-        }
-      }while(inputChar!=-1);
+      inputChar = f.read();
+      while(inputChar!=-1 && inputChar!='eof' && inputChar!='\r' && inputChar!='\n'){
+        codigoseguridad = codigoseguridad + inputChar;
+         inputChar = f.read();
+      }
       f.close();
       if(codigoseguridad== NULL or codigoseguridad==""){
         return 4;
       }
+      codigoseguridad.trim();
       f = SD.open("config.txt", FILE_READ);
-      boolean salto = false;
-      do{
-        inputChar = f.read();
-        if(inputChar==-1 || inputChar=='eof'){
-          break;
-        }
-        if(inputChar=='\r' || inputChar=='\n'){
-          salto = true;
-          f.read();
-        }
-        if(salto){
-          clave->concat(inputChar);
+      inputChar = f.read();
+      indice = 0;
+      while(indice < 4 && inputChar!=-1 && inputChar!='eof' && inputChar!='\r' && inputChar!='\n' ){
+        if(inputChar=='1'){
+          sensores[indice]=true;
         }
         else{
-          ssid->concat(inputChar);
+          sensores[indice]=false;
         }
-      }while(inputChar!=-1);
+        indice = indice + 1;
+        inputChar = f.read();
+      }
       f.close();
-      if(*clave== NULL or *clave=="" or *ssid==NULL or *ssid==""){
+      if(indice<4){
         return 5;
       }
       return 0;
@@ -140,46 +146,60 @@ void setup(void)
     else{
       return 2;
     } 
- }
-
- int inicializarWifi(String * ssid, String * clave){
-   if (!wifi.setOprToStationSoftAP()) {
-      Serial.println("Ha fallado el Station");
-      return 6;
-   }
-   ssid->trim();
-   clave->trim();
-   if (!wifi.joinAP(*ssid, *clave)) {
-    Serial.println("Ha fallado el AP");
-    return 6;
-   }
- 
-   if (!wifi.disableMUX()) {
-    Serial.println("Ha fallado el MUX");
-      return 6;
-   }
-
-   //si llega bien aqui, implica que esta conectado, podemos registrarlo
-   tramitarEnvio("REG",null,null);
-   return 0;
 }
 
-float tramitarTemperatura(){
+void tramitarTemperatura(){
   OneWire ourWire(PIN_TEMPERATURA);                //Se establece el pin 2  como bus OneWire
   DallasTemperature sensors(&ourWire); //Se declara una variable u objeto para nuestro sensor
   sensors.begin();
-  delay(10);
   sensors.requestTemperatures();  
-  return sensors.getTempCByIndex(0);
+  prepararEnvioBT("TEMP",String(sensors.getTempCByIndex(0)));
 }
 
-boolean tramitarCaida(){
+void tramitarECG(){
+  int ecgval;
+  if((digitalRead(PIN_LOMI) == 1)||(digitalRead(PIN_LOMA) == 1)){
+    error = 6;
+    return;
+  }
+  else{
+    ecgval = analogRead(PIN_ECG);
+    if(ECGAnt==-99){
+      ECGAnt = ecgval;
+    }
+    else{
+      ECGAnt  = (alfa*ecgval) + (1-alfa)*ECGAnt;
+    }
+    int i = 19;
+    while(i>0){
+      ECGArr[i] = ECGArr[i-1];
+      i = i - 1;     
+    }
+   ECGArr[0] = ECGAnt;
+  }
+}
+
+void tramitarEDA(){
+  int gsrvalue=analogRead(PIN_EDA);
+  if(EDAAnt==-99){
+    EDAAnt=gsrvalue;
+  }
+  else{
+    EDAAnt  = (alfa*gsrvalue) + (1-alfa)*EDAAnt;
+  }
+  int i = 19;
+  while(i>0){
+    EDAArr[i] = EDAArr[i-1];
+    i = i - 1;     
+  }
+  EDAArr[0] = EDAAnt;
+}
+
+bool tramitarCaida(){
   ADXL335 accel(PIN_X, PIN_Y, PIN_Z, aref);
   float x;
   float y;
   float z;
-  //this is required to update the values
-  delay(10);
   accel.update(); 
   x = accel.getX();
   y = accel.getY();
@@ -197,7 +217,8 @@ boolean tramitarCaida(){
     zAnt  = (alfa*z) + (1-alfa)*zAnt;
   }
 
-  if(tiempo>=0 && tiempo%250==0){ 
+  if(activacion[3]){ 
+    activacion[3] = false;
     float acelfinal = sqrt(xAnt*xAnt + yAnt*yAnt + zAnt*zAnt);
     //tenemos que actualizar la array de pesos
     int i = 3;
@@ -231,6 +252,8 @@ void loop(void){
   int indice = 0;
   float temperatura;
   int bateria;
+  bool caida = false;
+  bool io = true;
   if(error > 0){
     while(indice < error){
       tone(PIN_BUZZER, 500); // Send 1KHz sound signal...
@@ -244,69 +267,161 @@ void loop(void){
     }
   }
   else{
-    tiempo = tiempo + 1;
-    if(tramitarCaida()){
-      //tramitarEnvio("CAIDA",1,0.0);
+    if(sensores[3]){
+      caida = tramitarCaida();
     }
-    if(tiempo>=1000){
+    if(sensores[1]){
+      tramitarEDA();
+    }
+    if(sensores[0]){
+      tramitarECG();
+    }
+
+    if(sensores[3] && caida){
+      prepararEnvioBT("CAIDA","1");
+      io = false;
+    }
+
+    if(sensores[1] && activacion[1]){
+       prepararEnvioBT("EDA","");
+       io = false;
+       activacion[1] = false;
+     }
+     if(sensores[0] && activacion[0]){
+       prepararEnvioBT("ECG","");
+       io = false;
+       activacion[0] = false;
+     }
+
+    if(mensaje>=1000000){
+      mensaje = 1;
+    }
+    
+    if(minuto){
       //hora de hacer el envio, primero actualizamos el timer
       myRTC.updateTime();
-      bateria = analogRead(PIN_BATERIA);
-      temperatura = tramitarTemperatura();
-      boolean envioWifi = false;
-      //boolean envioWifi = tramitarEnvio("BAT",bateria,0.0);
-     // envioWifi = envioWifi && tramitarEnvio("TEMP",0,temperatura);
-      if(!envioWifi){
-        //abrimos el fichero Wifi para guardar los datos
-        File f = SD.open("log.txt", FILE_WRITE);
-        String cadena = String(myRTC.dayofmonth) + "/" + String(myRTC.month) + "/" + String(myRTC.year) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
-        Serial.println(cadena);
-        f.print(cadena);
-        cadena = " TEMP:" + String(temperatura);
-        f.print(cadena);
-        cadena = " BAT: " + String(bateria);
-        f.println(cadena);
-        f.flush();
-        f.close();
+      prepararEnvioBT("BAT",String(analogRead(PIN_BATERIA)));
+      io= false;
+      if(sensores[2]){
+       tramitarTemperatura();
       }
       tiempo = 0;
+      myRTC.updateTime();
+      fecha = String(myRTC.year) + "-" + String(myRTC.month) + "-" + String(myRTC.dayofmonth) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
+      minuto = false;
+    }
+    incrementarTiempo();
+    //solo si no se ha enviado algo y han pasado 5s procedemos a procesar una entrada antigua
+    if(io && enviarIO){
+      procesarUnaEntrada();
+      enviarIO = false;
+    }
+    delay(10);
+  }
+}
+
+void procesarUnaEntrada(){
+  //primero tenemos que leer un parametros
+  unsigned long posicion = 0;
+  File f = SD.open("pos.txt", FILE_READ);
+  String cadena = f.readStringUntil('\n');
+  char *poschar = const_cast<char*>(cadena.c_str());
+  posicion = atol(poschar);
+  f.close();
+  f = SD.open("log.txt", FILE_READ);
+  //nos situamos en el lugar indicado en posicion
+  f.seek(posicion);
+  //leemos la cadena
+  cadena = f.readStringUntil('\n');
+  //quitamos el \r que haya
+  cadena.replace("\r","");
+  posicion = f.position();
+  f.close();
+  bool rec = envioBT(cadena,false);
+  if(rec){
+    //actualizamos el contador a la posicion actual
+    SD.remove("pos.txt");
+    f = SD.open("pos.txt", FILE_WRITE);
+    f.println(posicion);
+    f.flush();
+    f.close();
+  }
+}
+
+boolean envioBT(String cadena, bool insertar){
+  uint8_t intentos = 0;
+  String valor = "";
+  Serial.println(cadena);
+  do{
+    incrementarTiempo();
+    intentos = intentos + 1;
+    delay(10);
+  }
+  while(intentos < MAXIMO && Serial.available() <= 0);
+
+  if(insertar && (intentos >= MAXIMO)){
+    //hay que abrir el fichero de log y añadirlo
+     File f = SD.open("log.txt", FILE_WRITE);
+     f.println(cadena);
+     f.flush();
+     f.close();
+     return false;
+  }
+
+  if(intentos >= MAXIMO){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+
+void incrementarTiempo(){
+  tiempo = tiempo + 10;
+
+  if(tiempo%250==0){
+    activacion[3] = true;    
+  }
+  
+  if(tiempo%1000==0){
+    activacion[0] = true;
+    activacion[1] = true;
+  }
+
+  if(tiempo%5000==0){
+    enviarIO = true;
+  }
+
+  if(tiempo%60000 == 0){
+    minuto = true;
+    activacion[2] = true;
+  }
+}
+
+void prepararEnvioBT(String tipo, String dato){
+  String cadena;
+  mensaje = mensaje + 1;
+  if(tipo=="REG"){
+    cadena = fecha + ";;" + tipo + ";;" + numeroserie + ";;" + codigoseguridad + ";;" + mensaje;
+  }
+  if(tipo=="ECG"){
+    uint8_t indice = 0;
+    while(indice < 20){
+      dato = dato + "," + String(ECGArr[indice]);
+      indice = indice + 1;
     }
   }
 
-}
+  if(tipo=="EDA"){
+    uint8_t indice = 0;
+    while(indice < 20){
+      dato = dato + "," + String(EDAArr[indice]);
+      indice = indice + 1;
+    }
+  }
 
-boolean tramitarEnvio(String tipo, int dato, float dato2){
-   if (!wifi.createTCP(HOST_NAME, HOST_PORT)) {
-      //no se ba podido generar la conexion TCP
-      return -1; 
-   }
-   uint8_t buffer[800] = { 0 };
-   char *request = NULL;
-   String cadena = "";
-   if(tipo=="REG"){
-    cadena = INIT_URL + "registro/" + numeroserie + "/" + codigoseguridad + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
-   }
-   if(tipo=="BAT"){
-    cadena = INIT_URL + "bateria/" + numeroserie + "/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
-   }
-   if(tipo=="TEMP"){
-    cadena = INIT_URL + "temperatura/" + numeroserie + "/" + String(dato2) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
-   }
-   if(tipo=="CAIDA"){
-    cadena = INIT_URL + "caida/" + numeroserie + "/" + String(dato) + " HTTP/1.1\r\nHost: " + HOST_NAME + "\r\nConnection: close\r\n\r\n"; 
-   }
-   cadena.toCharArray(request, cadena.length());
-   wifi.send((const uint8_t*)request, strlen(request));
-  
-   delay(1000);
-   
-   uint32_t len = wifi.recv(buffer, sizeof(buffer), 10000);
-   delay(1000);
-   delete [] request;
-   if (len > 0) {
-     return true;
-   }
-   else{
-    return false;
-   }
+  if(tipo!="REG"){
+    cadena = fecha + ";;" + tipo + ";;" + numeroserie + ";;" +  dato + ";;" + mensaje;
+  }
+  envioBT(cadena, true);
 }
