@@ -14,7 +14,7 @@ include_once '../modelo/producto.php';
 include_once '../modelo/camiseta.php';
 include_once '../modelo/informacion.php';
 
-if(!isset($_GET['ns']) || $_GET['ns']==NULL || $_GET['ns']==""){
+if(!isset($_POST['ns']) || $_POST['ns']==NULL || $_POST['ns']==""){
     http_response_code(CODIGO_FALTAN_PARAMETROS);
     exit();
 }
@@ -36,9 +36,9 @@ $c = new Camiseta();
 $c->setConexion($db);
 $p = new Producto();
 $p->setConexion($db);
-$_GET['ns'] = base64_decode($_GET['ns']);
-$c->setNumeroserie($_GET['ns']);
-$p->setNumeroserie($_GET['ns']);
+$_POST['ns'] = base64_decode($_POST['ns']);
+$c->setNumeroserie($_POST['ns']);
+$p->setNumeroserie($_POST['ns']);
 
 if(!$p->encontrar_producto_con_caida()){
     http_response_code(CODIGO_NO_CUENTA);
@@ -46,7 +46,7 @@ if(!$p->encontrar_producto_con_caida()){
 }
 
 //si llega aqui es que existe, solo debemo enviarlo si el usuario tiene activa las notificaciones
-$datos_umbrales = $c->obtener_umbrales_por_usuario($_GET['ns']);
+$datos_umbrales = $c->obtener_umbrales_por_usuario($_POST['ns']);
 foreach($datos_umbrales as $valorumbral){
 
     if($valorumbral['notificacionestodas']==1){
