@@ -13,33 +13,33 @@ include_once '../modelo/camiseta.php';
 include_once '../modelo/informacion.php';
 include_once '../utilidades/notificaciones.php';
 
-if(!isset($_GET['ns']) || $_GET['ns']==NULL || $_GET['ns']==""){
+if(!isset($_POST['ns']) || $_POST['ns']==NULL || $_POST['ns']==""){
     http_response_code(CODIGO_FALTAN_PARAMETROS);
     exit();
 }
 
-if(!isset($_GET['tipo']) || $_GET['tipo']==NULL || $_GET['tipo']==""){
+if(!isset($_POST['tipo']) || $_POST['tipo']==NULL || $_POST['tipo']==""){
     http_response_code(CODIGO_FALTAN_PARAMETROS);
     exit();
 }
 
-if(!isset($_GET['valor']) || $_GET['valor']==NULL || $_GET['valor']==""){
+if(!isset($_POST['valor']) || $_POST['valor']==NULL || $_POST['valor']==""){
     http_response_code(CODIGO_FALTAN_PARAMETROS);
     exit();
 }
 
-if(!isset($_GET['valor2']) || $_GET['valor2']==NULL || $_GET['valor2']==""){
+if(!isset($_POST['valor2']) || $_POST['valor2']==NULL || $_POST['valor2']==""){
     http_response_code(CODIGO_FALTAN_PARAMETROS);
     exit();
 }
 
-if(!isset($_GET['check']) || $_GET['check']==NULL || $_GET['check']==""){
+if(!isset($_POST['check']) || $_POST['check']==NULL || $_POST['check']==""){
     http_response_code(CODIGO_FALTAN_PARAMETROS);
     exit();
 }
 
-if($_GET['tipo']=="registrar"){
-$clases = $_GET['valor2'];
+if($_POST['tipo']=="REG"){
+$clases = $_POST['valor2'];
 if(strlen($clases)!=4 || !is_numeric($clases[0]) || !is_numeric($clases[1]) || !is_numeric($clases[2]) || !is_numeric($clases[3])){
     http_response_code(CODIGO_FALTAN_PARAMETROS);
     exit();
@@ -59,17 +59,17 @@ catch(Exception $e){
 
 //si llega aqui es que estan todos los parametros bien definidos
 
-$_GET['ns'] = base64_decode($_GET['ns']);
+$_POST['ns'] = base64_decode($_POST['ns']);
 
-if($_GET['tipo']=="registrar"){
+if($_POST['tipo']=="REG"){
     //es el proceso de registrar la camiseta
     //el proceso de la camiseta se hace a dos partes
     //comprobar si existe la camiseta, sino existe se inserta
     //si existe, se actualiza el codigoseguridad
     $p = new Producto();
     $p->setConexion($db);
-    $p->setNumeroserie($_GET['ns']);
-    $p->setCodseg(base64_encode($_GET['valor']));
+    $p->setNumeroserie($_POST['ns']);
+    $p->setCodseg(base64_encode($_POST['valor']));
     //ahora hay que desglosar los campos esECG esEDA, etc
     //el primero indica el ECG
     //el segunda indica el EDA
@@ -107,24 +107,24 @@ if($_GET['tipo']=="registrar"){
 
     //la fecha esta definida
     //YYYY-MM-DD HH:MM:SS
-$fecha = $_GET['valor2'];
+$fecha = $_POST['valor2'];
 
-if($_GET['tipo']=="bateria"){
+if($_POST['tipo']=="BAT"){
     //convertimos el valor a un %
-    $v = $_GET['valor'] / 10.23;
+    $v = $_POST['valor'] / 10.23;
     //redondeamos al entero mas cercano
     $v = round($v);
-    $_GET['valor'] = $v;
+    $_POST['valor'] = $v;
     
 }
 
 $c = new Camiseta();
 $c->setConexion($db);
-$c->setNumeroserie($_GET['ns']);
-$datos_umbrales = $c->obtener_umbrales_por_usuario($_GET['ns']);
-if($_GET['tipo']=="bateria" && $_GET['check']==0){
+$c->setNumeroserie($_POST['ns']);
+$datos_umbrales = $c->obtener_umbrales_por_usuario($_POST['ns']);
+if($_POST['tipo']=="BAT" && $_POST['check']==0){
     //la bateria se actualiza en cualquier caso
-    $c->setBateria($_GET['valor']);
+    $c->setBateria($_POST['valor']);
     $c->actualizar_bateria_camiseta();
 
     //por ultimo si esta por debajo del 20% lanzar un aviso
@@ -136,14 +136,14 @@ if($_GET['tipo']=="bateria" && $_GET['check']==0){
             continue;
         }
 
-        if($valorumbral['notificacionesbateria']==0 && $_GET['valor'] < 20){
+        if($valorumbral['notificacionesbateria']==0 && $_POST['valor'] < 20){
                 //tenemos que enviar una notificacion informando de que el dispositivo tiene bateria baja
-                enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'bateria',null,$_GET['valor']);
+                enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'bateria',null,$_POST['valor']);
         }
     }
 }
 
-if($_GET['tipo']=="temperatura"){
+if($_POST['tipo']=="TEMP"){
     //procedemos a comprobar si tenemos que enviar notificaciones de temperatura
     foreach($datos_umbrales as $valorumbral){
         if($valorumbral['notificacionestodas']==1){
@@ -153,19 +153,19 @@ if($_GET['tipo']=="temperatura"){
 
         if($valorumbral['notificacionestemperatura']==0 && $valorumbral['cnotificacionestemperatura']==0){
             //tenemos que comprobar si se ha rebasado el minimo o maximo de temperatura
-            if($valorumbral['ctemperaturaminimo']!=null && $valorumbral['ctemperaturaminimo']!='' && $valorumbral['ctemperaturaminimo'] > $_GET['valor']){
-                enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'temperatura','minimo',$_GET['valor']);
+            if($valorumbral['ctemperaturaminimo']!=null && $valorumbral['ctemperaturaminimo']!='' && $valorumbral['ctemperaturaminimo'] > $_POST['valor']){
+                enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'temperatura','minimo',$_POST['valor']);
             }
     
             //y ahora el maximo
-            if($valorumbral['ctemperaturamaximo']!=null && $valorumbral['ctemperaturamaximo']!='' && $valorumbral['ctemperaturamaximo'] < $_GET['valor']){
-                enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'temperatura','maximo',$_GET['valor']);
+            if($valorumbral['ctemperaturamaximo']!=null && $valorumbral['ctemperaturamaximo']!='' && $valorumbral['ctemperaturamaximo'] < $_POST['valor']){
+                enviar_notificacion($valorumbral['token'],$valorumbral['nombre'],$valorumbral['id'],$valorumbral['numeroserie'],'temperatura','maximo',$_POST['valor']);
             }
         }
     }
 }
 
-if($_GET['tipo']=="ecg"){
+if($_POST['tipo']=="ECG"){
     //TODO hacer el calculo de los npm cuando este terminada la camiseta
     $npm = 60;
     //procedemos a comprobar si tenemos que enviar notificaciones de temperatura
@@ -190,8 +190,8 @@ if($_GET['tipo']=="ecg"){
     }
 }
 
-if($_GET['tipo']=="eda"){
-    $eda_generadas = explode(",",$_GET['valor']);
+if($_POST['tipo']=="EDA"){
+    $eda_generadas = explode(",",$_POST['valor']);
     //procedemos a comprobar si tenemos que enviar notificaciones de temperatura
     foreach($datos_umbrales as $valorumbral){
         if($valorumbral['notificacionestodas']==1){
@@ -235,11 +235,11 @@ if($_GET['tipo']=="eda"){
 //si han pasado mas de 120 segundos desde la ultima actualizacion
 $i = new Informacion();
 $i->setConexion($db);
-$i->setNumeroserie($_GET['ns']);
+$i->setNumeroserie($_POST['ns']);
 $i->setFecha($fecha);
 $valor = $i->obtener_datos_exact_not_json();
 if($valor==null || count($valor)==0){
-    if($i->insertar_por_campo_fecha($_GET['tipo'],$_GET['valor'])){
+    if($i->insertar_por_campo_fecha($_POST['tipo'],$_POST['valor'])){
         http_response_code(CODIGO_OK);
         exit();        
     }
@@ -250,7 +250,7 @@ if($valor==null || count($valor)==0){
 }
 else{
     //debemos actualizarlo
-    if($i->actualizar_campo($_GET['tipo'], $_GET['valor'])){
+    if($i->actualizar_campo($_POST['tipo'], $_POST['valor'])){
         http_response_code(CODIGO_OK);
         exit();
     }

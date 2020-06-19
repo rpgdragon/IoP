@@ -27,6 +27,7 @@
 String numeroserie;
 String codigoseguridad;
 String fecha;
+String sen;
 
 
 uint8_t error = 0;
@@ -66,7 +67,7 @@ void setup(void)
    myRTC.updateTime();
    fecha = String(myRTC.year) + "-" + String(myRTC.month) + "-" + String(myRTC.dayofmonth) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
    if(error==0){
-    prepararEnvioBT("REG","");
+    prepararEnvioBT("REG",sen);
    }
    activacion[0] = false;
    activacion[1] = false;
@@ -127,6 +128,7 @@ void setup(void)
       f = SD.open("config.txt", FILE_READ);
       inputChar = f.read();
       indice = 0;
+      sen = "";
       while(indice < 4 && inputChar!=-1 && inputChar!='eof' && inputChar!='\r' && inputChar!='\n' ){
         if(inputChar=='1'){
           sensores[indice]=true;
@@ -134,6 +136,7 @@ void setup(void)
         else{
           sensores[indice]=false;
         }
+        sen = sen + inputChar;
         indice = indice + 1;
         inputChar = f.read();
       }
@@ -300,11 +303,11 @@ void loop(void){
     if(minuto){
       //hora de hacer el envio, primero actualizamos el timer
       myRTC.updateTime();
-      prepararEnvioBT("BAT",String(analogRead(PIN_BATERIA)));
       io= false;
       if(sensores[2]){
        tramitarTemperatura();
       }
+      prepararEnvioBT("BAT",String(analogRead(PIN_BATERIA)));
       tiempo = 0;
       myRTC.updateTime();
       fecha = String(myRTC.year) + "-" + String(myRTC.month) + "-" + String(myRTC.dayofmonth) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
@@ -316,7 +319,7 @@ void loop(void){
       procesarUnaEntrada();
       enviarIO = false;
     }
-    delay(10);
+    delay(6);
   }
 }
 
@@ -355,7 +358,7 @@ boolean envioBT(String cadena, bool insertar){
   do{
     incrementarTiempo();
     intentos = intentos + 1;
-    delay(10);
+    delay(6);
   }
   while(intentos < MAXIMO && Serial.available() <= 0);
 
@@ -402,10 +405,11 @@ void prepararEnvioBT(String tipo, String dato){
   String cadena;
   mensaje = mensaje + 1;
   if(tipo=="REG"){
-    cadena = fecha + ";;" + tipo + ";;" + numeroserie + ";;" + codigoseguridad + ";;" + mensaje;
+    cadena = fecha + ";;" + tipo + ";;" + numeroserie + ";;" + codigoseguridad + ";;" + sen + ";;" + mensaje;
   }
   if(tipo=="ECG"){
-    uint8_t indice = 0;
+    uint8_t indice = 1;
+    dato = String(ECGArr[0])
     while(indice < 20){
       dato = dato + "," + String(ECGArr[indice]);
       indice = indice + 1;
@@ -413,7 +417,8 @@ void prepararEnvioBT(String tipo, String dato){
   }
 
   if(tipo=="EDA"){
-    uint8_t indice = 0;
+    uint8_t indice = 1;
+    dato = String(EDAArr[0])
     while(indice < 20){
       dato = dato + "," + String(EDAArr[indice]);
       indice = indice + 1;
