@@ -126,7 +126,6 @@ export class EditarcamisetaPage {
     else{
       this.isCaida = true;
     }
-
   }
 
   ionViewDidLoad() {
@@ -251,16 +250,16 @@ export class EditarcamisetaPage {
     if(!this.validarCamposMinimoMaximo()){
       return;
     }
-    this.rest.editarCamiseta(MyApp.getNombreusuario(), this.camiseta["id"], this.getFormularioEditarCamiseta().value.nombre
-    ,this.getFormularioEditarCamiseta().value.icono,this.getFormularioEditarCamiseta().value.ecgminimo,this.getFormularioEditarCamiseta().value.ecgmaximo,
-    this.getFormularioEditarCamiseta().value.edaminimo,this.getFormularioEditarCamiseta().value.edamaximo,
-    this.getFormularioEditarCamiseta().value.temperaturaminimo,this.getFormularioEditarCamiseta().value.temperaturamaximo,
-    this.getFormularioEditarCamiseta().value.notificacionesecg,this.getFormularioEditarCamiseta().value.notificacioneseda,
-    this.getFormularioEditarCamiseta().value.notificacionestemperatura,this.getFormularioEditarCamiseta().value.notificacionescaida,
-    this.getFormularioEditarCamiseta().value.fechanacimiento,this.getFormularioEditarCamiseta().value.sexo,this.getFormularioEditarCamiseta().value.telefono,
-    this.getFormularioEditarCamiseta().value.telefonocontacto,this.getFormularioEditarCamiseta().value.notas,
-    this.getFormularioEditarCamiseta().value.calle,this.getFormularioEditarCamiseta().value.numero,this.getFormularioEditarCamiseta().value.localidad,
-    this.getFormularioEditarCamiseta().value.provincia,this.getLatitud(), this.getLongitud()).then(data => {
+    this.rest.editarCamiseta(MyApp.getNombreusuario(), this.camiseta["id"], this.camiseta["nombre"]
+    ,this.getFormularioEditarCamiseta().value.icono,this.camiseta["ecgminimo"],this.camiseta["ecgmaximo"],
+    this.camiseta["edaminimo"],this.camiseta["edamaximo"],
+    this.camiseta["temperaturaminimo"],this.camiseta["temperaturamaximo"],
+    this.notificacionesecg,this.notificacioneseda,
+    this.notificacionestemperatura,this.notificacionescaida,
+    this.camiseta["fechanacimiento"],this.camiseta["sexo"],this.camiseta["telefono"],
+    this.camiseta["telefonocontacto"],this.camiseta["notas"],
+    this.camiseta["calle"],this.camiseta["numero"],this.camiseta["localidad"],
+    this.camiseta["provincia"],this.getLatitud(), this.getLongitud()).then(data => {
         alert("Camiseta editada exitosamente");
         this.navCtrl.pop();
     }, error => {
@@ -288,48 +287,48 @@ export class EditarcamisetaPage {
     var edamaximorelleno = false;
     var temperaturaminimorelleno = false;
     var temperaturamaximorelleno = false;
-    if(this.getFormularioEditarCamiseta().value.ecgminimo!='' && this.getFormularioEditarCamiseta().value.ecgminimo!=null && this.getFormularioEditarCamiseta().value.ecgminimo!=undefined){
-      if(isNaN(this.getFormularioEditarCamiseta().value.ecgminimo)){
+    if(this.camiseta["ecgminimo"]!='' && this.camiseta["ecgminimo"]!=null && this.camiseta["ecgminimo"]!=undefined){
+      if(isNaN(this.camiseta["ecgminimo"])){
         alert("El campo ECG minimo debe rellenarse con un número");
         return false;
       }
       ecgminimorelleno = true;
     }
 
-    if(this.getFormularioEditarCamiseta().value.ecgmaximo!='' && this.getFormularioEditarCamiseta().value.ecgmaximo!=null && this.getFormularioEditarCamiseta().value.ecgmaximo!=undefined){
-      if(isNaN(this.getFormularioEditarCamiseta().value.ecgmaximo)){
+    if(this.camiseta["ecgmaximo"]!='' && this.camiseta["ecgmaximo"]!=null && this.camiseta["ecgmaximo"]!=undefined){
+      if(isNaN(this.camiseta["ecgmaximo"])){
         alert("El campo ECG máximo debe rellenarse con un número");
         return false;
       }
       ecgmaximorelleno = true;
     }
 
-    if(this.getFormularioEditarCamiseta().value.edaminimo!='' && this.getFormularioEditarCamiseta().value.edaminimo!=null && this.getFormularioEditarCamiseta().value.edaminimo!=undefined){
-      if(isNaN(this.getFormularioEditarCamiseta().value.edaminimo)){
+    if(this.camiseta["edaminimo"]!='' && this.camiseta["edaminimo"]!=null && this.camiseta["edaminimo"]!=undefined){
+      if(isNaN(this.camiseta["edaminimo"])){
         alert("El campo EDA minimo debe rellenarse con un número");
         return false;
       }
       edaminimorelleno = true;
     }
 
-    if(this.getFormularioEditarCamiseta().value.edamaximo!='' && this.getFormularioEditarCamiseta().value.edamaximo!=null && this.getFormularioEditarCamiseta().value.edamaximo!=undefined){
-      if(isNaN(this.getFormularioEditarCamiseta().value.ecgmaximo)){
+    if(this.camiseta["edamaximo"]!='' && this.camiseta["edamaximo"]!=null && this.camiseta["edamaximo"]!=undefined){
+      if(isNaN(this.camiseta["edamaximo"])){
         alert("El campo EDA máximo debe rellenarse con un número");
         return false;
       }
       edamaximorelleno = true;
     }
 
-    if(this.getFormularioEditarCamiseta().value.temperaturaminimo!='' && this.getFormularioEditarCamiseta().value.temperaturaminimo!=null && this.getFormularioEditarCamiseta().value.temperaturaminimo!=undefined){
-      if(isNaN(this.getFormularioEditarCamiseta().value.temperaturaminimo)){
+    if(this.camiseta["temperaturaminimo"]!='' && this.camiseta["temperaturaminimo"]!=null && this.camiseta["temperaturaminimo"]!=undefined){
+      if(isNaN(this.camiseta["temperaturaminimo"])){
         alert("El campo Temperatura minimo debe rellenarse con un número");
         return false;
       }
       temperaturaminimorelleno = true;
     }
 
-    if(this.getFormularioEditarCamiseta().value.temperaturamaximo!='' && this.getFormularioEditarCamiseta().value.temperaturamaximo!=null && this.getFormularioEditarCamiseta().value.temperaturamaximo!=undefined){
-      if(isNaN(this.getFormularioEditarCamiseta().value.temperaturamaximo)){
+    if(this.camiseta["temperaturamaximo"]!='' && this.camiseta["temperaturamaximo"]!=null && this.camiseta["temperaturamaximo"]!=undefined){
+      if(isNaN(this.camiseta["temperaturamaximo"])){
         alert("El campo Temperatura máximo debe rellenarse con un número");
         return false;
       }
@@ -337,8 +336,8 @@ export class EditarcamisetaPage {
     }
 
     if(ecgminimorelleno && ecgmaximorelleno){
-      var v1 = Number(this.getFormularioEditarCamiseta().value.ecgminimo);
-      var v2 = Number(this.getFormularioEditarCamiseta().value.ecgmaximo);
+      var v1 = Number(this.camiseta["ecgminimo"]);
+      var v2 = Number(this.camiseta["ecgmaximo"]);
       if(v1 > v2){
         alert("El umbral minimo de ECG no puede ser superior al umbral máximo");
         return false;
@@ -346,8 +345,8 @@ export class EditarcamisetaPage {
     }
 
     if(edaminimorelleno && edamaximorelleno){
-      var v3 = Number(this.getFormularioEditarCamiseta().value.edaminimo);
-      var v4 = Number(this.getFormularioEditarCamiseta().value.edamaximo);
+      var v3 = Number(this.camiseta["edaminimo"]);
+      var v4 = Number(this.camiseta["edamaximo"]);
       if(v3 > v4){
         alert("El umbral minimo de EDA no puede ser superior al umbral máximo");
         return false;
@@ -355,8 +354,8 @@ export class EditarcamisetaPage {
     }
 
     if(temperaturaminimorelleno && temperaturamaximorelleno){
-      var v5 = Number(this.getFormularioEditarCamiseta().value.temperaturaminimo);
-      var v6 = Number(this.getFormularioEditarCamiseta().value.temperaturamaximo);
+      var v5 = Number(this.camiseta["temperaturaminimo"]);
+      var v6 = Number(this.camiseta["temperaturamaximo"]);
       if(v5 > v6){
         alert("El umbral minimo de Temperatura no puede ser superior al umbral máximo");
         return false;
