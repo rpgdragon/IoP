@@ -136,16 +136,16 @@ class Informacion{
     function actualizar_campo($tipo, $valor){
         if($this->comprobar_existe_producto()){
             $query = "UPDATE ".$this->tabla . " SET ";
-            if($tipo=="bateria"){
+            if($tipo=="BAT"){
                 $query = $query."bateria=:valor ";
             }
-            if($tipo=="ecg"){
+            if($tipo=="ECG"){
                 $query = $query."ecg=:valor ";
             }
-            if($tipo=="eda"){
+            if($tipo=="EDA"){
                 $query = $query."eda=:valor ";
             }
-            if($tipo=="temperatura"){
+            if($tipo=="TEMP"){
                 $query = $query."temperatura=:valor ";
             }
             $query = $query." WHERE numeroserie=:numeroserie AND fecha=:fecha";
@@ -173,16 +173,16 @@ class Informacion{
     function insertar_por_campo($tipo,$valor){
         if($this->comprobar_existe_producto()){
             $query = "INSERT INTO ".$this->tabla . " SET ";
-            if($tipo=="bateria"){
+            if($tipo=="BAT"){
                 $query = $query."bateria=:valor, ";
             }
-            if($tipo=="ecg"){
+            if($tipo=="ECG"){
                 $query = $query."ecg=:valor, ";
             }
-            if($tipo=="eda"){
+            if($tipo=="EDA"){
                 $query = $query."eda=:valor, ";
             }
-            if($tipo=="temperatura"){
+            if($tipo=="TEMP"){
                 $query = $query."temperatura=:valor, ";
             }
            $query=$query." numeroserie=:numeroserie,fecha=NOW()";
@@ -210,16 +210,16 @@ class Informacion{
     function insertar_por_campo_fecha($tipo,$valor){
         if($this->comprobar_existe_producto()){
             $query = "INSERT INTO ".$this->tabla . " SET ";
-            if($tipo=="bateria"){
+            if($tipo=="BAT"){
                 $query = $query."bateria=:valor, ";
             }
-            if($tipo=="ecg"){
+            if($tipo=="ECG"){
                 $query = $query."ecg=:valor, ";
             }
-            if($tipo=="eda"){
+            if($tipo=="EDA"){
                 $query = $query."eda=:valor, ";
             }
-            if($tipo=="temperatura"){
+            if($tipo=="TEMP"){
                 $query = $query."temperatura=:valor, ";
             }
            $query=$query." numeroserie=:numeroserie,fecha=:fecha";
@@ -259,7 +259,6 @@ class Informacion{
                     return false;
                 }
             }catch(PDOException $e) { 
-                echo $e;
                 return false; 
             }
         }
