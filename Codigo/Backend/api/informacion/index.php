@@ -58,7 +58,6 @@ catch(Exception $e){
 }
 
 //si llega aqui es que estan todos los parametros bien definidos
-
 $_POST['ns'] = base64_decode($_POST['ns']);
 
 if($_POST['tipo']=="REG"){
@@ -126,7 +125,6 @@ if($_POST['tipo']=="BAT" && $_POST['check']==0){
     //la bateria se actualiza en cualquier caso
     $c->setBateria($_POST['valor']);
     $c->actualizar_bateria_camiseta();
-
     //por ultimo si esta por debajo del 20% lanzar un aviso
     //si llega aqui es que existe, solo debemo enviarlo si el usuario tiene activa las notificaciones
    
@@ -142,7 +140,6 @@ if($_POST['tipo']=="BAT" && $_POST['check']==0){
         }
     }
 }
-
 if($_POST['tipo']=="TEMP"){
     //procedemos a comprobar si tenemos que enviar notificaciones de temperatura
     foreach($datos_umbrales as $valorumbral){
