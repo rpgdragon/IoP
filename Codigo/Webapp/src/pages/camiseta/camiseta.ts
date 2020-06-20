@@ -79,6 +79,37 @@ export class CamisetaPage {
     
   }
 
+  convertirFecha(horadatos){
+    var month = '';
+    var day = '';
+    var year = '';
+    var hours = '';
+    var minutes = '';
+    var seconds = '';
+    if(horadatos==null || horadatos==undefined || horadatos=='0000-00-00 00:00:00'){
+      return "No hay datos";
+    }
+    var d = new Date(horadatos + " UTC");
+    month = '' + (d.getMonth() + 1);
+    day = '' + d.getDate();
+    year = '' + d.getFullYear();
+    hours = '' + d.getHours();
+    minutes = '' + d.getMinutes();
+    seconds = '' + d.getSeconds();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+    if (hours.length < 2) 
+        hours = '0' + day;
+    if (minutes.length < 2) 
+        minutes = '0' + day;
+    if (seconds.length < 2) 
+        seconds = '0' + day;    
+    return [year, month, day].join('-') + " " + [hours, minutes, seconds].join(':') ;
+  }
+
   recargarLista(){
     this.rest.listar(MyApp.getNombreusuario()).then((data:any) => {
       this.listaCamisetas = JSON.parse(data.mensaje);

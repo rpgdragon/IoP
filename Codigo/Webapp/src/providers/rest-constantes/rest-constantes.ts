@@ -5,9 +5,9 @@ import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
 
 const AUTHORIZACION = "healthshirt20192020";
-const MAIN_URL = "https://www.jmcastellano.eu/healthshirt/api/";
+const MAIN_URL = "http://www.iopshirt.es/api/";
 const INFORMACION_URL = "informacion/";
-const VERSION = "v2/";
+const VERSION = "v3/";
 
 const TIMEOUT_MAXIMO = 10000;
 

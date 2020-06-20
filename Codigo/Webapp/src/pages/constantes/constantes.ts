@@ -119,64 +119,86 @@ export class ConstantesPage {
     if(this.actual==true){
       //ok podemos seguir ya que se piden los datos del último minuto
       this.rest.obtenerConstantesUltimoMinuto(this.camiseta["numeroserie"]).then( (data:any) => {
+        console.log(data);
         var constantesarray = JSON.parse(data.mensaje);
         var elemento = constantesarray[0];
         var ecgc = elemento["ecg"];
         var edac = elemento["eda"];
         var temperaturac = elemento["temperatura"];
         //ahora tenemos que convertir los datos a elementos comprensibles por el mismo
-        this.datosecg = ecgc.split(",");
-        this.datoseda = edac.split(",");
-        this.datostemperatura = temperaturac.split(","); 
+        if(ecgc!=null && ecgc!=undefined){
+          this.datosecg = ecgc.split(",");
+        }
+        else{
+          this.datosecg = null;
+        }
+        if(edac!=null && edac!=undefined){
+          this.datoseda = edac.split(",");
+        }
+        else{
+          this.datoseda = null;
+        }
+        if(temperaturac!=null && temperaturac!=undefined){
+          this.datostemperatura = temperaturac.split(",");
+        }
+        else{
+          this.datostemperatura = null;
+        }
 
         //vamos a calcular las medias
         //la media de la temperatura es tan simple como sumar sus valores y dividirlos por el número del tamaño
-        var mediat = 0;
-        var minencontrado = 100;
-        var maxencontrado = -100;
-        for(var i=0; i< this.datostemperatura.length; i++){
-          this.datostemperatura[i] = parseFloat(this.datostemperatura[i]);
-          mediat+=this.datostemperatura[i];
-          if(minencontrado > this.datostemperatura[i]){
-            minencontrado = this.datostemperatura[i];
+        if(this.datostemperatura!=null){
+          var mediat = 0;
+          var minencontrado = 100;
+          var maxencontrado = -100;
+          for(var i=0; i< this.datostemperatura.length; i++){
+            this.datostemperatura[i] = parseFloat(this.datostemperatura[i]);
+            mediat+=this.datostemperatura[i];
+            if(minencontrado > this.datostemperatura[i]){
+              minencontrado = this.datostemperatura[i];
+            }
+            if(maxencontrado < this.datostemperatura[i]){
+              maxencontrado = this.datostemperatura[i];
+            }
           }
-          if(maxencontrado < this.datostemperatura[i]){
-            maxencontrado = this.datostemperatura[i];
+          this.temperaturamax = maxencontrado;
+          this.temperaturamin = minencontrado;
+          if(this.temperaturamin==100 || this.temperaturamax==-100){
+            this.temperaturamax = '';
+            this.temperaturamin = '';
           }
+          this.temperaturamedias = Math.round( (mediat/this.datostemperatura.length) * 100) / 100
         }
-        this.temperaturamax = maxencontrado;
-        this.temperaturamin = minencontrado;
-        if(this.temperaturamin==100 || this.temperaturamax==-100){
-          this.temperaturamax = '';
-          this.temperaturamin = '';
-        }
-        this.temperaturamedias = Math.round( (mediat/this.datostemperatura.length) * 100) / 100
 
         //lo mismo con el eda
-        mediat = 0;
-        minencontrado = 600;
-        maxencontrado = -100;
-        for(i=0; i< this.datoseda.length; i++){
-          this.datoseda[i] = parseInt(this.datoseda[i]);
-          mediat+=this.datoseda[i];
-          if(minencontrado > this.datoseda[i]){
-            minencontrado = this.datoseda[i];
+
+        if(this.datoseda!=null){
+          mediat = 0;
+          minencontrado = 600;
+          maxencontrado = -100;
+          for(i=0; i< this.datoseda.length; i++){
+            this.datoseda[i] = parseInt(this.datoseda[i]);
+            mediat+=this.datoseda[i];
+            if(minencontrado > this.datoseda[i]){
+              minencontrado = this.datoseda[i];
+            }
+            if(maxencontrado < this.datoseda[i]){
+              maxencontrado = this.datoseda[i];
+            }
           }
-          if(maxencontrado < this.datoseda[i]){
-            maxencontrado = this.datoseda[i];
+          this.edamax = maxencontrado;
+          this.edamin = minencontrado;
+          if(this.edamin==600 || this.edamax==-100){
+            this.edamax = '';
+            this.edamin = '';
           }
+          this.edamedias = Math.round( (mediat/this.datoseda.length) * 100) / 100
         }
-        this.edamax = maxencontrado;
-        this.edamin = minencontrado;
-        if(this.edamin==600 || this.edamax==-100){
-          this.edamax = '';
-          this.edamin = '';
-        }
-        this.edamedias = Math.round( (mediat/this.datoseda.length) * 100) / 100
 
         //por último el ecg. No obstante este es un poco más complicado de medir, por que aqui tenemos que medir
         //los pulsos segun los valores y no los valores en si
 
+        if(this.datosecg!=null){
         mediat = 0;
         this.pulsacionesmedias = 0;
         minencontrado = 200;
@@ -207,6 +229,7 @@ export class ConstantesPage {
           this.pulsacionesmax = '';
           this.pulsacionesmin = '';
         }
+      }
 
 
         //ademas aqui tendrá que haber una accion para que se reinicien las animaciones y las graficas
@@ -396,100 +419,121 @@ export class ConstantesPage {
         var edac = elemento["eda"];
         var temperaturac = elemento["temperatura"];
         //ahora tenemos que convertir los datos a elementos comprensibles por el mismo
-        this.datosecg = ecgc.split(",");
-        this.datoseda = edac.split(",");
-        this.datostemperatura = temperaturac.split(","); 
+        if(ecgc!=null && ecgc!=undefined){
+          this.datosecg = ecgc.split(",");
+        }
+        else{
+          this.datosecg = null;
+        }
+        if(edac!=null && edac!=undefined){
+          this.datoseda = edac.split(",");
+        }
+        else{
+          this.datoseda = null;
+        }
+        if(temperaturac!=null && temperaturac!=undefined){
+          this.datostemperatura = temperaturac.split(",");
+        }
+        else{
+          this.datostemperatura = null;
+        } 
 
         //vamos a calcular las medias
         //la media de la temperatura es tan simple como sumar sus valores y dividirlos por el número del tamaño
         //vamos a calcular las medias
         //la media de la temperatura es tan simple como sumar sus valores y dividirlos por el número del tamaño
-        var mediat = 0;
-        var minencontrado = 100;
-        var maxencontrado = -100;
-        for(var i=0; i< this.datostemperatura.length; i++){
-          this.datostemperatura[i] = parseFloat(this.datostemperatura[i]);
-          mediat+=this.datostemperatura[i];
-          if(minencontrado > this.datostemperatura[i]){
-            minencontrado = this.datostemperatura[i];
+        if(this.datostemperatura!=null){
+          var mediat = 0;
+          var minencontrado = 100;
+          var maxencontrado = -100;
+          for(var i=0; i< this.datostemperatura.length; i++){
+            this.datostemperatura[i] = parseFloat(this.datostemperatura[i]);
+            mediat+=this.datostemperatura[i];
+            if(minencontrado > this.datostemperatura[i]){
+              minencontrado = this.datostemperatura[i];
+            }
+            if(maxencontrado < this.datostemperatura[i]){
+              maxencontrado = this.datostemperatura[i];
+            }
           }
-          if(maxencontrado < this.datostemperatura[i]){
-            maxencontrado = this.datostemperatura[i];
+          this.temperaturamax = maxencontrado;
+          this.temperaturamin = minencontrado;
+          if(this.temperaturamin==100 || this.temperaturamax==-100){
+            this.temperaturamax = '';
+            this.temperaturamin = '';
           }
+          this.temperaturamedias = Math.round( (mediat/this.datostemperatura.length) * 100) / 100
         }
-        this.temperaturamax = maxencontrado;
-        this.temperaturamin = minencontrado;
-        if(this.temperaturamin==100 || this.temperaturamax==-100){
-          this.temperaturamax = '';
-          this.temperaturamin = '';
-        }
-        this.temperaturamedias = Math.round( (mediat/this.datostemperatura.length) * 100) / 100
 
         //lo mismo con el eda
-        mediat = 0;
-        minencontrado = 600;
-        maxencontrado = -100;
-        for(i=0; i< this.datoseda.length; i++){
-          this.datoseda[i] = parseInt(this.datoseda[i]);
-          mediat+=this.datoseda[i];
-          if(minencontrado > this.datoseda[i]){
-            minencontrado = this.datoseda[i];
+        if(this.datoseda!=null){
+          mediat = 0;
+          minencontrado = 600;
+          maxencontrado = -100;
+          for(i=0; i< this.datoseda.length; i++){
+            this.datoseda[i] = parseInt(this.datoseda[i]);
+            mediat+=this.datoseda[i];
+            if(minencontrado > this.datoseda[i]){
+              minencontrado = this.datoseda[i];
+            }
+            if(maxencontrado < this.datoseda[i]){
+              maxencontrado = this.datoseda[i];
+            }
           }
-          if(maxencontrado < this.datoseda[i]){
-            maxencontrado = this.datoseda[i];
+          this.edamax = maxencontrado;
+          this.edamin = minencontrado;
+          if(this.edamin==600 || this.edamax==-100){
+            this.edamax = '';
+            this.edamin = '';
           }
+          this.edamedias = Math.round( (mediat/this.datoseda.length) * 100) / 100
         }
-        this.edamax = maxencontrado;
-        this.edamin = minencontrado;
-        if(this.edamin==600 || this.edamax==-100){
-          this.edamax = '';
-          this.edamin = '';
-        }
-        this.edamedias = Math.round( (mediat/this.datoseda.length) * 100) / 100
 
         //por último el ecg. No obstante este es un poco más complicado de medir, por que aqui tenemos que medir
         //los pulsos segun los valores y no los valores en si
 
-        mediat = 0;
-        this.pulsacionesmedias = 0;
-        minencontrado = 200;
-        maxencontrado = -200;
-        var valorpulsaciones = 0;
-        for(i=0; i< this.datosecg.length; i++){
-          //cada 1200 valores es un minuto
-          this.datosecg[i] = parseInt(this.datosecg[i]);
-          if(this.datosecg[i]>=550){
-            this.pulsacionesmedias++;
-            valorpulsaciones++;
-          }
+        if(this.datosecg!=null){
+          mediat = 0;
+          this.pulsacionesmedias = 0;
+          minencontrado = 200;
+          maxencontrado = -200;
+          var valorpulsaciones = 0;
+          for(i=0; i< this.datosecg.length; i++){
+            //cada 1200 valores es un minuto
+            this.datosecg[i] = parseInt(this.datosecg[i]);
+            if(this.datosecg[i]>=550){
+              this.pulsacionesmedias++;
+              valorpulsaciones++;
+            }
 
-          if((i+1)%1200==0){
-            console.log(i);
-            console.log(valorpulsaciones);
-            if(minencontrado > valorpulsaciones){
-              minencontrado = valorpulsaciones;
+            if((i+1)%1200==0){
+              console.log(i);
+              console.log(valorpulsaciones);
+              if(minencontrado > valorpulsaciones){
+                minencontrado = valorpulsaciones;
+              }
+              if(maxencontrado < valorpulsaciones){
+                console.log("Cambiado");
+                maxencontrado = valorpulsaciones;
+              }
+              valorpulsaciones=0;
             }
-            if(maxencontrado < valorpulsaciones){
-              console.log("Cambiado");
-              maxencontrado = valorpulsaciones;
-            }
-            valorpulsaciones=0;
+          
           }
-         
-        }
-        this.pulsacionesmax = maxencontrado;
-        this.pulsacionesmin = minencontrado;
-        if(this.pulsacionesmin==200 || this.pulsacionesmax==-100){
-          this.pulsacionesmax = '';
-          this.pulsacionesmin = '';
-        }
+          this.pulsacionesmax = maxencontrado;
+          this.pulsacionesmin = minencontrado;
+          if(this.pulsacionesmin==200 || this.pulsacionesmax==-100){
+            this.pulsacionesmax = '';
+            this.pulsacionesmin = '';
+          }
 
         //y ahora a partir de la diferencia de minutos se divide
         
-        var diffMs = (Date.parse(this.fechaHasta.toLocaleString()) - Date.parse(this.fechaDe.toLocaleString()));
-        let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
-        console.log(diffMins);
-        this.pulsacionesmedias = Math.round(this.pulsacionesmedias / diffMins);
+          var diffMs = (Date.parse(this.fechaHasta.toLocaleString()) - Date.parse(this.fechaDe.toLocaleString()));
+          let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+          console.log(diffMins);
+          this.pulsacionesmedias = Math.round(this.pulsacionesmedias / diffMins);
+        }
 
         //ademas aqui tendrá que haber una accion para que se reinicien las animaciones y las graficas
         //se utilizará un flag
