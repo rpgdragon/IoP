@@ -32,7 +32,7 @@ String sen;
 
 uint8_t error = 0;
 long tiempo = 0;
-long mensaje = 0;
+int mensaje = 0;
 uint8_t datos = 0;
 
 bool sensores[4];
@@ -266,6 +266,7 @@ void loop(void){
       indice = indice + 1;
     }
     while(indice < MAXIMO_ERRORES){
+      indice = indice + 1;
       delay(1000);
     }
   }
@@ -296,7 +297,7 @@ void loop(void){
        activacion[0] = false;
      }
 
-    if(mensaje>=1000000){
+    if(mensaje>=25000){
       mensaje = 1;
     }
     
@@ -404,29 +405,48 @@ void incrementarTiempo(){
 void prepararEnvioBT(String tipo, String dato){
   String cadena;
   mensaje = mensaje + 1;
+  uint8_t indice = 1;
   if(tipo=="REG"){
-    cadena = fecha + ";;" + tipo + ";;" + numeroserie + ";;" + codigoseguridad + ";;" + sen + ";;" + mensaje;
+    cadena = fecha;
+    cadena += ";;";
+    cadena += tipo;
+    cadena += ";;";
+    cadena += numeroserie;
+    cadena += ";;";
+    cadena += codigoseguridad;
+    cadena += ";;";
+    cadena += sen;
+    cadena += ";;";
+    cadena += mensaje;
   }
   if(tipo=="ECG"){
-    uint8_t indice = 1;
-    dato = String(ECGArr[0])
+    dato = String(ECGArr[0]);
     while(indice < 20){
-      dato = dato + "," + String(ECGArr[indice]);
+      dato+= ",";
+      dato+= String(ECGArr[indice]);
       indice = indice + 1;
     }
   }
 
   if(tipo=="EDA"){
-    uint8_t indice = 1;
-    dato = String(EDAArr[0])
+    dato = String(EDAArr[0]);
     while(indice < 20){
-      dato = dato + "," + String(EDAArr[indice]);
+      dato+= ",";
+      dato+= String(EDAArr[indice]);
       indice = indice + 1;
     }
   }
 
   if(tipo!="REG"){
-    cadena = fecha + ";;" + tipo + ";;" + numeroserie + ";;" +  dato + ";;" + mensaje;
+    cadena = fecha;
+    cadena +=  ";;";
+    cadena += tipo;
+    cadena += ";;";
+    cadena += numeroserie;
+    cadena += ";;";
+    cadena += dato;
+    cadena += ";;";
+    cadena +=  mensaje;
   }
   envioBT(cadena, true);
 }

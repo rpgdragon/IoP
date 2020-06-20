@@ -48,11 +48,10 @@ export class EdaPage {
     this.data = [];
     this.canvas = document.getElementById("canvaseda");
     this.ctx = this.canvas.getContext("2d");
-
+    this.ctx.translate(0, this.canvas.height+(-100 + 50*((this.constantes.getEdamedias()-200)/100)));
+    this.ctx.scale(10,-0.5);
     this.canvas.width = this.platform.width();
     this.canvas.height = this.platform.width();
-    this.ctx.translate(0, this.canvas.height-100);
-    this.ctx.scale(10,-0.5);
     this.frame=0;
     
     this.x = 0;
@@ -70,6 +69,9 @@ export class EdaPage {
   animate() {
     //lo primero es comprobar si hay nuevos datos
     if(this.constantes.getValoredacambiado()==true){
+      this.ctx.resetTransform();
+      this.ctx.translate(0, this.canvas.height+(-100 + 50*((this.constantes.getEdamedias()-200)/100)));
+      this.ctx.scale(10,-0.5);
       this.data = this.constantes.getDatoseda();
       this.constantes.setValoredacambiado(false);
       this.x = 0;
@@ -79,7 +81,7 @@ export class EdaPage {
     if (this.continuarAnimacion) {
       requestAnimationFrame(this.animate.bind(this));
     }
-
+    
     this.ctx.strokeStyle="#FF0000";
     this.ctx.lineWidth = 1;
     if (this.x > this.data.length - 1) {
