@@ -123,6 +123,8 @@ export class TemperaturaPage {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.fillStyle = "#0099ff";
     this.ctx.font = "20 pt Verdana";
+    this.Val_min = Math.floor(this.constantes.getTemperaturamin() - 3);
+    this.Val_max = Math.floor(this.constantes.getTemperaturamax() + 3);
     var yScale = (this.canvas.height - this.columnSize - this.margin) / (this.Val_max - this.Val_min);
     var xScale = (this.canvas.width - this.rowSize) / this.data.length;
     

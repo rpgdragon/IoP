@@ -28,7 +28,7 @@
                 <div (click)="llamarContacto(camiseta); $event.stopPropagation();" *ngIf="camiseta.telefono" class="telefono"><h4> <ion-icon name="call"></ion-icon> {{camiseta.telefono}}</h4></div>
                 <div class="display-inline-landscape">
                   <p>{{" Bateria: " + camiseta.bateria + "%"}}</p>
-                  <p>{{" Últimos datos: " + camiseta.horadatos}}</p>
+                  <p>{{" Últimos datos: " + convertirFecha(camiseta.horadatos)}}</p>
                 </div>
               </div>
             </div>
