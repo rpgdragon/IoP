@@ -1,0 +1,1203 @@
+{
+	"info": {
+		"_postman_id": "d6854e07-9426-4de2-9fed-dba524658eb4",
+		"name": "Health Shirt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login no facebook sin parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/login/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login no existe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"noexiste\",\"password\":\"noexiste\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/login/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"login",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login existe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"password\":\"51q7d00DRAGARIES.\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/login/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"login",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "jmcastellano",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "jmcastellano",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrar sin parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/registrar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"registrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrar con parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"marihhola@hotmail.com\",\"password\":\"noexiste\",\"esFacebook\":\"0\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/registrar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"registrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registrar token  Notificaciones existe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"prueba11\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/registrartoken/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"registrartoken",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Configuración",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"usuario\": \"healthshirt@jmcastellano.eu\", \"notificacionestodas\": \"false\", \"notificacionesecg\": \"false\", \"notificacioneseda\": \"false\", \"notificacionestemperatura\": \"false\", \"notificacionesbateria\": \"false\", \"notificacionescaida\": \"false\" }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/configuracion/editar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"configuracion",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Configuración Sin Parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"usuario\": \"healthshirt@jmcastellano.eu\" }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/configuracion/editar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"configuracion",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Camiseta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/crear/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"crear",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Camiseta No usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"healthshirt@jmcastellano.eu\",\"id\":\"28\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/editar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"camiseta",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Camiseta Si Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\",\"id\":\"28\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"130\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/editar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"camiseta",
+						"editar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Camiseta No Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"healthshirt@jmcastellano.eu\", \"id\": \"27\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/borrar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"camiseta",
+						"borrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Camiseta  Si Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\", \"id\": \"28\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/borrar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"camiseta",
+						"borrar",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login Facebook tokenincorrecto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"EAAMoJckFChcBAIXZBSZBzUHVZB4AsZBZBaTw95vr24z3bMHJ32QQ789LkqnxoHk28ruXyiB6VkqkqhcDzQZBQEpZBnyXyS3HSwCLz7KYgDJGrS9MZAJTKqcYFIO2L9lxZACyw3ZBO3aCMYyycEpoZCHtjjZC0CgRVpPclHX66IGN5kG28unsnesZBeTAYRIPBhAYv0luuTODerKzke4l4ZCwnJ3f1xq9yo94C87JQZD\"}"
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/loginfacebook/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"loginfacebook",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "jmcastellano",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "jmcastellano",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login Google token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"jmcastellano\"}"
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/login/logingoogle/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"login",
+						"logingoogle",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "jmcastellano",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "jmcastellano",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "olvidocontrasena",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\"}"
+				},
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/olvido/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"login",
+						"olvido",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Camisetas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/lista/?usuario=jmcastellano@jmcastellano.eu",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"camiseta",
+						"lista",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "jmcastellano@jmcastellano.eu"
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Datos Constantes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/informacion/actual/?numeroserie=1111111111111111",
+					"protocol": "http",
+					"host": [
+						"www",
+						"jmcastellano",
+						"eu"
+					],
+					"path": [
+						"healthshirt",
+						"api",
+						"v2",
+						"informacion",
+						"actual",
+						""
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "numeroserie",
+							"value": "1111111111111111"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Datos Constantes Historico",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"numeroserie\": \"1111111111111111\", \"fechade\": \"2019-12-21T17:40:00Z\", \"fechahasta\": \"2019-12-21T17:53:00Z\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/informacion/historico/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"informacion",
+						"historico",
+						""
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "numeroserie",
+							"value": "1111111111111111",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generador",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.iopshirt.es/api/v3/generador/generaDatos.php",
+					"protocol": "https",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"generador",
+						"generaDatos.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Geolocalizacion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"localidad\": \"Málaga\",\r\n    \"calle\": \"Calle Verdi\",\r\n    \"numero\": \"5\",\r\n    \"provincia\": \"Málaga\"\r\n}"
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/geolocalizacion/geolocalizar/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"geolocalizacion",
+						"geolocalizar",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Ya existente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ns",
+							"value": "MTExMTExMTExMTExMTExMQ==",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "REG",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "Healthshirt2019",
+							"type": "text"
+						},
+						{
+							"key": "valor2",
+							"value": "0011",
+							"type": "text"
+						},
+						{
+							"key": "check",
+							"value": "0",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/informacion/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"informacion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Nueva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ns",
+							"value": "MzMzMzMzMzMzMzMzMzMzMw==",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "REG",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "milindagatita",
+							"type": "text"
+						},
+						{
+							"key": "valor2",
+							"value": "0001",
+							"type": "text"
+						},
+						{
+							"key": "check",
+							"value": "0",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/informacion/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"informacion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nuevo Dato Bateria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ns",
+							"value": "MzMzMzMzMzMzMzMzMzMzMw==",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "BAT",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "987",
+							"type": "text"
+						},
+						{
+							"key": "valor2",
+							"value": "2020-6-12 21:45:00",
+							"type": "text"
+						},
+						{
+							"key": "check",
+							"value": "0",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/informacion/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"informacion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nuevo Dato Temperatura Existente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ns",
+							"value": "MzMzMzMzMzMzMzMzMzMzMw==",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "TEMP",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "34.5",
+							"type": "text"
+						},
+						{
+							"key": "valor2",
+							"value": "2020-6-12 21:45:00",
+							"type": "text"
+						},
+						{
+							"key": "check",
+							"value": "0",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/informacion/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"informacion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nuevo Dato ECG Existente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ns",
+							"value": "MzMzMzMzMzMzMzMzMzMzMw==",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "ECG",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,125,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,200",
+							"type": "text"
+						},
+						{
+							"key": "valor2",
+							"value": "2020-6-12 21:45:00",
+							"type": "text"
+						},
+						{
+							"key": "check",
+							"value": "0",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/informacion/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"informacion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nuevo Dato EDA Existente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ns",
+							"value": "MzMzMzMzMzMzMzMzMzMzMw==",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "EDA",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,101",
+							"type": "text"
+						},
+						{
+							"key": "valor2",
+							"value": "2020-6-12 21:45:00\n",
+							"type": "text"
+						},
+						{
+							"key": "check",
+							"value": "0",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/informacion/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"informacion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Informar Caida",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ns",
+							"value": "MTExMTExMTExMTExMTExMQ==",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/caida/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"caida",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
