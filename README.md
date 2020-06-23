@@ -1,10 +1,13 @@
 # Aplicación Móvil IoP-Shirt
+
+Antes de utilizar el presente producto debe hacerse con una camiseta inteligente diseñada especificamente para este proyecto..
+
 Antes de realizar cualquier compilación, es necesario que el entorno tenga instaladas las siguientes herramientas
 - Node (con npm, actualmente, 10.16.0)
 - NPM 6.9.0
 - Agregar gradle versión 5.5.* al path del sistema.
 - En caso de que ocurra un error relacionado con memoria en la ejecución de gradle, agregar la variable _JAVA_OPTIONS al sistema con el valor -Xmx512M -Xms512M
-- Hacer un npm install en la raiz del proyecto de Iop-Shirt
+- Hacer un npm install en la raiz del proyecto de Webapp
 
 - Si da un error de Duplicate Classes hay que añadir en el gradle.properties las siguientes propiedades.
 
