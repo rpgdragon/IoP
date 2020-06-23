@@ -204,8 +204,8 @@ catch(Exception $e){
 $informacion = new Informacion();
 $informacion->setConexion($db);
 
-//ahora obtenemos los datos del último minuto para la camiseta "1111111111111111"
-$informacion->setNumeroserie("1111111111111111");
+//ahora obtenemos los datos del último minuto para la camiseta "2222222222222222"
+$informacion->setNumeroserie("2222222222222222");
 $json_results = $informacion->obtener_datos_last_minute();
 //este json devuelto contiene la última información, si no esta relleno tendremos que inicializar la bateria y la temperatura
 if($json_results==null || $json_results=="" || $json_results=="[]"){
@@ -269,7 +269,7 @@ $valor_devuelto = $informacion->registrar_informacion();
 
 //ahora por ultimo comprobamos si supera alguno de los umbrales establecidos
 
-$datos_umbrales = $camiseta->obtener_umbrales_por_usuario("1111111111111111");
+$datos_umbrales = $camiseta->obtener_umbrales_por_usuario("2222222222222222");
 foreach($datos_umbrales as $valorumbral){
     //lo primero que tenemos que hacer es comprobar si las notificaciones se encuentran apagadas o no
     
