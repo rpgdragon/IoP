@@ -7920,138 +7920,6 @@ Spark Fun Electronics SKU : COM-00107</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="diy-modules">
-<description>&lt;b&gt;DIY Modules for Arduino, Raspberry Pi, CubieBoard etc.&lt;/b&gt;
-&lt;br&gt;&lt;br&gt;
-The library contains a list of symbols and footprints for popular, cheap and easy-to-use electronic modules.&lt;br&gt;
-The modules are intend to work with microprocessor-based platforms such as &lt;a href="http://arduino.cc"&gt;Arduino&lt;/a&gt;, &lt;a href="http://raspberrypi.org/"&gt;Raspberry Pi&lt;/a&gt;, &lt;a href="http://cubieboard.org/"&gt;CubieBoard&lt;/a&gt;, &lt;a href="http://beagleboard.org/"&gt;BeagleBone&lt;/a&gt; and many others. There are many manufacturers of the modules in the world. Almost all of them can be bought on &lt;a href="ebay.com"&gt;ebay.com&lt;/a&gt;.&lt;br&gt;
-&lt;br&gt;
-By using this library, you can design a PCB for devices created with usage of modules. Even if you do not need to create PCB design, you can also use the library to quickly document your work by drawing schematics of devices built by you.&lt;br&gt;
-&lt;br&gt;
-The latest version, examples, photos and much more can be found at: &lt;b&gt;&lt;a href="http://diymodules.org/eagle"&gt;diymodules.org/eagle&lt;/a&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;
-Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailto:eagle@diymodules.org"&gt;eagle@diymodules.org&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
-&lt;i&gt;Version: 1.8.0 (2017-Jul-02)&lt;/i&gt;&lt;br&gt;
-&lt;i&gt;Created by: Miroslaw Brudnowski&lt;/i&gt;&lt;br&gt;&lt;br&gt;
-&lt;i&gt;Released under the Creative Commons Attribution 4.0 International License: &lt;a href="http://creativecommons.org/licenses/by/4.0"&gt;http://creativecommons.org/licenses/by/4.0&lt;/a&gt;&lt;/i&gt;
-&lt;br&gt;&lt;br&gt;
-&lt;center&gt;
-&lt;a href="http://diymodules.org/eagle"&gt;&lt;img src="http://www.diymodules.org/img/diymodules-lbr-image.php?v=1.8.0" alt="DIYmodules.org"&gt;&lt;/a&gt;
-&lt;/center&gt;</description>
-<packages>
-<package name="WIRELESS-BLUETOOTH-HC-05">
-<description>&lt;b&gt;Bluetooth Transceiver Module&lt;/b&gt; based on &lt;b&gt;HC-05&lt;/b&gt; board</description>
-<pad name="2" x="-3.81" y="-17.145" drill="1"/>
-<pad name="1" x="-6.35" y="-17.145" drill="1" shape="square"/>
-<pad name="3" x="-1.27" y="-17.145" drill="1"/>
-<wire x1="-8.255" y1="-18.415" x2="-6.985" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-6.985" y1="-18.415" x2="-5.715" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-5.715" y1="-18.415" x2="-4.445" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-4.445" y1="-18.415" x2="-3.175" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-3.175" y1="-18.415" x2="-1.905" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-1.905" y1="-18.415" x2="-0.635" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-18.415" x2="8.255" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="8.255" y1="-18.415" x2="8.255" y2="18.415" width="0.127" layer="21"/>
-<wire x1="8.255" y1="18.415" x2="6.604" y2="18.415" width="0.127" layer="21"/>
-<wire x1="6.604" y1="18.415" x2="-6.604" y2="18.415" width="0.127" layer="21"/>
-<wire x1="-6.604" y1="18.415" x2="-8.255" y2="18.415" width="0.127" layer="21"/>
-<wire x1="-8.255" y1="18.415" x2="-8.255" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="0" y1="-16.51" x2="0.635" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="0.635" y1="-15.875" x2="1.905" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="1.905" y1="-15.875" x2="2.54" y2="-16.51" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-16.51" x2="3.175" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="3.175" y1="-15.875" x2="4.445" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="4.445" y1="-15.875" x2="5.08" y2="-16.51" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-16.51" x2="5.715" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="5.715" y1="-15.875" x2="6.985" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="7.62" y1="-17.78" x2="6.985" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="5.715" y1="-18.415" x2="5.08" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-17.78" x2="4.445" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="3.175" y1="-18.415" x2="2.54" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-17.78" x2="1.905" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="0.635" y1="-18.415" x2="0" y2="-17.78" width="0.127" layer="21"/>
-<text x="0" y="19.685" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-19.685" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-<wire x1="7.62" y1="-17.78" x2="7.62" y2="-16.51" width="0.127" layer="21"/>
-<wire x1="7.62" y1="-16.51" x2="6.985" y2="-15.875" width="0.127" layer="21"/>
-<pad name="4" x="1.27" y="-17.145" drill="1"/>
-<pad name="5" x="3.81" y="-17.145" drill="1"/>
-<pad name="6" x="6.35" y="-17.145" drill="1"/>
-<wire x1="0" y1="-16.51" x2="-0.635" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-15.875" x2="-1.905" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="-1.905" y1="-15.875" x2="-2.54" y2="-16.51" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-16.51" x2="-3.175" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="-3.175" y1="-15.875" x2="-4.445" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="-4.445" y1="-15.875" x2="-5.08" y2="-16.51" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="-16.51" x2="-5.715" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="-5.715" y1="-15.875" x2="-6.985" y2="-15.875" width="0.127" layer="21"/>
-<wire x1="-6.985" y1="-15.875" x2="-7.62" y2="-16.51" width="0.127" layer="21"/>
-<wire x1="-7.62" y1="-16.51" x2="-7.62" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="-7.62" y1="-17.78" x2="-6.985" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-5.715" y1="-18.415" x2="-5.08" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="-17.78" x2="-4.445" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-3.175" y1="-18.415" x2="-2.54" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-17.78" x2="-1.905" y2="-18.415" width="0.127" layer="21"/>
-<wire x1="-0.635" y1="-18.415" x2="0" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="-6.604" y1="18.415" x2="-6.604" y2="14.605" width="0.127" layer="21"/>
-<wire x1="-6.604" y1="14.605" x2="-6.604" y2="-8.255" width="0.127" layer="21"/>
-<wire x1="-6.604" y1="-8.255" x2="6.604" y2="-8.255" width="0.127" layer="21"/>
-<wire x1="6.604" y1="-8.255" x2="6.604" y2="14.605" width="0.127" layer="21"/>
-<text x="-6.35" y="-15.24" size="1.27" layer="21" rot="R90" align="center-left">STATE</text>
-<text x="-3.81" y="-15.24" size="1.27" layer="21" rot="R90" align="center-left">RX</text>
-<text x="-1.27" y="-15.24" size="1.27" layer="21" rot="R90" align="center-left">TX</text>
-<text x="1.27" y="-15.24" size="1.27" layer="21" rot="R90" align="center-left">GND</text>
-<text x="3.81" y="-15.24" size="1.27" layer="21" rot="R90" align="center-left">+5V</text>
-<text x="6.35" y="-15.24" size="1.27" layer="21" rot="R90" align="center-left">EN</text>
-<wire x1="6.604" y1="14.605" x2="6.604" y2="18.415" width="0.127" layer="21"/>
-<wire x1="-6.604" y1="14.605" x2="6.604" y2="14.605" width="0.127" layer="21"/>
-<text x="0" y="16.51" size="1.524" layer="21" align="center">ANTENNA</text>
-</package>
-</packages>
-<symbols>
-<symbol name="WIRELESS-BLUETOOTH-HC-05">
-<description>&lt;b&gt;Bluetooth Transceiver Module&lt;/b&gt; based on &lt;b&gt;HC-05&lt;/b&gt; board</description>
-<pin name="STATE" x="-20.32" y="5.08" length="middle"/>
-<wire x1="15.24" y1="7.62" x2="15.24" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="15.24" y1="-10.16" x2="-15.24" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="-15.24" y1="-10.16" x2="-15.24" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-15.24" y1="7.62" x2="15.24" y2="7.62" width="0.254" layer="94"/>
-<text x="-15.24" y="12.7" size="1.778" layer="95">&gt;NAME</text>
-<text x="-15.24" y="10.16" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="RX" x="-20.32" y="2.54" length="middle"/>
-<pin name="TX" x="-20.32" y="0" length="middle"/>
-<pin name="GND" x="-20.32" y="-2.54" length="middle" direction="pwr"/>
-<pin name="+5V" x="-20.32" y="-5.08" length="middle" direction="pwr"/>
-<pin name="EN" x="-20.32" y="-7.62" length="middle"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="WIRELESS-BLUETOOTH-HC-05">
-<description>&lt;b&gt;Bluetooth Transceiver Module&lt;/b&gt; based on &lt;b&gt;HC-05&lt;/b&gt; board
-&lt;p&gt;Tutorial is available here:&lt;br /&gt;
-&lt;a href="https://arduino-info.wikispaces.com/BlueTooth-HC05-HC06-Modules-How-To"&gt;https://arduino-info.wikispaces.com/BlueTooth-HC05-HC06-Modules-How-To&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;&lt;a href="http://www.ebay.com/sch/hc-05+module+rs232"&gt;Click here to find device on ebay.com&lt;/a&gt;&lt;/b&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="photo" src="http://www.diymodules.org/img/device-photo.php?name=WIRELESS-BLUETOOTH-HC-05"&gt;&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="WIRELESS-BLUETOOTH-HC-05" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="WIRELESS-BLUETOOTH-HC-05">
-<connects>
-<connect gate="G$1" pin="+5V" pad="5"/>
-<connect gate="G$1" pin="EN" pad="6"/>
-<connect gate="G$1" pin="GND" pad="4"/>
-<connect gate="G$1" pin="RX" pad="2"/>
-<connect gate="G$1" pin="STATE" pad="1"/>
-<connect gate="G$1" pin="TX" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -8066,12 +7934,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <part name="PCB1" library="E14_Arduino_revB" deviceset="ARDUINO_LILYPAD" device=""/>
 <part name="SP1" library="buzzer" library_urn="urn:adsk.eagle:library:113" deviceset="AL11P" device="" package3d_urn="urn:adsk.eagle:package:5308/1"/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0309/12" package3d_urn="urn:adsk.eagle:package:23571/1" value="100"/>
-<part name="DS1320" library="ltc1440_lt1529_ds1302" deviceset="DS1302" device=""/>
+<part name="DS1302" library="ltc1440_lt1529_ds1302" deviceset="DS1302" device=""/>
 <part name="BT2" library="SparkFun-Batteries" deviceset="BATTERY" device="-6.8MM_SMD" value="6.8MM_COIN_CELL"/>
 <part name="Y1" library="SparkFun-Clocks" deviceset="CRYSTAL" device="PTH-2X6"/>
 <part name="LM7805" library="SparkFun-IC-Power" deviceset="V_REG_78XX" device="-TO-220"/>
 <part name="9V" library="SparkFun-Connectors" deviceset="BATTERY_CONN" device="_DEANS"/>
-<part name="U$1" library="diy-modules" deviceset="WIRELESS-BLUETOOTH-HC-05" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -8091,7 +7958,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <attribute name="NAME" x="19.05" y="56.9214" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="19.05" y="61.722" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="DS1320" gate="G$1" x="124.46" y="5.08" smashed="yes">
+<instance part="DS1302" gate="G$1" x="124.46" y="5.08" smashed="yes">
 <attribute name="NAME" x="116.84" y="16.51" size="1.778" layer="95"/>
 <attribute name="VALUE" x="116.84" y="-7.62" size="1.778" layer="96"/>
 </instance>
@@ -8111,10 +7978,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <attribute name="VALUE" x="-40.64" y="50.8" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="-40.64" y="61.722" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="U$1" gate="G$1" x="124.46" y="73.66" smashed="yes">
-<attribute name="NAME" x="109.22" y="86.36" size="1.778" layer="95"/>
-<attribute name="VALUE" x="109.22" y="83.82" size="1.778" layer="96"/>
-</instance>
 </instances>
 <busses>
 </busses>
@@ -8123,8 +7986,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <segment>
 <pinref part="PCB1" gate="G$1" pin="0/RX"/>
 <wire x1="63.5" y1="73.66" x2="63.5" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="TX"/>
-<wire x1="63.5" y1="73.66" x2="104.14" y2="73.66" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$18" class="0">
@@ -8161,9 +8022,8 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pinref part="PCB1" gate="G$1" pin="A3"/>
 <wire x1="2.54" y1="58.42" x2="2.54" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="81.28" x2="86.36" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="81.28" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="DS1320" gate="G$1" pin="VCC2"/>
-<wire x1="86.36" y1="68.58" x2="86.36" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="81.28" x2="86.36" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="DS1302" gate="G$1" pin="VCC2"/>
 <wire x1="111.76" y1="12.7" x2="93.98" y2="12.7" width="0.1524" layer="91"/>
 <wire x1="93.98" y1="12.7" x2="93.98" y2="-22.86" width="0.1524" layer="91"/>
 <wire x1="93.98" y1="-22.86" x2="48.26" y2="-22.86" width="0.1524" layer="91"/>
@@ -8172,9 +8032,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pinref part="LM7805" gate="G$1" pin="OUT"/>
 <wire x1="-12.7" y1="58.42" x2="2.54" y2="58.42" width="0.1524" layer="91"/>
 <junction x="2.54" y="58.42"/>
-<pinref part="U$1" gate="G$1" pin="+5V"/>
-<wire x1="104.14" y1="68.58" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
-<junction x="86.36" y="68.58"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -8198,7 +8055,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <junction x="30.48" y="45.72"/>
 <pinref part="SP1" gate="G$1" pin="1"/>
 <wire x1="22.86" y1="71.12" x2="22.86" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="DS1320" gate="G$1" pin="GND"/>
+<pinref part="DS1302" gate="G$1" pin="GND"/>
 <wire x1="111.76" y1="-2.54" x2="96.52" y2="-2.54" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="-2.54" x2="96.52" y2="-25.4" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="-25.4" x2="45.72" y2="-25.4" width="0.1524" layer="91"/>
@@ -8243,14 +8100,14 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="N$12" class="0">
 <segment>
-<pinref part="DS1320" gate="G$1" pin="VCC1"/>
+<pinref part="DS1302" gate="G$1" pin="VCC1"/>
 <pinref part="BT2" gate="G$1" pin="+"/>
 <wire x1="139.7" y1="12.7" x2="149.86" y2="12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$13" class="0">
 <segment>
-<pinref part="DS1320" gate="G$1" pin="SCLK"/>
+<pinref part="DS1302" gate="G$1" pin="SCLK"/>
 <wire x1="139.7" y1="7.62" x2="142.24" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="7.62" x2="142.24" y2="-17.78" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="-17.78" x2="35.56" y2="-17.78" width="0.1524" layer="91"/>
@@ -8261,7 +8118,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="N$15" class="0">
 <segment>
-<pinref part="DS1320" gate="G$1" pin="RST"/>
+<pinref part="DS1302" gate="G$1" pin="RST"/>
 <wire x1="139.7" y1="-2.54" x2="139.7" y2="-20.32" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="-20.32" x2="40.64" y2="-20.32" width="0.1524" layer="91"/>
 <pinref part="PCB1" gate="G$1" pin="6"/>
@@ -8270,7 +8127,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="N$16" class="0">
 <segment>
-<pinref part="DS1320" gate="G$1" pin="IO"/>
+<pinref part="DS1302" gate="G$1" pin="IO"/>
 <wire x1="139.7" y1="2.54" x2="144.78" y2="2.54" width="0.1524" layer="91"/>
 <wire x1="144.78" y1="2.54" x2="144.78" y2="-10.16" width="0.1524" layer="91"/>
 <wire x1="144.78" y1="-10.16" x2="99.06" y2="-10.16" width="0.1524" layer="91"/>
@@ -8282,7 +8139,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="N$10" class="0">
 <segment>
-<pinref part="DS1320" gate="G$1" pin="X1"/>
+<pinref part="DS1302" gate="G$1" pin="X1"/>
 <pinref part="Y1" gate="G$1" pin="2"/>
 <wire x1="111.76" y1="7.62" x2="106.68" y2="7.62" width="0.1524" layer="91"/>
 </segment>
@@ -8290,7 +8147,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <net name="N$11" class="0">
 <segment>
 <pinref part="Y1" gate="G$1" pin="1"/>
-<pinref part="DS1320" gate="G$1" pin="X2"/>
+<pinref part="DS1302" gate="G$1" pin="X2"/>
 <wire x1="106.68" y1="2.54" x2="111.76" y2="2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -8303,19 +8160,8 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="N$6" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="RX"/>
 <pinref part="PCB1" gate="G$1" pin="1/TX"/>
-<wire x1="104.14" y1="76.2" x2="58.42" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="76.2" x2="58.42" y2="71.12" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$17" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="GND"/>
-<wire x1="104.14" y1="71.12" x2="93.98" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="71.12" x2="93.98" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="86.36" x2="30.48" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="30.48" y1="86.36" x2="30.48" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
