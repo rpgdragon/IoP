@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -9803,7 +9803,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="Y1" library="SparkFun-Clocks" deviceset="CRYSTAL" device="PTH-2X6"/>
 <part name="ADXL335" library="SparkFun-Connectors" deviceset="CONN_05" device=""/>
 <part name="IC1" library="1wire" deviceset="DS18B20" device=""/>
-<part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0309/12" package3d_urn="urn:adsk.eagle:package:23571/1" value="100"/>
+<part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0309/12" package3d_urn="urn:adsk.eagle:package:23571/1" value="4700"/>
 <part name="LM7805" library="SparkFun-IC-Power" deviceset="V_REG_78XX" device="-TO-220"/>
 <part name="9V" library="SparkFun-Connectors" deviceset="BATTERY_CONN" device="_DEANS"/>
 <part name="U$1" library="diy-modules" deviceset="WIRELESS-BLUETOOTH-HC-05" device=""/>
