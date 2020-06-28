@@ -143,6 +143,10 @@ export class CamisetaPage {
     }
 
     borrarCamiseta(camiseta){
+
+      if(!confirm("¿Esta seguro que desea borrar esta camiseta?")){
+        return;
+      }
       //invocamos al proceso de borrar la camiseta
       this.rest.borrar(MyApp.getNombreusuario(), camiseta.id).then((data:any) => {
         //si ha ido todo bien recargamos la lista
