@@ -34,7 +34,7 @@ export class RestConstantesProvider {
 					'Authorization': 'Bearer ' + AUTHORIZACION
 				})
       }
-      this.http.get(MAIN_URL + VERSION + INFORMACION_URL + "actual/?numeroserie=" + numeroserie,httpOptions)
+      this.http.get(MAIN_URL + VERSION + INFORMACION_URL + "actual/" + numeroserie + "/",httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -54,12 +54,7 @@ export class RestConstantesProvider {
 				})
       }
 
-      let cuerpo = {
-        "numeroserie": numeroserie,
-        "fechade": fechaDe,
-        "fechahasta": fechaHasta
-      } 
-      this.http.post(MAIN_URL + VERSION + INFORMACION_URL + "historico/",cuerpo,httpOptions)
+      this.http.get(MAIN_URL + VERSION + INFORMACION_URL + "historico/" + numeroserie + "/" + fechaDe + "/" + fechaHasta + "/",httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);

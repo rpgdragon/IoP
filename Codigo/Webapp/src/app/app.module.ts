@@ -14,7 +14,7 @@ import { Keyboard } from "@ionic-native/keyboard/ngx";
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
-import { RestProvider } from '../providers/rest/rest';
+import { RestProvider } from '../providers/rest-login/rest-login';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { TemplatePage } from '@pages/template/template';
@@ -44,7 +44,7 @@ import { RestConstantesProvider } from '../providers/rest-constantes/rest-consta
 import { FCM } from '@ionic-native/fcm/ngx';
 import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { GeolocalizacionProvider } from '../providers/geolocalizacion/geolocalizacion';
+import { GeolocalizacionProvider } from '../providers/rest-geolocalizacion/rest-geolocalizacion';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 
 

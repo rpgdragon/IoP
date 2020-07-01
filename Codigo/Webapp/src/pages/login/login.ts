@@ -3,7 +3,7 @@ import { NavController, Platform} from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
 import { CamisetaPage } from '@pages/camiseta/camiseta';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { RestProvider} from '../../providers/rest/rest';
+import { RestProvider} from '../../providers/rest-login/rest-login';
 import { MyApp } from '@app/app.component';
 import { Storage } from '@ionic/storage';
 import { OlvidoPage } from '@pages/olvido/olvido';

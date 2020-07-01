@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform} from 'ionic-angular';
 import { MenuController } from 'ionic-angular/index';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { RestProvider} from '../../providers/rest/rest';
+import { RestProvider} from '../../providers/rest-login/rest-login';
 
 @Component({
   selector: 'page-olvido',

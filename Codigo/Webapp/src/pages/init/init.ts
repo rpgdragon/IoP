@@ -5,7 +5,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { QueesPage } from '@pages/quees/quees';
 import { LoginPage } from '@pages/login/login';
 import { CamisetaPage } from '@pages/camiseta/camiseta';
-import { RestProvider} from '../../providers/rest/rest';
+import { RestProvider} from '../../providers/rest-login/rest-login';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { Storage } from '@ionic/storage';
 import { MyApp } from '@app/app.component';

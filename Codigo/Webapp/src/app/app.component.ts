@@ -15,7 +15,7 @@ import { InfoPage } from '@pages/info/info';
 import { NuevacamisetaPage } from '@pages/nuevacamiseta/nuevacamiseta';
 import { EditarcamisetaPage } from '@pages/editarcamiseta/editarcamiseta';
 import { FCM } from '@ionic-native/fcm/ngx';
-import { RestProvider } from '../providers/rest/rest';
+import { RestProvider } from '../providers/rest-login/rest-login';
 import { ConstantesPage } from '@pages/constantes/constantes';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';

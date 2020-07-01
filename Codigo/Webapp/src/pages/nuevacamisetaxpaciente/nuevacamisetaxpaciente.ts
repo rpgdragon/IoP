@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RestCamisetaProvider} from '../../providers/rest-camiseta/rest-camiseta';
-import { GeolocalizacionProvider} from '../../providers/geolocalizacion/geolocalizacion';
+import { GeolocalizacionProvider} from '../../providers/rest-geolocalizacion/rest-geolocalizacion';
 import { NuevacamisetaPage} from '@pages/nuevacamiseta/nuevacamiseta';
 import { MyApp } from '@app/app.component';
 import { LoadingController} from 'ionic-angular';
@@ -47,8 +47,8 @@ export class NuevacamisetaxpacientePage {
 
   loadMap(){
     Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyAi6Z9rjV6H8PTJSCwwrxJqYZTuQ7P-5Qw',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyAi6Z9rjV6H8PTJSCwwrxJqYZTuQ7P-5Qw'
+      'API_KEY_FOR_BROWSER_RELEASE': '',
+      'API_KEY_FOR_BROWSER_DEBUG': ''
     });
 
     let mapOptions: GoogleMapOptions = {

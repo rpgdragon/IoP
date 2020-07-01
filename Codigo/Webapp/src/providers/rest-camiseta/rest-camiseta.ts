@@ -2,8 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 
-
-
 const AUTHORIZACION = "healthshirt20192020";
 const MAIN_URL = "http://www.iopshirt.es/api/";
 const CAMISETA_URL = "camiseta/";
@@ -35,12 +33,7 @@ export class RestCamisetaProvider {
 				})
       }
 
-      let cuerpo = {
-        "usuario": usuario,
-        "id": "" + id
-      } 
-
-      this.http.post(MAIN_URL + VERSION + CAMISETA_URL + "borrar/" ,cuerpo,httpOptions)
+      this.http.delete(MAIN_URL + VERSION + CAMISETA_URL +  usuario + "/" + id + "/" ,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -59,7 +52,7 @@ export class RestCamisetaProvider {
 					'Authorization': 'Bearer ' + AUTHORIZACION
 				})
       }
-      this.http.get(MAIN_URL + VERSION + CAMISETA_URL + "lista/?usuario=" + email,httpOptions)
+      this.http.get(MAIN_URL + VERSION + CAMISETA_URL + email + "/",httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -86,7 +79,6 @@ export class RestCamisetaProvider {
       }
       
 			let cuerpo = {
-        "usuario": usuario,
         "nombre": nombre,
         "numeroserie": numeroserie,
         "codseg": codseg,
@@ -106,7 +98,7 @@ export class RestCamisetaProvider {
 
       console.log(cuerpo);
 
-      this.http.post(MAIN_URL + VERSION + CAMISETA_URL + "crear/",cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + CAMISETA_URL + usuario + "/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -172,8 +164,6 @@ export class RestCamisetaProvider {
       }
       
 			let cuerpo = {
-        "usuario": usuario,
-        "id": "" + id,
         "nombre": nombre,
         "icono": icono,
         "ecgminimo": "" + ecgminimo,
@@ -201,7 +191,7 @@ export class RestCamisetaProvider {
 
       console.log(cuerpo);
 
-      this.http.post(MAIN_URL + VERSION + CAMISETA_URL + "editar/",cuerpo,httpOptions)
+      this.http.put(MAIN_URL + VERSION + CAMISETA_URL + usuario + "/" + id + "/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -211,7 +201,6 @@ export class RestCamisetaProvider {
 				});
     });
   }
-
 }
 
 

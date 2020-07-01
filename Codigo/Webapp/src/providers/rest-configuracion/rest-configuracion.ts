@@ -56,7 +56,6 @@ export class RestConfiguracionProvider {
       }
       
 			let cuerpo = {
-				"usuario": usuario,
         "notificacionestodas": "" + notificacionestodas,
         "notificacionesecg": "" + notificacionesecg,
         "notificacioneseda": "" + notificacioneseda,
@@ -66,7 +65,7 @@ export class RestConfiguracionProvider {
       } 
 
       console.log(cuerpo);
-      this.http.post(MAIN_URL + VERSION + CONFIGURACION_URL + "editar/",cuerpo,httpOptions)
+      this.http.put(MAIN_URL + VERSION + CONFIGURACION_URL + usuario + "/",cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
@@ -85,7 +84,7 @@ export class RestConfiguracionProvider {
 					'Authorization': 'Bearer ' + AUTHORIZACION
 				})
       }
-      this.http.get(MAIN_URL + VERSION + CONFIGURACION_URL + "lista/?usuario=" + usuario,httpOptions)
+      this.http.get(MAIN_URL + VERSION + CONFIGURACION_URL + usuario + "/",httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);

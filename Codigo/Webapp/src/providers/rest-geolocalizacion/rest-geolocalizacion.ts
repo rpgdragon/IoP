@@ -37,7 +37,7 @@ export class GeolocalizacionProvider {
         "localidad": localidad,
         "provincia": provincia
       } 
-      this.http.post(MAIN_URL + VERSION + GEO_URL + 'geolocalizar/',cuerpo,httpOptions)
+      this.http.post(MAIN_URL + VERSION + GEO_URL,cuerpo,httpOptions)
       .timeout(TIMEOUT_MAXIMO)
 				.subscribe(data => {
 					resolve(data);
