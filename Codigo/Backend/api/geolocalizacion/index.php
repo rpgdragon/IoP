@@ -2,21 +2,21 @@
 //añadimos la cabecera del CORS
  header("Access-Control-Allow-Origin: *");
 
- include_once '../../utilidades/logging.php';
- include_once '../../modelo/codigos.php';
- include_once '../../utilidades/utils.php';
+ include_once '../utilidades/logging.php';
+ include_once '../modelo/codigos.php';
+ include_once '../utilidades/utils.php';
 
  $inputJSON = file_get_contents('php://input');
 if(!isset($inputJSON) || $inputJSON==null || $inputJSON==''){
 	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La solicitud de geolocalizacion le faltan datos';
-	meter_error_log($log);
+	meter_error_log2($log);
 	generar_respuesta(false, "La petición de geolocalizacion le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
 $input= json_decode( $inputJSON );
 if(!isset($input) || $input==null || $input==''){
 	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La solicitud de geolocalizacion le faltan datos';
-	meter_error_log($log);
+	meter_error_log2($log);
 	generar_respuesta(false, "La petición de geolocalización le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
@@ -26,7 +26,7 @@ if(!isset($input) || $input==null || $input==''){
 if(!isset($input->calle) || $input->calle==null || $input->calle=='' || !isset($input->numero) || $input->numero==null || $input->numero==''
 || !isset($input->localidad) || $input->localidad==null || $input->localidad=='' || !isset($input->provincia) || $input->provincia==null || $input->provincia==''){
 	$log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La solicitud de geolocalizacion le faltan datos';
-	meter_error_log($log);
+	meter_error_log2($log);
 	generar_respuesta(false, "La solicitud de creación de login le faltan datos",CODIGO_FALTAN_PARAMETROS,ESTATUS_BAD_REQUEST);
 	exit();
 }
@@ -118,18 +118,18 @@ curl_close($ch);
 $jsontraducido = json_decode($data,true);
 if($jsontraducido==NULL){
     $log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada a la API de Google ha fallado';
-	meter_error_log($log);
+	meter_error_log2($log);
 	generar_respuesta(false, "La solicitud a Google ha dado un error",CODIGO_ERROR,ESTATUS_INTERNAL_SERVER_ERROR);
 	exit();
 }
 if($jsontraducido==[] || count($jsontraducido["results"])==0){
     $log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- La llamada a la API de Google no ha encontrado datos';
-	meter_error_log($log);
+	meter_error_log2($log);
 	generar_respuesta(false, "La solicitud a Google no ha encontrado datos",CODIGO_NO_CUENTA,ESTATUS_NO_ENCONTRADO);
 	exit();    
 }
 $valor_encontrado= $jsontraducido["results"][0]["geometry"]["location"];
 $resultados = json_encode($valor_encontrado);
 $log  = "URLPeticion: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").'- Peticion de Google: '.$resultados;
-meter_debug_log($log);
+meter_debug_log2($log);
 generar_respuesta(true, $resultados,CODIGO_OK,ESTATUS_OK);

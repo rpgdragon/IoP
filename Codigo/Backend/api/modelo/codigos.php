@@ -30,7 +30,7 @@ define("ESTATUS_CONFLICTO",409);
 define("AL_MENOS_UN_NUMERO",'/\d/');
 define("AL_MENOS_UN_ESPECIAL",'/[^a-zA-Z\d]/');
 
-define("API_KEY_GOOGLE", "AIzaSyAi6Z9rjV6H8PTJSCwwrxJqYZTuQ7P-5Qw");
+define("API_KEY_GOOGLE", "");
 define ("URL_GOOGLE_MAPS_GEOLOCALIZACION","https://maps.googleapis.com/maps/api/geocode/json?key=");
 define("URL_PATH_ASSETS","api/v3/assets");
 
