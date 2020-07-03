@@ -341,7 +341,9 @@ void procesarUnaEntrada(){
   cadena.replace("\r","");
   posicion = f.position();
   f.close();
-  bool rec = envioBT(cadena,false);
+  int poscoma = cadena.lastIndexOf(";");
+  String mensaje = cadena.substring(poscoma+1);
+  bool rec = envioBT(cadena,false, mensaje);
   if(rec){
     //actualizamos el contador a la posicion actual
     SD.remove("pos.txt");
@@ -352,9 +354,13 @@ void procesarUnaEntrada(){
   }
 }
 
-boolean envioBT(String cadena, bool insertar){
+boolean envioBT(String cadena, bool insertar, String mensaje){
   uint8_t intentos = 0;
   String valor = "";
+  //Dejamos el Bluetooth vacio de datos antes de enviar
+  while(Serial.available() > 0){
+    Serial.read():
+  }
   Serial.println(cadena);
   do{
     incrementarTiempo();
@@ -376,7 +382,13 @@ boolean envioBT(String cadena, bool insertar){
     return false;
   }
   else{
-    return true;
+    String cadena = Serial.readString();
+    if(cadena.indexOf("S" + mensaje)!=-1){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }
 
@@ -448,5 +460,5 @@ void prepararEnvioBT(String tipo, String dato){
     cadena += ";;";
     cadena +=  mensaje;
   }
-  envioBT(cadena, true);
+  envioBT(cadena, true, String(mensaje));
 }
