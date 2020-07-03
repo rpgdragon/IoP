@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/rpgdragon/proyectofinalsedu#readme",
   "dependencies": {
-    "mysql": "^2.17.1"
+    "axios": "^0.19.2",
+    "mysql": "^2.17.1",
+    "request": "^2.88.2"
   }
 }
