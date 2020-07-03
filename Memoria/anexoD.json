@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "d6854e07-9426-4de2-9fed-dba524658eb4",
-		"name": "Health Shirt",
+		"name": "IopShirt",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -240,17 +240,27 @@
 		{
 			"name": "Guardar Configuración",
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"usuario\": \"healthshirt@jmcastellano.eu\", \"notificacionestodas\": \"false\", \"notificacionesecg\": \"false\", \"notificacioneseda\": \"false\", \"notificacionestemperatura\": \"false\", \"notificacionesbateria\": \"false\", \"notificacionescaida\": \"false\" }",
+					"raw": "{ \"notificacionestodas\": \"false\", \"notificacionesecg\": \"false\", \"notificacioneseda\": \"false\", \"notificacionestemperatura\": \"false\", \"notificacionesbateria\": \"false\", \"notificacionescaida\": \"true\" }",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/configuracion/editar/",
+					"raw": "http://www.iopshirt.es/api/v3/configuracion/jmcastellano@jmcastellano.eu/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -261,7 +271,116 @@
 						"api",
 						"v3",
 						"configuracion",
-						"editar",
+						"jmcastellano@jmcastellano.eu",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Configuración Metodo erroneo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"notificacionestodas\": \"false\", \"notificacionesecg\": \"false\", \"notificacioneseda\": \"false\", \"notificacionestemperatura\": \"false\", \"notificacionesbateria\": \"false\", \"notificacionescaida\": \"false\" }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/configuracion/jmcastellano@jmcastellano.eu/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"configuracion",
+						"jmcastellano@jmcastellano.eu",
+						""
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "noexiste",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "noexiste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Configuracion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"notificacionestodas\": \"false\", \"notificacionesecg\": \"false\", \"notificacioneseda\": \"false\", \"notificacionestemperatura\": \"false\", \"notificacionesbateria\": \"false\", \"notificacionescaida\": \"false\" }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://www.iopshirt.es/api/v3/configuracion/jmcastellano@jmcastellano.eu/",
+					"protocol": "http",
+					"host": [
+						"www",
+						"iopshirt",
+						"es"
+					],
+					"path": [
+						"api",
+						"v3",
+						"configuracion",
+						"jmcastellano@jmcastellano.eu",
 						""
 					],
 					"query": [
@@ -283,17 +402,27 @@
 		{
 			"name": "Guardar Configuración Sin Parametros",
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"usuario\": \"healthshirt@jmcastellano.eu\" }",
+					"raw": "",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/configuracion/editar/",
+					"raw": "http://www.iopshirt.es/api/v3/configuracion/jmcastellano@jmcastellano.eu/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -304,7 +433,7 @@
 						"api",
 						"v3",
 						"configuracion",
-						"editar",
+						"jmcastellano@jmcastellano.eu",
 						""
 					],
 					"query": [
@@ -326,26 +455,35 @@
 		{
 			"name": "Registrar Camiseta",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}"
+					"raw": "{\"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}"
 				},
 				"url": {
-					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/crear/",
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/jmcastellano@jmcastellano.eu/",
 					"protocol": "http",
 					"host": [
 						"www",
-						"jmcastellano",
-						"eu"
+						"iopshirt",
+						"es"
 					],
 					"path": [
-						"healthshirt",
 						"api",
-						"v2",
+						"v3",
 						"camiseta",
-						"crear",
+						"jmcastellano@jmcastellano.eu",
 						""
 					],
 					"query": [
@@ -367,17 +505,17 @@
 		{
 			"name": "Editar Camiseta No usuario",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"usuario\": \"healthshirt@jmcastellano.eu\",\"id\":\"28\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}",
+					"raw": "{\"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"100\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/camiseta/editar/",
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/jcastellano88@gmail.com/30/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -388,7 +526,8 @@
 						"api",
 						"v3",
 						"camiseta",
-						"editar",
+						"jcastellano88@gmail.com",
+						"30",
 						""
 					],
 					"query": [
@@ -410,17 +549,17 @@
 		{
 			"name": "Editar Camiseta Si Usuario",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\",\"id\":\"28\", \"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"parentesco\": \"chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"130\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}",
+					"raw": "{\"notificacionesecg\": \"true\", \"notificacioneseda\": \"true\", \"notificacionestemperatura\": \"true\", \"notificacionescaida\": \"true\", \"nombre\": \"Esto es un chorizo\", \"numeroserie\": \"2222222222222222\", \"codseg\": \"Healthshirt2019\",\"icono\": \"man\",\r\n    \"ecgminimo\": \"50\",\r\n    \"ecgmaximo\": \"80\",\r\n    \"edaminimo\": \"130\",\r\n    \"edamaximo\": \"300\",\r\n    \"temperaturaminimo\": \"34.6\",\r\n    \"temperaturamaximo\": \"39.1\",\r\n    \"sexo\": \"H\",\r\n    \"telefono\": \"965786317\",\r\n    \"telefonocontacto\":\"\",\r\n    \"notas\":\"Hola\",\r\n    \"direccion\":\"Calle Quevedo nº 3\",\r\n    \"fechanacimiento\": \"2019-12-21\"\r\n}",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/camiseta/editar/",
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/jmcastellano@jmcastellano.eu/30/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -431,7 +570,8 @@
 						"api",
 						"v3",
 						"camiseta",
-						"editar",
+						"jmcastellano@jmcastellano.eu",
+						"30",
 						""
 					],
 					"query": [
@@ -453,17 +593,17 @@
 		{
 			"name": "Borrar Camiseta No Usuario",
 			"request": {
-				"method": "POST",
+				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"usuario\": \"healthshirt@jmcastellano.eu\", \"id\": \"27\"}",
+					"raw": "",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/camiseta/borrar/",
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/jmcastellano88@gmail.com/30/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -474,7 +614,8 @@
 						"api",
 						"v3",
 						"camiseta",
-						"borrar",
+						"jmcastellano88@gmail.com",
+						"30",
 						""
 					],
 					"query": [
@@ -496,17 +637,27 @@
 		{
 			"name": "Borrar Camiseta  Si Usuario",
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"usuario\": \"jmcastellano@jmcastellano.eu\", \"id\": \"28\"}",
+					"raw": "",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/camiseta/borrar/",
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/jmcastellano@jmcastellano.eu/30/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -517,7 +668,8 @@
 						"api",
 						"v3",
 						"camiseta",
-						"borrar",
+						"jmcastellano@jmcastellano.eu",
+						"30",
 						""
 					],
 					"query": [
@@ -543,7 +695,10 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"EAAMoJckFChcBAIXZBSZBzUHVZB4AsZBZBaTw95vr24z3bMHJ32QQ789LkqnxoHk28ruXyiB6VkqkqhcDzQZBQEpZBnyXyS3HSwCLz7KYgDJGrS9MZAJTKqcYFIO2L9lxZACyw3ZBO3aCMYyycEpoZCHtjjZC0CgRVpPclHX66IGN5kG28unsnesZBeTAYRIPBhAYv0luuTODerKzke4l4ZCwnJ3f1xq9yo94C87JQZD\"}"
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"EAAMoJckFChcBAIXZBSZBzUHVZB4AsZBZBaTw95vr24z3bMHJ32QQ789LkqnxoHk28ruXyiB6VkqkqhcDzQZBQEpZBnyXyS3HSwCLz7KYgDJGrS9MZAJTKqcYFIO2L9lxZACyw3ZBO3aCMYyycEpoZCHtjjZC0CgRVpPclHX66IGN5kG28unsnesZBeTAYRIPBhAYv0luuTODerKzke4l4ZCwnJ3f1xq9yo94C87JQZD\"}",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://www.iopshirt.es/api/v3/login/loginfacebook/",
@@ -579,11 +734,24 @@
 		{
 			"name": "login Google token",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"jmcastellano\"}"
+					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\",\"token\":\"jmcastellano\"}",
+					"options": {
+						"raw": {}
+					}
 				},
 				"url": {
 					"raw": "http://www.iopshirt.es/api/v3/login/logingoogle/",
@@ -619,6 +787,16 @@
 		{
 			"name": "olvidocontrasena",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -626,17 +804,16 @@
 					"raw": "{\"usuario\":\"jmcastellano@jmcastellano.eu\"}"
 				},
 				"url": {
-					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/login/olvido/",
+					"raw": "http://www.iopshirt.es/api/v3/login/olvido/",
 					"protocol": "http",
 					"host": [
 						"www",
-						"jmcastellano",
-						"eu"
+						"iopshirt",
+						"es"
 					],
 					"path": [
-						"healthshirt",
 						"api",
-						"v2",
+						"v3",
 						"login",
 						"olvido",
 						""
@@ -660,29 +837,34 @@
 		{
 			"name": "Listar Camisetas",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/camiseta/lista/?usuario=jmcastellano@jmcastellano.eu",
+					"raw": "http://www.iopshirt.es/api/v3/camiseta/jmcastellano@jmcastellano.eu/",
 					"protocol": "http",
 					"host": [
 						"www",
-						"jmcastellano",
-						"eu"
+						"iopshirt",
+						"es"
 					],
 					"path": [
-						"healthshirt",
 						"api",
-						"v2",
+						"v3",
 						"camiseta",
-						"lista",
+						"jmcastellano@jmcastellano.eu",
 						""
 					],
 					"query": [
-						{
-							"key": "usuario",
-							"value": "jmcastellano@jmcastellano.eu"
-						},
 						{
 							"key": "password",
 							"value": "noexiste",
@@ -696,22 +878,32 @@
 		{
 			"name": "Datos Constantes",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://www.jmcastellano.eu/healthshirt/api/v2/informacion/actual/?numeroserie=1111111111111111",
+					"raw": "http://www.iopshirt.es/api/v3/informacion/actual/1111111111111111/",
 					"protocol": "http",
 					"host": [
 						"www",
-						"jmcastellano",
-						"eu"
+						"iopshirt",
+						"es"
 					],
 					"path": [
-						"healthshirt",
 						"api",
-						"v2",
+						"v3",
 						"informacion",
 						"actual",
+						"1111111111111111",
 						""
 					],
 					"query": [
@@ -719,10 +911,6 @@
 							"key": "password",
 							"value": "noexiste",
 							"disabled": true
-						},
-						{
-							"key": "numeroserie",
-							"value": "1111111111111111"
 						}
 					]
 				}
@@ -731,18 +919,31 @@
 		},
 		{
 			"name": "Datos Constantes Historico",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"numeroserie\": \"1111111111111111\", \"fechade\": \"2019-12-21T17:40:00Z\", \"fechahasta\": \"2019-12-21T17:53:00Z\"}",
+					"raw": "",
 					"options": {
 						"raw": {}
 					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/informacion/historico/",
+					"raw": "http://www.iopshirt.es/api/v3/informacion/historico/1111111111111111/2019-12-21T17:40:00Z/2019-12-21T17:53:00Z/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -754,6 +955,9 @@
 						"v3",
 						"informacion",
 						"historico",
+						"1111111111111111",
+						"2019-12-21T17:40:00Z",
+						"2019-12-21T17:53:00Z",
 						""
 					],
 					"query": [
@@ -775,11 +979,21 @@
 		{
 			"name": "Generador",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://www.iopshirt.es/api/v3/generador/generaDatos.php",
-					"protocol": "https",
+					"raw": "http://www.iopshirt.es/api/v3/generador/generaDatos.php",
+					"protocol": "http",
 					"host": [
 						"www",
 						"iopshirt",
@@ -797,18 +1011,30 @@
 		},
 		{
 			"name": "Geolocalizacion",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \"localidad\": \"Málaga\",\r\n    \"calle\": \"Calle Verdi\",\r\n    \"numero\": \"5\",\r\n    \"provincia\": \"Málaga\"\r\n}"
+					"raw": "{   \"localidad\": \"Málaga\",\r\n    \"calle\": \"Calle Verdi\",\r\n    \"numero\": \"5\",\r\n    \"provincia\": \"Málaga\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "http://www.iopshirt.es/api/v3/geolocalizacion/geolocalizar/",
+					"raw": "http://www.iopshirt.es/api/v3/geolocalizacion/",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -819,7 +1045,6 @@
 						"api",
 						"v3",
 						"geolocalizacion",
-						"geolocalizar",
 						""
 					]
 				}
@@ -829,6 +1054,16 @@
 		{
 			"name": "Registrar Ya existente",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -885,6 +1120,16 @@
 		{
 			"name": "Registrar Nueva",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -941,6 +1186,16 @@
 		{
 			"name": "Nuevo Dato Bateria",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -997,6 +1252,16 @@
 		{
 			"name": "Nuevo Dato Temperatura Existente",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -1053,6 +1318,16 @@
 		{
 			"name": "Nuevo Dato ECG Existente",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -1109,6 +1384,16 @@
 		{
 			"name": "Nuevo Dato EDA Existente",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -1165,6 +1450,16 @@
 		{
 			"name": "Informar Caida",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "healthshirt20192020",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
