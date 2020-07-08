@@ -39,6 +39,9 @@ bool sensores[4];
 bool activacion[4];
 bool enviarIO;
 bool minuto;
+bool btactivo;
+bool comprobacionBT;
+bool mili;
 
 float laccel[4];
 float xAnt = -99.99;
@@ -67,6 +70,20 @@ void setup(void)
    myRTC.updateTime();
    fecha = String(myRTC.year) + "-" + String(myRTC.month) + "-" + String(myRTC.dayofmonth) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
    if(error==0){
+    //enviamos mensaje para comprobar si el BT esta vivo
+    Serial.println("[S]");
+    //esperamos máximo 1seg la contestacion
+    delay(2000);
+    if(Serial.available() > 0){
+      char caracter = Serial.read();
+      if(caracter=='S'){
+        btactivo=true;
+      }
+      else{
+        btactivo=false;
+      }
+    }
+    Serial.println("[S]");
     prepararEnvioBT("REG",sen);
    }
    activacion[0] = false;
@@ -75,6 +92,8 @@ void setup(void)
    activacion[3] = false;
    enviarIO = false;
    minuto = false;
+   comprobacionBT = false;
+   mili = false;
 }
 
  uint8_t inicializarSD(){
@@ -314,13 +333,36 @@ void loop(void){
       fecha = String(myRTC.year) + "-" + String(myRTC.month) + "-" + String(myRTC.dayofmonth) + " " + String(myRTC.hours) + ":" + String(myRTC.minutes) + ":" + myRTC.seconds;
       minuto = false;
     }
-    incrementarTiempo();
     //solo si no se ha enviado algo y han pasado 5s procedemos a procesar una entrada antigua
-    if(io && enviarIO){
+    if(io && enviarIO && btactivo){
       procesarUnaEntrada();
       enviarIO = false;
     }
-    delay(6);
+    incrementarTiempo();
+    if(comprobacionBT){
+      //comprobamos primero si hay para leer de antes
+      if(Serial.available() > 0){
+        char caracter = Serial.read();
+        if(caracter=='S'){
+          btactivo=true;
+        }
+        else{
+          btactivo=false;
+        }
+      }
+      else{
+        btactivo=false;
+      }
+      Serial.println("[S]");
+      comprobacionBT = false;
+    }
+    mili = !mili;
+    if(mili){
+      delay(9);
+    }
+    else{
+      delay(8);
+    }
   }
 }
 
@@ -337,58 +379,33 @@ void procesarUnaEntrada(){
   f.seek(posicion);
   //leemos la cadena
   cadena = f.readStringUntil('\n');
+  if(cadena==NULL || cadena=="\r\n"){
+    f.close();
+    return;
+  }
   //quitamos el \r que haya
   cadena.replace("\r","");
   posicion = f.position();
   f.close();
   int poscoma = cadena.lastIndexOf(";");
   String mensaje = cadena.substring(poscoma+1);
-  bool rec = envioBT(cadena,false, mensaje);
-  if(rec){
-    //actualizamos el contador a la posicion actual
-    SD.remove("pos.txt");
-    f = SD.open("pos.txt", FILE_WRITE);
-    f.println(posicion);
-    f.flush();
-    f.close();
-  }
+  envioBT(cadena);
+  SD.remove("pos.txt");
+  f = SD.open("pos.txt", FILE_WRITE);
+  f.println(posicion);
+  f.flush();
+  f.close();
 }
 
-boolean envioBT(String cadena, bool insertar, String mensaje){
-  uint8_t intentos = 0;
-  String valor = "";
-  //Dejamos el Bluetooth vacio de datos antes de enviar
-  while(Serial.available() > 0){
-    Serial.read():
+void envioBT(String cadena){
+  if(btactivo){
+    Serial.println(cadena);    
   }
-  Serial.println(cadena);
-  do{
-    incrementarTiempo();
-    intentos = intentos + 1;
-    delay(6);
-  }
-  while(intentos < MAXIMO && Serial.available() <= 0);
-
-  if(insertar && (intentos >= MAXIMO)){
-    //hay que abrir el fichero de log y añadirlo
+  else{
      File f = SD.open("log.txt", FILE_WRITE);
      f.println(cadena);
      f.flush();
-     f.close();
-     return false;
-  }
-
-  if(intentos >= MAXIMO){
-    return false;
-  }
-  else{
-    String cadena = Serial.readString();
-    if(cadena.indexOf("S" + mensaje)!=-1){
-      return true;
-    }
-    else{
-      return false;
-    }
+     f.close();   
   }
 }
 
@@ -402,6 +419,10 @@ void incrementarTiempo(){
   if(tiempo%1000==0){
     activacion[0] = true;
     activacion[1] = true;
+  }
+
+  if(tiempo%2000==0){
+    comprobacionBT = true;
   }
 
   if(tiempo%5000==0){
@@ -460,5 +481,5 @@ void prepararEnvioBT(String tipo, String dato){
     cadena += ";;";
     cadena +=  mensaje;
   }
-  envioBT(cadena, true, String(mensaje));
+  envioBT(cadena);
 }
